@@ -48,23 +48,25 @@ describe('parseCamelot', () => {
 });
 
 describe('toCamelotString', () => {
-  it('should format number and letter', () => {
-    expect(toCamelotString(8, 'A')).toBe('8A');
-    expect(toCamelotString(12, 'B')).toBe('12B');
+  it('should format CamelotEntry to string', () => {
+    const entry8A = CAMELOT_WHEEL.find(e => e.number === 8 && e.letter === 'A')!;
+    const entry12B = CAMELOT_WHEEL.find(e => e.number === 12 && e.letter === 'B')!;
+    expect(toCamelotString(entry8A)).toBe('8A');
+    expect(toCamelotString(entry12B)).toBe('12B');
   });
 });
 
 describe('findByCamelot', () => {
-  it('should find Am at 8A', () => {
-    const key = findByCamelot(8, 'A');
+  it('should find A minor at 8A', () => {
+    const key = findByCamelot('8A');
     expect(key).toBeDefined();
-    expect(key?.key).toBe('Am');
+    expect(key?.key).toBe('A minor');
   });
 
-  it('should find C at 8B', () => {
-    const key = findByCamelot(8, 'B');
+  it('should find C major at 8B', () => {
+    const key = findByCamelot('8B');
     expect(key).toBeDefined();
-    expect(key?.key).toBe('C');
+    expect(key?.key).toBe('C major');
   });
 });
 
@@ -74,18 +76,18 @@ describe('getCompatibleKeys', () => {
     expect(compatible.length).toBeGreaterThan(0);
 
     // Should include perfect match (same key)
-    const perfect = compatible.find(c => c.type === 'perfect');
+    const perfect = compatible.find(c => c.compatibility === 'perfect');
     expect(perfect).toBeDefined();
 
     // Should include adjacent keys (7A, 9A)
-    const adjacents = compatible.filter(c => c.type === 'compatible');
+    const adjacents = compatible.filter(c => c.compatibility === 'compatible');
     expect(adjacents.length).toBeGreaterThanOrEqual(2);
   });
 
   it('should include energy boost/drop for inner/outer switch', () => {
     const compatible = getCompatibleKeys('8A');
     const energyChanges = compatible.filter(
-      c => c.type === 'energy_boost' || c.type === 'energy_drop'
+      c => c.compatibility === 'energy_boost' || c.compatibility === 'energy_drop'
     );
     expect(energyChanges.length).toBeGreaterThan(0);
   });

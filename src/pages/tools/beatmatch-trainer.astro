@@ -1,6 +1,6 @@
 ---
 import ToolLayout from '@layouts/ToolLayout.astro';
-import BeatmatchTrainer from '@components/tools/BeatmatchTrainer';
+import BeatmatchTrainerTool from '@components/tools/BeatmatchTrainer';
 ---
 
 <ToolLayout
@@ -11,7 +11,7 @@ import BeatmatchTrainer from '@components/tools/BeatmatchTrainer';
   <div class="space-y-8">
     <!-- Tool Component -->
     <div class="flex justify-center">
-      <BeatmatchTrainer client:load />
+      <BeatmatchTrainerTool client:load />
     </div>
 
     <!-- Instructions -->

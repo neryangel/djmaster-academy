@@ -1,6 +1,6 @@
 ---
 import ToolLayout from '@layouts/ToolLayout.astro';
-import EqTrainer from '@components/tools/EqTrainer';
+import EqTrainerTool from '@components/tools/EqTrainer';
 ---
 
 <ToolLayout
@@ -11,7 +11,7 @@ import EqTrainer from '@components/tools/EqTrainer';
   <div class="space-y-8">
     <!-- Tool Component -->
     <div class="flex justify-center">
-      <EqTrainer client:load />
+      <EqTrainerTool client:load />
     </div>
 
     <!-- Instructions -->

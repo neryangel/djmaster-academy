@@ -92,8 +92,8 @@ describe('Storage Utilities', () => {
       const result = getItem('complex', {});
 
       expect(result).toEqual(complexData);
-      expect(result.user.name).toBe('Test User');
-      expect(result.metadata.tags).toHaveLength(2);
+      expect((result as any).user.name).toBe('Test User');
+      expect((result as any).metadata.tags).toHaveLength(2);
     });
   });
 
@@ -238,8 +238,8 @@ describe('Storage Utilities', () => {
 
       const results = getQuizResults('quiz-01');
       expect(results).toHaveLength(1);
-      expect(results[0].score).toBe(85);
-      expect(results[0].passed).toBe(true);
+      expect(results[0]!.score).toBe(85);
+      expect(results[0]!.passed).toBe(true);
     });
 
     it('should save multiple quiz results for same quiz', () => {
@@ -264,8 +264,8 @@ describe('Storage Utilities', () => {
 
       const results = getQuizResults('quiz-01');
       expect(results).toHaveLength(2);
-      expect(results[0].score).toBe(70);
-      expect(results[1].score).toBe(90);
+      expect(results[0]!.score).toBe(70);
+      expect(results[1]!.score).toBe(90);
     });
 
     it('should return empty array for nonexistent quiz', () => {
@@ -295,8 +295,8 @@ describe('Storage Utilities', () => {
 
       expect(getQuizResults('quiz-01')).toHaveLength(1);
       expect(getQuizResults('quiz-02')).toHaveLength(1);
-      expect(getQuizResults('quiz-01')[0].quizId).toBe('quiz-01');
-      expect(getQuizResults('quiz-02')[0].quizId).toBe('quiz-02');
+      expect(getQuizResults('quiz-01')[0]!.quizId).toBe('quiz-01');
+      expect(getQuizResults('quiz-02')[0]!.quizId).toBe('quiz-02');
     });
   });
 

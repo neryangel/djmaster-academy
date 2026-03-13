@@ -45,6 +45,7 @@ export interface VitePWAOptions {
         cacheableResponse?: {
           statuses: number[];
         };
+        networkTimeoutSeconds?: number;
       };
     }>;
   };
@@ -235,6 +236,7 @@ export const vitePWAConfig: VitePWAOptions = {
         options: {
           cacheName: 'external-cache',
           expiration: {
+            maxEntries: 50,
             maxAgeSeconds: 60 * 60 * 24 * 365, // 1 year
           },
         },

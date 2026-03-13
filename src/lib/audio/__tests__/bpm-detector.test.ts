@@ -8,8 +8,8 @@ describe('TapTempoCalculator', () => {
     calc = new TapTempoCalculator();
   });
 
-  it('should return 0 for first tap', () => {
-    expect(calc.tap()).toBe(0);
+  it('should return 0 bpm for first tap', () => {
+    expect(calc.tap().bpm).toBe(0);
   });
 
   it('should calculate BPM from regular taps', () => {
@@ -20,22 +20,22 @@ describe('TapTempoCalculator', () => {
 
     // We can test by calling tap multiple times in sequence
     // Since real timing varies, test the calculation logic
-    const bpm = calc.tap();
+    const result = calc.tap();
     // First two taps give an initial reading
-    expect(typeof bpm).toBe('number');
+    expect(typeof result.bpm).toBe('number');
   });
 
   it('should reset on fresh instance', () => {
     calc.reset();
-    expect(calc.tap()).toBe(0);
+    expect(calc.tap().bpm).toBe(0);
   });
 
-  it('should report stability', () => {
-    expect(calc.isStable()).toBe(false);
+  it('should report stability via tap result', () => {
+    expect(calc.tap().isStable).toBe(false);
   });
 
-  it('should return current BPM', () => {
-    expect(calc.getCurrentBPM()).toBe(0);
+  it('should return current BPM via tap result', () => {
+    expect(calc.tap().bpm).toBe(0);
   });
 });
 
@@ -73,9 +73,9 @@ describe('GENRE_BPM_RANGES', () => {
 
   it('should have valid min/max for each genre', () => {
     for (const [genre, range] of Object.entries(GENRE_BPM_RANGES)) {
-      expect(range.min).toBeLessThan(range.max);
-      expect(range.min).toBeGreaterThan(0);
-      expect(range.max).toBeLessThan(300);
+      expect(range[0]).toBeLessThan(range[1]!);
+      expect(range[0]).toBeGreaterThan(0);
+      expect(range[1]).toBeLessThan(300);
     }
   });
 });

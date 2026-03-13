@@ -1,4 +1,5 @@
-import { describe, it, expect, beforeEach } from 'vitest';
+/// <reference types="vitest/globals" />
+import { describe, it, expect, beforeEach, vi } from 'vitest';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import BpmCalculator from '../tools/BpmCalculator';
@@ -62,7 +63,7 @@ describe('BpmCalculator Component', () => {
     it('should display tap button with correct styling', () => {
       render(<BpmCalculator />);
 
-      const tapButton = screen.getByRole('button').filter((btn) =>
+      const tapButton = screen.getAllByRole('button').filter((btn: HTMLElement) =>
         btn.textContent?.includes('BPM')
       )[0];
 
@@ -75,7 +76,7 @@ describe('BpmCalculator Component', () => {
     it('should increment tap count on tap', async () => {
       render(<BpmCalculator />);
 
-      const tapButton = screen.getAllByRole('button')[0];
+      const tapButton = screen.getAllByRole('button')[0]!;
 
       fireEvent.click(tapButton);
       await waitFor(() => {
@@ -91,7 +92,7 @@ describe('BpmCalculator Component', () => {
     it('should calculate BPM after 2 taps', async () => {
       render(<BpmCalculator />);
 
-      const tapButton = screen.getAllByRole('button')[0];
+      const tapButton = screen.getAllByRole('button')[0]!;
 
       // Tap twice with consistent timing
       fireEvent.click(tapButton);
@@ -106,7 +107,7 @@ describe('BpmCalculator Component', () => {
     it('should update BPM display as more taps are added', async () => {
       render(<BpmCalculator />);
 
-      const tapButton = screen.getAllByRole('button')[0];
+      const tapButton = screen.getAllByRole('button')[0]!;
 
       // First tap
       fireEvent.click(tapButton);
@@ -124,7 +125,7 @@ describe('BpmCalculator Component', () => {
     it('should show stability indicator after sufficient taps', async () => {
       render(<BpmCalculator />);
 
-      const tapButton = screen.getAllByRole('button')[0];
+      const tapButton = screen.getAllByRole('button')[0]!;
 
       // Tap 4+ times for stability check
       for (let i = 0; i < 5; i++) {
@@ -164,7 +165,7 @@ describe('BpmCalculator Component', () => {
     it('should reset taps if gap exceeds 3 seconds', async () => {
       render(<BpmCalculator />);
 
-      const tapButton = screen.getAllByRole('button')[0];
+      const tapButton = screen.getAllByRole('button')[0]!;
 
       fireEvent.click(tapButton);
       await waitFor(() => {
@@ -186,7 +187,7 @@ describe('BpmCalculator Component', () => {
     it('should limit tap history to 16 taps', async () => {
       render(<BpmCalculator />);
 
-      const tapButton = screen.getAllByRole('button')[0];
+      const tapButton = screen.getAllByRole('button')[0]!;
 
       // Tap 20 times
       for (let i = 0; i < 20; i++) {
@@ -259,7 +260,7 @@ describe('BpmCalculator Component', () => {
     it('should reset tap count and BPM on reset button click', async () => {
       render(<BpmCalculator />);
 
-      const tapButton = screen.getAllByRole('button')[0];
+      const tapButton = screen.getAllByRole('button')[0]!;
 
       // Tap a few times
       fireEvent.click(tapButton);
@@ -298,7 +299,7 @@ describe('BpmCalculator Component', () => {
     it('should support Escape key for reset', async () => {
       render(<BpmCalculator />);
 
-      const tapButton = screen.getAllByRole('button')[0];
+      const tapButton = screen.getAllByRole('button')[0]!;
 
       fireEvent.click(tapButton);
 
@@ -318,7 +319,7 @@ describe('BpmCalculator Component', () => {
     it('should show animation on tap', async () => {
       render(<BpmCalculator />);
 
-      const tapButton = screen.getAllByRole('button')[0];
+      const tapButton = screen.getAllByRole('button')[0]!;
 
       fireEvent.click(tapButton);
 
@@ -331,7 +332,7 @@ describe('BpmCalculator Component', () => {
     it('should show stability status in correct color', async () => {
       render(<BpmCalculator />);
 
-      const tapButton = screen.getAllByRole('button')[0];
+      const tapButton = screen.getAllByRole('button')[0]!;
 
       // Tap consistently
       for (let i = 0; i < 6; i++) {

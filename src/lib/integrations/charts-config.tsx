@@ -25,6 +25,8 @@ import {
   Legend,
   ResponsiveContainer,
   Cell,
+  PolarAngleAxis,
+  PolarRadiusAxis,
 } from 'recharts';
 
 /**
@@ -69,7 +71,7 @@ export const CHART_THEME = {
  * Responsive container default props
  */
 export const RESPONSIVE_CONTAINER_DEFAULTS = {
-  width: '100%',
+  width: '100%' as const,
   height: 300,
   margin: { top: 20, right: 30, left: 0, bottom: 20 },
 };
@@ -123,7 +125,7 @@ export const XPProgressChart = ({
   isRTL?: boolean;
 }) => {
   return (
-    <ResponsiveContainer {...RESPONSIVE_CONTAINER_DEFAULTS} height={250}>
+    <ResponsiveContainer width={RESPONSIVE_CONTAINER_DEFAULTS.width} height={250}>
       <BarChart
         data={data}
         layout="vertical"
@@ -163,7 +165,7 @@ export const FrequencySpectrum = ({
   data: Array<{ frequency: string; amplitude: number }>;
 }) => {
   return (
-    <ResponsiveContainer {...RESPONSIVE_CONTAINER_DEFAULTS} height={250}>
+    <ResponsiveContainer width={RESPONSIVE_CONTAINER_DEFAULTS.width} height={250}>
       <BarChart data={data}>
         <CartesianGrid strokeDasharray="3 3" stroke={DJ_CHART_COLORS.grid} />
         <XAxis
@@ -192,7 +194,7 @@ export const BPMHistoryChart = ({
   data: Array<{ time: string; bpm: number }>;
 }) => {
   return (
-    <ResponsiveContainer {...RESPONSIVE_CONTAINER_DEFAULTS} height={250}>
+    <ResponsiveContainer width={RESPONSIVE_CONTAINER_DEFAULTS.width} height={250}>
       <AreaChart data={data}>
         <defs>
           <linearGradient id="bpmGradient" x1="0" y1="0" x2="0" y2="1">
@@ -239,7 +241,7 @@ export const EnergyFlowChart = ({
   }>;
 }) => {
   return (
-    <ResponsiveContainer {...RESPONSIVE_CONTAINER_DEFAULTS} height={300}>
+    <ResponsiveContainer width={RESPONSIVE_CONTAINER_DEFAULTS.width} height={300}>
       <ComposedChart data={data}>
         <CartesianGrid strokeDasharray="3 3" stroke={DJ_CHART_COLORS.grid} />
         <XAxis
@@ -298,7 +300,7 @@ export const MixingSkillsRadar = ({
   }>;
 }) => {
   return (
-    <ResponsiveContainer {...RESPONSIVE_CONTAINER_DEFAULTS} height={300}>
+    <ResponsiveContainer width={RESPONSIVE_CONTAINER_DEFAULTS.width} height={300}>
       <RadarChart data={data}>
         <CartesianGrid stroke={DJ_CHART_COLORS.grid} />
         <PolarAngleAxis
@@ -337,14 +339,14 @@ export const TimeSpentChart = ({
   }>;
 }) => {
   return (
-    <ResponsiveContainer {...RESPONSIVE_CONTAINER_DEFAULTS} height={300}>
+    <ResponsiveContainer width={RESPONSIVE_CONTAINER_DEFAULTS.width} height={300}>
       <PieChart>
         <Pie
           data={data}
           cx="50%"
           cy="50%"
           labelLine={false}
-          label={({ course, percentage }) => `${course}: ${percentage}%`}
+          label={({ course, percentage }: any) => `${course}: ${percentage}%`}
           outerRadius={80}
           fill={DJ_CHART_COLORS.primary}
           dataKey="hours"
@@ -402,6 +404,8 @@ export {
   Tooltip,
   Legend,
   Cell,
+  PolarAngleAxis,
+  PolarRadiusAxis,
 };
 
 export default {

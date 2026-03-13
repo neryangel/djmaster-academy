@@ -1,6 +1,6 @@
 ---
 import ToolLayout from '@layouts/ToolLayout.astro';
-import SetPlanner from '@components/tools/SetPlanner';
+import SetPlannerTool from '@components/tools/SetPlanner';
 ---
 
 <ToolLayout
@@ -11,7 +11,7 @@ import SetPlanner from '@components/tools/SetPlanner';
   <div class="space-y-8">
     <!-- Tool Component -->
     <div class="flex justify-center">
-      <SetPlanner client:load />
+      <SetPlannerTool client:load />
     </div>
 
     <!-- Instructions -->

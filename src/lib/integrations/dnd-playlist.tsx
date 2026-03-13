@@ -6,21 +6,21 @@
 import React from 'react';
 import {
   DndContext,
-  DndContextProps,
   closestCenter,
   KeyboardSensor,
   PointerSensor,
   useSensor,
   useSensors,
 } from '@dnd-kit/core';
+import type { DndContextProps } from '@dnd-kit/core';
 import {
   arrayMove,
   SortableContext,
-  SortableContextProps,
   verticalListSortingStrategy,
   horizontalListSortingStrategy,
   sortableKeyboardCoordinates,
 } from '@dnd-kit/sortable';
+import type { SortableContextProps } from '@dnd-kit/sortable';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 
@@ -90,7 +90,9 @@ export const DndPlaylistProvider = React.forwardRef<
 
   const sensors = useSensors(
     useSensor(PointerSensor, {
-      distance: 8,
+      activationConstraint: {
+        distance: 8,
+      },
     }),
     useSensor(KeyboardSensor, {
       coordinateGetter: sortableKeyboardCoordinates,
@@ -124,7 +126,7 @@ export const DndPlaylistProvider = React.forwardRef<
       <DndContext
         sensors={sensors}
         collisionDetection={closestCenter}
-        onDragStart={(event) => setActiveId(event.active.id)}
+        onDragStart={(event) => setActiveId(String(event.active.id))}
         onDragEnd={handleDragEnd}
       >
         <SortableContext

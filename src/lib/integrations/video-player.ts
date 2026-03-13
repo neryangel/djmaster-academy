@@ -3,7 +3,10 @@
  * אינטגרציה של Video.js ו-HLS.js לשיעורי וידאו
  */
 
-import videojs, { VideoJsPlayer, VideoJsPlayerOptions } from 'video.js';
+import videojs from 'video.js';
+type VideoJsPlayer = ReturnType<typeof videojs>;
+type VideoJsPlayerOptions = Parameters<typeof videojs>[1];
+// @ts-ignore — no type declarations available
 import HlsPlugin from '@videojs/http-streaming';
 
 /**
@@ -203,9 +206,9 @@ export class VideoLessonPlayer {
     this.markers.set(time, marker);
 
     // Add visual marker to progress bar if player is initialized
-    if (this.player && this.player.progressControl) {
+    if (this.player && (this.player as any).progressControl) {
       // Create marker element on progress bar
-      const progressBar = this.player.progressControl.el();
+      const progressBar = (this.player as any).progressControl.el();
       if (progressBar) {
         const markerEl = document.createElement('div');
         markerEl.className = 'lesson-marker';
@@ -280,7 +283,7 @@ export class VideoLessonPlayer {
   private checkMarkers(): void {
     if (!this.player) return;
 
-    const currentTime = this.player.currentTime();
+    const currentTime = this.player.currentTime?.() ?? 0;
     const threshold = 0.5; // within 0.5 seconds
 
     this.markers.forEach((marker, time) => {

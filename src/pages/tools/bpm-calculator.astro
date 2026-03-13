@@ -1,6 +1,6 @@
 ---
 import ToolLayout from '@layouts/ToolLayout.astro';
-import BpmCalculator from '@components/tools/BpmCalculator';
+import BpmCalculatorTool from '@components/tools/BpmCalculator';
 ---
 
 <ToolLayout
@@ -11,7 +11,7 @@ import BpmCalculator from '@components/tools/BpmCalculator';
   <div class="space-y-8">
     <!-- Tool Component -->
     <div class="flex justify-center">
-      <BpmCalculator client:load />
+      <BpmCalculatorTool client:load />
     </div>
 
     <!-- Instructions -->

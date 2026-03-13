@@ -30,9 +30,9 @@ export interface DDJFLXMapping {
  * MIDI stack for device connectivity and control
  */
 export class MidiStack {
-  private midiAccess: WebMidi.MIDIAccess | null = null;
-  private controller: WebMidi.MIDIInput | null = null;
-  private output: WebMidi.MIDIOutput | null = null;
+  private midiAccess: MIDIAccess | null = null;
+  private controller: MIDIInput | null = null;
+  private output: MIDIOutput | null = null;
   private controlHandlers = new Map<string, MidiControlHandler[]>();
   private noteHandlers = new Map<string, MidiNoteHandler[]>();
   private ddjFlx4Mapping: DDJFLXMapping | null = null;
@@ -96,7 +96,7 @@ export class MidiStack {
 
     if (!this.controller) {
       console.warn(`${deviceName} not found. Available devices:`,
-        Array.from(this.midiAccess.inputs.values()).map(d => d.name));
+        Array.from(this.midiAccess.inputs.values()).map((d: MIDIInput) => d.name));
       return false;
     }
 
@@ -110,12 +110,13 @@ export class MidiStack {
   private setupMidiListeners(): void {
     if (!this.controller) return;
 
-    this.controller.addEventListener('midimessage', (event: WebMidi.MIDIMessageEvent) => {
+    this.controller.addEventListener('midimessage', (event: MIDIMessageEvent) => {
       const { data } = event;
-      const status = data[0] & 0xf0;
-      const channel = data[0] & 0x0f;
-      const cc = data[1];
-      const value = data[2];
+      if (!data || data.length < 3) return;
+      const status = data[0]! & 0xf0;
+      const channel = data[0]! & 0x0f;
+      const cc = data[1]!;
+      const value = data[2]!;
 
       // Control Change (CC) - 0xB0
       if (status === 0xb0) {
@@ -298,7 +299,7 @@ export class MidiStack {
     }
 
     const devices: string[] = [];
-    this.midiAccess.inputs.forEach(input => {
+    this.midiAccess.inputs.forEach((input: MIDIInput) => {
       if (input.name) {
         devices.push(input.name);
       }
@@ -328,11 +329,13 @@ export class MidiStack {
   /**
    * טיפול בשינויים במצב התקנים
    */
-  private handleStateChange(event: WebMidi.MIDIConnectionEvent): void {
-    console.log(`MIDI device ${event.port.name} is now ${event.port.state}`);
+  private handleStateChange(event: MIDIConnectionEvent): void {
+    const port = event.port;
+    if (!port) return;
+    console.log(`MIDI device ${port.name} is now ${port.state}`);
 
-    if (event.port.state === 'disconnected' &&
-        event.port === this.controller) {
+    if (port.state === 'disconnected' &&
+        port === this.controller) {
       this.disconnect();
     }
   }
