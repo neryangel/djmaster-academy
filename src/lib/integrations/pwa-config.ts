@@ -430,7 +430,7 @@ export async function setupPWAUpdateListener(
 
       // Listen for controller change (new SW activated)
       navigator.serviceWorker.addEventListener('controllerchange', () => {
-        console.log('New service worker activated');
+        // New service worker activated
         if (onUpdateAvailable && registration) {
           onUpdateAvailable(registration);
         }

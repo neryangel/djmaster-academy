@@ -80,7 +80,7 @@ export class MidiStack {
         this.controller = input;
         this.setupMidiListeners();
         this.isConnected = true;
-        console.log(`Connected to ${input.name}`);
+        // Connected to MIDI input
         break;
       }
     }
@@ -89,7 +89,7 @@ export class MidiStack {
     for (const output of this.midiAccess.outputs.values()) {
       if (output.name && output.name.includes(deviceName)) {
         this.output = output;
-        console.log(`MIDI output connected: ${output.name}`);
+        // MIDI output connected
         break;
       }
     }
@@ -250,7 +250,7 @@ export class MidiStack {
       [0, 1].forEach(deck => {
         const playCC = this.ddjFlx4Mapping!.play + (deck * 0x30);
         this.onControl(0, playCC, (value) => {
-          console.log(`Deck ${deck} play: ${value}`);
+          // Deck play event
         });
       });
     }
@@ -322,7 +322,7 @@ export class MidiStack {
       this.output = null;
       this.isConnected = false;
 
-      console.log('MIDI device disconnected');
+      // MIDI device disconnected
     }
   }
 
@@ -332,7 +332,7 @@ export class MidiStack {
   private handleStateChange(event: MIDIConnectionEvent): void {
     const port = event.port;
     if (!port) return;
-    console.log(`MIDI device ${port.name} is now ${port.state}`);
+    // MIDI state change event
 
     if (port.state === 'disconnected' &&
         port === this.controller) {

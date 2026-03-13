@@ -129,12 +129,12 @@ export class VideoLessonPlayer {
 
     // Pause detection
     this.player.on('pause', () => {
-      console.log('Video paused at', this.player?.currentTime());
+      // Video paused
     });
 
     // Play detection
     this.player.on('play', () => {
-      console.log('Video playing');
+      // Video playing
     });
   }
 
@@ -301,7 +301,7 @@ export class VideoLessonPlayer {
    * Callback when marker is reached
    */
   private onMarkerReached(marker: LessonMarker): void {
-    console.log(`Reached marker: ${marker.label} at ${marker.time}s`);
+    // Reached marker at the specified time
 
     // Dispatch custom event
     const event = new CustomEvent('markerReached', {
@@ -338,7 +338,7 @@ export class VideoLessonPlayer {
    * Handle video completion
    */
   private onVideoComplete(): void {
-    console.log('Lesson completed');
+    // Lesson completed
     this.completionCallback?.();
 
     // Dispatch custom event
