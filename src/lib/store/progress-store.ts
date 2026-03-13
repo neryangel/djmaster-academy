@@ -39,12 +39,12 @@ export const $currentLessonId = atom<string | null>(null);
 // Computed values
 export const $currentLevel = computed($userProgress, (progress) => {
   if (!progress) return null;
-  return calculateLevel(progress.totalXP);
+  return calculateLevel(progress.xp);
 });
 
 export const $xpProgress = computed($userProgress, (progress) => {
   if (!progress) return { current: 0, needed: 100, progress: 0 };
-  return getXPToNextLevel(progress.totalXP);
+  return getXPToNextLevel(progress.xp);
 });
 
 export const $badgeCount = computed($userProgress, (progress) => {

@@ -63,10 +63,10 @@ export class AudioStack {
       autoplay: false,
       preload: 'metadata',
       onload: () => {
-        console.log('Track loaded successfully');
+        // Track loaded
       },
-      onerror: (id, error) => {
-        console.error('Howler error:', error);
+      onerror: (_id, error) => {
+        throw new Error(`Audio load failed: ${String(error)}`);
       },
     });
 

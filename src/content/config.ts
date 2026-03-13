@@ -77,7 +77,7 @@ const quizzes = defineCollection({
       shuffle_options: z.boolean().default(true),
       max_attempts: z.number().default(3),
       passing_score: z.number().default(70),
-      time_limit_minutes: z.number().optional(),
+      time_limit_minutes: z.number().nullable().optional(),
     }).optional(),
     questions: z.array(z.object({
       id: z.string(),

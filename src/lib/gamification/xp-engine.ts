@@ -4,10 +4,10 @@
 
 import { XP_VALUES, LEVELS, BADGES, type UserProgress } from '../../types/gamification';
 
-export function calculateLevel(totalXP: number): typeof LEVELS[number] {
-  let currentLevel = LEVELS[0];
+export function calculateLevel(xp: number): (typeof LEVELS)[number] {
+  let currentLevel = LEVELS[0]!;
   for (const level of LEVELS) {
-    if (totalXP >= level.minXP) {
+    if (xp >= level.minXP) {
       currentLevel = level;
     } else {
       break;
@@ -16,16 +16,16 @@ export function calculateLevel(totalXP: number): typeof LEVELS[number] {
   return currentLevel;
 }
 
-export function getXPToNextLevel(totalXP: number): { current: number; needed: number; progress: number } {
-  const currentLevel = calculateLevel(totalXP);
+export function getXPToNextLevel(xp: number): { current: number; needed: number; progress: number } {
+  const currentLevel = calculateLevel(xp);
   const currentIndex = LEVELS.indexOf(currentLevel);
 
   if (currentIndex >= LEVELS.length - 1) {
-    return { current: totalXP, needed: 0, progress: 100 };
+    return { current: xp, needed: 0, progress: 100 };
   }
 
-  const nextLevel = LEVELS[currentIndex + 1];
-  const xpInCurrentLevel = totalXP - currentLevel.minXP;
+  const nextLevel = LEVELS[currentIndex + 1]!;
+  const xpInCurrentLevel = xp - currentLevel.minXP;
   const xpNeededForNext = nextLevel.minXP - currentLevel.minXP;
   const progress = Math.round((xpInCurrentLevel / xpNeededForNext) * 100);
 
@@ -40,17 +40,17 @@ export function awardXP(
   progress: UserProgress,
   eventType: keyof typeof XP_VALUES
 ): { newProgress: UserProgress; xpGained: number; leveledUp: boolean; newBadges: string[] } {
-  const xpGained = XP_VALUES[eventType];
-  const oldLevel = calculateLevel(progress.totalXP);
-  const newTotalXP = progress.totalXP + xpGained;
-  const newLevel = calculateLevel(newTotalXP);
-  const leveledUp = newLevel.level > oldLevel.level;
+  const xpGained = XP_VALUES[eventType] ?? 0;
+  const oldLevel = calculateLevel(progress.xp);
+  const newXP = progress.xp + xpGained;
+  const newLevel = calculateLevel(newXP);
+  const leveledUp = newLevel.number > oldLevel.number;
 
   // Check for new badges
   const newBadges: string[] = [];
   for (const badge of BADGES) {
     if (!progress.badges.includes(badge.id)) {
-      const earned = checkBadgeCondition(badge.id, { ...progress, totalXP: newTotalXP });
+      const earned = checkBadgeCondition(badge.id, { ...progress, xp: newXP });
       if (earned) {
         newBadges.push(badge.id);
       }
@@ -59,10 +59,13 @@ export function awardXP(
 
   const newProgress: UserProgress = {
     ...progress,
-    totalXP: newTotalXP,
-    level: newLevel.level,
+    xp: newXP,
+    level: newLevel.number,
     badges: [...progress.badges, ...newBadges],
-    lastActivity: new Date().toISOString(),
+    streak: {
+      ...progress.streak,
+      lastActivity: new Date().toISOString(),
+    },
   };
 
   return { newProgress, xpGained, leveledUp, newBadges };
@@ -71,15 +74,15 @@ export function awardXP(
 function checkBadgeCondition(badgeId: string, progress: UserProgress): boolean {
   switch (badgeId) {
     case 'first-lesson':
-      return progress.lessonsCompleted >= 1;
+      return progress.completedLessons.length >= 1;
     case 'quiz-ace':
-      return progress.quizzesPassed >= 1;
+      return Object.values(progress.quizResults).some(r => r.score >= 70);
     case 'tool-explorer':
-      return progress.toolsUsed >= 3;
+      return Object.keys(progress.toolUsage).length >= 3;
     case 'streak-7':
-      return progress.currentStreak >= 7;
+      return progress.streak.current >= 7;
     case 'course-complete':
-      return progress.coursesCompleted >= 1;
+      return progress.completedCourses.length >= 1;
     case 'dj-master':
       return progress.level >= 10;
     default:
@@ -89,10 +92,13 @@ function checkBadgeCondition(badgeId: string, progress: UserProgress): boolean {
 
 export function updateStreak(progress: UserProgress): UserProgress {
   const now = new Date();
-  const lastActivity = progress.lastActivity ? new Date(progress.lastActivity) : null;
+  const lastActivity = progress.streak.lastActivity ? new Date(progress.streak.lastActivity) : null;
 
   if (!lastActivity) {
-    return { ...progress, currentStreak: 1, longestStreak: 1, lastActivity: now.toISOString() };
+    return {
+      ...progress,
+      streak: { current: 1, longest: 1, lastActivity: now.toISOString() },
+    };
   }
 
   const daysSinceLastActivity = Math.floor(
@@ -104,31 +110,39 @@ export function updateStreak(progress: UserProgress): UserProgress {
     return progress;
   } else if (daysSinceLastActivity === 1) {
     // Consecutive day
-    const newStreak = progress.currentStreak + 1;
+    const newStreak = progress.streak.current + 1;
     return {
       ...progress,
-      currentStreak: newStreak,
-      longestStreak: Math.max(newStreak, progress.longestStreak),
-      lastActivity: now.toISOString(),
+      streak: {
+        current: newStreak,
+        longest: Math.max(newStreak, progress.streak.longest),
+        lastActivity: now.toISOString(),
+      },
     };
   } else {
     // Streak broken
-    return { ...progress, currentStreak: 1, lastActivity: now.toISOString() };
+    return {
+      ...progress,
+      streak: { ...progress.streak, current: 1, lastActivity: now.toISOString() },
+    };
   }
 }
 
 export function createInitialProgress(userId: string): UserProgress {
   return {
     userId,
-    totalXP: 0,
+    xp: 0,
     level: 1,
     badges: [],
-    lessonsCompleted: 0,
-    quizzesPassed: 0,
-    toolsUsed: 0,
-    coursesCompleted: 0,
-    currentStreak: 0,
-    longestStreak: 0,
-    lastActivity: null,
+    completedLessons: [],
+    completedCourses: [],
+    quizResults: {},
+    streak: {
+      current: 0,
+      longest: 0,
+      lastActivity: '',
+    },
+    toolUsage: {},
+    joinedAt: new Date().toISOString(),
   };
 }

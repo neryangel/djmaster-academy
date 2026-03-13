@@ -100,7 +100,6 @@ export default function WaveformVisualizer({
 
     // Draw waveform
     const data = waveformData[0];
-    const samplesPerPixel = Math.max(1, Math.floor((data.length / width) / zoom));
     const centerY = canvasHeight / 2;
     const scale = (canvasHeight / 4) * 0.8;
 
