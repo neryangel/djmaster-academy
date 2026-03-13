@@ -11,24 +11,24 @@ import { LEVELS, XP_VALUES } from '../../../types/gamification';
 describe('calculateLevel', () => {
   it('should return level 1 for 0 XP', () => {
     const level = calculateLevel(0);
-    expect(level.level).toBe(1);
+    expect(level.number).toBe(1);
   });
 
   it('should return correct level for moderate XP', () => {
     const level = calculateLevel(500);
-    expect(level.level).toBeGreaterThanOrEqual(2);
+    expect(level.number).toBeGreaterThanOrEqual(2);
   });
 
   it('should return max level for very high XP', () => {
     const level = calculateLevel(999999);
-    expect(level.level).toBe(10);
+    expect(level.number).toBe(10);
   });
 
   it('should always return a valid level', () => {
     for (let xp = 0; xp <= 10000; xp += 100) {
       const level = calculateLevel(xp);
-      expect(level.level).toBeGreaterThanOrEqual(1);
-      expect(level.level).toBeLessThanOrEqual(10);
+      expect(level.number).toBeGreaterThanOrEqual(1);
+      expect(level.number).toBeLessThanOrEqual(10);
     }
   });
 });
@@ -42,7 +42,7 @@ describe('getXPToNextLevel', () => {
   });
 
   it('should show 100% at max level', () => {
-    const maxXP = LEVELS[LEVELS.length - 1].minXP + 1000;
+    const maxXP = LEVELS[LEVELS.length - 1]!.minXP + 1000;
     const result = getXPToNextLevel(maxXP);
     expect(result.progress).toBe(100);
   });
@@ -53,11 +53,11 @@ describe('awardXP', () => {
     const progress = createInitialProgress('test-user');
     const result = awardXP(progress, 'lesson_complete');
     expect(result.xpGained).toBe(XP_VALUES.lesson_complete);
-    expect(result.newProgress.totalXP).toBe(XP_VALUES.lesson_complete);
+    expect(result.newProgress.xp).toBe(XP_VALUES.lesson_complete);
   });
 
   it('should detect level up', () => {
-    const progress = { ...createInitialProgress('test-user'), totalXP: LEVELS[1].minXP - 1 };
+    const progress = { ...createInitialProgress('test-user'), xp: LEVELS[1]!.minXP - 1 };
     const result = awardXP(progress, 'lesson_complete');
     // May or may not level up depending on XP values
     expect(typeof result.leveledUp).toBe('boolean');
@@ -68,7 +68,7 @@ describe('updateStreak', () => {
   it('should start streak at 1 for first activity', () => {
     const progress = createInitialProgress('test-user');
     const updated = updateStreak(progress);
-    expect(updated.currentStreak).toBe(1);
+    expect(updated.streak.current).toBe(1);
   });
 
   it('should maintain streak for same day', () => {
@@ -78,7 +78,7 @@ describe('updateStreak', () => {
       lastActivity: new Date().toISOString(),
     };
     const updated = updateStreak(progress);
-    expect(updated.currentStreak).toBe(5); // No change
+    expect(updated.streak.current).toBe(5); // No change
   });
 });
 
@@ -86,9 +86,9 @@ describe('createInitialProgress', () => {
   it('should create valid initial state', () => {
     const progress = createInitialProgress('user-123');
     expect(progress.userId).toBe('user-123');
-    expect(progress.totalXP).toBe(0);
+    expect(progress.xp).toBe(0);
     expect(progress.level).toBe(1);
     expect(progress.badges).toEqual([]);
-    expect(progress.currentStreak).toBe(0);
+    expect(progress.streak.current).toBe(0);
   });
 });

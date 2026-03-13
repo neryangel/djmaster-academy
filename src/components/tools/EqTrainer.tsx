@@ -1,4 +1,4 @@
-import React, { useState, useRef, useCallback, useEffect } from 'react';
+import { useState, useRef, useCallback, useEffect } from 'react';
 
 interface EQBand {
   name: string;
@@ -87,7 +87,9 @@ export default function EqTrainer() {
     // EQ filter
     const eq = ctx.createBiquadFilter();
     eq.type = 'peaking';
-    eq.frequency.value = availableBands[randomBand].frequency;
+    const targetBand = availableBands[randomBand];
+    if (!targetBand) return;
+    eq.frequency.value = targetBand.frequency;
     eq.Q.value = 2;
     eq.gain.value = settings.boost;
 

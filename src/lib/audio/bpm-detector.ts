@@ -52,7 +52,7 @@ export class TapTempoCalculator {
     const now = performance.now();
 
     // Reset if gap too large
-    if (this.taps.length > 0 && now - this.taps[this.taps.length - 1] > this.maxInterval) {
+    if (this.taps.length > 0 && now - this.taps[this.taps.length - 1]! > this.maxInterval) {
       this.taps = [];
     }
 
@@ -67,7 +67,7 @@ export class TapTempoCalculator {
 
     const intervals: number[] = [];
     for (let i = 1; i < this.taps.length; i++) {
-      intervals.push(this.taps[i] - this.taps[i - 1]);
+      intervals.push(this.taps[i]! - this.taps[i - 1]!);
     }
 
     const avgInterval = intervals.reduce((a, b) => a + b, 0) / intervals.length;
@@ -109,7 +109,7 @@ export async function detectBPMFromBuffer(
   for (let i = 0; i < channelData.length - windowSize; i += windowSize) {
     let energy = 0;
     for (let j = 0; j < windowSize; j++) {
-      energy += channelData[i + j] * channelData[i + j];
+      energy += (channelData[i + j] ?? 0) * (channelData[i + j] ?? 0);
     }
     energies.push(energy / windowSize);
   }
@@ -117,7 +117,7 @@ export async function detectBPMFromBuffer(
   // Spectral flux / onset detection
   const onsets: number[] = [];
   for (let i = 1; i < energies.length; i++) {
-    const diff = energies[i] - energies[i - 1];
+    const diff = (energies[i] ?? 0) - (energies[i - 1] ?? 0);
     if (diff > 0) onsets.push(diff);
     else onsets.push(0);
   }
@@ -131,7 +131,7 @@ export async function detectBPMFromBuffer(
     let correlation = 0;
     let count = 0;
     for (let i = 0; i < onsets.length - lag; i++) {
-      correlation += onsets[i] * onsets[i + lag];
+      correlation += (onsets[i] ?? 0) * (onsets[i + lag] ?? 0);
       count++;
     }
     correlations.push(count > 0 ? correlation / count : 0);
@@ -141,8 +141,8 @@ export async function detectBPMFromBuffer(
   let maxCorr = 0;
   let bestLag = minLag;
   for (let i = 0; i < correlations.length; i++) {
-    if (correlations[i] > maxCorr) {
-      maxCorr = correlations[i];
+    if ((correlations[i] ?? 0) > maxCorr) {
+      maxCorr = correlations[i]!;
       bestLag = minLag + i;
     }
   }

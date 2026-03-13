@@ -1,6 +1,4 @@
 ---
-import type { Props } from 'astro';
-
 interface CourseProps {
   title: string;
   description: string;
@@ -9,7 +7,7 @@ interface CourseProps {
   lessonCount: number;
 }
 
-const { title, description, level, duration, lessonCount } = Astro.props as CourseProps;
+const { title, description, level, duration, lessonCount } = Astro.props as unknown as CourseProps;
 
 const levelLabels: Record<string, string> = {
   beginner: 'מתחיל',

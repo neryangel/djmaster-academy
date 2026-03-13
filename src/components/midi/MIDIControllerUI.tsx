@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { MidiConnectionState, MidiEvent, DDJ_FLX4_MAPPING } from '../../types/midi';
+import React, { useState } from 'react';
+import type { MidiConnectionState, MidiEvent } from '../../types/midi';
 
 interface MIDIControllerUIProps {
   connectionState: MidiConnectionState;
@@ -190,7 +190,7 @@ function Pad({ index, isActive = false, onClick }: { index: number; isActive?: b
 
 export default function MIDIControllerUI({
   connectionState,
-  onMidiEvent,
+  onMidiEvent: _onMidiEvent,
   decksState = {
     playing: { A: false, B: false },
     cued: { A: false, B: false },
@@ -313,9 +313,9 @@ export default function MIDIControllerUI({
                 value={decksState.volume.A}
                 className="w-10 h-32 vertical-slider accent-dj-cyan"
                 style={{
-                  writingMode: 'bt-lr',
-                  appearance: 'slider-vertical',
-                  WebkitAppearance: 'slider-vertical',
+                  writingMode: 'vertical-lr' as React.CSSProperties['writingMode'],
+                  appearance: 'none' as React.CSSProperties['appearance'],
+                  WebkitAppearance: 'slider-vertical' as React.CSSProperties['WebkitAppearance'],
                 }}
               />
               <div className="text-xs text-gray-400 font-mono">
@@ -442,9 +442,9 @@ export default function MIDIControllerUI({
                 value={decksState.volume.B}
                 className="w-10 h-32 vertical-slider accent-dj-cyan"
                 style={{
-                  writingMode: 'bt-lr',
-                  appearance: 'slider-vertical',
-                  WebkitAppearance: 'slider-vertical',
+                  writingMode: 'vertical-lr' as React.CSSProperties['writingMode'],
+                  appearance: 'none' as React.CSSProperties['appearance'],
+                  WebkitAppearance: 'slider-vertical' as React.CSSProperties['WebkitAppearance'],
                 }}
               />
               <div className="text-xs text-gray-400 font-mono">

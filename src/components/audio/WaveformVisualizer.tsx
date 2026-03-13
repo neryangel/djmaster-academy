@@ -1,5 +1,5 @@
-import React, { useEffect, useRef, useState, useCallback } from 'react';
-import { AudioPlayerState } from '../../types/audio';
+import { useEffect, useRef, useState, useCallback } from 'react';
+import type { AudioPlayerState } from '../../types/audio';
 
 interface WaveformVisualizerProps {
   audioUrl: string;
@@ -10,10 +10,7 @@ interface WaveformVisualizerProps {
   showTimeMarkers?: boolean;
 }
 
-interface Point {
-  x: number;
-  y: number;
-}
+
 
 export default function WaveformVisualizer({
   audioUrl,
@@ -30,7 +27,7 @@ export default function WaveformVisualizer({
   const [waveformData, setWaveformData] = useState<Float32Array[]>([]);
   const [isDragging, setIsDragging] = useState(false);
   const [zoom, setZoom] = useState(1);
-  const animationFrameRef = useRef<number>();
+  const animationFrameRef = useRef<number | null>(null);
 
   // Load and decode audio
   useEffect(() => {
@@ -47,7 +44,7 @@ export default function WaveformVisualizer({
         audioBufferRef.current = audioBuffer;
 
         // Extract waveform data
-        const rawData = [];
+        const rawData: Float32Array[] = [];
         for (let i = 0; i < audioBuffer.numberOfChannels; i++) {
           rawData.push(audioBuffer.getChannelData(i));
         }
@@ -100,6 +97,7 @@ export default function WaveformVisualizer({
 
     // Draw waveform
     const data = waveformData[0];
+    if (!data) return;
     const centerY = canvasHeight / 2;
     const scale = (canvasHeight / 4) * 0.8;
 
@@ -163,6 +161,7 @@ export default function WaveformVisualizer({
     const width = canvas.width;
     const height = canvas.height;
     const data = waveformData[0];
+    if (!data) return;
     const duration = playerState.duration || 1;
     const fftSize = 2048;
 
@@ -182,8 +181,8 @@ export default function WaveformVisualizer({
         const sample = Math.abs(data[sampleIndex + i] || 0);
         const freq = (i / windowSize) * 5;
         const band = Math.floor(freq);
-        if (band < bandEnergies.length) {
-          bandEnergies[band] += sample * sample;
+        if (band < bandEnergies.length && bandEnergies[band] !== undefined) {
+          bandEnergies[band]! += sample * sample;
         }
       }
 
@@ -193,7 +192,7 @@ export default function WaveformVisualizer({
       // Draw bands
       const bandHeight = height / bandEnergies.length;
       for (let b = 0; b < bandEnergies.length; b++) {
-        const energy = Math.min(1, bandEnergies[b] * 2);
+        const energy = Math.min(1, (bandEnergies[b] ?? 0) * 2);
         const hue = (b / bandEnergies.length) * 60;
         const brightness = Math.floor(energy * 255);
         ctx.fillStyle = `hsla(${hue}, 100%, ${brightness / 5}%, ${energy})`;

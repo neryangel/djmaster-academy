@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import { useState, useMemo } from 'react';
 
 interface QuizQuestion {
   id: string;
@@ -43,13 +43,14 @@ export default function QuizRenderer({ quiz, onComplete }: QuizRendererProps) {
     if (quiz.settings.shuffle_questions) {
       for (let i = q.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
-        [q[i], q[j]] = [q[j], q[i]];
+        [q[i]!, q[j]!] = [q[j]!, q[i]!];
       }
     }
     return q;
   }, [quiz]);
 
   const currentQuestion = questions[currentIndex];
+  if (!currentQuestion) return <div>אין שאלות</div>;
   const totalPoints = questions.reduce((sum, q) => sum + q.points, 0);
 
   const handleAnswer = (answer: unknown) => {

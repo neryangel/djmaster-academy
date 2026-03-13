@@ -1,4 +1,4 @@
-import React from 'react';
+import { useState } from 'react';
 
 interface Level {
   number: number;
@@ -35,10 +35,10 @@ export default function ProgressTracker({
   totalLessons,
   streak,
 }: ProgressTrackerProps) {
-  const currentLevel = LEVELS.reduce((level, l) => (xp >= l.minXP ? l : level), LEVELS[0]);
-  const nextLevel = LEVELS.find(l => l.minXP > xp) ?? LEVELS[LEVELS.length - 1];
-  const progressToNext = nextLevel.minXP > currentLevel.minXP
-    ? ((xp - currentLevel.minXP) / (nextLevel.minXP - currentLevel.minXP)) * 100
+  const currentLevel = LEVELS.reduce((level, l) => (xp >= l.minXP ? l : level), LEVELS[0]!);
+  const nextLevel = LEVELS.find(l => l.minXP > xp) ?? LEVELS[LEVELS.length - 1]!;
+  const progressToNext = nextLevel!.minXP > currentLevel!.minXP
+    ? ((xp - currentLevel!.minXP) / (nextLevel!.minXP - currentLevel!.minXP)) * 100
     : 100;
   const courseProgress = totalLessons > 0 ? (completedLessons / totalLessons) * 100 : 0;
 
@@ -47,10 +47,10 @@ export default function ProgressTracker({
       {/* Level & XP card */}
       <div className="bg-dj-card border border-dj-border rounded-2xl p-5">
         <div className="flex items-center gap-4 mb-4">
-          <div className="text-4xl">{currentLevel.icon}</div>
+          <div className="text-4xl">{currentLevel!.icon}</div>
           <div>
-            <div className="text-xs text-gray-400">רמה {currentLevel.number}</div>
-            <div className="text-lg font-bold text-white">{currentLevel.nameHe}</div>
+            <div className="text-xs text-gray-400">רמה {currentLevel!.number}</div>
+            <div className="text-lg font-bold text-white">{currentLevel!.nameHe}</div>
           </div>
           <div className="mr-auto text-left">
             <div className="text-2xl font-mono font-bold text-dj-cyan">{xp.toLocaleString()}</div>
@@ -61,8 +61,8 @@ export default function ProgressTracker({
         {/* XP progress bar */}
         <div className="space-y-1">
           <div className="flex justify-between text-xs text-gray-400">
-            <span>{currentLevel.nameHe}</span>
-            <span>{nextLevel.nameHe} {nextLevel.icon}</span>
+            <span>{currentLevel!.nameHe}</span>
+            <span>{nextLevel!.nameHe} {nextLevel!.icon}</span>
           </div>
           <div className="h-3 bg-dj-dark rounded-full overflow-hidden">
             <div
@@ -71,7 +71,7 @@ export default function ProgressTracker({
             />
           </div>
           <div className="text-xs text-gray-500 text-left font-mono">
-            {(nextLevel.minXP - xp).toLocaleString()} XP לרמה הבאה
+            {(nextLevel!.minXP - xp).toLocaleString()} XP לרמה הבאה
           </div>
         </div>
       </div>

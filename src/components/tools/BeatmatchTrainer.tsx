@@ -1,13 +1,11 @@
-'use client';
-
-import React, { useState, useRef, useEffect, useCallback } from 'react';
+import { useState, useRef, useCallback } from 'react';
 
 interface AudioContextsRef {
   audioContext: AudioContext | null;
   oscillatorA: OscillatorNode | null;
   oscillatorB: OscillatorNode | null;
-  noiseA: AudioBufferNode | null;
-  noiseB: AudioBufferNode | null;
+  noiseA: AudioBufferSourceNode | null;
+  noiseB: AudioBufferSourceNode | null;
   gainA: GainNode | null;
   gainB: GainNode | null;
 }
@@ -115,7 +113,7 @@ export default function BeatmatchTrainer() {
       setDeckState({ ...deckState, isPlaying: true });
 
       const playBeats = () => {
-        const elapsed = Date.now() - startTimeRef.current[deck];
+        const elapsed = Date.now() - (startTimeRef.current[deck] ?? Date.now());
         const beatIndex = Math.floor(elapsed / beatDuration) % 4;
 
         if (beatCounterRef.current[deck] !== beatIndex) {
@@ -263,7 +261,7 @@ export default function BeatmatchTrainer() {
     setAccuracy(null);
   }, [stopDeck]);
 
-  const renderDeck = (deck: 'A' | 'B', state: DeckState, setterFunc: (func: (prev: DeckState) => DeckState) => void) => {
+  const renderDeck = (deck: 'A' | 'B', state: DeckState, _setterFunc: (func: (prev: DeckState) => DeckState) => void) => {
     const showBpm = difficulty === 'easy' || (difficulty === 'medium' && deck === 'A');
 
     return (

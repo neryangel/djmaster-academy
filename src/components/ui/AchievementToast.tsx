@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { Badge } from '../../types/gamification';
+import { useEffect, useState } from 'react';
+import type { Badge } from '../../types/gamification';
 
 interface AchievementToastProps {
   badge: Badge;
@@ -50,7 +50,7 @@ export default function AchievementToast({
       if (remaining === 0) {
         clearInterval(updateInterval);
         setIsVisible(false);
-        setTimeout(onDismiss, 300);
+        if (onDismiss) setTimeout(onDismiss, 300);
       }
     }, 50);
 
@@ -210,7 +210,7 @@ export default function AchievementToast({
           <button
             onClick={() => {
               setIsVisible(false);
-              setTimeout(onDismiss, 300);
+              if (onDismiss) setTimeout(onDismiss, 300);
             }}
             className="flex-shrink-0 w-6 h-6 flex items-center justify-center rounded hover:bg-white/10 transition-colors text-gray-400 hover:text-white text-sm"
           >

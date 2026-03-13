@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useRef, useEffect } from 'react';
+import { useState, useCallback, useRef, useEffect } from 'react';
 
 interface TapState {
   bpm: number;
@@ -29,7 +29,7 @@ export default function BpmCalculator() {
     const now = performance.now();
 
     // Reset if gap > 3 seconds
-    if (tapsRef.current.length > 0 && now - tapsRef.current[tapsRef.current.length - 1] > 3000) {
+    if (tapsRef.current.length > 0 && now - tapsRef.current[tapsRef.current.length - 1]! > 3000) {
       tapsRef.current = [];
     }
 
@@ -46,7 +46,7 @@ export default function BpmCalculator() {
 
     const intervals: number[] = [];
     for (let i = 1; i < tapsRef.current.length; i++) {
-      intervals.push(tapsRef.current[i] - tapsRef.current[i - 1]);
+      intervals.push(tapsRef.current[i]! - tapsRef.current[i - 1]!);
     }
 
     const avg = intervals.reduce((a, b) => a + b, 0) / intervals.length;

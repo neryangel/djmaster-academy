@@ -62,9 +62,12 @@ export function toCamelotString(entry: CamelotEntry): string {
 export function parseCamelot(camelot: string): { number: number; letter: 'A' | 'B' } | null {
   const match = camelot.match(/^(\d{1,2})([AB])$/i);
   if (!match) return null;
-  const num = parseInt(match[1]);
+  const matchStr = match[1];
+  const letterStr = match[2];
+  if (!matchStr || !letterStr) return null;
+  const num = parseInt(matchStr);
   if (num < 1 || num > 12) return null;
-  return { number: num, letter: match[2].toUpperCase() as 'A' | 'B' };
+  return { number: num, letter: letterStr.toUpperCase() as 'A' | 'B' };
 }
 
 /**

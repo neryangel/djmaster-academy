@@ -1,8 +1,10 @@
 import * as Tone from 'tone';
-import { Howl, Howler } from 'howler';
+import { Howl } from 'howler';
 import WaveSurfer from 'wavesurfer.js';
 import * as Tonal from '@tonaljs/tonal';
 import Meyda from 'meyda';
+
+type MeydaAnalyzer = ReturnType<typeof Meyda.createMeydaAnalyzer>;
 
 /**
  * ממשק AudioStack משלב ערימת אודיו מלאה לניתוח וניהול רצועות סאונד
@@ -29,11 +31,11 @@ export interface CompatibleKey {
 export class AudioStack {
   private howl: Howl | null = null;
   private wavesurfer: WaveSurfer | null = null;
-  private analyser: Meyda.MeydaAnalyzer | null = null;
+  private analyser: MeydaAnalyzer | null = null;
   private audioContext: AudioContext | null = null;
   private toneReady = false;
   private currentKey: string | null = null;
-  private currentBPM: number = 120;
+  private currentBPM = 120;
 
   /**
    * אתחול ערימת האודיו ו-Tone.js
@@ -43,7 +45,7 @@ export class AudioStack {
     if (this.toneReady) return;
 
     await Tone.start();
-    this.audioContext = Tone.getContext().rawContext;
+    this.audioContext = Tone.getContext().rawContext as unknown as AudioContext;
     this.toneReady = true;
   }
 
@@ -65,7 +67,7 @@ export class AudioStack {
       onload: () => {
         // Track loaded
       },
-      onerror: (_id, error) => {
+      onloaderror: (_id: number, error: unknown) => {
         throw new Error(`Audio load failed: ${String(error)}`);
       },
     });
@@ -101,7 +103,7 @@ export class AudioStack {
       analyserNode.fftSize = 2048;
 
       // חיבור Howler output ל-analyser
-      const sourceNode = this.audioContext.createMediaElementAudioSourceNode(
+      const sourceNode = this.audioContext.createMediaElementSource(
         new Audio()
       );
       sourceNode.connect(analyserNode);
@@ -132,7 +134,7 @@ export class AudioStack {
     return {
       rms: features.rms || 0,
       spectralCentroid: features.spectralCentroid || 0,
-      chroma: features.chroma || new Array(12).fill(0),
+      chroma: features.chroma || Array.from({ length: 12 }, () => 0),
       zcr: features.zcr,
       spectralFlatness: features.spectralFlatness,
     };
@@ -165,7 +167,7 @@ export class AudioStack {
     const key = Tonal.Key.majorKey(detectedNote);
     this.currentKey = key.tonic;
 
-    return this.currentKey;
+    return this.currentKey ?? detectedNote;
   }
 
   /**

@@ -99,11 +99,11 @@ export class MidiController {
     const data = event.data;
     if (!data || data.length < 2) return;
 
-    const status = data[0];
+    const status = data[0]!;
     const channel = status & 0x0F;
     const messageType = status & 0xF0;
-    const byte1 = data[1];
-    const byte2 = data.length > 2 ? data[2] : 0;
+    const byte1 = data[1]!;
+    const byte2 = data.length > 2 ? data[2]! : 0;
 
     switch (messageType) {
       case 0x90: // Note On

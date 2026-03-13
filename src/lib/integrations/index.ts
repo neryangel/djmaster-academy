@@ -7,6 +7,8 @@
 export {
   AudioStack,
   getAudioStack,
+} from './audio-stack';
+export type {
   AudioFeatures,
   CompatibleKey,
 } from './audio-stack';
@@ -15,6 +17,8 @@ export {
 export {
   MidiStack,
   getMidiStack,
+} from './midi-stack';
+export type {
   MidiControlHandler,
   MidiNoteHandler,
   DDJFLXMapping,
@@ -28,9 +32,12 @@ export {
   createDJComponentStyle,
   getRTLVariants,
   createRTLAnimation,
+} from './ui-toolkit';
+export type {
   RTLProps,
   DialogContentProps,
-  // Radix UI exports
+} from './ui-toolkit';
+export {
   Dialog,
   DialogTrigger,
   DialogContent,
@@ -134,7 +141,8 @@ export {
   DndPlaylistProvider,
   SortableTrack,
   useSortablePlaylist,
-  formatDuration,
+} from './dnd-playlist';
+export type {
   PlaylistTrack,
   DndPlaylistProviderProps,
   SortableTrackProps,
@@ -148,6 +156,8 @@ export {
   offlinePageConfig,
   swUpdateNotificationConfig,
   setupPWAUpdateListener,
+} from './pwa-config';
+export type {
   VitePWAOptions,
 } from './pwa-config';
 
@@ -155,6 +165,8 @@ export {
 export {
   VideoLessonPlayer,
   createVideoPlayer,
+} from './video-player';
+export type {
   LessonMarker,
   VideoLessonOptions,
 } from './video-player';
@@ -190,7 +202,7 @@ export {
   XAxis,
   YAxis,
   CartesianGrid,
-  Tooltip,
+  Tooltip as RechartsTooltip,
   Legend,
   Cell,
 } from './charts-config';

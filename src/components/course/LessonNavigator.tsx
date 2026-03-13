@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import { useState, useMemo } from 'react';
 
 interface Lesson {
   id: string;
@@ -156,8 +156,9 @@ export default function LessonNavigator({
   courseProgress = 0,
   isCompact = false,
 }: LessonNavigatorProps) {
+  const initialId = currentModuleId ?? modules[0]?.id;
   const [expandedModules, setExpandedModules] = useState<Set<string>>(
-    new Set(currentModuleId ? [currentModuleId] : [modules[0]?.id])
+    new Set(initialId ? [initialId] : [])
   );
   const [isMobileOpen, setIsMobileOpen] = useState(false);
 

@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 
 interface CamelotKey {
   number: number;
@@ -107,7 +107,8 @@ export default function HarmonicWheel() {
     const x2 = CENTER_X + Math.cos(angle + Math.PI / 12) * radius;
     const y2 = CENTER_Y + Math.sin(angle + Math.PI / 12) * radius;
 
-    const keyLabel = isMinor ? CAMELOT_KEYS[number - 1].minor : CAMELOT_KEYS[number - 1].major;
+    const camelotKey = CAMELOT_KEYS[number - 1];
+    const keyLabel = camelotKey ? (isMinor ? camelotKey.minor : camelotKey.major) : '';
     const keyId = `${number}${type}`;
     const compatibility = selectedKey ? getCompatibility(selectedKey, keyId) : null;
 
@@ -241,7 +242,7 @@ export default function HarmonicWheel() {
                   <div className="text-sm text-gray-400 space-y-1">
                     <p>
                       מפתח:{' '}
-                      {CAMELOT_KEYS[parseInt(selectedKey) - 1][selectedKey.endsWith('A') ? 'minor' : 'major']}
+                      {CAMELOT_KEYS[parseInt(selectedKey) - 1]?.[selectedKey.endsWith('A') ? 'minor' : 'major'] ?? ''}
                     </p>
                     <p>מספר: {selectedKey.slice(0, -1)}</p>
                     <p>סוג: {selectedKey.endsWith('A') ? 'מינור' : 'מז\'ור'}</p>

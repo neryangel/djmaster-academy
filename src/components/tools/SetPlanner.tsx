@@ -1,6 +1,4 @@
-'use client';
-
-import React, { useState, useCallback } from 'react';
+import { useState, useCallback } from 'react';
 
 interface Track {
   id: string;
@@ -24,9 +22,7 @@ const CAMELOT_NUMBERS = Array.from({ length: 12 }, (_, i) => i + 1);
 const CAMELOT_TYPES = ['A', 'B'] as const;
 const GENRES = ['טראנס', 'טק הוס', 'אלקטרו הוס', 'פרוגרסיבי', 'דראם וביס', 'אחר'];
 
-const TRANSITION_TYPES = ['מיקס', 'חיתוך', 'echo out', 'loop', 'filter', 'spinback'];
-
-const generateId = () => Math.random().toString(36).substr(2, 9);
+const generateId = () => Math.random().toString(36).substring(2, 11);
 
 const getKeyCompatibility = (key1: string, key2: string) => {
   if (key1 === key2) return 'perfect';
@@ -111,11 +107,11 @@ export default function SetPlanner() {
     const index = tracks.findIndex(t => t.id === id);
     if (direction === 'up' && index > 0) {
       const newTracks = [...tracks];
-      [newTracks[index], newTracks[index - 1]] = [newTracks[index - 1], newTracks[index]];
+      [newTracks[index]!, newTracks[index - 1]!] = [newTracks[index - 1]!, newTracks[index]!];
       setTracks(newTracks);
     } else if (direction === 'down' && index < tracks.length - 1) {
       const newTracks = [...tracks];
-      [newTracks[index], newTracks[index + 1]] = [newTracks[index + 1], newTracks[index]];
+      [newTracks[index]!, newTracks[index + 1]!] = [newTracks[index + 1]!, newTracks[index]!];
       setTracks(newTracks);
     }
   }, [tracks]);
@@ -142,7 +138,10 @@ export default function SetPlanner() {
     let totalTransitions = 0;
 
     for (let i = 0; i < tracks.length - 1; i++) {
-      const compatibility = getKeyCompatibility(tracks[i].key, tracks[i + 1].key);
+      const trackI = tracks[i];
+      const trackNext = tracks[i + 1];
+      if (!trackI || !trackNext) continue;
+      const compatibility = getKeyCompatibility(trackI.key, trackNext.key);
       if (compatibility !== 'clash') {
         compatibleTransitions++;
       }
@@ -174,7 +173,10 @@ export default function SetPlanner() {
       exportText += `   BPM: ${track.bpm} | מפתח: ${track.key} | ז׳אנר: ${track.genre} | אנרגיה: ${track.energy}/5\n`;
 
       if (i < tracks.length - 1) {
-        const transition = analyzeFransition(tracks[i], tracks[i + 1]);
+        const trackI = tracks[i]!;
+        const trackNext = tracks[i + 1];
+        if (!trackNext) return;
+        const transition = analyzeFransition(trackI, trackNext);
         exportText += `   ↓ ${transition.transitionType} (${transition.keyLabel})\n`;
       }
       exportText += '\n';
@@ -361,7 +363,8 @@ export default function SetPlanner() {
           ) : (
             <div className="space-y-3">
               {tracks.map((track, index) => {
-                const transition = index < tracks.length - 1 ? analyzeFransition(track, tracks[index + 1]) : null;
+                const nextTrack = tracks[index + 1];
+                const transition = index < tracks.length - 1 && nextTrack ? analyzeFransition(track, nextTrack) : null;
 
                 return (
                   <div key={track.id}>
