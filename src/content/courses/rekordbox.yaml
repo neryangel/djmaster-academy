@@ -1,0 +1,50 @@
+id: "03-rekordbox"
+title: "Rekordbox תוכנת"
+slug: "rekordbox"
+version: "2.0.0"
+
+description:
+  short: "מדריך מלא לתוכנת Rekordbox — ניהול מוזיקה וביצוע"
+  full: >
+    קורס על תוכנת Rekordbox של Pioneer DJ. נלמד התקנה והגדרות,
+    ייבוא מוזיקה וניתוח אוטומטי, ניהול ספריה, Grid Editing,
+    Hot Cues, וביצוע בPerformance Mode.
+
+metadata:
+  level: "beginner"
+  duration_minutes: 100
+  lesson_count: 1
+  module_count: 1
+  language: "he"
+  direction: "rtl"
+
+prerequisites:
+  - "01-world-of-dj"
+  - "02-flx4-equipment"
+
+equipment:
+  required:
+    - "מחשב (Windows או Mac)"
+    - "Rekordbox (גרסה חינם או Pro)"
+    - "אוזניות"
+
+learning_objectives:
+  - "להתקין ולהגדיר Rekordbox לראשונה"
+  - "ללמוד ייבוא מוזיקה ותיקון Beat Grid"
+  - "להבין ניהול ספריה (Playlists, Tags, Rating)"
+  - "ללמוד Hot Cues ו-Memory Points"
+  - "להבדיל בין Export Mode ו-Performance Mode"
+  - "להגדיר את Rekordbox לביצוע עם DDJ-FLX4"
+
+completion:
+  quizzes_required: true
+  min_quiz_score: 70
+  exercises_min: 2
+  certificate: false
+
+tags: ["beginner", "software", "rekordbox", "music-management"]
+
+modules:
+  - "01-rekordbox-setup"
+
+pricing_tier: "pro"

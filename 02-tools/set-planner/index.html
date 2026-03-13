@@ -1,0 +1,1334 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:;">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DJ Set Planner - DJMaster Academy</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;700;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg: #0A0A0F;
+            --surface: #12121F;
+            --elevated: #1A1A2E;
+            --border: #2A2A3E;
+            --accent-cyan: #00d4ff;
+            --accent-purple: #7b2fff;
+            --accent-pink: #ff3d6e;
+            --accent-green: #00ff9d;
+            --accent-yellow: #ffd60a;
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0b0;
+            --spacing-xs: 4px;
+            --spacing-sm: 8px;
+            --spacing-md: 16px;
+            --spacing-lg: 24px;
+            --spacing-xl: 32px;
+            --radius-sm: 4px;
+            --radius-md: 8px;
+            --radius-lg: 12px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+            background: var(--bg);
+            color: var(--text-primary);
+            font-family: 'Heebo', sans-serif;
+            font-size: 14px;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Scrollbar Styling */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--surface);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--border);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--accent-cyan);
+        }
+
+        /* Layout */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: var(--spacing-lg);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header */
+        .header {
+            margin-bottom: var(--spacing-xl);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: var(--spacing-md);
+        }
+
+        .header h1 {
+            font-size: 32px;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: var(--spacing-sm);
+            flex-wrap: wrap;
+        }
+
+        /* Main Content Grid */
+        .main-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--spacing-lg);
+            flex: 1;
+        }
+
+        @media (max-width: 1024px) {
+            .main-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Sections */
+        .section {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-lg);
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-md);
+            transition: var(--transition);
+        }
+
+        .section:hover {
+            border-color: var(--accent-cyan);
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.1);
+        }
+
+        .section-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--accent-cyan);
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+        }
+
+        /* Buttons */
+        button {
+            padding: var(--spacing-sm) var(--spacing-md);
+            border: none;
+            border-radius: var(--radius-md);
+            font-family: 'Heebo', sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-xs);
+            white-space: nowrap;
+        }
+
+        .btn-primary {
+            background: var(--accent-cyan);
+            color: var(--bg);
+        }
+
+        .btn-primary:hover {
+            background: var(--accent-purple);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(0, 212, 255, 0.3);
+        }
+
+        .btn-secondary {
+            background: var(--elevated);
+            color: var(--text-primary);
+            border: 1px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--accent-cyan);
+            color: var(--accent-cyan);
+        }
+
+        .btn-danger {
+            background: var(--accent-pink);
+            color: white;
+        }
+
+        .btn-danger:hover {
+            opacity: 0.8;
+            transform: translateY(-2px);
+        }
+
+        .btn-sm {
+            padding: 4px 12px;
+            font-size: 12px;
+        }
+
+        /* Form Elements */
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-sm);
+        }
+
+        label {
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        select,
+        textarea {
+            background: var(--elevated);
+            border: 1px solid var(--border);
+            color: var(--text-primary);
+            padding: var(--spacing-sm) var(--spacing-md);
+            border-radius: var(--radius-md);
+            font-family: 'Heebo', sans-serif;
+            font-size: 14px;
+            transition: var(--transition);
+            direction: rtl;
+        }
+
+        input[type="text"]:focus,
+        input[type="number"]:focus,
+        select:focus,
+        textarea:focus {
+            outline: none;
+            border-color: var(--accent-cyan);
+            box-shadow: 0 0 12px rgba(0, 212, 255, 0.2);
+            background: var(--elevated);
+        }
+
+        /* Slider */
+        input[type="range"] {
+            width: 100%;
+            height: 6px;
+            border-radius: 3px;
+            background: var(--border);
+            outline: none;
+            -webkit-appearance: none;
+            appearance: none;
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: var(--accent-cyan);
+            cursor: pointer;
+            box-shadow: 0 0 8px rgba(0, 212, 255, 0.5);
+            transition: var(--transition);
+        }
+
+        input[type="range"]::-webkit-slider-thumb:hover {
+            background: var(--accent-purple);
+            box-shadow: 0 0 16px rgba(123, 47, 255, 0.5);
+        }
+
+        input[type="range"]::-moz-range-thumb {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: var(--accent-cyan);
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 0 8px rgba(0, 212, 255, 0.5);
+            transition: var(--transition);
+        }
+
+        input[type="range"]::-moz-range-thumb:hover {
+            background: var(--accent-purple);
+            box-shadow: 0 0 16px rgba(123, 47, 255, 0.5);
+        }
+
+        /* Track Input Form */
+        .track-form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--spacing-md);
+        }
+
+        .track-form .form-group:nth-child(1),
+        .track-form .form-group:nth-child(2) {
+            grid-column: span 1;
+        }
+
+        @media (max-width: 768px) {
+            .track-form {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Energy Level Display */
+        .energy-display {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-md);
+        }
+
+        .energy-bar {
+            flex: 1;
+            height: 8px;
+            background: var(--border);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .energy-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent-green), var(--accent-yellow), var(--accent-pink));
+            transition: var(--transition);
+        }
+
+        .energy-value {
+            font-family: 'Space Mono', monospace;
+            font-weight: 700;
+            color: var(--accent-cyan);
+            min-width: 30px;
+            text-align: center;
+        }
+
+        /* Track List */
+        .track-list {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-md);
+            max-height: 600px;
+            overflow-y: auto;
+            padding-right: var(--spacing-sm);
+        }
+
+        .track-item {
+            background: var(--elevated);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            padding: var(--spacing-md);
+            cursor: grab;
+            transition: var(--transition);
+            display: grid;
+            grid-template-columns: 20px 1fr auto;
+            gap: var(--spacing-md);
+            align-items: center;
+        }
+
+        .track-item:hover {
+            border-color: var(--accent-cyan);
+            box-shadow: 0 4px 12px rgba(0, 212, 255, 0.1);
+            transform: translateX(-4px);
+        }
+
+        .track-item.dragging {
+            opacity: 0.5;
+            border-color: var(--accent-purple);
+        }
+
+        .track-item.drag-over {
+            border-color: var(--accent-green);
+            background: rgba(0, 255, 157, 0.05);
+        }
+
+        .drag-handle {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+            cursor: grab;
+            color: var(--accent-cyan);
+        }
+
+        .drag-handle:active {
+            cursor: grabbing;
+        }
+
+        .drag-dot {
+            width: 4px;
+            height: 4px;
+            background: currentColor;
+            border-radius: 50%;
+        }
+
+        .track-info {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .track-name {
+            font-weight: 700;
+            font-size: 15px;
+            color: var(--text-primary);
+        }
+
+        .track-meta {
+            font-size: 12px;
+            color: var(--text-secondary);
+            display: flex;
+            gap: var(--spacing-md);
+            flex-wrap: wrap;
+        }
+
+        .track-meta-item {
+            display: flex;
+            gap: 4px;
+        }
+
+        .track-meta-label {
+            color: var(--text-secondary);
+        }
+
+        .track-meta-value {
+            font-family: 'Space Mono', monospace;
+            color: var(--accent-cyan);
+            font-weight: 700;
+        }
+
+        .track-actions {
+            display: flex;
+            gap: var(--spacing-xs);
+        }
+
+        .btn-icon {
+            width: 32px;
+            height: 32px;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            background: var(--border);
+            border: none;
+            border-radius: var(--radius-md);
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .btn-icon:hover {
+            background: var(--accent-cyan);
+            color: var(--bg);
+        }
+
+        /* Compatibility Indicator */
+        .compatibility-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 4px 8px;
+            border-radius: var(--radius-sm);
+            font-size: 11px;
+            font-weight: 600;
+            font-family: 'Space Mono', monospace;
+        }
+
+        .compat-perfect {
+            background: rgba(0, 255, 157, 0.15);
+            color: var(--accent-green);
+            border: 1px solid rgba(0, 255, 157, 0.3);
+        }
+
+        .compat-good {
+            background: rgba(255, 214, 10, 0.15);
+            color: var(--accent-yellow);
+            border: 1px solid rgba(255, 214, 10, 0.3);
+        }
+
+        .compat-warn {
+            background: rgba(255, 61, 110, 0.15);
+            color: var(--accent-pink);
+            border: 1px solid rgba(255, 61, 110, 0.3);
+        }
+
+        /* Compatibility Section */
+        .compatibility-item {
+            background: var(--elevated);
+            border-left: 3px solid var(--border);
+            padding: var(--spacing-md);
+            border-radius: var(--radius-md);
+            font-size: 12px;
+        }
+
+        .compatibility-item.perfect {
+            border-left-color: var(--accent-green);
+        }
+
+        .compatibility-item.good {
+            border-left-color: var(--accent-yellow);
+        }
+
+        .compatibility-item.warn {
+            border-left-color: var(--accent-pink);
+        }
+
+        .compatibility-header {
+            font-weight: 700;
+            margin-bottom: 4px;
+            color: var(--text-primary);
+        }
+
+        .compatibility-details {
+            color: var(--text-secondary);
+            margin-bottom: 4px;
+        }
+
+        /* Charts */
+        .chart-container {
+            background: var(--elevated);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            padding: var(--spacing-md);
+            overflow-x: auto;
+        }
+
+        canvas {
+            width: 100%;
+            height: auto;
+        }
+
+        /* Stats */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: var(--spacing-md);
+        }
+
+        .stat-card {
+            background: var(--elevated);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            padding: var(--spacing-md);
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .stat-card:hover {
+            border-color: var(--accent-cyan);
+            box-shadow: 0 0 16px rgba(0, 212, 255, 0.15);
+        }
+
+        .stat-label {
+            font-size: 11px;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .stat-value {
+            font-size: 24px;
+            font-weight: 900;
+            font-family: 'Space Mono', monospace;
+            color: var(--accent-cyan);
+        }
+
+        /* Demo Set Button */
+        .btn-demo {
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-pink));
+            color: white;
+        }
+
+        .btn-demo:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: var(--spacing-xl);
+            color: var(--text-secondary);
+        }
+
+        .empty-state-icon {
+            font-size: 48px;
+            margin-bottom: var(--spacing-md);
+            opacity: 0.5;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .modal-content {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-lg);
+            max-width: 500px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            animation: slideIn 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(-20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--spacing-lg);
+            border-bottom: 1px solid var(--border);
+            padding-bottom: var(--spacing-md);
+        }
+
+        .modal-title {
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--text-secondary);
+            padding: 0;
+            width: auto;
+        }
+
+        .modal-close:hover {
+            color: var(--accent-cyan);
+        }
+
+        /* File Input Hidden */
+        input[type="file"] {
+            display: none;
+        }
+
+        /* Print Styles */
+        @media print {
+            * {
+                background: white !important;
+                color: black !important;
+                border-color: #ddd !important;
+            }
+
+            .container {
+                max-width: 100%;
+                padding: 20px;
+            }
+
+            .header-actions,
+            .main-grid,
+            .section {
+                display: block !important;
+                break-inside: avoid;
+                page-break-inside: avoid;
+            }
+
+            .main-grid {
+                display: block !important;
+            }
+
+            .section {
+                margin-bottom: 20px;
+                border: 1px solid #ccc;
+                page-break-inside: avoid;
+            }
+
+            canvas {
+                border: 1px solid #ccc;
+                page-break-inside: avoid;
+            }
+
+            .track-item {
+                break-inside: avoid;
+                page-break-inside: avoid;
+                border: 1px solid #ccc;
+                margin-bottom: 10px;
+            }
+
+            .track-actions,
+            .chart-container {
+                display: none !important;
+            }
+
+            body {
+                background: white;
+                color: black;
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: var(--spacing-md);
+            }
+
+            .header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .header h1 {
+                font-size: 24px;
+            }
+
+            .header-actions {
+                width: 100%;
+                justify-content: flex-start;
+            }
+
+            .track-form {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .track-item {
+                grid-template-columns: 20px 1fr;
+                gap: var(--spacing-sm);
+            }
+
+            .track-actions {
+                grid-column: 2;
+                justify-content: flex-end;
+            }
+
+            button {
+                padding: 8px 12px;
+                font-size: 12px;
+            }
+        }
+
+        /* Animations */
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.7;
+            }
+        }
+
+        .pulse {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>🎧 DJ Set Planner</h1>
+            <div class="header-actions">
+                <button class="btn-primary" id="addTrackBtn">+ הוסף ערך</button>
+                <button class="btn-secondary" id="loadDemoBtn">📚 דוגמה</button>
+                <button class="btn-secondary" id="exportJsonBtn">💾 ייצא JSON</button>
+                <button class="btn-secondary" id="importJsonBtn">📂 ייבא JSON</button>
+                <button class="btn-secondary" id="printBtn">🖨️ הדפס</button>
+            </div>
+        </div>
+
+        <!-- Main Grid -->
+        <div class="main-grid">
+            <!-- Left Column -->
+            <div>
+                <!-- Track Input Section -->
+                <div class="section">
+                    <div class="section-title">➕ הוסף ערך חדש</div>
+                    <form class="track-form" id="trackForm">
+                        <div class="form-group">
+                            <label>שם הערך</label>
+                            <input type="text" id="trackName" placeholder="e.g., Blinding Lights" required>
+                        </div>
+                        <div class="form-group">
+                            <label>אמן</label>
+                            <input type="text" id="trackArtist" placeholder="e.g., The Weeknd" required>
+                        </div>
+                        <div class="form-group">
+                            <label>ז'אנר</label>
+                            <select id="trackGenre" required>
+                                <option value="">בחר ז'אנר</option>
+                                <option value="House">House</option>
+                                <option value="Techno">Techno</option>
+                                <option value="Trance">Trance</option>
+                                <option value="Drum & Bass">Drum & Bass</option>
+                                <option value="Dubstep">Dubstep</option>
+                                <option value="Deep House">Deep House</option>
+                                <option value="Progressive">Progressive</option>
+                                <option value="Electro">Electro</option>
+                                <option value="Minimal">Minimal</option>
+                                <option value="Indie Dance">Indie Dance</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>BPM</label>
+                            <input type="number" id="trackBpm" min="40" max="220" placeholder="e.g., 120" required>
+                        </div>
+                        <div class="form-group">
+                            <label>מפתח (Camelot)</label>
+                            <select id="trackKey" required>
+                                <option value="">בחר מפתח</option>
+                                <option value="1A">1A</option><option value="1B">1B</option>
+                                <option value="2A">2A</option><option value="2B">2B</option>
+                                <option value="3A">3A</option><option value="3B">3B</option>
+                                <option value="4A">4A</option><option value="4B">4B</option>
+                                <option value="5A">5A</option><option value="5B">5B</option>
+                                <option value="6A">6A</option><option value="6B">6B</option>
+                                <option value="7A">7A</option><option value="7B">7B</option>
+                                <option value="8A">8A</option><option value="8B">8B</option>
+                                <option value="9A">9A</option><option value="9B">9B</option>
+                                <option value="10A">10A</option><option value="10B">10B</option>
+                                <option value="11A">11A</option><option value="11B">11B</option>
+                                <option value="12A">12A</option><option value="12B">12B</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>משך זמן (mm:ss)</label>
+                            <input type="text" id="trackDuration" placeholder="3:45" required>
+                        </div>
+                        <div class="form-group">
+                            <label>רמת אנרגיה: <span id="energyValueDisplay">5</span>/10</label>
+                            <div class="energy-display">
+                                <input type="range" id="trackEnergy" min="1" max="10" value="5">
+                                <div class="energy-bar">
+                                    <div class="energy-fill" id="energyPreview" style="width: 50%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn-primary" style="grid-column: span 2;">הוסף לסט</button>
+                    </form>
+                </div>
+
+                <!-- Track List Section -->
+                <div class="section" style="flex: 1; margin-top: var(--spacing-lg);">
+                    <div class="section-title">🎵 רשימת הערכים</div>
+                    <div class="track-list" id="trackList">
+                        <div class="empty-state">
+                            <div class="empty-state-icon">🎼</div>
+                            <p>אין ערכים עדיין. התחל בהוספת ערך!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column -->
+            <div>
+                <!-- Statistics Section -->
+                <div class="section">
+                    <div class="section-title">📊 סטטיסטיקות</div>
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-label">מספר ערכים</div>
+                            <div class="stat-value" id="statTracks">0</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-label">זמן כולל</div>
+                            <div class="stat-value" id="statDuration">0:00</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-label">BPM ממוצע</div>
+                            <div class="stat-value" id="statAvgBpm">0</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-label">אנרגיה ממוצעת</div>
+                            <div class="stat-value" id="statAvgEnergy">0</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Energy Flow Graph -->
+                <div class="section" style="margin-top: var(--spacing-lg);">
+                    <div class="section-title">⚡ תרשים אנרגיה</div>
+                    <div class="chart-container">
+                        <canvas id="energyChart" width="400" height="200"></canvas>
+                    </div>
+                </div>
+
+                <!-- BPM Flow Graph -->
+                <div class="section" style="margin-top: var(--spacing-lg);">
+                    <div class="section-title">♩ תרשים BPM</div>
+                    <div class="chart-container">
+                        <canvas id="bpmChart" width="400" height="200"></canvas>
+                    </div>
+                </div>
+
+                <!-- Compatibility Section -->
+                <div class="section" style="margin-top: var(--spacing-lg);">
+                    <div class="section-title">🔗 תאימות בין ערכים</div>
+                    <div id="compatibilityList">
+                        <div class="empty-state">
+                            <p>הוסף לפחות 2 ערכים כדי לראות תאימות</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- File Input for Import -->
+    <input type="file" id="importFile" accept=".json">
+
+    <script>
+        // Data Structure
+        let setData = {
+            tracks: [],
+            createdAt: new Date().toISOString()
+        };
+
+        const CAMELOT_WHEEL = {
+            '1A': 0, '1B': 1, '2A': 2, '2B': 3, '3A': 4, '3B': 5,
+            '4A': 6, '4B': 7, '5A': 8, '5B': 9, '6A': 10, '6B': 11,
+            '7A': 12, '7B': 13, '8A': 14, '8B': 15, '9A': 16, '9B': 17,
+            '10A': 18, '10B': 19, '11A': 20, '11B': 21, '12A': 22, '12B': 23
+        };
+
+        // Demo Data
+        const DEMO_SET = [
+            { name: 'Blinding Lights', artist: 'The Weeknd', bpm: 103, key: '9B', genre: 'Electro', energy: 7, duration: '3:20' },
+            { name: 'Levitating', artist: 'Dua Lipa', bpm: 103, key: '10A', genre: 'Disco', energy: 8, duration: '3:24' },
+            { name: 'Sunroof', artist: 'Nicky Youre', bpm: 92, key: '8A', genre: 'Deep House', energy: 6, duration: '2:52' },
+            { name: 'I Remember', artist: 'Deadmau5 ft. Kaskade', bpm: 128, key: '6A', genre: 'Progressive', energy: 8, duration: '5:39' },
+            { name: 'Midnight City', artist: 'M83', bpm: 94, key: '7B', genre: 'Electro', energy: 7, duration: '4:08' },
+            { name: 'Strobe', artist: 'Deadmau5', bpm: 128, key: '5A', genre: 'Progressive', energy: 9, duration: '6:35' }
+        ];
+
+        // Utilities
+        function parseTime(timeStr) {
+            const [mins, secs] = timeStr.split(':').map(Number);
+            return (mins || 0) * 60 + (secs || 0);
+        }
+
+        function formatTime(seconds) {
+            const mins = Math.floor(seconds / 60);
+            const secs = Math.floor(seconds % 60);
+            return `${mins}:${secs.toString().padStart(2, '0')}`;
+        }
+
+        function checkHarmonicCompatibility(key1, key2) {
+            const pos1 = CAMELOT_WHEEL[key1];
+            const pos2 = CAMELOT_WHEEL[key2];
+            const diff = Math.abs(pos2 - pos1);
+            const minDiff = Math.min(diff, 24 - diff);
+
+            if (minDiff === 0 || minDiff === 12) return { type: 'perfect', message: 'Perfect Match - Same key' };
+            if (minDiff === 1 || minDiff === 11) return { type: 'perfect', message: 'Perfect Match - Adjacent' };
+            if (minDiff === 2 || minDiff === 10) return { type: 'perfect', message: 'Perfect Match - Same letter' };
+            if (minDiff === 8 || minDiff === 16) return { type: 'good', message: 'Energy Boost - +2 semitones' };
+
+            return { type: 'warn', message: 'Risky - Key clash warning' };
+        }
+
+        function checkBpmCompatibility(bpm1, bpm2) {
+            const diff = Math.abs(bpm2 - bpm1);
+            if (diff <= 6) return { type: 'perfect', message: `BPM match (Δ${diff})` };
+            if (diff <= 12) return { type: 'good', message: `Close BPM (Δ${diff})` };
+            return { type: 'warn', message: `Large BPM jump (Δ${diff})` };
+        }
+
+        // DOM Elements
+        const trackForm = document.getElementById('trackForm');
+        const trackList = document.getElementById('trackList');
+        const energyChart = document.getElementById('energyChart');
+        const bpmChart = document.getElementById('bpmChart');
+        const compatibilityList = document.getElementById('compatibilityList');
+        const importFile = document.getElementById('importFile');
+
+        // Event Listeners
+        trackForm.addEventListener('submit', addTrack);
+        document.getElementById('trackEnergy').addEventListener('input', (e) => {
+            document.getElementById('energyValueDisplay').textContent = e.target.value;
+            const val = (e.target.value / 10) * 100;
+            document.getElementById('energyPreview').style.width = val + '%';
+        });
+
+        document.getElementById('addTrackBtn').addEventListener('click', () => trackForm.reset());
+        document.getElementById('loadDemoBtn').addEventListener('click', loadDemoSet);
+        document.getElementById('exportJsonBtn').addEventListener('click', exportJson);
+        document.getElementById('importJsonBtn').addEventListener('click', () => importFile.click());
+        document.getElementById('printBtn').addEventListener('click', () => window.print());
+
+        importFile.addEventListener('change', importJson);
+
+        // Add Track Function
+        function addTrack(e) {
+            e.preventDefault();
+
+            const track = {
+                id: Date.now(),
+                name: document.getElementById('trackName').value,
+                artist: document.getElementById('trackArtist').value,
+                bpm: parseInt(document.getElementById('trackBpm').value),
+                key: document.getElementById('trackKey').value,
+                genre: document.getElementById('trackGenre').value,
+                energy: parseInt(document.getElementById('trackEnergy').value),
+                duration: document.getElementById('trackDuration').value
+            };
+
+            setData.tracks.push(track);
+            trackForm.reset();
+            document.getElementById('energyValueDisplay').textContent = '5';
+            document.getElementById('energyPreview').style.width = '50%';
+            render();
+        }
+
+        // Load Demo Set
+        function loadDemoSet() {
+            if (setData.tracks.length > 0) {
+                if (!confirm('This will clear your current set. Continue?')) return;
+            }
+            setData.tracks = DEMO_SET.map((track, idx) => ({ ...track, id: Date.now() + idx }));
+            render();
+        }
+
+        // Delete Track
+        function deleteTrack(id) {
+            setData.tracks = setData.tracks.filter(t => t.id !== id);
+            render();
+        }
+
+        // Export JSON
+        function exportJson() {
+            const dataStr = JSON.stringify(setData, null, 2);
+            const dataBlob = new Blob([dataStr], { type: 'application/json' });
+            const url = URL.createObjectURL(dataBlob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = `djset-${new Date().getTime()}.json`;
+            link.click();
+            URL.revokeObjectURL(url);
+        }
+
+        // Import JSON
+        function importJson(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = (event) => {
+                try {
+                    const imported = JSON.parse(event.target.result);
+                    if (imported.tracks && Array.isArray(imported.tracks)) {
+                        setData = imported;
+                        render();
+                        importFile.value = '';
+                    } else {
+                        alert('Invalid file format');
+                    }
+                } catch (err) {
+                    alert('Error reading file: ' + err.message);
+                }
+            };
+            reader.readAsText(file);
+        }
+
+        // Drag and Drop
+        let draggedElement = null;
+
+        function setupDragAndDrop() {
+            const items = document.querySelectorAll('.track-item');
+            items.forEach(item => {
+                item.draggable = true;
+                item.addEventListener('dragstart', handleDragStart);
+                item.addEventListener('dragend', handleDragEnd);
+                item.addEventListener('dragover', handleDragOver);
+                item.addEventListener('drop', handleDrop);
+                item.addEventListener('dragleave', handleDragLeave);
+            });
+        }
+
+        function handleDragStart(e) {
+            draggedElement = this;
+            this.classList.add('dragging');
+            e.dataTransfer.effectAllowed = 'move';
+        }
+
+        function handleDragEnd(e) {
+            this.classList.remove('dragging');
+            document.querySelectorAll('.track-item').forEach(item => item.classList.remove('drag-over'));
+        }
+
+        function handleDragOver(e) {
+            e.preventDefault();
+            e.dataTransfer.dropEffect = 'move';
+            if (this !== draggedElement) {
+                this.classList.add('drag-over');
+            }
+        }
+
+        function handleDragLeave(e) {
+            this.classList.remove('drag-over');
+        }
+
+        function handleDrop(e) {
+            e.preventDefault();
+            if (this !== draggedElement) {
+                const draggedIdx = setData.tracks.findIndex(t => t.id === parseInt(draggedElement.dataset.id));
+                const targetIdx = setData.tracks.findIndex(t => t.id === parseInt(this.dataset.id));
+
+                [setData.tracks[draggedIdx], setData.tracks[targetIdx]] = [setData.tracks[targetIdx], setData.tracks[draggedIdx]];
+                render();
+            }
+        }
+
+        // Draw Charts
+        function drawChart(canvas, data, label, color) {
+            if (data.length === 0) {
+                const ctx = canvas.getContext('2d');
+                ctx.fillStyle = '#a0a0b0';
+                ctx.font = '14px Heebo';
+                ctx.textAlign = 'center';
+                ctx.fillText('Add tracks to see chart', canvas.width / 2, canvas.height / 2);
+                return;
+            }
+
+            const padding = 40;
+            const width = canvas.width - padding * 2;
+            const height = canvas.height - padding * 2;
+            const ctx = canvas.getContext('2d');
+
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Background
+            ctx.fillStyle = '#1A1A2E';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            const min = Math.min(...data);
+            const max = Math.max(...data);
+            const range = max - min || 1;
+
+            // Grid lines
+            ctx.strokeStyle = '#2A2A3E';
+            ctx.lineWidth = 1;
+            for (let i = 0; i <= 4; i++) {
+                const y = padding + (height / 4) * i;
+                ctx.beginPath();
+                ctx.moveTo(padding, y);
+                ctx.lineTo(canvas.width - padding, y);
+                ctx.stroke();
+            }
+
+            // Axis labels
+            ctx.fillStyle = '#a0a0b0';
+            ctx.font = '12px Space Mono';
+            ctx.textAlign = 'center';
+            for (let i = 0; i < data.length; i++) {
+                const x = padding + (width / (data.length - 1 || 1)) * i;
+                ctx.fillText(i + 1, x, canvas.height - 10);
+            }
+
+            // Line chart
+            ctx.strokeStyle = color;
+            ctx.lineWidth = 3;
+            ctx.beginPath();
+
+            for (let i = 0; i < data.length; i++) {
+                const x = padding + (width / (data.length - 1 || 1)) * i;
+                const y = padding + height - ((data[i] - min) / range) * height;
+
+                if (i === 0) {
+                    ctx.moveTo(x, y);
+                } else {
+                    ctx.lineTo(x, y);
+                }
+            }
+            ctx.stroke();
+
+            // Points
+            ctx.fillStyle = color;
+            for (let i = 0; i < data.length; i++) {
+                const x = padding + (width / (data.length - 1 || 1)) * i;
+                const y = padding + height - ((data[i] - min) / range) * height;
+                ctx.beginPath();
+                ctx.arc(x, y, 5, 0, Math.PI * 2);
+                ctx.fill();
+            }
+
+            // Value labels
+            ctx.fillStyle = color;
+            ctx.font = 'bold 12px Space Mono';
+            for (let i = 0; i < data.length; i++) {
+                const x = padding + (width / (data.length - 1 || 1)) * i;
+                const y = padding + height - ((data[i] - min) / range) * height;
+                ctx.textAlign = 'center';
+                ctx.fillText(data[i], x, y - 15);
+            }
+        }
+
+        // Render Function
+        function render() {
+            // Render track list
+            if (setData.tracks.length === 0) {
+                trackList.innerHTML = '<div class="empty-state"><div class="empty-state-icon">🎼</div><p>אין ערכים עדיין. התחל בהוספת ערך!</p></div>';
+            } else {
+                trackList.innerHTML = setData.tracks.map((track, idx) => `
+                    <div class="track-item" data-id="${track.id}" draggable="true">
+                        <div class="drag-handle">
+                            <div class="drag-dot"></div>
+                            <div class="drag-dot"></div>
+                            <div class="drag-dot"></div>
+                        </div>
+                        <div class="track-info">
+                            <div class="track-name">#${idx + 1} - ${track.name}</div>
+                            <div class="track-meta">
+                                <div class="track-meta-item">
+                                    <span class="track-meta-label">Artist:</span>
+                                    <span class="track-meta-value">${track.artist}</span>
+                                </div>
+                                <div class="track-meta-item">
+                                    <span class="track-meta-label">BPM:</span>
+                                    <span class="track-meta-value">${track.bpm}</span>
+                                </div>
+                                <div class="track-meta-item">
+                                    <span class="track-meta-label">Key:</span>
+                                    <span class="track-meta-value">${track.key}</span>
+                                </div>
+                                <div class="track-meta-item">
+                                    <span class="track-meta-label">Energy:</span>
+                                    <span class="track-meta-value">${track.energy}/10</span>
+                                </div>
+                                <div class="track-meta-item">
+                                    <span class="track-meta-label">Duration:</span>
+                                    <span class="track-meta-value">${track.duration}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="track-actions">
+                            <button class="btn-icon" onclick="deleteTrack(${track.id})" title="Delete">🗑️</button>
+                        </div>
+                    </div>
+                `).join('');
+                setupDragAndDrop();
+            }
+
+            // Update statistics
+            const totalSeconds = setData.tracks.reduce((sum, t) => sum + parseTime(t.duration), 0);
+            const avgBpm = setData.tracks.length > 0 ? Math.round(setData.tracks.reduce((sum, t) => sum + t.bpm, 0) / setData.tracks.length) : 0;
+            const avgEnergy = setData.tracks.length > 0 ? Math.round(setData.tracks.reduce((sum, t) => sum + t.energy, 0) / setData.tracks.length) : 0;
+
+            document.getElementById('statTracks').textContent = setData.tracks.length;
+            document.getElementById('statDuration').textContent = formatTime(totalSeconds);
+            document.getElementById('statAvgBpm').textContent = avgBpm;
+            document.getElementById('statAvgEnergy').textContent = avgEnergy;
+
+            // Draw charts
+            const energyData = setData.tracks.map(t => t.energy);
+            const bpmData = setData.tracks.map(t => t.bpm);
+            drawChart(energyChart, energyData, 'Energy', '#00d4ff');
+            drawChart(bpmChart, bpmData, 'BPM', '#7b2fff');
+
+            // Render compatibility
+            if (setData.tracks.length < 2) {
+                compatibilityList.innerHTML = '<div class="empty-state"><p>הוסף לפחות 2 ערכים כדי לראות תאימות</p></div>';
+            } else {
+                compatibilityList.innerHTML = setData.tracks.slice(0, -1).map((track, idx) => {
+                    const nextTrack = setData.tracks[idx + 1];
+                    const harmonic = checkHarmonicCompatibility(track.key, nextTrack.key);
+                    const bpmCompat = checkBpmCompatibility(track.bpm, nextTrack.bpm);
+                    const compatClass = harmonic.type;
+
+                    return `
+                        <div class="compatibility-item ${compatClass}">
+                            <div class="compatibility-header">${idx + 1} → ${idx + 2}</div>
+                            <div class="compatibility-details">${track.name} → ${nextTrack.name}</div>
+                            <div style="display: flex; gap: 8px; margin-top: 6px;">
+                                <span class="compatibility-badge compat-${harmonic.type}">🔑 ${harmonic.message}</span>
+                                <span class="compatibility-badge compat-${bpmCompat.type}">♩ ${bpmCompat.message}</span>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+            }
+
+            // Save to localStorage
+            localStorage.setItem('djSetData', JSON.stringify(setData));
+        }
+
+        // Load from localStorage on startup
+        function loadFromLocalStorage() {
+            const saved = localStorage.getItem('djSetData');
+            if (saved) {
+                try {
+                    setData = JSON.parse(saved);
+                } catch (e) {
+                    console.error('Error loading saved data:', e);
+                }
+            }
+        }
+
+        // Initialize
+        loadFromLocalStorage();
+        render();
+
+        // Smooth scroll behavior
+        document.addEventListener('DOMContentLoaded', () => {
+            document.documentElement.style.scrollBehavior = 'smooth';
+        });
+    </script>
+</body>
+</html>

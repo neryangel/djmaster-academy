@@ -1,0 +1,111 @@
+---
+import ToolLayout from '@layouts/ToolLayout.astro';
+import HarmonicWheel from '@components/tools/HarmonicWheel';
+---
+
+<ToolLayout
+  title="גלגל הרמוני"
+  description="מצא מפתחות תואמים למיקס הרמוני מושלם"
+  icon="🎡"
+>
+  <div class="space-y-8">
+    <!-- Tool Component -->
+    <div class="flex justify-center">
+      <HarmonicWheel client:load />
+    </div>
+
+    <!-- Instructions -->
+    <div class="border-t border-white/10 pt-8">
+      <h2 class="text-2xl font-bold mb-4">מהו גלגל הרמוני ואיך להשתמש בו?</h2>
+
+      <div class="space-y-6">
+        <div>
+          <h3 class="text-lg font-semibold text-[#7b2fff] mb-2">מה זה מיקס הרמוני?</h3>
+          <p class="text-white/70 mb-3">
+            מיקס הרמוני (Harmonic Mixing) היא טכניקה שמאפשרת לתיאום שני שירים בעלי מפתחות תואמים,
+            מה שיוצר מעבר חלק וקוהרנטי בין השירים.
+          </p>
+          <p class="text-white/70">
+            בניגוד ל-BPM (טמפו), שמתעלם מהגובה המוזיקלי, הגלגל ההרמוני מובטח שהשירים ישמעו טוב זה לצד זה.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-lg font-semibold text-[#7b2fff] mb-2">שלבי השימוש:</h3>
+          <ol class="list-decimal list-inside space-y-3 text-white/70 ml-4">
+            <li>
+              <strong class="text-white">בחרו את מפתח השיר הראשון</strong> — בדרך כלל תוכלו לזהות זאת בעזרת ניתוח בעבודת דיוק
+              או בדיקה ידנית
+            </li>
+            <li>
+              <strong class="text-white">הגלגל יהדגיש מפתחות תואמים</strong> — השירים בנקודות הסמוכות בגלגל יתיאמו הרמונית
+            </li>
+            <li>
+              <strong class="text-white">בחרו שיר בעל מפתח תואם</strong> — חפשו את המפתחות הירוקים או הכחולים בגלגל
+            </li>
+            <li>
+              <strong class="text-white">בדקו את התוצאה</strong> — בדיוק בקובץ ניתוח או באמצעות אוזניות
+            </li>
+          </ol>
+        </div>
+
+        <div class="bg-[#00d4ff]/5 border border-[#00d4ff]/20 rounded-lg p-4">
+          <h3 class="text-lg font-semibold text-[#00d4ff] mb-3">מפתחות תואמים בגלגל:</h3>
+          <ul class="list-disc list-inside space-y-2 text-white/70 ml-4">
+            <li>
+              <strong class="text-white">1 מדרגה הרמונית:</strong> המפתח המדויק או מפתח קשור (זהה לחלוטין בטוח)
+            </li>
+            <li>
+              <strong class="text-white">2 מדרגות:</strong> מפתחות במרחק טוני או חצי טוני (מעבר טוב מאוד)
+            </li>
+            <li>
+              <strong class="text-white">3+ מדרגות:</strong> מפתחות רחוקים יותר (אפשרי אך פחות הרמוני)
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="text-lg font-semibold text-[#7b2fff] mb-2">טיפים לשימוש מתקדם:</h3>
+          <ul class="list-disc list-inside space-y-2 text-white/70 ml-4">
+            <li>
+              <strong class="text-white">דוריאן vs מינור:</strong> אם הגלגל מציע שני מפתחות קשורים מאוד, בחרו לפי מצב הרוח של השיר
+            </li>
+            <li>
+              <strong class="text-white">מחרזת Beatless:</strong> במעברים ארוכים, אפילו מפתחות קצת פחות תואמים יעבדו
+            </li>
+            <li>
+              <strong class="text-white">בחינת EQ:</strong> שימוש ב-EQ יכול לעזור להחביא אי-התאמות הרמוניות קטנות
+            </li>
+            <li>
+              <strong class="text-white">מעברים מהירים:</strong> כשמעברים הוא מהיר (חצי טיקט), תדייקו את המפתחות
+            </li>
+          </ul>
+        </div>
+
+        <div class="bg-[#4ade80]/5 border border-[#4ade80]/20 rounded-lg p-4">
+          <p class="text-white/70 mb-2"><strong>🎵 דוגמאות מעשיות:</strong></p>
+          <div class="space-y-2 text-white/70 ml-4 text-sm">
+            <p>
+              <strong>House Mix:</strong> אם אתם מתחילים עם שיר ב-G Major, תוכלו לעבור ל-D Major, A Major, או E Major
+            </p>
+            <p>
+              <strong>Techno Mix:</strong> שירים ב-A Minor ו-E Minor עובדים מדהים ביחד
+            </p>
+            <p>
+              <strong>DNB Mashup:</strong> בשל הטמפו המהיר, קשרים הרמוניים פחות קריטיים, אך עדיין חשובים
+            </p>
+          </div>
+        </div>
+
+        <div class="bg-[#6C63FF]/5 border border-[#6C63FF]/20 rounded-lg p-4">
+          <p class="text-white/70"><strong>💡 קשיים נפוצים:</strong></p>
+          <ul class="list-disc list-inside space-y-1 text-white/70 ml-4 mt-2 text-sm">
+            <li>אם שיר לא מתוייג כראוי, תזדקק לחקור את המפתח ידנית</li>
+            <li>בשירים עם מודולציות, המפתח עלול להשתנות במהלך השיר</li>
+            <li>תרגול אוזן חיוני — התחילו עם מפתחות בטוחים ולאט לאט בחנו מרחקים</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</ToolLayout>

@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>אתה במצב אופליין - DJMaster Academy</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+        background: linear-gradient(135deg, #0a0a0f 0%, #1a0a2e 100%);
+        color: #e0e0e0;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+      }
+
+      .container {
+        max-width: 600px;
+        text-align: center;
+      }
+
+      .icon {
+        font-size: 64px;
+        margin-bottom: 20px;
+        animation: pulse 2s ease-in-out infinite;
+      }
+
+      @keyframes pulse {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.7;
+        }
+      }
+
+      h1 {
+        font-size: 32px;
+        margin-bottom: 10px;
+        color: #6c63ff;
+      }
+
+      p {
+        font-size: 18px;
+        margin-bottom: 30px;
+        color: #a0a0a0;
+      }
+
+      .features {
+        background: rgba(108, 99, 255, 0.05);
+        border: 1px solid rgba(108, 99, 255, 0.2);
+        border-radius: 12px;
+        padding: 30px;
+        margin-bottom: 30px;
+        text-align: right;
+      }
+
+      .features h2 {
+        font-size: 18px;
+        margin-bottom: 15px;
+        color: #6c63ff;
+      }
+
+      .features ul {
+        list-style: none;
+        text-align: right;
+      }
+
+      .features li {
+        padding: 10px 0;
+        border-bottom: 1px solid rgba(108, 99, 255, 0.1);
+        font-size: 14px;
+      }
+
+      .features li:last-child {
+        border-bottom: none;
+      }
+
+      .features li::before {
+        content: '✓ ';
+        color: #00d4ff;
+        margin-left: 10px;
+      }
+
+      .button {
+        display: inline-block;
+        padding: 12px 30px;
+        background: linear-gradient(135deg, #6c63ff 0%, #7c73ff 100%);
+        color: white;
+        text-decoration: none;
+        border-radius: 8px;
+        font-size: 16px;
+        font-weight: 600;
+        border: none;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        margin-bottom: 15px;
+      }
+
+      .button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(108, 99, 255, 0.3);
+      }
+
+      .button.secondary {
+        background: transparent;
+        border: 2px solid #6c63ff;
+        color: #6c63ff;
+      }
+
+      .button.secondary:hover {
+        background: rgba(108, 99, 255, 0.1);
+      }
+
+      .info {
+        font-size: 14px;
+        color: #707070;
+        margin-top: 20px;
+      }
+
+      .connection-status {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        margin-top: 20px;
+        font-size: 14px;
+      }
+
+      .status-indicator {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: #ff6b6b;
+        animation: blink 1s ease-in-out infinite;
+      }
+
+      @keyframes blink {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.5;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="icon">📡</div>
+
+      <h1>אתה במצב אופליין</h1>
+      <p>לא ניתן להתחבר לאינטרנט כרגע</p>
+
+      <div class="features">
+        <h2>זמין גם ללא חיבור</h2>
+        <ul>
+          <li>בוחנים שהורדת מראש</li>
+          <li>כלים DJ מקומיים</li>
+          <li>הערות שלך ושיפור עצמי</li>
+          <li>הגדרות ויעדים</li>
+        </ul>
+      </div>
+
+      <button class="button" onclick="tryReconnect()">נסה שנית</button>
+      <button class="button secondary" onclick="goHome()">חזור לעמוד הבית</button>
+
+      <div class="connection-status">
+        <div class="status-indicator"></div>
+        <span>ממתין לחיבור...</span>
+      </div>
+
+      <div class="info">
+        <p>כשתחזור לאינטרנט, כל ההתקדמות שלך תסתנכרן אוטומטית</p>
+      </div>
+    </div>
+
+    <script>
+      // Check for online status changes
+      window.addEventListener('online', () => {
+        document.querySelector('.status-indicator').style.background = '#51cf66';
+        const status = document.querySelector('.connection-status span');
+        status.textContent = 'חזרת לתוכנית!';
+        setTimeout(() => {
+          window.location.href = '/';
+        }, 1500);
+      });
+
+      // Function to retry connection
+      function tryReconnect() {
+        fetch('/').then(() => {
+          window.location.href = '/';
+        });
+      }
+
+      // Function to go home
+      function goHome() {
+        // Just navigate to main page, will show offline if still disconnected
+        window.location.href = '/';
+      }
+
+      // Check initial online status
+      if (navigator.onLine) {
+        window.location.href = '/';
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,52 @@
+id: "01-world-of-dj"
+title: "עולם הדי-ג'יי"
+slug: "world-of-dj"
+version: "2.0.0"
+
+description:
+  short: "היכרות מקיפה עם עולם הDJ — מה זה, מה צריך, ואיך מתחילים"
+  full: >
+    קורס היסודות של DJMaster Academy. נלמד מהו DJ, אילו סוגים של DJ-ים קיימים,
+    איך הציוד התפתח מוויניל לדיגיטלי, מה הציוד הבסיסי שצריך היום,
+    ואיך אפשר לבנות קריירה אמיתית בתחום.
+
+metadata:
+  level: "beginner"
+  duration_minutes: 120
+  lesson_count: 6
+  module_count: 3
+  language: "he"
+  direction: "rtl"
+
+prerequisites: []
+
+equipment:
+  required:
+    - "אוזניות"
+    - "גישה לאינטרנט"
+  recommended:
+    - "Rekordbox (Free)"
+    - "DDJ-FLX4 (להמשך)"
+
+learning_objectives:
+  - "להבין מה זה DJ ומה הוא עושה בפועל"
+  - "ללמוד על סוגי DJ-ים שונים והקריירות שלהם"
+  - "להכיר את ההיסטוריה של ציוד DJ מוויניל לדיגיטלי"
+  - "להכיר את הציוד הבסיסי ותפקיד כל פריט"
+  - "להבין למה DDJ-FLX4 הוא הבחירה הנכונה למתחילים"
+  - "לראות את התחום כמקום קריירה אמיתי"
+
+completion:
+  quizzes_required: true
+  min_quiz_score: 70
+  exercises_min: 3
+  certificate: true
+
+tags: ["beginner", "theory", "introduction", "dj-basics"]
+
+modules:
+  - "01-what-is-dj"
+  - "02-history-equipment"
+  - "03-career-first-steps"
+
+pricing_tier: "free"

@@ -1,0 +1,92 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://djmaster.academy/schemas/lesson.json",
+  "title": "DJMaster Lesson Schema",
+  "description": "Validates YAML frontmatter of lesson markdown files",
+  "type": "object",
+  "required": ["id", "title", "module", "course", "duration_minutes", "type"],
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[0-9]{2}-[a-z-]+$",
+      "description": "Lesson ID in format: 01-topic-name"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 200,
+      "description": "Lesson title in Hebrew"
+    },
+    "module": {
+      "type": "string",
+      "pattern": "^[0-9]{2}-[a-z-]+$",
+      "description": "Parent module ID"
+    },
+    "course": {
+      "type": "string",
+      "pattern": "^[0-9]{2}-[a-z-]+$",
+      "description": "Parent course ID"
+    },
+    "duration_minutes": {
+      "type": "integer",
+      "minimum": 3,
+      "maximum": 45,
+      "description": "Lesson duration in minutes"
+    },
+    "type": {
+      "type": "string",
+      "enum": ["theory", "practical", "demo", "review", "workshop"],
+      "description": "Lesson delivery type"
+    },
+    "difficulty": {
+      "type": "string",
+      "enum": ["beginner", "intermediate", "advanced"]
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+    },
+    "last_updated": {
+      "type": "string",
+      "format": "date"
+    },
+    "prerequisites": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "IDs of prerequisite lessons"
+    },
+    "learning_objectives": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "What the student will learn"
+    },
+    "media": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["type", "id", "title"],
+        "properties": {
+          "type": { "type": "string", "enum": ["video", "image", "audio", "slide"] },
+          "id": { "type": "string" },
+          "title": { "type": "string" },
+          "duration": { "type": "string" },
+          "alt": { "type": "string" },
+          "src": { "type": "string", "format": "uri" }
+        }
+      }
+    },
+    "key_terms": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["term", "definition"],
+        "properties": {
+          "term": { "type": "string" },
+          "definition": { "type": "string" },
+          "english": { "type": "string", "description": "English equivalent" }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,36 @@
+id: "02-history-equipment"
+title: "היסטוריה וציוד"
+order: 2
+
+duration_minutes: 45
+description: "ההיסטוריה של ציוד DJ מוויניל לדיגיטלי, והציוד הבסיסי שצריך היום"
+
+lessons:
+  - id: "01-history"
+    title: "היסטוריית ציוד DJ — מוויניל לדיגיטלי"
+    duration_minutes: 12
+    type: "theory"
+
+  - id: "02-equipment"
+    title: "הציוד הבסיסי שצריך היום"
+    duration_minutes: 12
+    type: "theory"
+
+exercises:
+  - id: "01-equipment-comparison"
+    title: "השוואת בקרים"
+    duration_minutes: 15
+    type: "analysis"
+
+  - id: "02-dream-playlist"
+    title: "בניית פלייליסט חלומי"
+    duration_minutes: 20
+    type: "creative"
+
+quiz:
+  questions_count: 6
+  min_score: 70
+  attempts: 3
+
+prerequisite_modules:
+  - "01-what-is-dj"

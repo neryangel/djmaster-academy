@@ -1,0 +1,51 @@
+id: "02-flx4-equipment"
+title: "הכרת הציוד DDJ-FLX4"
+slug: "flx4-equipment"
+version: "2.0.0"
+
+description:
+  short: "למד כיצד להשתמש בבקר Pioneer DDJ-FLX4 מדריך מעשי שלב אחר שלב"
+  full: >
+    קורס מעשי על ציוד DJ. נלמד את המבנה הפיזי של ה-DDJ-FLX4,
+    תפקידי כל חלק בבקר, Jog Wheels, Performance Pads, Mixer Section,
+    וחיבורים. קורס זה מכין אתכם לביצוע בפועל.
+
+metadata:
+  level: "beginner"
+  duration_minutes: 90
+  lesson_count: 2
+  module_count: 1
+  language: "he"
+  direction: "rtl"
+
+prerequisites:
+  - "01-world-of-dj"
+
+equipment:
+  required:
+    - "DDJ-FLX4"
+    - "מחשב (Laptop)"
+    - "אוזניות"
+    - "רמקול או מוניטור"
+
+learning_objectives:
+  - "להכיר את המבנה הפיזי של ה-DDJ-FLX4"
+  - "להבין את תפקידי כל חלק בבקר"
+  - "ללמוד על Jog Wheels וכיצד להשתמש בהם"
+  - "להבין את Performance Pads ותפקידיהם (Hot Cue, Loop, Slicer, Sampler)"
+  - "לשלוט בחלק המיקסר (Mixer Section)"
+  - "להבין את החיבורים והקישוריות"
+  - "לדעת על תכונות Smart Fader Link ו-Merge FX"
+
+completion:
+  quizzes_required: true
+  min_quiz_score: 70
+  exercises_min: 2
+  certificate: false
+
+tags: ["beginner", "hardware", "equipment", "flx4", "practical"]
+
+modules:
+  - "01-flx4-overview"
+
+pricing_tier: "pro"

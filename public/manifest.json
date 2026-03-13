@@ -1,0 +1,86 @@
+{
+  "name": "DJMaster Academy",
+  "short_name": "DJMaster",
+  "description": "פלטפורמה מקצועית ללימוד DJ - קורסים, כלים, וקהילה",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "dir": "rtl",
+  "lang": "he",
+  "theme_color": "#6C63FF",
+  "background_color": "#0A0A0F",
+  "categories": ["education", "music"],
+  "screenshots": [
+    {
+      "src": "/screenshots/djmaster-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "form_factor": "narrow"
+    },
+    {
+      "src": "/screenshots/djmaster-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "form_factor": "wide"
+    }
+  ],
+  "icons": [
+    {
+      "src": "/icons/djmaster-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/djmaster-192-maskable.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/icons/djmaster-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/djmaster-512-maskable.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "בוחנים",
+      "short_name": "בוחנים",
+      "description": "עבור לבוחנים",
+      "url": "/courses",
+      "icons": [
+        {
+          "src": "/icons/quiz-192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "כלים",
+      "short_name": "כלים",
+      "description": "גישה לכלים בDJ",
+      "url": "/tools",
+      "icons": [
+        {
+          "src": "/icons/tools-192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    }
+  ],
+  "prefer_related_applications": false,
+  "shortcuts_metadata": {
+    "default_locale": "he"
+  }
+}

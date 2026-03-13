@@ -1,0 +1,41 @@
+id: "03-career-first-steps"
+title: "קריירה וצעדים ראשונים"
+order: 3
+
+duration_minutes: 35
+description: "מסלולי קריירה ב-DJ, מקורות הכנסה, והצעד הראשון שלך"
+
+lessons:
+  - id: "01-career"
+    title: "קריירה ב-DJ — מסלולים ומקורות הכנסה"
+    duration_minutes: 12
+    type: "theory"
+    status: "placeholder"
+
+  - id: "02-first-steps"
+    title: "הצעדים הראשונים שלך כ-DJ"
+    duration_minutes: 10
+    type: "theory"
+    status: "placeholder"
+
+exercises:
+  - id: "01-visual-poster"
+    title: "פוסטר סוגי DJ"
+    duration_minutes: 25
+    type: "creative"
+    status: "placeholder"
+
+  - id: "02-smart-goals"
+    title: "יעדי SMART אישיים"
+    duration_minutes: 10
+    type: "reflection"
+    status: "placeholder"
+
+quiz:
+  questions_count: 6
+  min_score: 70
+  attempts: 3
+  status: "placeholder"
+
+prerequisite_modules:
+  - "02-history-equipment"

@@ -1,0 +1,125 @@
+{
+  "lesson": "03-rekordbox",
+  "questions": [
+    {
+      "id": 1,
+      "text": "מה זה BPM Analysis ב-Rekordbox?",
+      "options": [
+        "ייבוא שירים מ-Spotify",
+        "חישוב מהירות הטראק וה-Beat Grid",
+        "סינכרון בין משני Decks",
+        "עריכת הצלילים גבוהים"
+      ],
+      "correct": 1,
+      "explanation": "BPM Analysis הוא תהליך שב-Rekordbox מחשבת את מהירות הטראק (BPM) ויוצרת Beat Grid מדויק."
+    },
+    {
+      "id": 2,
+      "text": "כמה מודים יש ב-Rekordbox?",
+      "options": [
+        "1 — Performance Mode בלבד",
+        "2 — Export Mode ו-Performance Mode",
+        "3 — Export, Performance, ו-Edit",
+        "4 — Export, Performance, Edit, ו-Analyze"
+      ],
+      "correct": 1,
+      "explanation": "Rekordbox יש שני מודים עיקריים: Export Mode (לארגון המוזיקה) ו-Performance Mode (לביצוע עם בקר)."
+    },
+    {
+      "id": 3,
+      "text": "מה זה Playlist ב-Rekordbox?",
+      "options": [
+        "רשימת שירים שנמחקה",
+        "קבוצת שירים מארגנת לביצוע או ז'אנר",
+        "רשימה של כל השירים בתיקייה",
+        "קבוצה של Hot Cues"
+      ],
+      "correct": 1,
+      "explanation": "Playlist היא קבוצה ארגנית של שירים שנבחרת, דומה ל-Playlist ב-Spotify אבל לביצוע DJ."
+    },
+    {
+      "id": 4,
+      "text": "כיצד תוקנים את Beat Grid של טראק?",
+      "options": [
+        "לחץ על 'Beatmatch' בממשק",
+        "פתח Grid Editor, בדוק ה-BPM, וגרור את הקו הראשון לKick",
+        "עדכן את ה-Rating של הטראק",
+        "גרור את הטראק ל-Playlist חדש"
+      ],
+      "correct": 1,
+      "explanation": "Grid Editing נעשה בפתיחת Grid Editor, בדיקת ה-BPM, וגרירת הקו הראשון לנקודה הנכונה (Kick)."
+    },
+    {
+      "id": 5,
+      "text": "מה זה Hot Cue?",
+      "options": [
+        "נקודת קפיצה בטראק שנשמרת ב-Rekordbox",
+        "אפקט אודיו עם צליל חם",
+        "סינכרון אוטומטי בין Decks",
+        "מסנן בס בטראק"
+      ],
+      "correct": 0,
+      "explanation": "Hot Cue היא נקודה בטראק שאתה מגדיר שמאפשרת קפיצה מהירה בלחיצה בביצוע."
+    },
+    {
+      "id": 6,
+      "text": "איזה מצב ב-Rekordbox משמש לביצוע עם בקר?",
+      "options": [
+        "Export Mode",
+        "Performance Mode",
+        "Edit Mode",
+        "Analyze Mode"
+      ],
+      "correct": 1,
+      "explanation": "Performance Mode הוא המצב לביצוע עם בקר, כאשר Export Mode הוא לארגון המוזיקה."
+    },
+    {
+      "id": 7,
+      "text": "כמה Decks ניתן לבקר ב-Performance Mode עם DDJ-FLX4?",
+      "options": [
+        "1 Deck בלבד",
+        "2 Decks (שמאל וימין)",
+        "3 Decks (עם תוכנה מתקדמת)",
+        "4 Decks (אם יש מתאם USB נוסף)"
+      ],
+      "correct": 1,
+      "explanation": "DDJ-FLX4 מבקר 2 Decks — אחד בשמאל (Deck 1) ואחד בימין (Deck 2)."
+    },
+    {
+      "id": 8,
+      "text": "מה פירוש 'Grid' בRekordbox?",
+      "options": [
+        "קווים אדומים המשמשים להצגת זמן",
+        "קווים האומרים כן beat בטראק נמצא בדיוק",
+        "גרפי של צלילים גבוהים",
+        "טבלה של כל הטרקים בספריה"
+      ],
+      "correct": 1,
+      "explanation": "Grid הוא קווים אדומים שמציינים כאן כל beat בטראק נמצא, חיוני לBeatmatching מדויק."
+    },
+    {
+      "id": 9,
+      "text": "מה צריך לעשות אם טראק לא מתחבר לRekordbox?",
+      "options": [
+        "המחק את הטראק",
+        "אל תתדאג — זה טבעי",
+        "בדוק שפורמט הקובץ נתמך (MP3, FLAC, WAV)",
+        "נסה להוריד מחדש"
+      ],
+      "correct": 2,
+      "explanation": "אם טראק לא מתחבר, בדוק שהפורמט שלו נתמך (MP3, FLAC, WAV). פורמטים אחרים (OGG, AC3) לא נתמכים."
+    },
+    {
+      "id": 10,
+      "text": "מה פירוש Tag ב-Rekordbox?",
+      "options": [
+        "מחיקת שיר מספריה",
+        "תג טקסטי שעוזר לחיפוש מהיר (למשל, 'Summer', 'Night')",
+        "דירוג של שיר בכוכבים",
+        "תנועה בין Playlists"
+      ],
+      "correct": 1,
+      "explanation": "Tag היא תווית טקסטית שהוסיפה לשיר לעזרה חיפוש מהיר וארגון (למשל, 'Summer', 'Party', 'Energy')."
+    }
+  ]
+}

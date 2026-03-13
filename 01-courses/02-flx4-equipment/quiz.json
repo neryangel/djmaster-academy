@@ -1,0 +1,110 @@
+{
+  "lesson": "02-flx4-equipment",
+  "questions": [
+    {
+      "id": 1,
+      "text": "מה ה-Jog Wheel משמש?",
+      "options": [
+        "שינוי עוצמת הקול של הטראק",
+        "שליטה בהשמעת הטראק וזיהוי Beat",
+        "בקרת ה-Crossfader",
+        "הנעת הטראק אחורה בלבד"
+      ],
+      "correct": 1,
+      "explanation": "ה-Jog Wheel משמש לשליטה בהשמעת הטראק בדומה לויניל ישנות, וגם לזיהוי Pitch/Beat בעזרת הנעת הגלגל."
+    },
+    {
+      "id": 2,
+      "text": "כמה Pads (כפתורים ביצוע) יש בכל Deck ב-DDJ-FLX4?",
+      "options": ["4", "6", "8", "12"],
+      "correct": 2,
+      "explanation": "כל Deck ב-DDJ-FLX4 מכיל 8 Pads בשתי שורות של 4 כפתורים."
+    },
+    {
+      "id": 3,
+      "text": "מה ה-Hot Cue?",
+      "options": [
+        "טמפו של הטראק",
+        "סימן נקודה בטראק לקפיצה מהירה",
+        "חתך של הטראק לשמונה חלקים",
+        "אפקט אודיו מובנה"
+      ],
+      "correct": 1,
+      "explanation": "Hot Cue הוא סימן (Cue Point) בטראק שאתה יכול לקבוע כדי לקפוץ לנקודה זו בלחיצה על Pad."
+    },
+    {
+      "id": 4,
+      "text": "מה תפקיד ה-Trim בכל Deck?",
+      "options": [
+        "בקרת מהירות הטראק",
+        "בקרת עוצמת ה-Input של הטראק",
+        "בקרת הצלילים הגבוהים",
+        "מעבר בין שני Decks"
+      ],
+      "correct": 1,
+      "explanation": "ה-Trim בקר את עוצמת ה-Input של כל Deck, מה שמאפשר נרמול של רמות שונות בין טרקים."
+    },
+    {
+      "id": 5,
+      "text": "איזה מהבאים הוא לא חלק מהמיקסר?",
+      "options": ["EQ High/Mid/Low", "Crossfader", "Master Volume", "Jog Wheel"],
+      "correct": 3,
+      "explanation": "Jog Wheel הוא חלק מ-Deck Controlling, לא מהמיקסר. המיקסר כולל EQ, Crossfader ו-Master Volume."
+    },
+    {
+      "id": 6,
+      "text": "מה עושה ה-Crossfader?",
+      "options": [
+        "משנה את הגובה של הצליל",
+        "בוקר את התערובת בין Deck 1 ל-Deck 2",
+        "יוצר אפקט Echo",
+        "מחזיק את הטראק במהירות קבועה"
+      ],
+      "correct": 1,
+      "explanation": "ה-Crossfader הוא Slider אופקי שמבקר את התערובת בין שני Decks. שמאל = 100% Deck 1, ימין = 100% Deck 2."
+    },
+    {
+      "id": 7,
+      "text": "מה פירוש Loop Mode?",
+      "options": [
+        "חזור על הטראק מהתחלה",
+        "תקוע חלק מהטראק בחזרה אינסופית",
+        "חתוך את הטראק לשמונה חתיכות",
+        "העתק את הטראק לטראק שני"
+      ],
+      "correct": 1,
+      "explanation": "Loop Mode יוצר לולאה של קטע נתון (בדרך כלל 8 Bars) שחוזרת שוב ושוב עד שתכבה אותו."
+    },
+    {
+      "id": 8,
+      "text": "איזה חיבור משמש להעברת אודיו + MIDI לביתן?",
+      "options": ["AUX In", "Headphones Jack", "USB-C", "RCA Out"],
+      "correct": 2,
+      "explanation": "USB-C הוא החיבור הראשי של ה-DDJ-FLX4 לביתן, המעביר אודיו ותוכניות MIDI ל-Rekordbox."
+    },
+    {
+      "id": 9,
+      "text": "מה זה Slicer Mode?",
+      "options": [
+        "בקרת מהירות הטראק",
+        "יצירת לולאה של הטראק",
+        "חלוקת קטע של 8 Beats ל-8 חתיכות בנפרד",
+        "מחיקת חלקים מהטראק"
+      ],
+      "correct": 2,
+      "explanation": "Slicer Mode חוקק קטע (בדרך כלל 8 Bars) לשמונה חתיכות שוות, וכל Pad משחק חתיכה אחרת."
+    },
+    {
+      "id": 10,
+      "text": "מה ה-Smart Fader Link במערכת?",
+      "options": [
+        "קשר בין שני Decks",
+        "תכונה המחברת Crossfader לבקרות EQ אחרות",
+        "בקרת המהירות של שני Decks בו-זמנית",
+        "פילטר אודיו מובנה"
+      ],
+      "correct": 1,
+      "explanation": "Smart Fader Link היא תכונה המחברת את ה-Crossfader לGain Control, מה שמבטיח מעברים חלקים ואוטומטיים בין Decks."
+    }
+  ]
+}

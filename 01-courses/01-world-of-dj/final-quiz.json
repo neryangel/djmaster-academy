@@ -1,0 +1,37 @@
+{
+  "course": "01-world-of-dj",
+  "type": "final-quiz",
+  "version": "2.0.0",
+  "status": "template",
+  "settings": {
+    "shuffle_questions": true,
+    "shuffle_options": true,
+    "show_correct_answer": false,
+    "show_explanation": true,
+    "max_attempts": 2,
+    "passing_score": 75,
+    "time_limit_minutes": 30
+  },
+  "question_pool": {
+    "total_questions": 15,
+    "sources": [
+      {
+        "module": "01-what-is-dj",
+        "question_count": 5,
+        "topics": ["dj-definition", "dj-types", "skills"]
+      },
+      {
+        "module": "02-history-equipment",
+        "question_count": 5,
+        "topics": ["history", "equipment", "setup"]
+      },
+      {
+        "module": "03-career-first-steps",
+        "question_count": 5,
+        "topics": ["career", "income", "first-steps"],
+        "status": "placeholder"
+      }
+    ]
+  },
+  "questions": []
+}

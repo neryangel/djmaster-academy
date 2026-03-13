@@ -1,0 +1,93 @@
+---
+import type { Props } from 'astro';
+
+interface CourseProps {
+  title: string;
+  description: string;
+  level: string;
+  duration: number;
+  lessonCount: number;
+}
+
+const { title, description, level, duration, lessonCount } = Astro.props as CourseProps;
+
+const levelLabels: Record<string, string> = {
+  beginner: 'מתחיל',
+  intermediate: 'בינוני',
+  advanced: 'מתקדם',
+};
+
+const levelColors: Record<string, string> = {
+  beginner: 'bg-green-500/20 text-green-400',
+  intermediate: 'bg-yellow-500/20 text-yellow-400',
+  advanced: 'bg-red-500/20 text-red-400',
+};
+---
+
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{title} | DJMaster Academy</title>
+  <meta name="description" content={description} />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+</head>
+<body class="bg-[#0A0A0F] text-white font-hebrew min-h-screen">
+  <!-- Course Header -->
+  <header class="border-b border-white/10 bg-[#0A0A0F]/95 backdrop-blur-xl sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 py-4">
+      <nav class="flex items-center justify-between">
+        <a href="/" class="text-2xl font-bold bg-gradient-to-l from-[#00d4ff] to-[#7b2fff] bg-clip-text text-transparent">
+          DJMaster Academy
+        </a>
+        <div class="flex items-center gap-4">
+          <a href="/courses" class="text-white/70 hover:text-white transition">קורסים</a>
+          <a href="/tools" class="text-white/70 hover:text-white transition">כלים</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Course Hero -->
+  <section class="py-12 bg-gradient-to-b from-[#7b2fff]/10 to-transparent">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="flex items-center gap-3 mb-4">
+        <span class={`px-3 py-1 rounded-full text-sm font-medium ${levelColors[level] || ''}`}>
+          {levelLabels[level] || level}
+        </span>
+        <span class="text-white/50 text-sm">{duration} דקות</span>
+        <span class="text-white/50 text-sm">•</span>
+        <span class="text-white/50 text-sm">{lessonCount} שיעורים</span>
+      </div>
+      <h1 class="text-4xl md:text-5xl font-bold mb-4">{title}</h1>
+      <p class="text-white/70 text-lg max-w-2xl">{description}</p>
+    </div>
+  </section>
+
+  <!-- Course Content -->
+  <main class="max-w-7xl mx-auto px-4 py-8">
+    <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+      <!-- Sidebar -->
+      <aside class="lg:col-span-1 order-2 lg:order-1">
+        <div class="sticky top-24 bg-white/5 rounded-2xl p-6 border border-white/10">
+          <h3 class="text-lg font-bold mb-4">תוכן הקורס</h3>
+          <slot name="sidebar" />
+        </div>
+      </aside>
+      <!-- Main Content -->
+      <div class="lg:col-span-3 order-1 lg:order-2">
+        <slot />
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="border-t border-white/10 py-8 mt-16">
+    <div class="max-w-7xl mx-auto px-4 text-center text-white/40 text-sm">
+      <p>© 2025 DJMaster Academy. כל הזכויות שמורות.</p>
+    </div>
+  </footer>
+</body>
+</html>

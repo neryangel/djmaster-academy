@@ -1,0 +1,112 @@
+{
+  "quiz_id": "world-of-dj-m2",
+  "title": "עולם הDJ — מודול 2: היסטוריה וציוד",
+  "description": "בחן את הידע שלך על ההיסטוריה של ציוד DJ וה-Setup הבסיסי של היום",
+  "course_id": "01-world-of-dj",
+  "module_id": "02-history-equipment",
+  "settings": {
+    "shuffle_questions": true,
+    "shuffle_options": true,
+    "show_correct_answer": true,
+    "show_explanation": true,
+    "max_attempts": 3,
+    "passing_score": 70,
+    "time_limit_minutes": null
+  },
+  "questions": [
+    {
+      "id": "m2-q1",
+      "type": "multiple_choice",
+      "difficulty": "beginner",
+      "points": 10,
+      "text": "מה היה הציוד הראשון של DJ-ים בשנות ה-50?",
+      "options": [
+        "לפטופ ותוכנה",
+        "שני פטיפונים ומיקסר",
+        "נגני CD",
+        "בקר USB"
+      ],
+      "correct": 1,
+      "explanation": "DJ-ים בשנות ה-50 השתמשו בשני פטיפונים (Turntables) ומיקסר לערבוב ביניהם.",
+      "related_lesson": "01-history",
+      "tags": ["history", "vinyl"]
+    },
+    {
+      "id": "m2-q2",
+      "type": "multiple_choice",
+      "difficulty": "intermediate",
+      "points": 10,
+      "text": "מה הטכניקה של Beatmatching?",
+      "options": [
+        "ניגון שני שירים שונים בו-זמנית",
+        "התאמת הקצב של שני שירים כך שינגנו ביחד",
+        "הקלטת שיר חדש מעל שיר קיים",
+        "שינוי הטון של שיר"
+      ],
+      "correct": 1,
+      "explanation": "Beatmatching היא התאמת ה-BPM (קצב) של שני שירים כך שהם ינגנו בסנכרון מושלם. זו אחת הטכניקות הבסיסיות ביותר של DJ.",
+      "related_lesson": "01-history",
+      "tags": ["technique", "core-concept"]
+    },
+    {
+      "id": "m2-q3",
+      "type": "true_false",
+      "difficulty": "beginner",
+      "points": 5,
+      "text": "CDJ הוא נגן CD מקצועי ל-DJ שמיוצר על ידי Pioneer.",
+      "correct": true,
+      "explanation": "CDJ (Compact Disc Jockey) הוא אכן נגן מקצועי של Pioneer DJ. ה-CDJ-3000 הוא הסטנדרט במועדונים היום.",
+      "related_lesson": "01-history",
+      "tags": ["equipment", "terminology"]
+    },
+    {
+      "id": "m2-q4",
+      "type": "matching",
+      "difficulty": "intermediate",
+      "points": 20,
+      "text": "התאם כל תקופה לציוד המרכזי שלה:",
+      "pairs": [
+        { "left": "שנות 1950-1970", "right": "פטיפונים ומיקסר" },
+        { "left": "שנות 1980-1990", "right": "נגני CDJ" },
+        { "left": "שנות 1990-2000", "right": "לפטופ + תוכנה + בקרי MIDI" },
+        { "left": "2010 עד היום", "right": "בקרים כמו DDJ-FLX4" }
+      ],
+      "related_lesson": "01-history",
+      "tags": ["history", "timeline"]
+    },
+    {
+      "id": "m2-q5",
+      "type": "multiple_choice",
+      "difficulty": "beginner",
+      "points": 10,
+      "text": "מהם 4 החלקים החיוניים שצריך DJ מתחיל?",
+      "options": [
+        "מחשב, תוכנה, בקר, רמקולים",
+        "פטיפון, מיקסר, אוזניות, תקליטים",
+        "מיקרופון, מגבר, רמקולים, כבלים",
+        "טלפון, אפליקציה, אוזניות, בלוטות'"
+      ],
+      "correct": 0,
+      "explanation": "ה-Setup הבסיסי של DJ מתחיל כולל: מחשב (Laptop), תוכנה (Rekordbox), בקר (DDJ-FLX4), ורמקולים או אוזניות.",
+      "related_lesson": "02-equipment",
+      "tags": ["equipment", "setup"]
+    },
+    {
+      "id": "m2-q6",
+      "type": "multiple_choice",
+      "difficulty": "intermediate",
+      "points": 10,
+      "text": "למה אנחנו עובדים עם DDJ-FLX4 בקורס?",
+      "options": [
+        "כי הוא הזול ביותר בשוק",
+        "כי הוא במחיר סביר וה-Layout שלו דומה לציוד מקצועי",
+        "כי הוא היחיד שעובד עם Mac",
+        "כי הוא לא צריך חיבור למחשב"
+      ],
+      "correct": 1,
+      "explanation": "DDJ-FLX4 נבחר כי הוא במחיר סביר למתחילים, עובד מושלם עם Rekordbox, וה-Layout שלו זהה לציוד מקצועי. כשתגיעו למועדון — הכל יהיה מוכר.",
+      "related_lesson": "02-equipment",
+      "tags": ["equipment", "flx4"]
+    }
+  ]
+}

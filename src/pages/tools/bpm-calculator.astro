@@ -1,0 +1,75 @@
+---
+import ToolLayout from '@layouts/ToolLayout.astro';
+import BpmCalculator from '@components/tools/BpmCalculator';
+---
+
+<ToolLayout
+  title="מחשבון BPM"
+  description="זהה קצב שירים בטאפ או ניתוח אוטומטי"
+  icon="🥁"
+>
+  <div class="space-y-8">
+    <!-- Tool Component -->
+    <div class="flex justify-center">
+      <BpmCalculator client:load />
+    </div>
+
+    <!-- Instructions -->
+    <div class="border-t border-white/10 pt-8">
+      <h2 class="text-2xl font-bold mb-4">איך להשתמש בכלי זה?</h2>
+
+      <div class="space-y-6">
+        <div>
+          <h3 class="text-lg font-semibold text-[#00d4ff] mb-2">שיטה 1: הקשה דינמית (Tap Tempo)</h3>
+          <p class="text-white/70 mb-3">הדרך המהירה ביותר למדידת BPM:</p>
+          <ol class="list-decimal list-inside space-y-2 text-white/70 ml-4">
+            <li>הקשו על העיגול או לחצו רווח בעוד המוזיקה משתנגנת</li>
+            <li>המשיכו לתוך לפחות 4 פעמים לתוצאה מדויקת</li>
+            <li>הקצב יתעדכן בזמן אמת כשאתם מקישים</li>
+            <li>כשתהיו יציבים, תראו ✓ סימן אישור</li>
+          </ol>
+        </div>
+
+        <div>
+          <h3 class="text-lg font-semibold text-[#00d4ff] mb-2">שיטה 2: הקלדה ידנית</h3>
+          <p class="text-white/70 mb-3">אם אתם כבר יודעים את ה-BPM:</p>
+          <ul class="list-disc list-inside space-y-2 text-white/70 ml-4">
+            <li>הזינו את הערך בשדה "או הזן ידנית"</li>
+            <li>תוכלו לראות איזה ז'אנר מתאים לטמפו זה</li>
+            <li>השתמשו בתוצאה לסנכרון עם שירים אחרים</li>
+          </ul>
+        </div>
+
+        <div class="bg-[#FF6584]/5 border border-[#FF6584]/20 rounded-lg p-4">
+          <p class="text-white/70 mb-2"><strong>💡 טיפים למדידה מדויקת:</strong></p>
+          <ul class="list-disc list-inside space-y-2 text-white/70 ml-4">
+            <li>הקשו על קצב קבוע — זה הכמו לנגן על תוף</li>
+            <li>בשירים מהירים, קישו על חצי קצב (כל טיפה שנייה)</li>
+            <li>לפחות 8 הקשות לדיוק של ±0.5 BPM</li>
+            <li>אם הקצב שלכם אינו יציב, המערכת תמשיך למדוד</li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="text-lg font-semibold text-[#00d4ff] mb-2">טווחי BPM לפי ז'אנר</h3>
+          <p class="text-white/70 mb-3">בעמודה השמאלית בכלי תוכלו לראות טווחי BPM סטנדרטיים:</p>
+          <ul class="list-disc list-inside space-y-1 text-white/70 ml-4 text-sm">
+            <li><strong>Hip-Hop:</strong> 85–115 BPM</li>
+            <li><strong>House:</strong> 120–130 BPM</li>
+            <li><strong>Techno:</strong> 128–140 BPM</li>
+            <li><strong>Drum & Bass:</strong> 160–180 BPM</li>
+            <li><strong>Trance:</strong> 130–145 BPM</li>
+          </ul>
+        </div>
+
+        <div class="bg-[#6C63FF]/5 border border-[#6C63FF]/20 rounded-lg p-4">
+          <p class="text-white/70"><strong>⌨️ קיצורי מקלדת:</strong></p>
+          <ul class="list-disc list-inside space-y-1 text-white/70 ml-4 mt-2 text-sm">
+            <li><code class="bg-white/10 px-2 py-1 rounded">רווח</code> — הקש BPM</li>
+            <li><code class="bg-white/10 px-2 py-1 rounded">Esc</code> — אפס את המדידה</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</ToolLayout>

@@ -1,0 +1,115 @@
+{
+  "lesson": "04-music-structure",
+  "questions": [
+    {
+      "id": 1,
+      "text": "מה היא מטרת ה-Intro בשיר?",
+      "options": [
+        "להציג כל ה-Instruments באחת",
+        "התחלת השיר עם מוזיקה קצת, בדרך כלל בלי Vocals",
+        "סוף השיר שבו צליל מתפחת",
+        "חלק עם ה-Vocals העיקרי"
+      ],
+      "correct": 1,
+      "explanation": "ה-Intro היא התחלה של השיר עם מוזיקה אי-ברקית, בדרך כלל בלי קולות, ורק בס וביטים."
+    },
+    {
+      "id": 2,
+      "text": "כמה Beats יש בכל Bar בעד 4/4 Time Signature?",
+      "options": ["2 Beats", "3 Beats", "4 Beats", "8 Beats"],
+      "correct": 2,
+      "explanation": "ב-4/4 Time Signature יש 4 Beats בכל Bar (Measure). זה ה-Standard בדיוק כל הרקיצה."
+    },
+    {
+      "id": 3,
+      "text": "כמה Bars בדרך כלל בפרזה ב-DJ?",
+      "options": ["4 Bars", "8 Bars", "12 Bars", "16 Bars"],
+      "correct": 1,
+      "explanation": "בפרזה בדרך כלל יש 8 Bars או 16 Bars, וזה מסמן כאן חלק (Verse, Chorus) משתנה."
+    },
+    {
+      "id": 4,
+      "text": "מה זה Chorus בשיר?",
+      "options": [
+        "חלק שנשמע בתחילה",
+        "קטע בן-ברקה שחוזר שוב ושוב ויש בו Energy גבוה",
+        "סוף השיר",
+        "חלק ללא צלילים"
+      ],
+      "correct": 1,
+      "explanation": "ה-Chorus היא חלק שחוזר שוב ושוב בשיר, בדרך כלל קל וקולוני, עם Energy גבוה."
+    },
+    {
+      "id": 5,
+      "text": "מה תפקיד ה-Bridge בשיר?",
+      "options": [
+        "הסרה כל ה-Instruments",
+        "חלק שונה מכל אחר לשינוי Monotony",
+        "הוספת Beat נוסף",
+        "חלוקה של בס"
+      ],
+      "correct": 1,
+      "explanation": "ה-Bridge היא חלק שונה ואחר בשיר, משנה את הExperience בעזרת Breakdown או Build-up."
+    },
+    {
+      "id": 6,
+      "text": "כמה זמן בדרך כלל Intro?",
+      "options": [
+        "5 שניות",
+        "15 שניות",
+        "30 שניות עד דקה",
+        "2 דקות"
+      ],
+      "correct": 2,
+      "explanation": "ה-Intro בדרך כלל בן 20-30 שניות, מה שנותן זמן ל-DJ להתחיל טראק בעדינות."
+    },
+    {
+      "id": 7,
+      "text": "מה זה Build-up?",
+      "options": [
+        "הסרה של כל ה-Instruments",
+        "הוספה הדרגתית של Instruments על פני 8-32 Bars",
+        "שינוי מהיר של BPM",
+        "החלפת שירים"
+      ],
+      "correct": 1,
+      "explanation": "Build-up היא הוספה הדרגתית של מרכיבים על 16-32 Bars, יוצרת ציפיות לקראת Drop."
+    },
+    {
+      "id": 8,
+      "text": "מה זה Drop בתסריט מוזיקלי?",
+      "options": [
+        "ירידה של בס",
+        "לפתע כל האלמנטים חוזרים או משהו חדש מופיע",
+        "הוצאת דקות מהביטים",
+        "שקט בשיר"
+      ],
+      "correct": 1,
+      "explanation": "Drop היא זריקה פתאומית חזרה של כל המוזיקה (או משהו חדש) אחרי Build-up/Breakdown."
+    },
+    {
+      "id": 9,
+      "text": "איזה ז'אנר בדרך כלל לפעוט בו-128 BPM?",
+      "options": [
+        "Hip-Hop",
+        "Pop",
+        "House Music",
+        "Techno (בדרך כלל)"
+      ],
+      "correct": 2,
+      "explanation": "House Music בדרך כלל בעד 128 BPM, בעוד Techno בדרך כלל גבוה יותר (130-140 BPM)."
+    },
+    {
+      "id": 10,
+      "text": "מה הטריק להעברה טבעית בין שני שירים?",
+      "options": [
+        "רק לשנות את Crossfader",
+        "הקשב לPhrasing ועבור בחרים של 8 או 16 Bars",
+        "להוריד את הקול של Song הראשון",
+        "להפעיל גם שירים בו-זמנית"
+      ],
+      "correct": 1,
+      "explanation": "הטריק הוא להקשב לPhrasing וללעבור בדיוק כשBar 8 או 16 מסתיים, יוצר transition חלק."
+    }
+  ]
+}

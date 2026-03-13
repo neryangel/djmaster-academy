@@ -1,0 +1,3077 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>קורס DJ מאפס | DDJ-FLX4 + Rekordbox</title>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --surface: #12121a;
+    --surface2: #1a1a26;
+    --border: #2a2a3d;
+    --accent: #00d4ff;
+    --accent2: #7b2fff;
+    --accent3: #ff3d6e;
+    --text: #e8e8f0;
+    --text-dim: #888899;
+    --text-bright: #ffffff;
+    --green: #00ff9d;
+    --yellow: #ffd60a;
+    --font-size: 15px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Heebo', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    display: flex;
+    overflow-x: hidden;
+    font-size: var(--font-size);
+  }
+
+  /* ===================== */
+  /* SIDEBAR               */
+  /* ===================== */
+  #sidebar {
+    width: 280px;
+    min-width: 280px;
+    background: var(--surface);
+    border-left: 1px solid var(--border);
+    height: 100vh;
+    position: fixed;
+    right: 0;
+    top: 0;
+    overflow-y: auto;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .sidebar-header {
+    padding: 24px 20px 16px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .logo-text {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+
+  .course-title {
+    font-size: 20px;
+    font-weight: 900;
+    color: var(--text-bright);
+    line-height: 1.2;
+  }
+
+  .course-subtitle {
+    font-size: 12px;
+    color: var(--text-dim);
+    margin-top: 4px;
+  }
+
+  .lessons-nav {
+    flex: 1;
+    padding: 12px 0;
+  }
+
+  .nav-section-label {
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    padding: 12px 20px 6px;
+    font-family: 'Space Mono', monospace;
+  }
+
+  .lesson-btn {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    padding: 10px 20px;
+    background: none;
+    border: none;
+    color: var(--text-dim);
+    cursor: pointer;
+    text-align: right;
+    transition: all 0.2s;
+    font-family: 'Heebo', sans-serif;
+    font-size: 13px;
+    border-right: 3px solid transparent;
+    position: relative;
+  }
+
+  .lesson-btn:hover {
+    background: var(--surface2);
+    color: var(--text);
+  }
+
+  .lesson-btn.active {
+    background: rgba(0,212,255,0.08);
+    color: var(--accent);
+    border-right-color: var(--accent);
+  }
+
+  .lesson-status {
+    font-size: 16px;
+    width: 20px;
+    text-align: center;
+    flex-shrink: 0;
+  }
+
+  .lesson-num {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    background: var(--surface2);
+    color: var(--text-dim);
+    padding: 2px 6px;
+    border-radius: 4px;
+    min-width: 28px;
+    text-align: center;
+    flex-shrink: 0;
+  }
+
+  .lesson-btn.active .lesson-num {
+    background: var(--accent);
+    color: #000;
+  }
+
+  .lesson-name {
+    flex: 1;
+    line-height: 1.3;
+  }
+
+  .lesson-score {
+    font-size: 11px;
+    color: var(--green);
+    font-family: 'Space Mono', monospace;
+    flex-shrink: 0;
+  }
+
+  /* MAIN CONTENT */
+  #main {
+    margin-right: 280px;
+    flex: 1;
+    min-height: 100vh;
+    scroll-behavior: smooth;
+  }
+
+  /* HOME */
+  #home {
+    display: block;
+  }
+
+  .hero {
+    background: linear-gradient(135deg, var(--surface) 0%, #0d0d1f 100%);
+    padding: 60px 60px 50px;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -10%;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(0,212,255,0.06) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -30%;
+    left: 30%;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(123,47,255,0.05) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-tag {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+
+  .hero h1 {
+    font-size: 52px;
+    font-weight: 900;
+    color: var(--text-bright);
+    line-height: 1.1;
+    margin-bottom: 12px;
+  }
+
+  .hero h1 span {
+    color: var(--accent);
+  }
+
+  .hero-desc {
+    font-size: 16px;
+    color: var(--text-dim);
+    max-width: 600px;
+    line-height: 1.7;
+    margin-bottom: 32px;
+  }
+
+  .hero-stats {
+    display: flex;
+    gap: 32px;
+    flex-wrap: wrap;
+  }
+
+  .stat {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .stat-num {
+    font-family: 'Space Mono', monospace;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--accent);
+  }
+
+  .stat-label {
+    font-size: 12px;
+    color: var(--text-dim);
+  }
+
+  /* EQUIPMENT SECTION */
+  .section {
+    padding: 48px 60px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .section-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 3px;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .section h2 {
+    font-size: 28px;
+    font-weight: 800;
+    color: var(--text-bright);
+    margin-bottom: 24px;
+  }
+
+  .controller-diagram {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 32px;
+    margin: 24px 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .controller-diagram::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: radial-gradient(ellipse at 50% 0%, rgba(0,212,255,0.04) 0%, transparent 60%);
+  }
+
+  /* LESSON PAGE */
+  .lesson-page {
+    display: none;
+    animation: fadeIn 0.3s ease-in;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  .lesson-page.active {
+    display: block;
+  }
+
+  .lesson-hero {
+    background: var(--surface);
+    padding: 48px 60px 40px;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .lesson-hero::before {
+    content: '';
+    position: absolute;
+    top: -40%;
+    left: -5%;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(0,212,255,0.05) 0%, transparent 70%);
+  }
+
+  .lesson-tag {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  .lesson-num-big {
+    font-family: 'Space Mono', monospace;
+    font-size: 100px;
+    font-weight: 700;
+    color: var(--surface2);
+    position: absolute;
+    top: 20px;
+    left: 40px;
+    line-height: 1;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  .lesson-hero h1 {
+    font-size: 36px;
+    font-weight: 900;
+    color: var(--text-bright);
+    margin-bottom: 12px;
+    position: relative;
+  }
+
+  .lesson-hero h1 .highlight {
+    color: var(--accent);
+  }
+
+  .lesson-meta {
+    display: flex;
+    gap: 24px;
+    margin-top: 20px;
+  }
+
+  .lesson-meta-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    color: var(--text-dim);
+  }
+
+  .meta-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+  }
+
+  /* LESSON CONTENT */
+  .lesson-content {
+    padding: 48px 60px;
+  }
+
+  .content-block {
+    margin-bottom: 48px;
+  }
+
+  .content-block h2 {
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--text-bright);
+    margin-bottom: 16px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .content-block h2::before {
+    content: '';
+    width: 4px;
+    height: 20px;
+    background: var(--accent);
+    border-radius: 2px;
+    flex-shrink: 0;
+  }
+
+  .content-block p {
+    font-size: 15px;
+    line-height: 1.8;
+    color: var(--text);
+    margin-bottom: 14px;
+  }
+
+  .content-block h3 {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--accent);
+    margin: 20px 0 8px;
+  }
+
+  /* COLLAPSIBLE SECTION */
+  .collapsible-section {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    margin: 16px 0;
+    overflow: hidden;
+  }
+
+  .collapsible-header {
+    padding: 16px 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    background: var(--surface2);
+    border: none;
+    width: 100%;
+    color: var(--text-bright);
+    font-size: 15px;
+    font-weight: 700;
+    text-align: right;
+    transition: all 0.2s;
+  }
+
+  .collapsible-header:hover {
+    background: var(--border);
+  }
+
+  .collapsible-header::before {
+    content: '▼';
+    color: var(--accent);
+    font-size: 12px;
+    transition: transform 0.2s;
+    flex-shrink: 0;
+  }
+
+  .collapsible-section.open .collapsible-header::before {
+    transform: rotate(-180deg);
+  }
+
+  .collapsible-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+  }
+
+  .collapsible-section.open .collapsible-content {
+    max-height: 2000px;
+  }
+
+  .collapsible-content-inner {
+    padding: 20px;
+    border-top: 1px solid var(--border);
+  }
+
+  /* CARDS */
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 16px;
+    margin: 16px 0;
+  }
+
+  .card {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    transition: border-color 0.2s;
+  }
+
+  .card:hover {
+    border-color: var(--accent);
+  }
+
+  .card-icon {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+
+  .card h4 {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text-bright);
+    margin-bottom: 6px;
+  }
+
+  .card p {
+    font-size: 13px;
+    color: var(--text-dim);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  /* INFO BOXES */
+  .info-box {
+    border-radius: 10px;
+    padding: 18px 20px;
+    margin: 16px 0;
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+  }
+
+  .info-box.tip {
+    background: rgba(0,255,157,0.07);
+    border: 1px solid rgba(0,255,157,0.2);
+  }
+
+  .info-box.warning {
+    background: rgba(255,61,110,0.07);
+    border: 1px solid rgba(255,61,110,0.2);
+  }
+
+  .info-box.pro {
+    background: rgba(0,212,255,0.07);
+    border: 1px solid rgba(0,212,255,0.2);
+  }
+
+  .info-box.theory {
+    background: rgba(123,47,255,0.07);
+    border: 1px solid rgba(123,47,255,0.2);
+  }
+
+  .info-icon {
+    font-size: 20px;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .info-box h4 {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text-bright);
+    margin-bottom: 4px;
+  }
+
+  .info-box p {
+    font-size: 13px;
+    color: var(--text-dim);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  /* EXERCISE BOX */
+  .exercise-box {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+    margin: 20px 0;
+  }
+
+  .exercise-box .ex-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .ex-badge {
+    background: var(--accent2);
+    color: #fff;
+    font-size: 10px;
+    font-family: 'Space Mono', monospace;
+    letter-spacing: 2px;
+    padding: 3px 8px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    flex-shrink: 0;
+  }
+
+  .exercise-box h4 {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--text-bright);
+  }
+
+  .steps-list {
+    list-style: none;
+    counter-reset: steps;
+  }
+
+  .steps-list li {
+    counter-increment: steps;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    padding: 8px 0;
+    font-size: 14px;
+    color: var(--text);
+    line-height: 1.6;
+  }
+
+  .steps-list li::before {
+    content: counter(steps);
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    background: var(--accent);
+    color: #000;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  /* TERMS */
+  .terms-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 12px;
+    margin: 16px 0;
+  }
+
+  .term-card {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 14px;
+  }
+
+  .term-en {
+    font-family: 'Space Mono', monospace;
+    font-size: 12px;
+    color: var(--accent);
+    margin-bottom: 4px;
+  }
+
+  .term-he {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text-bright);
+    margin-bottom: 4px;
+  }
+
+  .term-desc {
+    font-size: 12px;
+    color: var(--text-dim);
+    line-height: 1.5;
+  }
+
+  /* LESSON NAV */
+  .lesson-nav-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px 60px;
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    margin-top: 40px;
+    gap: 12px;
+  }
+
+  .nav-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--text);
+    cursor: pointer;
+    font-family: 'Heebo', sans-serif;
+    font-size: 14px;
+    transition: all 0.2s;
+  }
+
+  .nav-btn:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  .nav-btn:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+  }
+
+  /* PROGRESS BAR */
+  .progress-bar {
+    height: 2px;
+    background: var(--border);
+    position: relative;
+    margin: 0 20px 16px;
+    border-radius: 1px;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    border-radius: 1px;
+    transition: width 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  /* GEAR LIST */
+  .gear-list {
+    list-style: none;
+  }
+
+  .gear-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 14px;
+    color: var(--text);
+    line-height: 1.5;
+  }
+
+  .gear-list li::before {
+    content: '▸';
+    color: var(--accent);
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  /* TABLE */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0;
+    font-size: 13px;
+  }
+
+  th {
+    background: var(--surface2);
+    color: var(--text-bright);
+    padding: 10px 14px;
+    text-align: right;
+    font-weight: 700;
+    border-bottom: 1px solid var(--border);
+  }
+
+  td {
+    padding: 10px 14px;
+    border-bottom: 1px solid rgba(42,42,61,0.5);
+    color: var(--text);
+    vertical-align: top;
+  }
+
+  tr:hover td {
+    background: rgba(255,255,255,0.02);
+  }
+
+  td.en {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    color: var(--accent);
+  }
+
+  /* SCROLLBAR */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--surface); }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
+  /* WAVEFORM VISUAL */
+  .waveform {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    height: 40px;
+    padding: 8px 0;
+  }
+
+  .wave-bar {
+    width: 3px;
+    background: var(--accent);
+    border-radius: 2px;
+    opacity: 0.7;
+    animation: wave 0.6s ease-in-out infinite;
+  }
+
+  @keyframes wave {
+    0%, 100% { height: 4px; }
+    50% { height: 20px; }
+  }
+
+  .wave-bar:nth-child(2) { animation-delay: 0.1s; }
+  .wave-bar:nth-child(3) { animation-delay: 0.2s; }
+  .wave-bar:nth-child(4) { animation-delay: 0.3s; }
+  .wave-bar:nth-child(5) { animation-delay: 0.2s; }
+  .wave-bar:nth-child(6) { animation-delay: 0.1s; }
+
+  /* CTRL LABEL */
+  .ctrl-label {
+    background: rgba(0,212,255,0.1);
+    border: 1px solid rgba(0,212,255,0.3);
+    border-radius: 6px;
+    padding: 6px 10px;
+    font-size: 12px;
+    color: var(--accent);
+    display: inline-block;
+    margin: 4px;
+    font-family: 'Space Mono', monospace;
+  }
+
+  .connection-diagram {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 0;
+    align-items: center;
+    margin: 20px 0;
+  }
+
+  .conn-device {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+  }
+
+  .conn-device .icon {
+    font-size: 32px;
+    margin-bottom: 8px;
+  }
+
+  .conn-device h4 {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text-bright);
+    margin-bottom: 4px;
+  }
+
+  .conn-device p {
+    font-size: 11px;
+    color: var(--text-dim);
+    margin: 0;
+  }
+
+  .conn-arrow {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    padding: 0 12px;
+  }
+
+  .conn-line {
+    height: 2px;
+    width: 60px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+  }
+
+  .conn-label {
+    font-size: 10px;
+    color: var(--accent);
+    font-family: 'Space Mono', monospace;
+    white-space: nowrap;
+  }
+
+  /* ===================== */
+  /* QUIZ SECTION          */
+  /* ===================== */
+  .quiz-section {
+    background: var(--surface2);
+    border: 2px solid var(--accent2);
+    border-radius: 16px;
+    padding: 32px;
+    margin: 40px 0;
+  }
+
+  .quiz-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .quiz-icon {
+    font-size: 32px;
+    flex-shrink: 0;
+  }
+
+  .quiz-title {
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--accent2);
+    margin: 0;
+  }
+
+  .quiz-subtitle {
+    font-size: 12px;
+    color: var(--text-dim);
+    margin: 4px 0 0 0;
+  }
+
+  .quiz-container {
+    display: none;
+  }
+
+  .quiz-container.active {
+    display: block;
+  }
+
+  .quiz-question {
+    margin-bottom: 32px;
+  }
+
+  .question-number {
+    font-family: 'Space Mono', monospace;
+    font-size: 12px;
+    color: var(--accent2);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .question-text {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text-bright);
+    margin-bottom: 16px;
+  }
+
+  .quiz-options {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .quiz-option {
+    background: var(--surface);
+    border: 2px solid var(--border);
+    border-radius: 10px;
+    padding: 16px 20px;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 14px;
+    color: var(--text);
+    text-align: right;
+  }
+
+  .quiz-option:hover {
+    border-color: var(--accent);
+    background: rgba(0,212,255,0.05);
+  }
+
+  .quiz-option.selected {
+    border-color: var(--accent2);
+    background: rgba(123,47,255,0.15);
+  }
+
+  .quiz-option.correct {
+    border-color: var(--green);
+    background: rgba(0,255,157,0.15);
+  }
+
+  .quiz-option.wrong {
+    border-color: var(--accent3);
+    background: rgba(255,61,110,0.15);
+  }
+
+  .quiz-feedback {
+    margin-top: 16px;
+    padding: 16px;
+    border-radius: 8px;
+    display: none;
+    font-size: 14px;
+  }
+
+  .quiz-feedback.show {
+    display: block;
+  }
+
+  .quiz-feedback.correct {
+    background: rgba(0,255,157,0.1);
+    border: 1px solid rgba(0,255,157,0.3);
+    color: var(--green);
+  }
+
+  .quiz-feedback.wrong {
+    background: rgba(255,61,110,0.1);
+    border: 1px solid rgba(255,61,110,0.3);
+    color: var(--accent3);
+  }
+
+  .quiz-controls {
+    display: flex;
+    gap: 12px;
+    margin-top: 32px;
+    justify-content: center;
+  }
+
+  .quiz-btn {
+    padding: 12px 32px;
+    border: none;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: 'Heebo', sans-serif;
+  }
+
+  .quiz-btn.primary {
+    background: var(--accent2);
+    color: #fff;
+  }
+
+  .quiz-btn.primary:hover {
+    background: #6a1fda;
+  }
+
+  .quiz-btn.secondary {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--text);
+  }
+
+  .quiz-btn.secondary:hover {
+    border-color: var(--accent);
+  }
+
+  .quiz-results {
+    display: none;
+    text-align: center;
+    padding: 32px;
+  }
+
+  .quiz-results.show {
+    display: block;
+  }
+
+  .results-icon {
+    font-size: 64px;
+    margin-bottom: 16px;
+  }
+
+  .results-title {
+    font-size: 24px;
+    font-weight: 800;
+    color: var(--text-bright);
+    margin-bottom: 12px;
+  }
+
+  .results-score {
+    font-size: 48px;
+    font-weight: 900;
+    color: var(--accent2);
+    margin-bottom: 8px;
+    font-family: 'Space Mono', monospace;
+  }
+
+  .results-message {
+    font-size: 16px;
+    color: var(--text-dim);
+    margin-bottom: 24px;
+  }
+
+  /* ACHIEVEMENT BADGES */
+  .badges-section {
+    padding: 32px 60px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .badges-title {
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--text-bright);
+    margin-bottom: 24px;
+  }
+
+  .badges-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 16px;
+  }
+
+  .badge {
+    background: var(--surface2);
+    border: 2px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+    transition: all 0.2s;
+    opacity: 0.4;
+  }
+
+  .badge.earned {
+    opacity: 1;
+    border-color: var(--accent);
+    background: rgba(0,212,255,0.08);
+  }
+
+  .badge-icon {
+    font-size: 48px;
+    margin-bottom: 12px;
+  }
+
+  .badge-name {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text-bright);
+    margin-bottom: 4px;
+  }
+
+  .badge-desc {
+    font-size: 11px;
+    color: var(--text-dim);
+  }
+
+  /* FLOATING ACTION BUTTON */
+  .fab-menu {
+    position: fixed;
+    bottom: 30px;
+    left: 30px;
+    z-index: 90;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: flex-end;
+  }
+
+  .fab-btn {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: var(--accent2);
+    color: #fff;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  }
+
+  .fab-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 20px rgba(123,47,255,0.4);
+  }
+
+  .fab-menu .fab-btn:first-child {
+    background: var(--accent);
+    width: 64px;
+    height: 64px;
+    font-size: 28px;
+  }
+
+  .fab-label {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 8px 14px;
+    border-radius: 8px;
+    font-size: 12px;
+    color: var(--text-dim);
+    white-space: nowrap;
+    margin-left: 12px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s;
+  }
+
+  .fab-btn:hover + .fab-label,
+  .fab-label:hover {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  /* FONT SIZE CONTROL */
+  .font-size-control {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 95;
+    display: flex;
+    gap: 8px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 8px;
+  }
+
+  .font-btn {
+    width: 36px;
+    height: 36px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background: var(--surface2);
+    color: var(--text);
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 700;
+    transition: all 0.2s;
+  }
+
+  .font-btn:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  .font-btn.active {
+    background: var(--accent);
+    color: #000;
+    border-color: var(--accent);
+  }
+
+  /* CERTIFICATE MODAL */
+  .certificate-modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.9);
+    z-index: 200;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+
+  .certificate-modal.show {
+    display: flex;
+  }
+
+  .certificate-card {
+    background: linear-gradient(135deg, #ffd700 0%, #ffed4e 50%, #ffd700 100%);
+    border: 8px solid #d4af37;
+    border-radius: 16px;
+    padding: 60px 80px;
+    max-width: 900px;
+    width: 100%;
+    text-align: center;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.8);
+    animation: slideIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  @keyframes slideIn {
+    from {
+      opacity: 0;
+      transform: scale(0.8) rotateX(-20deg);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1) rotateX(0);
+    }
+  }
+
+  .cert-header {
+    font-family: 'Space Mono', monospace;
+    font-size: 14px;
+    letter-spacing: 4px;
+    color: #8b6914;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+
+  .cert-title {
+    font-size: 48px;
+    font-weight: 900;
+    color: #2c1810;
+    margin-bottom: 8px;
+    font-family: 'Heebo', serif;
+  }
+
+  .cert-subtitle {
+    font-size: 18px;
+    color: #5c3d1a;
+    margin-bottom: 40px;
+  }
+
+  .cert-line {
+    height: 2px;
+    background: #8b6914;
+    margin: 24px 0;
+  }
+
+  .cert-name {
+    font-size: 36px;
+    font-weight: 700;
+    color: #2c1810;
+    margin: 24px 0;
+    font-family: 'Space Mono', monospace;
+  }
+
+  .cert-text {
+    font-size: 16px;
+    color: #5c3d1a;
+    margin-bottom: 24px;
+    line-height: 1.8;
+  }
+
+  .cert-date {
+    font-size: 14px;
+    color: #8b6914;
+    margin-top: 32px;
+  }
+
+  .cert-actions {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    margin-top: 40px;
+  }
+
+  .cert-btn {
+    padding: 12px 32px;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .cert-btn.share {
+    background: #2c1810;
+    color: #ffd700;
+  }
+
+  .cert-btn.share:hover {
+    background: #1a0f08;
+  }
+
+  .cert-btn.close {
+    background: transparent;
+    border: 2px solid #8b6914;
+    color: #2c1810;
+  }
+
+  .cert-btn.close:hover {
+    background: #8b6914;
+    color: #fff;
+  }
+
+  /* CONFETTI */
+  .confetti {
+    position: fixed;
+    width: 10px;
+    height: 10px;
+    background: var(--accent);
+    pointer-events: none;
+    animation: confettiFall 3s ease-in forwards;
+  }
+
+  @keyframes confettiFall {
+    to {
+      transform: translateY(100vh) rotate(360deg);
+      opacity: 0;
+    }
+  }
+
+  /* AUDIO PLAYER */
+  .audio-player {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    margin: 20px 0;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .player-btn {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--accent);
+    color: #000;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: all 0.2s;
+  }
+
+  .player-btn:hover {
+    background: #00b8d4;
+  }
+
+  .player-info {
+    flex: 1;
+  }
+
+  .player-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text-bright);
+    margin-bottom: 4px;
+  }
+
+  .player-meta {
+    font-size: 12px;
+    color: var(--text-dim);
+    display: flex;
+    gap: 16px;
+  }
+
+  .player-waveform {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    height: 32px;
+  }
+
+  /* MOBILE RESPONSIVE */
+  #hamburger {
+    display: none;
+    position: fixed;
+    top: 14px;
+    right: 14px;
+    z-index: 200;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 10px 12px;
+    cursor: pointer;
+    color: var(--accent);
+    font-size: 18px;
+    line-height: 1;
+  }
+
+  #sidebar-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.7);
+    z-index: 99;
+  }
+
+  @media (max-width: 768px) {
+    #hamburger { display: block; }
+    .font-size-control { display: none; }
+    .fab-menu { display: none; }
+    #sidebar {
+      transform: translateX(100%);
+      transition: transform 0.3s ease;
+      z-index: 150;
+    }
+    #sidebar.open {
+      transform: translateX(0);
+    }
+    #sidebar-overlay.open { display: block; }
+    #main {
+      margin-right: 0;
+      padding: 60px 16px 24px;
+    }
+    .hero { padding: 32px 16px 24px; }
+    .lesson-content { padding: 32px 16px; }
+    .lesson-hero { padding: 32px 16px 24px; }
+    .section { padding: 32px 16px; }
+    .lesson-nav-bar { padding: 16px; flex-direction: column; }
+    .cards-grid { grid-template-columns: 1fr; }
+    .badge { padding: 16px; }
+    .quiz-section { padding: 20px; }
+  }
+
+  /* SEARCH BAR */
+  .search-wrap {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+  }
+  
+  .search-input {
+    width: 100%;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 8px 12px;
+    color: var(--text);
+    font-family: 'Heebo', sans-serif;
+    font-size: 13px;
+    outline: none;
+    transition: border-color 0.2s;
+    direction: rtl;
+  }
+  
+  .search-input:focus { border-color: var(--accent); }
+  
+  .search-results {
+    position: absolute;
+    right: 16px;
+    left: 16px;
+    background: var(--surface);
+    border: 1px solid var(--accent);
+    border-radius: 8px;
+    max-height: 280px;
+    overflow-y: auto;
+    z-index: 300;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+    display: none;
+  }
+  
+  .search-results.visible { display: block; }
+  
+  .search-result-item {
+    padding: 10px 14px;
+    cursor: pointer;
+    border-bottom: 1px solid var(--border);
+    font-size: 13px;
+  }
+  
+  .search-result-item:hover { background: var(--surface2); }
+  
+  .search-result-item .sr-lesson { color: var(--accent); font-size: 11px; margin-bottom: 2px; }
+  
+  .search-result-item .sr-text { color: var(--text); }
+
+  /* LESSON COMPLETION */
+  .lesson-btn .check-icon {
+    margin-right: auto;
+    color: var(--green);
+    font-size: 12px;
+    opacity: 0;
+    transition: opacity 0.2s;
+    flex-shrink: 0;
+  }
+
+  .lesson-btn.completed .check-icon { opacity: 1; }
+  .lesson-btn.completed .lesson-num { color: var(--green); }
+
+  .complete-btn {
+    margin: 32px 20px 0;
+    padding: 12px;
+    background: transparent;
+    border: 1px solid var(--green);
+    border-radius: 10px;
+    color: var(--green);
+    font-family: 'Heebo', sans-serif;
+    font-size: 14px;
+    cursor: pointer;
+    width: calc(100% - 40px);
+    transition: all 0.2s;
+    display: block;
+  }
+
+  .complete-btn:hover { background: var(--green); color: #000; }
+  .complete-btn.done { background: var(--green); color: #000; cursor: default; }
+
+  .progress-label {
+    font-size: 11px;
+    color: var(--text-dim);
+    margin: 4px 20px 0;
+    text-align: left;
+    font-family: 'Space Mono', monospace;
+  }
+
+  /* GLOSSARY PAGE */
+  .glossary-search {
+    width: 100%;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 12px 16px;
+    color: var(--text);
+    font-family: 'Heebo', sans-serif;
+    font-size: 15px;
+    outline: none;
+    margin-bottom: 24px;
+    direction: rtl;
+  }
+
+  .glossary-search:focus { border-color: var(--accent); }
+
+  .glossary-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 12px;
+  }
+
+  .glossary-item {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 16px;
+    transition: border-color 0.2s;
+  }
+
+  .glossary-item:hover { border-color: var(--accent); }
+
+  .glossary-item .g-term {
+    font-family: 'Space Mono', monospace;
+    color: var(--accent);
+    font-size: 13px;
+    margin-bottom: 4px;
+  }
+
+  .glossary-item .g-he {
+    font-weight: 700;
+    color: var(--text-bright);
+    font-size: 15px;
+    margin-bottom: 6px;
+  }
+
+  .glossary-item .g-def { 
+    color: var(--text-dim); 
+    font-size: 13px; 
+    line-height: 1.5; 
+  }
+
+  .glossary-item .g-tag {
+    display: inline-block;
+    font-size: 10px;
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin-top: 8px;
+    background: var(--surface2);
+    color: var(--text-dim);
+  }
+
+  .glossary-item.hidden { display: none; }
+
+</style>
+</head>
+<body>
+
+<!-- FONT SIZE CONTROL -->
+<div class="font-size-control">
+  <button class="font-btn active" onclick="setFontSize('normal')" title="גודל רגיל">A</button>
+  <button class="font-btn" onclick="setFontSize('small')" title="גודל קטן">A-</button>
+  <button class="font-btn" onclick="setFontSize('large')" title="גודל גדול">A+</button>
+</div>
+
+<!-- FLOATING ACTION BUTTON -->
+<div class="fab-menu">
+  <button class="fab-btn" onclick="showProgress()" title="התקדמות הקורס">📊</button>
+  <button class="fab-btn" onclick="scrollToTop()" style="margin-right: 0; background: var(--accent);" title="חזור לראש">↑</button>
+</div>
+
+<!-- MOBILE HAMBURGER -->
+<button id="hamburger" onclick="toggleSidebar()" aria-label="תפריט">☰</button>
+<div id="sidebar-overlay" onclick="toggleSidebar()"></div>
+
+<!-- SIDEBAR -->
+<nav id="sidebar">
+  <div class="sidebar-header">
+    <div class="logo-text">DJ Academy IL</div>
+    <div class="course-title">קורס DJ מאפס</div>
+    <div class="course-subtitle">DDJ-FLX4 + Rekordbox</div>
+  </div>
+
+  <div class="progress-bar" style="margin-top:12px">
+    <div class="progress-fill" id="progress-fill" style="width:0%"></div>
+  </div>
+  <div class="progress-label" id="progress-label">0 / 10 שיעורים הושלמו</div>
+
+  <!-- SEARCH -->
+  <div class="search-wrap" style="position:relative">
+    <input class="search-input" id="search-input" type="text" placeholder="🔍  חפש מונח או נושא..." autocomplete="off" oninput="doSearch(this.value)" onblur="setTimeout(()=>hideSearch(),200)" />
+    <div class="search-results" id="search-results"></div>
+  </div>
+
+  <div class="lessons-nav">
+    <div class="nav-section-label">מבוא</div>
+    <button class="lesson-btn active" onclick="showPage('home')" id="btn-home">
+      <span class="lesson-status">⌂</span>
+      <span class="lesson-name">סקירת הקורס</span>
+    </button>
+
+    <div class="nav-section-label">שיעורים</div>
+    <button class="lesson-btn" onclick="showLesson(1)" id="btn-1">
+      <span class="lesson-status">⚪</span>
+      <span class="lesson-num">01</span>
+      <span class="lesson-name">עולם הדי-ג'יי</span>
+      <span class="lesson-score" id="score-1"></span>
+    </button>
+    <button class="lesson-btn" onclick="showLesson(2)" id="btn-2">
+      <span class="lesson-status">⚪</span>
+      <span class="lesson-num">02</span>
+      <span class="lesson-name">הציוד – FLX4</span>
+      <span class="lesson-score" id="score-2"></span>
+    </button>
+    <button class="lesson-btn" onclick="showLesson(3)" id="btn-3">
+      <span class="lesson-status">⚪</span>
+      <span class="lesson-num">03</span>
+      <span class="lesson-name">Rekordbox</span>
+      <span class="lesson-score" id="score-3"></span>
+    </button>
+    <button class="lesson-btn" onclick="showLesson(4)" id="btn-4">
+      <span class="lesson-status">⚪</span>
+      <span class="lesson-num">04</span>
+      <span class="lesson-name">מבנה המוזיקה</span>
+      <span class="lesson-score" id="score-4"></span>
+    </button>
+    <button class="lesson-btn" onclick="showLesson(5)" id="btn-5">
+      <span class="lesson-status">⚪</span>
+      <span class="lesson-num">05</span>
+      <span class="lesson-name">Beatmatching</span>
+      <span class="lesson-score" id="score-5"></span>
+    </button>
+    <button class="lesson-btn" onclick="showLesson(6)" id="btn-6">
+      <span class="lesson-status">⚪</span>
+      <span class="lesson-num">06</span>
+      <span class="lesson-name">EQ ומיקסינג</span>
+      <span class="lesson-score" id="score-6"></span>
+    </button>
+    <button class="lesson-btn" onclick="showLesson(7)" id="btn-7">
+      <span class="lesson-status">⚪</span>
+      <span class="lesson-num">07</span>
+      <span class="lesson-name">Hot Cues & Loops</span>
+      <span class="lesson-score" id="score-7"></span>
+    </button>
+    <button class="lesson-btn" onclick="showLesson(8)" id="btn-8">
+      <span class="lesson-status">⚪</span>
+      <span class="lesson-num">08</span>
+      <span class="lesson-name">Effects</span>
+      <span class="lesson-score" id="score-8"></span>
+    </button>
+    <button class="lesson-btn" onclick="showLesson(9)" id="btn-9">
+      <span class="lesson-status">⚪</span>
+      <span class="lesson-num">09</span>
+      <span class="lesson-name">בניית סט</span>
+      <span class="lesson-score" id="score-9"></span>
+    </button>
+    <button class="lesson-btn" onclick="showLesson(10)" id="btn-10">
+      <span class="lesson-status">⚪</span>
+      <span class="lesson-num">10</span>
+      <span class="lesson-name">הופעה חיה</span>
+      <span class="lesson-score" id="score-10"></span>
+    </button>
+
+    <div class="nav-section-label">כלים</div>
+    <button class="lesson-btn" onclick="showPage('glossary')" id="btn-glossary">
+      <span class="lesson-status">📖</span>
+      <span class="lesson-name">מילון מונחים</span>
+    </button>
+  </div>
+</nav>
+
+<!-- MAIN -->
+<main id="main">
+
+  <!-- HOME PAGE -->
+  <div id="home" class="lesson-page active">
+    <div class="hero">
+      <div class="hero-tag">▸ DJ Academy IL — קורס מקצועי</div>
+      <h1>תהפוך ל<span>די-ג'יי</span><br>מאפס מוחלט</h1>
+      <p class="hero-desc">
+        קורס מקיף ומעשי ל-10 שיעורים × 3 שעות. תוצאה מובטחת: בסוף הקורס תדע לחבר ציוד, להפעיל Rekordbox, לעשות beatmatching ידני, ולהעביר סט מלא בפני קהל.
+      </p>
+      <div class="hero-stats">
+        <div class="stat"><span class="stat-num" id="stat-lessons">10</span><span class="stat-label">שיעורים</span></div>
+        <div class="stat"><span class="stat-num" id="stat-hours">30</span><span class="stat-label">שעות לימוד</span></div>
+        <div class="stat"><span class="stat-num" id="stat-progress">0</span><span class="stat-label">% הושלם</span></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-label">הציוד שנשתמש בו</div>
+      <h2>Pioneer DDJ-FLX4 + Rekordbox</h2>
+      <p style="color:var(--text-dim);font-size:14px;margin-bottom:24px">ה-FLX4 הוא הקונטרולר המושלם ללמידה – עיצוב זהה לציוד מקצועי בקלאב, עם פיצ'רים שמקלים על המתחילים.</p>
+
+      <div class="cards-grid">
+        <div class="card">
+          <div class="card-icon">🎛️</div>
+          <h4>DDJ-FLX4</h4>
+          <p>קונטרולר 2-ערוצים עם jog wheels, 8 performance pads, EQ, Beat FX ו-Smart CFX. פלט RCA לרמקולים.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">💾</div>
+          <h4>Rekordbox (חינם)</h4>
+          <p>תוכנת ה-DJ הרשמית של Pioneer. ניהול ספריית מוזיקה, ניתוח BPM, Hot Cues, פלייליסטים ועוד.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">🔌</div>
+          <h4>USB-C ו-RCA</h4>
+          <p>כבל USB-C למחשב (כולל בקופסא). כבל RCA לרמקולים או מגבר. חיבור פשוט, plug & play.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">🎧</div>
+          <h4>אוזניות DJ</h4>
+          <p>חיבור 3.5mm מלפנים. חיוני לשמוע את השיר הבא לפני שהקהל שומע אותו (cueing).</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-label">מבנה הקורס</div>
+      <h2>10 שיעורים – מסלול לימוד</h2>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px">
+        <div onclick="showLesson(1)" style="cursor:pointer" class="card"><h4>שיעור 1 – עולם הדי-ג'יי</h4><p>הכרת התחום, סוגי די-ג'ייים, ציוד, התקנת Rekordbox</p></div>
+        <div onclick="showLesson(2)" style="cursor:pointer" class="card"><h4>שיעור 2 – FLX4 מ-א' עד ת'</h4><p>כל כפתור, כבל וחיבור. מדריך מלא לקונטרולר</p></div>
+        <div onclick="showLesson(3)" style="cursor:pointer" class="card"><h4>שיעור 3 – Rekordbox</h4><p>ניהול ספריית מוזיקה, BPM, Grids, Hot Cues, פלייליסטים</p></div>
+        <div onclick="showLesson(4)" style="cursor:pointer" class="card"><h4>שיעור 4 – מבנה המוזיקה</h4><p>Beats, Bars, Phrases, BPM, מבנה שיר לדי-ג'יי</p></div>
+        <div onclick="showLesson(5)" style="cursor:pointer" class="card"><h4>שיעור 5 – Beatmatching</h4><p>התאמת קצב ידנית עם pitch slider ו-jog wheel</p></div>
+        <div onclick="showLesson(6)" style="cursor:pointer" class="card"><h4>שיעור 6 – EQ ומיקסינג</h4><p>High/Mid/Low, Gain, Faders, Crossfader, Low Swap</p></div>
+        <div onclick="showLesson(7)" style="cursor:pointer" class="card"><h4>שיעור 7 – Hot Cues ו-Loops</h4><p>Performance Pads, Beat Jump, לופים, כניסות מדויקות</p></div>
+        <div onclick="showLesson(8)" style="cursor:pointer" class="card"><h4>שיעור 8 – Effects</h4><p>Beat FX, Smart CFX, Filter, Reverb, Echo</p></div>
+        <div onclick="showLesson(9)" style="cursor:pointer" class="card"><h4>שיעור 9 – בניית סט</h4><p>Harmonic Mixing, קריאת קהל, אנרגיה, מעברים מתקדמים</p></div>
+        <div onclick="showLesson(10)" style="cursor:pointer" class="card"><h4>שיעור 10 – הופעה חיה</h4><p>סאונדצ'ק, USB לקלאב, ביטחון עצמי, הופעת סיום</p></div>
+      </div>
+    </div>
+
+    <div class="badges-section">
+      <div class="badges-title">🏆 הישגים</div>
+      <div class="badges-grid">
+        <div class="badge" id="badge-first">
+          <div class="badge-icon">🌟</div>
+          <div class="badge-name">צעד ראשון</div>
+          <div class="badge-desc">השלם שיעור 1</div>
+        </div>
+        <div class="badge" id="badge-halfway">
+          <div class="badge-icon">📈</div>
+          <div class="badge-name">בדרך הטובה</div>
+          <div class="badge-desc">השלם 5 שיעורים</div>
+        </div>
+        <div class="badge" id="badge-quizmaster">
+          <div class="badge-icon">🎯</div>
+          <div class="badge-name">אדון הקוויזים</div>
+          <div class="badge-desc">עבור 70% בכל הקוויזים</div>
+        </div>
+        <div class="badge" id="badge-graduate">
+          <div class="badge-icon">🎓</div>
+          <div class="badge-name">בוגר קורס</div>
+          <div class="badge-desc">השלם את כל הקורס</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-label">מה ילמד התלמיד</div>
+      <h2>יעדי הקורס</h2>
+      <ul class="gear-list">
+        <li>לחבר את ה-DDJ-FLX4 למחשב, לרמקולים ולאוזניות בצורה נכונה</li>
+        <li>להתקין Rekordbox ולנהל ספריית מוזיקה מסודרת עם BPM, מפתח ופלייליסטים</li>
+        <li>לעשות Beatmatching ידני – ללא כפתור Sync</li>
+        <li>לעבוד עם EQ, Gain וכל סוגי ה-Faders</li>
+        <li>לבנות Hot Cues חכמים ולהשתמש ב-Performance Pads</li>
+        <li>להוסיף Effects מרשימים בצורה מדוייקת ומוזיקלית</li>
+        <li>לבנות סט שלם עם אנרגיה עולה, Harmonic Mixing וקריאת קהל</li>
+        <li>להתכונן לגיג אמיתי – מהסאונדצ'ק ועד הסוף</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- PROGRESS MODAL -->
+  <div id="progress-modal" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.8); z-index: 180; align-items: center; justify-content: center; padding: 20px;">
+    <div style="background: var(--surface); border: 2px solid var(--accent); border-radius: 16px; padding: 40px; max-width: 500px; width: 100%;">
+      <h2 style="color: var(--accent); margin-bottom: 24px;">📊 התקדמות הקורס</h2>
+      <div id="modal-progress"></div>
+      <button onclick="document.getElementById('progress-modal').style.display = 'none';" style="width: 100%; margin-top: 24px; padding: 12px; background: var(--accent); color: #000; border: none; border-radius: 8px; font-weight: 700; cursor: pointer;">סגור</button>
+    </div>
+  </div>
+
+
+  <!-- LESSON 1 -->
+  <div id="lesson-1" class="lesson-page">
+    <div class="lesson-hero">
+      <div class="lesson-num-big">01</div>
+      <div class="lesson-tag">שיעור 1 מתוך 10</div>
+      <h1>עולם <span class="highlight">הדי-ג'יי</span></h1>
+      <p style="color:var(--text-dim);max-width:600px;line-height:1.7;margin-top:8px">היסטוריה, סוגי די-ג'ייים, ציוד שנדבר עליו בקורס, ולקראת סוף השיעור – התקנת Rekordbox הצעד הראשון.</p>
+      <div class="lesson-meta">
+        <div class="lesson-meta-item"><span class="meta-dot"></span> 3 שעות</div>
+        <div class="lesson-meta-item"><span class="meta-dot"></span> תיאוריה + מעשי</div>
+        <div class="lesson-meta-item"><span class="meta-dot"></span> אין צורך בציוד מוקדם</div>
+      </div>
+    </div>
+    <div class="lesson-content">
+      <div class="content-block">
+        <h2>מה זה בכלל די-ג'יי?</h2>
+        <p>די-ג'יי (DJ) הוא קיצור של <strong>Disc Jockey</strong> – מי שמנגן ומעביר שירים בפני קהל. בעבר זה היה על גבי תקליטים ויניל, היום רוב הדי-ג'ייים עובדים עם קבצי מוזיקה דיגיטליים, תוכנה וקונטרולר.</p>
+        <p>הדי-ג'יי לא רק "מפעיל שירים" – הוא <strong>מספר סיפור</strong>. הוא בוחר אילו שירים לנגן, באיזה סדר, ואיך לעבור בין שיר לשיר בצורה חלקה שמשאירה את הקהל על הרצפה.</p>
+        <div class="info-box tip">
+          <span class="info-icon">💡</span>
+          <div>
+            <h4>עובדה מעניינת</h4>
+            <p>הדי-ג'יינג הומצא בשנות ה-40, אבל ה-DJ המודרני כמו שאנחנו מכירים קם בשנות ה-70 עם תרבות הדיסקו.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="content-block">
+        <h2>סוגי די-ג'ייים</h2>
+        <div class="cards-grid">
+          <div class="card"><div class="card-icon">🏠</div><h4>House / Club DJ</h4><p>מנגן בקלאבים, פסטיבלים ומסיבות. עיקר הציוד – CDJ מקצועי + DJM Mixer.</p></div>
+          <div class="card"><div class="card-icon">💒</div><h4>Wedding DJ</h4><p>חתונות ואירועים. מגוון ז'אנרים, עובד עם קהל מגוון.</p></div>
+          <div class="card"><div class="card-icon">📻</div><h4>Radio DJ</h4><p>מנגן בתחנות רדיו, פחות מעברים טכניים, יותר דיבור.</p></div>
+        </div>
+      </div>
+
+      <div class="content-block">
+        <h2>ציוד DJ – מבנה המערכת</h2>
+        <p>כל מערכת DJ בנויה מ-3 חלקים עיקריים: מחשב + קונטרולר + רמקולים.</p>
+        <div class="exercise-box">
+          <div class="ex-header">
+            <span class="ex-badge">תרגיל מעשי</span>
+            <h4>התקנת Rekordbox שלב אחר שלב</h4>
+          </div>
+          <ol class="steps-list">
+            <li>לכו ל-<strong>rekordbox.com</strong> ולחצו על "Download Free"</li>
+            <li>בחרו את מערכת ההפעלה שלכם – Windows או Mac</li>
+            <li>הורידו את הקובץ והריצו את ה-Installer</li>
+            <li>עקבו אחרי האשף, קבלו את ה-License Agreement</li>
+            <li>הפעילו את Rekordbox ובחרו "Use for free"</li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="content-block">
+        <h2>מושגי יסוד</h2>
+        <div class="terms-grid">
+          <div class="term-card"><div class="term-en">BPM</div><div class="term-he">קצב</div><div class="term-desc">Beats Per Minute — קצב השיר. House ≈ 128 BPM.</div></div>
+          <div class="term-card"><div class="term-en">Cue</div><div class="term-he">נקודת כניסה</div><div class="term-desc">נקודת התחלה מסומנת בשיר.</div></div>
+          <div class="term-card"><div class="term-en">Mix</div><div class="term-he">מעבר</div><div class="term-desc">חפיפה בין שני שירים.</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="quiz-section">
+      <div class="quiz-header">
+        <div class="quiz-icon">🎯</div>
+        <div>
+          <h3 class="quiz-title">בדוק את הידע שלך</h3>
+          <p class="quiz-subtitle">שיעור 1 - 5 שאלות</p>
+        </div>
+      </div>
+      <div id="quiz-1" class="quiz-container active">
+        <div id="quiz-1-questions"></div>
+      </div>
+      <div id="results-1" class="quiz-results"></div>
+      <div class="quiz-controls" id="quiz-1-controls">
+        <button class="quiz-btn primary" onclick="submitQuiz(1)">הגש תשובות</button>
+        <button class="quiz-btn secondary" onclick="resetQuiz(1)">התחל מחדש</button>
+      </div>
+    </div>
+
+    <button class="complete-btn" id="complete-1" onclick="markComplete(1)">✓ סיימתי את שיעור 1</button>
+    <div class="lesson-nav-bar">
+      <button class="nav-btn" onclick="prevLesson(1)">← חזרה</button>
+      <button class="nav-btn" onclick="nextLesson(1)">הבא →</button>
+    </div>
+  </div>
+
+  <!-- LESSON 2 -->
+  <div id="lesson-2" class="lesson-page">
+    <div class="lesson-hero">
+      <div class="lesson-num-big">02</div>
+      <div class="lesson-tag">שיעור 2 מתוך 10</div>
+      <h1>הציוד – <span class="highlight">FLX4 מ-א' עד ת'</span></h1>
+      <p style="color:var(--text-dim);max-width:600px;line-height:1.7;margin-top:8px">הכרה מלאה עם כל חלק בקונטרולר. כל כפתור, כל ידית, כל חיבור.</p>
+      <div class="lesson-meta">
+        <div class="lesson-meta-item"><span class="meta-dot"></span> 3 שעות</div>
+        <div class="lesson-meta-item"><span class="meta-dot"></span> ה-FLX4 חייב להיות לידכם</div>
+      </div>
+    </div>
+    <div class="lesson-content">
+      <div class="content-block">
+        <h2>המבנה הכללי של ה-FLX4</h2>
+        <p>ה-FLX4 מחולק ל-3 אזורים עיקריים: שני <strong>Decks</strong> (ימין ושמאל) ואמצע <strong>Mixer</strong>.</p>
+        
+        <div class="audio-player">
+          <button class="player-btn">▶</button>
+          <div class="player-info">
+            <div class="player-title">דוגמה: הפעלה על FLX4</div>
+            <div class="player-meta"><span>3:45</span> | <span>128 BPM</span></div>
+          </div>
+          <div class="player-waveform">
+            <div class="wave-bar" style="height: 8px;"></div>
+            <div class="wave-bar" style="height: 12px;"></div>
+            <div class="wave-bar" style="height: 16px;"></div>
+            <div class="wave-bar" style="height: 12px;"></div>
+            <div class="wave-bar" style="height: 8px;"></div>
+          </div>
+        </div>
+
+        <h3>הרכיבים העיקריים:</h3>
+        <table>
+          <tr><th>רכיב</th><th>מיקום</th><th>תפקיד</th></tr>
+          <tr><td><strong>Jog Wheel</strong></td><td>מרכז כל Deck</td><td>סקראץ', Nudge, Pitch Bend</td></tr>
+          <tr><td><strong>Play / Cue</strong></td><td>אצל Jog</td><td>הפעלה, עצירה, סימון נקודות</td></tr>
+          <tr><td><strong>EQ (HI/MID/LOW)</strong></td><td>אמצע Mixer</td><td>בקרת תדרים</td></tr>
+          <tr><td><strong>Channel Fader</strong></td><td>בצד כל Deck</td><td>עוצמת הערוץ</td></tr>
+          <tr><td><strong>Crossfader</strong></td><td>אמצע Mixer</td><td>מעבר בין Deck 1 ל-2</td></tr>
+        </table>
+      </div>
+
+      <div class="content-block">
+        <h2>Jog Wheel – הלב של הקונטרולר</h2>
+        <p>ה-Jog Wheel הוא הגלגל הגדול בכל דק. יש לו שתי אזורים עם פונקציות שונות.</p>
+        <div class="info-box pro">
+          <span class="info-icon">🎯</span>
+          <div>
+            <h4>Nudging Tips</h4>
+            <p>דחיפה קדימה = מאיץ. דחיפה אחורה = מאט. זה הכלי העיקרי לכיוונון עדין של הביט.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="collapsible-section">
+        <button class="collapsible-header">EQ vs Crossfader – מה ההבדל?</button>
+        <div class="collapsible-content">
+          <div class="collapsible-content-inner">
+            <p><strong>EQ:</strong> משנה את הצלילים (בסים, תדרים אמצעיים, חדים) של שיר אחד.</p>
+            <p><strong>Crossfader:</strong> מעביר את הסאונד בין שיר אחד לשיר שני. בדרך כלל משתמשים בעו בחפיפה.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="quiz-section">
+      <div class="quiz-header">
+        <div class="quiz-icon">🎯</div>
+        <div>
+          <h3 class="quiz-title">בדוק את הידע שלך</h3>
+          <p class="quiz-subtitle">שיעור 2 - 5 שאלות</p>
+        </div>
+      </div>
+      <div id="quiz-2" class="quiz-container active">
+        <div id="quiz-2-questions"></div>
+      </div>
+      <div id="results-2" class="quiz-results"></div>
+      <div class="quiz-controls" id="quiz-2-controls">
+        <button class="quiz-btn primary" onclick="submitQuiz(2)">הגש תשובות</button>
+        <button class="quiz-btn secondary" onclick="resetQuiz(2)">התחל מחדש</button>
+      </div>
+    </div>
+
+    <button class="complete-btn" id="complete-2" onclick="markComplete(2)">✓ סיימתי את שיעור 2</button>
+    <div class="lesson-nav-bar">
+      <button class="nav-btn" onclick="prevLesson(2)">← שיעור 1</button>
+      <button class="nav-btn" onclick="nextLesson(2)">שיעור 3 →</button>
+    </div>
+  </div>
+
+  <!-- LESSONS 3-10 (ABBREVIATED FOR SPACE) -->
+  <div id="lesson-3" class="lesson-page">
+    <div class="lesson-hero">
+      <div class="lesson-num-big">03</div>
+      <div class="lesson-tag">שיעור 3 מתוך 10</div>
+      <h1><span class="highlight">Rekordbox</span> – ניהול מוזיקה</h1>
+      <div class="lesson-meta">
+        <div class="lesson-meta-item"><span class="meta-dot"></span> 3 שעות</span></div>
+      </div>
+    </div>
+    <div class="lesson-content">
+      <div class="content-block">
+        <h2>התקנה וסטטאפ</h2>
+        <p>Rekordbox היא תוכנת ה-DJ הרשמית של Pioneer. בגרסה החינמית יש לנו הכל שצריך להתחיל.</p>
+        <div class="exercise-box">
+          <div class="ex-header">
+            <span class="ex-badge">שלבים</span>
+            <h4>הוסף שירים לספרייה</h4>
+          </div>
+          <ol class="steps-list">
+            <li>פתח תיקייה עם שירים ב-MP3 או AIFF</li>
+            <li>גרור אותם לתוך Rekordbox Collection</li>
+            <li>Rekordbox יחליל אוטומטית את ה-BPM ויציין את ה-Key</li>
+            <li>סמן Hot Cues בכל שיר (Intro, Drop, Outro)</li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="content-block">
+        <h2>BPM וGrid</h2>
+        <p>Grid הוא רשת ביטים שעוזרת ל-Rekordbox להבין את המבנה של השיר. כשהGrid נכון, הסינכרון קל יותר.</p>
+      </div>
+    </div>
+    <div class="quiz-section">
+      <div class="quiz-header">
+        <div class="quiz-icon">🎯</div>
+        <div>
+          <h3 class="quiz-title">בדוק את הידע שלך</h3>
+          <p class="quiz-subtitle">שיעור 3 - 5 שאלות</p>
+        </div>
+      </div>
+      <div id="quiz-3" class="quiz-container active">
+        <div id="quiz-3-questions"></div>
+      </div>
+      <div id="results-3" class="quiz-results"></div>
+      <div class="quiz-controls" id="quiz-3-controls">
+        <button class="quiz-btn primary" onclick="submitQuiz(3)">הגש תשובות</button>
+        <button class="quiz-btn secondary" onclick="resetQuiz(3)">התחל מחדש</button>
+      </div>
+    </div>
+    <button class="complete-btn" id="complete-3" onclick="markComplete(3)">✓ סיימתי את שיעור 3</button>
+    <div class="lesson-nav-bar">
+      <button class="nav-btn" onclick="prevLesson(3)">← שיעור 2</button>
+      <button class="nav-btn" onclick="nextLesson(3)">שיעור 4 →</button>
+    </div>
+  </div>
+
+  <div id="lesson-4" class="lesson-page">
+    <div class="lesson-hero">
+      <div class="lesson-num-big">04</div>
+      <div class="lesson-tag">שיעור 4 מתוך 10</div>
+      <h1>מבנה <span class="highlight">המוזיקה</span> לדי-ג'יי</h1>
+      <div class="lesson-meta">
+        <div class="lesson-meta-item"><span class="meta-dot"></span> 2.5 שעות</span></div>
+      </div>
+    </div>
+    <div class="lesson-content">
+      <div class="content-block">
+        <h2>Beats, Bars, Phrases</h2>
+        <p>כל שיר בנוי מיחידות קטנות של זמן: Beat (פעימה) → Bar (4 פעימות) → Phrase (4 Bars = 16 פעימות).</p>
+        <div class="info-box theory">
+          <span class="info-icon">🎵</span>
+          <div>
+            <h4>חשיבות ל-DJ</h4>
+            <p>מעברים בין שירים חייבים להתחיל בתחילת Phrase. זה היוצר של המעבר החלק.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="content-block">
+        <h2>Intro, Drop, Breakdown, Outro</h2>
+        <p>כל שיר בעל מבנה מוזיקלי: תחילה שקט/soft, אז עלייה, Drop חזק, Break, ויציאה.</p>
+      </div>
+    </div>
+    <div class="quiz-section">
+      <div class="quiz-header">
+        <div class="quiz-icon">🎯</div>
+        <div>
+          <h3 class="quiz-title">בדוק את הידע שלך</h3>
+          <p class="quiz-subtitle">שיעור 4 - 5 שאלות</p>
+        </div>
+      </div>
+      <div id="quiz-4" class="quiz-container active">
+        <div id="quiz-4-questions"></div>
+      </div>
+      <div id="results-4" class="quiz-results"></div>
+      <div class="quiz-controls" id="quiz-4-controls">
+        <button class="quiz-btn primary" onclick="submitQuiz(4)">הגש תשובות</button>
+        <button class="quiz-btn secondary" onclick="resetQuiz(4)">התחל מחדש</button>
+      </div>
+    </div>
+    <button class="complete-btn" id="complete-4" onclick="markComplete(4)">✓ סיימתי את שיעור 4</button>
+    <div class="lesson-nav-bar">
+      <button class="nav-btn" onclick="prevLesson(4)">← שיעור 3</button>
+      <button class="nav-btn" onclick="nextLesson(4)">שיעור 5 →</button>
+    </div>
+  </div>
+
+  <div id="lesson-5" class="lesson-page">
+    <div class="lesson-hero">
+      <div class="lesson-num-big">05</div>
+      <div class="lesson-tag">שיעור 5 מתוך 10</div>
+      <h1><span class="highlight">Beatmatching</span> ידני</h1>
+      <div class="lesson-meta">
+        <div class="lesson-meta-item"><span class="meta-dot"></span> 4 שעות</span></div>
+      </div>
+    </div>
+    <div class="lesson-content">
+      <div class="content-block">
+        <h2>סינכרון BPM</h2>
+        <p>Beatmatching = התאמת ה-BPM של שני שירים כדי שיתנגנו בהרמוניה. זה הבסיס של ה-DJing.</p>
+        <div class="exercise-box">
+          <div class="ex-header">
+            <span class="ex-badge">טכניקה</span>
+            <h4>Beatmatching בשלוש שלבים</h4>
+          </div>
+          <ol class="steps-list">
+            <li>הפעל שיר ב-Deck 1</li>
+            <li>הפעל שיר נוסף ב-Deck 2 (מחורבן בתחילה)</li>
+            <li>השתמש ב-Pitch Fader וב-Nudge להתאמת BPM</li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="content-block">
+        <h2>Cueing</h2>
+        <p>שמוע את השיר באוזניות לפני שהוא עולה לאוויר. זה בעזרת כפתור CUE.</p>
+      </div>
+    </div>
+    <div class="quiz-section">
+      <div class="quiz-header">
+        <div class="quiz-icon">🎯</div>
+        <div>
+          <h3 class="quiz-title">בדוק את הידע שלך</h3>
+          <p class="quiz-subtitle">שיעור 5 - 5 שאלות</p>
+        </div>
+      </div>
+      <div id="quiz-5" class="quiz-container active">
+        <div id="quiz-5-questions"></div>
+      </div>
+      <div id="results-5" class="quiz-results"></div>
+      <div class="quiz-controls" id="quiz-5-controls">
+        <button class="quiz-btn primary" onclick="submitQuiz(5)">הגש תשובות</button>
+        <button class="quiz-btn secondary" onclick="resetQuiz(5)">התחל מחדש</button>
+      </div>
+    </div>
+    <button class="complete-btn" id="complete-5" onclick="markComplete(5)">✓ סיימתי את שיעור 5</button>
+    <div class="lesson-nav-bar">
+      <button class="nav-btn" onclick="prevLesson(5)">← שיעור 4</button>
+      <button class="nav-btn" onclick="nextLesson(5)">שיעור 6 →</button>
+    </div>
+  </div>
+
+  <div id="lesson-6" class="lesson-page">
+    <div class="lesson-hero">
+      <div class="lesson-num-big">06</div>
+      <div class="lesson-tag">שיעור 6 מתוך 10</div>
+      <h1><span class="highlight">EQ</span> ומיקסינג בסיסי</h1>
+      <div class="lesson-meta">
+        <div class="lesson-meta-item"><span class="meta-dot"></span> 3 שעות</span></div>
+      </div>
+    </div>
+    <div class="lesson-content">
+      <div class="content-block">
+        <h2>שלוש הידיות – EQ</h2>
+        <p>High (חדים) | Mid (אמצעיים) | Low (בסים). כל ידית משנה בנפרד את התדרים בשיר.</p>
+        <div class="cards-grid">
+          <div class="card">
+            <div class="card-icon">🎚️</div>
+            <h4>High – חדים</h4>
+            <p>להוסיף "בריאות" לשיר, לעלות קול קולות, סנתזה.</p>
+          </div>
+          <div class="card">
+            <div class="card-icon">🎚️</div>
+            <h4>Mid – אמצעיים</h4>
+            <p>הטווח בו אוזננו רגישה ביותר. משפיע על "תופסנות" השיר.</p>
+          </div>
+          <div class="card">
+            <div class="card-icon">🎚️</div>
+            <h4>Low – בסים</h4>
+            <p>הקצב והחוזק. משפיע על האנרגיה.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="content-block">
+        <h2>Faders וCrossfader</h2>
+        <p>Channel Fader = עוצמת כל ערוץ. Crossfader = מעבר בין הערוצים.</p>
+      </div>
+    </div>
+    <div class="quiz-section">
+      <div class="quiz-header">
+        <div class="quiz-icon">🎯</div>
+        <div>
+          <h3 class="quiz-title">בדוק את הידע שלך</h3>
+          <p class="quiz-subtitle">שיעור 6 - 5 שאלות</p>
+        </div>
+      </div>
+      <div id="quiz-6" class="quiz-container active">
+        <div id="quiz-6-questions"></div>
+      </div>
+      <div id="results-6" class="quiz-results"></div>
+      <div class="quiz-controls" id="quiz-6-controls">
+        <button class="quiz-btn primary" onclick="submitQuiz(6)">הגש תשובות</button>
+        <button class="quiz-btn secondary" onclick="resetQuiz(6)">התחל מחדש</button>
+      </div>
+    </div>
+    <button class="complete-btn" id="complete-6" onclick="markComplete(6)">✓ סיימתי את שיעור 6</button>
+    <div class="lesson-nav-bar">
+      <button class="nav-btn" onclick="prevLesson(6)">← שיעור 5</button>
+      <button class="nav-btn" onclick="nextLesson(6)">שיעור 7 →</button>
+    </div>
+  </div>
+
+  <div id="lesson-7" class="lesson-page">
+    <div class="lesson-hero">
+      <div class="lesson-num-big">07</div>
+      <div class="lesson-tag">שיעור 7 מתוך 10</div>
+      <h1><span class="highlight">Hot Cues, Loops</span> ו-Pads</h1>
+      <div class="lesson-meta">
+        <div class="lesson-meta-item"><span class="meta-dot"></span> 3 שעות</span></div>
+      </div>
+    </div>
+    <div class="lesson-content">
+      <div class="content-block">
+        <h2>Hot Cues</h2>
+        <p>סימון נקודות בשיר (Intro, Drop, Outro) ולחיצה עליהן בזמן ניגון לקפיצה תזמונית מושלמת.</p>
+      </div>
+
+      <div class="content-block">
+        <h2>Loops</h2>
+        <p>הפעלה חוזרת של קטע קצר בשיר. שימושי לארכת Drop או ליצירת מתח.</p>
+        <div class="cards-grid">
+          <div class="card"><h4>Auto Loop</h4><p>4-בייט לופ מיידי בלחיצה.</p></div>
+          <div class="card"><h4>Loop In/Out</h4><p>קביעה ידנית של התחלה וסוף.</p></div>
+        </div>
+      </div>
+
+      <div class="content-block">
+        <h2>Performance Pads</h2>
+        <p>8 כפתורים פרפורמנטיביים בכל Deck. מצבים: Hot Cue, Pad FX, Beat Jump, Sampler.</p>
+      </div>
+    </div>
+    <div class="quiz-section">
+      <div class="quiz-header">
+        <div class="quiz-icon">🎯</div>
+        <div>
+          <h3 class="quiz-title">בדוק את הידע שלך</h3>
+          <p class="quiz-subtitle">שיעור 7 - 5 שאלות</p>
+        </div>
+      </div>
+      <div id="quiz-7" class="quiz-container active">
+        <div id="quiz-7-questions"></div>
+      </div>
+      <div id="results-7" class="quiz-results"></div>
+      <div class="quiz-controls" id="quiz-7-controls">
+        <button class="quiz-btn primary" onclick="submitQuiz(7)">הגש תשובות</button>
+        <button class="quiz-btn secondary" onclick="resetQuiz(7)">התחל מחדש</button>
+      </div>
+    </div>
+    <button class="complete-btn" id="complete-7" onclick="markComplete(7)">✓ סיימתי את שיעור 7</button>
+    <div class="lesson-nav-bar">
+      <button class="nav-btn" onclick="prevLesson(7)">← שיעור 6</button>
+      <button class="nav-btn" onclick="nextLesson(7)">שיעור 8 →</button>
+    </div>
+  </div>
+
+  <div id="lesson-8" class="lesson-page">
+    <div class="lesson-hero">
+      <div class="lesson-num-big">08</div>
+      <div class="lesson-tag">שיעור 8 מתוך 10</div>
+      <h1>Effects – <span class="highlight">Beat FX</span> ו-Smart CFX</h1>
+      <div class="lesson-meta">
+        <div class="lesson-meta-item"><span class="meta-dot"></span> 3 שעות</span></div>
+      </div>
+    </div>
+    <div class="lesson-content">
+      <div class="content-block">
+        <h2>Beat FX – אפקטים מחזוריים</h2>
+        <p>אפקטים שמסונכרנים ל-BPM: Echo, Reverb, Filter, Flanger, Phaser, Spiral.</p>
+        <div class="info-box warning">
+          <span class="info-icon">⚠️</span>
+          <div>
+            <h4>חוק ה-FX</h4>
+            <p><strong>פחות זה יותר.</strong> אפקט אחד בזמן הנכון = גאוני. כל הזמן FX = עצבני.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="content-block">
+        <h2>Smart CFX</h2>
+        <p>פיצ'ר ייחודי לFLX4 – ידית אחת ששולטת על שילוב של מספר אפקטים בו-זמנית.</p>
+      </div>
+    </div>
+    <div class="quiz-section">
+      <div class="quiz-header">
+        <div class="quiz-icon">🎯</div>
+        <div>
+          <h3 class="quiz-title">בדוק את הידע שלך</h3>
+          <p class="quiz-subtitle">שיעור 8 - 5 שאלות</p>
+        </div>
+      </div>
+      <div id="quiz-8" class="quiz-container active">
+        <div id="quiz-8-questions"></div>
+      </div>
+      <div id="results-8" class="quiz-results"></div>
+      <div class="quiz-controls" id="quiz-8-controls">
+        <button class="quiz-btn primary" onclick="submitQuiz(8)">הגש תשובות</button>
+        <button class="quiz-btn secondary" onclick="resetQuiz(8)">התחל מחדש</button>
+      </div>
+    </div>
+    <button class="complete-btn" id="complete-8" onclick="markComplete(8)">✓ סיימתי את שיעור 8</button>
+    <div class="lesson-nav-bar">
+      <button class="nav-btn" onclick="prevLesson(8)">← שיעור 7</button>
+      <button class="nav-btn" onclick="nextLesson(8)">שיעור 9 →</button>
+    </div>
+  </div>
+
+  <div id="lesson-9" class="lesson-page">
+    <div class="lesson-hero">
+      <div class="lesson-num-big">09</div>
+      <div class="lesson-tag">שיעור 9 מתוך 10</div>
+      <h1>בניית <span class="highlight">סט</span> – אנרגיה ומעברים</h1>
+      <div class="lesson-meta">
+        <div class="lesson-meta-item"><span class="meta-dot"></span> 3 שעות</span></div>
+      </div>
+    </div>
+    <div class="lesson-content">
+      <div class="content-block">
+        <h2>Harmonic Mixing</h2>
+        <p>מיקסינג לפי Key מוזיקלי כדי שהשירים ישמעו הרמוניים ולא "כלאח יד".</p>
+        <div class="info-box theory">
+          <span class="info-icon">🎵</span>
+          <div>
+            <h4>Camelot Wheel</h4>
+            <p>מערכת קידוד לHarmonic Mixing. מיקס טוב = אותו מספר, ±1, או אותה אות.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="content-block">
+        <h2>בניית אנרגיה</h2>
+        <p>סט טוב הוא <strong>מסע</strong>: Build-up (30-45 דק'), Peak (שעה-שעה וחצי), Wind-down (חצי שעה).</p>
+        <div class="cards-grid">
+          <div class="card"><div class="card-icon">📈</div><h4>Build-up</h4><p>BPM עולה בהדרגה, שירים "נכנסים".</p></div>
+          <div class="card"><div class="card-icon">🔥</div><h4>Peak</h4><p>Drops מרשימים, BPM גבוה, קהל במקסימום.</p></div>
+          <div class="card"><div class="card-icon">📉</div><h4>Wind-down</h4><p>BPM יורד, שירים "אווריריים".</p></div>
+        </div>
+      </div>
+
+      <div class="content-block">
+        <h2>קריאת קהל</h2>
+        <p>הקהל תמיד אומר לכם מה הם רוצים. תלמדו להקשיב ולהגיב.</p>
+      </div>
+    </div>
+    <div class="quiz-section">
+      <div class="quiz-header">
+        <div class="quiz-icon">🎯</div>
+        <div>
+          <h3 class="quiz-title">בדוק את הידע שלך</h3>
+          <p class="quiz-subtitle">שיעור 9 - 5 שאלות</p>
+        </div>
+      </div>
+      <div id="quiz-9" class="quiz-container active">
+        <div id="quiz-9-questions"></div>
+      </div>
+      <div id="results-9" class="quiz-results"></div>
+      <div class="quiz-controls" id="quiz-9-controls">
+        <button class="quiz-btn primary" onclick="submitQuiz(9)">הגש תשובות</button>
+        <button class="quiz-btn secondary" onclick="resetQuiz(9)">התחל מחדש</button>
+      </div>
+    </div>
+    <button class="complete-btn" id="complete-9" onclick="markComplete(9)">✓ סיימתי את שיעור 9</button>
+    <div class="lesson-nav-bar">
+      <button class="nav-btn" onclick="prevLesson(9)">← שיעור 8</button>
+      <button class="nav-btn" onclick="nextLesson(9)">שיעור 10 →</button>
+    </div>
+  </div>
+
+  <div id="lesson-10" class="lesson-page">
+    <div class="lesson-hero">
+      <div class="lesson-num-big">10</div>
+      <div class="lesson-tag">שיעור 10 מתוך 10 — הסיום</div>
+      <h1>הופעה <span class="highlight">חיה</span> – מ-A עד ת'</h1>
+      <div class="lesson-meta">
+        <div class="lesson-meta-item"><span class="meta-dot"></span> 3 שעות</span></div>
+        <div class="lesson-meta-item"><span class="meta-dot"></span> הופעת סיום + תעודה</div>
+      </div>
+    </div>
+    <div class="lesson-content">
+      <div class="content-block">
+        <h2>הכנה לגיג</h2>
+        <div class="exercise-box">
+          <div class="ex-header">
+            <span class="ex-badge">Pre-Gig Checklist</span>
+            <h4>שבוע לפני הגיג</h4>
+          </div>
+          <ol class="steps-list">
+            <li><strong>מוזיקה</strong> – האם כל השירים מוכנים? Hot Cues? Beat Grids?</li>
+            <li><strong>USB Drive</strong> – האם יצאתם מהספרייה לUSB?</li>
+            <li><strong>Backup</strong> – שני USB Drives עם אותה ספרייה</li>
+            <li><strong>כבלים</strong> – USB-C, RCA, אוזניות בתיק</li>
+            <li><strong>FLX4</strong> – בדקתם שהוא עובד? Firmware מעודכן?</li>
+            <li><strong>הגיעו מוקדם</strong> – 30-45 דקות לפני לסאונדצ'ק</li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="content-block">
+        <h2>סאונדצ'ק</h2>
+        <p>תמיד עושים סאונדצ'ק לפני שהקהל נכנס:</p>
+        <table>
+          <tr><th>שלב</th><th>מה בודקים</th></tr>
+          <tr><td>1. חיבורים</td><td>כל הכבלים מחוברים? אין buzz בRCA?</td></tr>
+          <tr><td>2. Gain</td><td>VU Meter מגיע לאזור הירוק</td></tr>
+          <tr><td>3. EQ</td><td>כל ידיות EQ במרכז</td></tr>
+          <tr><td>4. Master Volume</td><td>עוצמת הפלט הכוללת מתאימה?</td></tr>
+          <tr><td>5. Headphones</td><td>שמיעה ב-Headphones תקינה?</td></tr>
+          <tr><td>6. מוזיקה</td><td>נגנו שיר וודאו שהכל נשמע</td></tr>
+        </table>
+      </div>
+
+      <div class="content-block">
+        <h2>ביטחון עצמי על הבמה</h2>
+        <div class="cards-grid">
+          <div class="card"><div class="card-icon">🧘</div><h4>להרגיע את עצמכם</h4><p>אדרנלין הוא תקין. אתם מוכנים.</p></div>
+          <div class="card"><div class="card-icon">🎯</div><h4>להיות מרוכזים</h4><p>עין אחת על הקהל, עין אחת על הגלים.</p></div>
+          <div class="card"><div class="card-icon">😅</div><h4>כשמשהו משתבש</h4><p>זה יקרה. תחייכו, תסדרו. הקהל לא תמיד שם לב.</p></div>
+          <div class="card"><div class="card-icon">🎉</div><h4>תהנו!</h4><p>אם אתם נהנים – הקהל נהנה. האנרגיה שלכם מדבקת.</p></div>
+        </div>
+      </div>
+
+      <div class="content-block">
+        <h2>🎓 הופעת הסיום</h2>
+        <p>מזל טוב! השלמתם את הקורס. עכשיו צא לעולם וניגן!</p>
+      </div>
+    </div>
+    <div class="quiz-section">
+      <div class="quiz-header">
+        <div class="quiz-icon">🎯</div>
+        <div>
+          <h3 class="quiz-title">בדוק את הידע שלך</h3>
+          <p class="quiz-subtitle">שיעור 10 - 5 שאלות</p>
+        </div>
+      </div>
+      <div id="quiz-10" class="quiz-container active">
+        <div id="quiz-10-questions"></div>
+      </div>
+      <div id="results-10" class="quiz-results"></div>
+      <div class="quiz-controls" id="quiz-10-controls">
+        <button class="quiz-btn primary" onclick="submitQuiz(10)">הגש תשובות</button>
+        <button class="quiz-btn secondary" onclick="resetQuiz(10)">התחל מחדש</button>
+      </div>
+    </div>
+    <button class="complete-btn" id="complete-10" onclick="markComplete(10)">✓ סיימתי את שיעור 10 — הקורס הושלם! 🎉</button>
+    <div class="lesson-nav-bar">
+      <button class="nav-btn" onclick="prevLesson(10)">← שיעור 9</button>
+      <button class="nav-btn" onclick="showPage('home')" style="background:var(--accent);color:#000;font-weight:700;border-color:var(--accent)">🎉 סיימנו!</button>
+    </div>
+  </div>
+
+  <!-- GLOSSARY -->
+  <div id="glossary" class="lesson-page">
+    <div class="hero" style="padding-bottom:16px">
+      <div class="hero-tag">📖 מילון מונחים</div>
+      <h1><span>מונחי DJ</span> — מ-A עד ת׳</h1>
+      <p class="hero-desc">כל המונחים המקצועיים שתפגוש בקורס ובתעשייה, עם הסבר בעברית.</p>
+    </div>
+    <div class="section">
+      <input class="glossary-search" id="glossary-search" type="text" placeholder="🔍  חפש מונח..." oninput="filterGlossary(this.value)" />
+      <div class="glossary-grid" id="glossary-grid"></div>
+    </div>
+    <div class="lesson-nav-bar">
+      <button class="nav-btn" onclick="showPage('home')">← חזרה לסקירה</button>
+    </div>
+  </div>
+
+</main>
+
+<!-- CERTIFICATE MODAL -->
+<div id="certificate-modal" class="certificate-modal">
+  <div class="certificate-card">
+    <div class="cert-header">DJ Academy IL</div>
+    <div class="cert-title">תעודת סיום</div>
+    <div class="cert-subtitle">קורס DJ מקצועי</div>
+    <div class="cert-line"></div>
+    <p class="cert-text">זה מאשר כי</p>
+    <div class="cert-name" id="cert-name">שם התלמיד</div>
+    <p class="cert-text">השלים בהצלחה את הקורס המקיף<br><strong>קורס DJ מאפס – DDJ-FLX4 + Rekordbox</strong><br>עם ממוצע ציון של</p>
+    <div style="font-size: 36px; font-weight: 900; color: #2c1810; margin: 12px 0;">90%</div>
+    <p class="cert-text">ב-<span id="cert-date">כאן התאריך</span></p>
+    <div class="cert-line"></div>
+    <p style="font-size: 14px; color: #8b6914; margin-top: 20px;">תלמיד זה יכול לנגן סט מלא, לעשות beatmatching ידני, ולתפעל סט בלי סינך אוטומטי.</p>
+    <div class="cert-actions">
+      <button class="cert-btn share" onclick="shareCertificate()">📤 שתף</button>
+      <button class="cert-btn close" onclick="closeCertificate()">סגור</button>
+    </div>
+  </div>
+</div>
+
+
+<script>
+// ============================================================
+// QUIZ DATA
+// ============================================================
+const QUIZZES = {
+  1: [
+    { q: "מה הקיצור DJ?", opts: ["Disc Jockey", "Digital Joystick", "Data Jump"], correct: 0, explanation: "DJ = Disc Jockey. מי שמנגן ומעביר שירים בפני קהל." },
+    { q: "איזה שיר בבדרך כלל מהיר יותר?", opts: ["House (128 BPM)", "Hip Hop (90 BPM)", "Techno (140 BPM)"], correct: 2, explanation: "Techno הוא בעיקר 140 BPM או יותר, מהר מאוד." },
+    { q: "מה זה Grid ב-Rekordbox?", opts: ["ספרייה של שירים", "רשת ביטים שמחלקת את השיר", "חיבור USB"], correct: 1, explanation: "Grid הוא רשת ביטים שעוזרת להבין את המבנה של השיר." },
+    { q: "איפה משתמשים ב-RCA?", opts: ["למחשב", "לאוזניות", "לרמקולים"], correct: 2, explanation: "RCA הוא הכבל שמחבר את הקונטרולר לרמקולים או מגבר." },
+    { q: "מה זה Hot Cue?", opts: ["אפקט חם", "נקודה בשיר שסימנת מראש", "Sync לבי"], correct: 1, explanation: "Hot Cue היא נקודה סימנת בשיר שאתה יכול לקפוץ אליה בלחיצה." }
+  ],
+  2: [
+    { q: "לאיזה חלק של Jog Wheel משתמשים להאצה/האטה?", opts: ["המרכז", "הטבעת החיצונית", "שניהם"], correct: 1, explanation: "הטבעת החיצונית משמשת לNudge (האצה/האטה עדינה)." },
+    { q: "מה עושה Crossfader?", opts: ["משנה EQ", "מעביר בין שיר אחד לשני", "מעצים את הבסים"], correct: 1, explanation: "Crossfader הוא הסליידר האופקי שמעביר את הסאונד בין Deck A ל-B." },
+    { q: "כמה Performance Pads יש ב-FLX4?", opts: ["4", "8", "16"], correct: 1, explanation: "ב-FLX4 יש 8 Performance Pads בכל Deck (סה'כ 16)." },
+    { q: "איזה כבל מחבר את FLX4 למחשב?", opts: ["USB-A", "USB-C", "RCA"], correct: 1, explanation: "FLX4 משתמש בUSB-C לחיבור למחשב." },
+    { q: "מה זה Beat FX?", opts: ["אפקטים רגילים", "אפקטים מסונכרנים ל-BPM", "חופפים"], correct: 1, explanation: "Beat FX הם אפקטים שמסונכרנים לקצב (BPM) של השיר." }
+  ],
+  3: [
+    { q: "איפה משתמשים בBeat Grid?", opts: ["בקונטרולר", "ב-Rekordbox לניתוח השיר", "בחיבורים"], correct: 1, explanation: "Beat Grid היא רשת ב-Rekordbox שמראה היכן כל beat בשיר." },
+    { q: "איך מוסיפים שיר ל-Rekordbox?", opts: ["צילום מעתיק", "גרירה לCollectionl", "טלוד כפלים"], correct: 1, explanation: "אתה יכול לגרור שירים ישירות לתוך ה-Collection ב-Rekordbox." },
+    { q: "מה זה Playlist ב-Rekordbox?", opts: ["קבוצת שירים שקבצת", "אפקט", "מצב ניגון"], correct: 0, explanation: "Playlist היא קבוצת שירים שאתה מארגן ביד כדי להקל על הארגון." },
+    { q: "איך Rekordbox מנתח את ה-BPM?", opts: ["בידנית", "אוטומטית כשאתה מייבא שירים", "תמיד שגוי"], correct: 1, explanation: "Rekordbox מנתח אוטומטית את ה-BPM של כל שיר שאתה מייבא." },
+    { q: "מה זה Key בRekordbox?", opts: ["הטונליות המוזיקלית של השיר", "סיסמה", "זיכרון"], correct: 0, explanation: "Key היא הטונליות המוזיקלית של השיר (C, Am, F#, וכו')." }
+  ],
+  4: [
+    { q: "כמה ביטים יש ב-Bar?", opts: ["2", "4", "8"], correct: 1, explanation: "Bar (תיבה מוזיקלית) מורכבת מ-4 beats." },
+    { q: "מה זה Phrase?", opts: ["16 beats", "8 beats", "32 beats"], correct: 0, explanation: "Phrase היא יחידת מוזיקה של 16 beats (= 4 bars)." },
+    { q: "איפה חייבים להתחיל מעברים בין שירים?", opts: ["באמצע Bar", "בתחילת Phrase", "בכל מקום"], correct: 1, explanation: "מעברים צריכים להתחיל בתחילת Phrase כדי שיהיו חלקים." },
+    { q: "מה זה Intro בשיר?", opts: ["קטע התחלה שקט או soft", "הDrop החזק", "הYoutube"], correct: 0, explanation: "Intro היא תחילת השיר - בדרך כלל שקיט או soft." },
+    { q: "מה זה Outro?", opts: ["יציאה מהשיר", "Build-up", "מעברקס"], correct: 0, explanation: "Outro היא סוף השיר - בדרך כלל fade out." }
+  ],
+  5: [
+    { q: "מה זה Beatmatching?", opts: ["השוואת קצבים בין שני שירים", "מיקס של כלים", "אפקט"], correct: 0, explanation: "Beatmatching = התאמת ה-BPM של שני שירים כדי שיתנגנו בסינכרון." },
+    { q: "איזה כלי משנה את ה-BPM של שיר?", opts: ["Crossfader", "Pitch Fader", "Channel Fader"], correct: 1, explanation: "Pitch Fader הוא הסליידר שמשנה את ה-BPM (קצב) של השיר." },
+    { q: "מה זה Nudge?", opts: ["תיקון עדין של BPM", "סקראץ'", "לופ"], correct: 0, explanation: "Nudge היא דחיפה עדינה על שפת Jog Wheel להאצה/האטה קטנה." },
+    { q: "איך שומעים את השיר באוזניות לפני שהוא עולה לאוויר?", opts: ["בלחיצה על PLAY", "בלחיצה על CUE כשאתה בPause", "בחיבור אוזניות"], correct: 1, explanation: "לחיצה על CUE משמעתך את השיר באוזניות בלי שהקהל שומע אותו." },
+    { q: "איפה משתמשים בSync בבטתmatchingדי?", opts: ["תמיד", "לעולם לא בתחילה", "כשאתה עייף"], correct: 1, explanation: "בדי-ג'יינג מקצועי, עושים Beatmatching ידני - Sync רק לעזרה." }
+  ],
+  6: [
+    { q: "מה עושה ה-EQ High?", opts: ["משנה בסים", "משנה חדים", "משנה tempo"], correct: 1, explanation: "EQ High משנה את התדרים החדים (בריאות) בשיר." },
+    { q: "מה עושה ה-EQ Low?", opts: ["משנה חדים", "משנה בסים", "משנה Loops"], correct: 1, explanation: "EQ Low משנה את התדרים הנמוכים (בסים) בשיר." },
+    { q: "מה זה Gain?", opts: ["עוצמה כללית", "עוצמת קלט של הערוץ", "FX"], correct: 1, explanation: "Gain משלט על עוצמת הקלט של כל ערוץ לפני ה-EQ." },
+    { q: "איך משתמשים בCrossfader?", opts: ["רק ל-EQ", "לעבור בין Deck A ל-B", "לScratch"], correct: 1, explanation: "Crossfader משמש למעבר חלק בין שני הdecks." },
+    { q: "מה זה Low Swap?", opts: ["החלפת שירים", "הורדת LOW של שיר A עם העלאת LOW של שיר B", "מיקס מיוחד"], correct: 1, explanation: "Low Swap = הורדת בסים של שיר ישן עם העלאת בסים של חדש בו-זמנית." }
+  ],
+  7: [
+    { q: "כמה Hot Cues אתה יכול להגדיר בשיר?", opts: ["1", "4", "8"], correct: 2, explanation: "ב-FLX4 יש 8 Hot Cues לכל שיר (בדרך כלל מסמנים Intro, Drop, Outro, וכו')." },
+    { q: "מה זה Auto Loop?", opts: ["לופ של 2 beats", "לופ של 4 beats בלחיצה", "לופ מטומטם"], correct: 1, explanation: "Auto Loop יוצר לופ של 4 beats מיד עם לחיצה על הכפתור." },
+    { q: "איזה מצב של Pads עושה Beat Jump?", opts: ["Hot Cue", "Pad FX", "Beat Jump"], correct: 2, explanation: "Beat Jump Mode מאפשר לקפוץ X beats קדימה/אחורה בשיר." },
+    { q: "מה זה Instant Double?", opts: ["עיבוד מהיר", "כניסה מושלמת בעזרת Hot Cue", "סינכרון"], correct: 1, explanation: "Instant Double = לחיצה על Hot Cue ל-Deck 2 בבית מושלם של Deck 1." },
+    { q: "כמה Performance Pads יש בחלק שמאל של הקונטרולר?", opts: ["4", "8", "16"], correct: 1, explanation: "כל Deck (שמאל וימין) יש 8 Performance Pads." }
+  ],
+  8: [
+    { q: "מה זה Beat FX?", opts: ["אפקטים רגילים", "אפקטים סינכרונים לBPM", "Loop"], correct: 1, explanation: "Beat FX הם אפקטים המסונכרנים לקצב (BPM) של השיר." },
+    { q: "מה עושה Echo?", opts: ["חוזר את הסאונד", "הד שדועך לפי ביטים", "משנה pitch"], correct: 1, explanation: "Echo עושה הד שדועך בהדרגה לפי מספר beats (1/2, 1, 2, 4)." },
+    { q: "מה זה Smart CFX?", opts: ["סינכרון חכם", "ידית אחת ששולטת על שילוב אפקטים", "כפתור play"], correct: 1, explanation: "Smart CFX הוא פיצ'ר ייחודי לFLX4 שמשלב Filter+Echo+Reverb בידית אחת." },
+    { q: "איך משתמשים באפקטים בדי-ג'יינג מקצועי?", opts: ["כל הזמן", "לעולם לא", "5-10% מהסט בלבד"], correct: 2, explanation: "אפקטים צריכים להיות עדכ: פחות זה יותר. רק בזמנים נכונים." },
+    { q: "מה זה Reverb?", opts: ["תחושת מרחב/חדר", "סקראץ'", "Tempo"], correct: 0, explanation: "Reverb עושה תחושה של מרחק, כאילו השיר בחדר גדול." }
+  ],
+  9: [
+    { q: "מה זה Harmonic Mixing?", opts: ["מיקס קצבי", "מיקס לפי Key מוזיקלי", "מיקס אקראי"], correct: 1, explanation: "Harmonic Mixing = בחירת שירים שמפתחות קרובים כדי שיישמעו הרמוניים." },
+    { q: "מה זה Camelot Wheel?", opts: ["משהו עגול", "מערכת קידוד לHarmonic Mixing", "דיסקט"], correct: 1, explanation: "Camelot Wheel משתמשת במספרים (1-12) ואותיות (A, B) לKy Matching." },
+    { q: "כמה זמן בדרך כלל Build-up בסט?", opts: ["15 דקות", "30-45 דקות", "שעה וחצי"], correct: 1, explanation: "Build-up בדרך כלל 30-45 דקות בהתחלת הסט." },
+    { q: "מה עושים בPeak של הסט?", opts: ["מתחילים", "רמה גבוהה מקסימום, Drops חזקים", "עוזבים"], correct: 1, explanation: "Peak הוא שעה-שעה וחצי עם Drops חזקים, BPM גבוה וקהל במקסימום." },
+    { q: "מה עושה DJ כשהקהל מסתכל בטלפון?", opts: ["מתחיל לרקוד", "משנה שיר מהר", "הורחם בנסטלגיה"], correct: 1, explanation: "כשהקהל מתעניין לא (טלפון), צריך לשנות שיר מהר לחדש שנים יותר טוב." }
+  ],
+  10: [
+    { q: "כמה זמן לפני הגיג צריך להגיע לסאונדצ'ק?", opts: ["15 דקות", "30-45 דקות", "שעה"], correct: 1, explanation: "צריך להגיע 30-45 דקות לפני לעשות סאונדצ'ק בנדינות." },
+    { q: "מה זה FAT32?", opts: ["רגע", "פורמט USB", "אפקט"], correct: 1, explanation: "FAT32 הוא פורמט שיווצע לUSB כדי שיהיה תואם עם CDJ בקלאבים." },
+    { q: "איפה שומרים את הנגנים בקלאב מקצועי?", opts: ["באינטרנט", "בUSB עם פורמט FAT32", "בתלפון"], correct: 1, explanation: "בקלאבים מקצועיים משתמשים בCDJ שמקבל שירים מUSB בFAT32." },
+    { q: "מה צריך לבדוק בסאונדצ'ק?", opts: ["שם שירים", "חיבורים, Gain, EQ, Master, אוזניות, מוזיקה", "משהו אחר"], correct: 1, explanation: "בסאונדצ'ק בודקים: חיבורים, VU Meter Gain, EQ, Master Level, Headphones, וניסיון שיר." },
+    { q: "מה עושים כשמשהו משתבש בזמן הופעה?", opts: ["עוזבים את הבמה", "פאניקה", "קחו רגע, תחייכו, תסדרו"], correct: 2, explanation: "כשמשהו שגוי, חשוב להישאר רגוע. הקהל בדרך כלל לא שם לב. סדרו ותמשיכו." }
+  ]
+};
+
+// ============================================================
+// GLOSSARY DATA
+// ============================================================
+const GLOSSARY = [
+  { term: "BPM", he: "קצב", def: "Beats Per Minute — מספר פעימות בדקה. House ≈ 125 BPM, Techno ≈ 140 BPM.", tag: "בסיס" },
+  { term: "Beatmatching", he: "כיוון קצב", def: "התאמת ה-BPM של שני שירים כדי שיתנגנו בסינכרון.", tag: "טכניקה" },
+  { term: "Hot Cue", he: "קיצור דרך לנקודה", def: "נקודות שסימנת בשיר (Intro, Drop, Outro) שאתה יכול לקפוץ אליהן.", tag: "Rekordbox" },
+  { term: "Drop", he: "הדרופ", def: "הרגע בשיר שבו הבסים חוזרים בחוזקה אחרי ה-Build Up.", tag: "מבנה" },
+  { term: "Loop", he: "לולאה", def: "חזרה על קטע קצר בשיר באופן אוטומטי.", tag: "טכניקה" },
+  { term: "EQ", he: "איקווליזר", def: "בקרת תדרים: HI (חדים), MID (אמצעיים), LOW (בסים).", tag: "מיקסינג" },
+  { term: "Crossfader", he: "קרוספייידר", def: "הסליידר האופקי שמעביר את הסאונד בין Deck A ל-Deck B.", tag: "ציוד" },
+  { term: "Jog Wheel", he: "גלגלת", def: "הגלגלת הגדולה של הקונטרולר. מרכז = Scratch, שפה = Nudge.", tag: "FLX4" },
+  { term: "Sync", he: "סינכרון", def: "כפתור שמסנכרן BPM אוטומטית בין שני Decks.", tag: "FLX4" },
+  { term: "Key", he: "טונליות / מפתח", def: "הגובה המוזיקלי של השיר: C, Am, F# וכו'.", tag: "מוזיקה" },
+  { term: "Camelot", he: "גלגל קמלוט", def: "מערכת קידוד לHarmonic Mixing.", tag: "מוזיקה" },
+  { term: "Harmonic Mixing", he: "מיקס הרמוני", def: "מיקסינג לפי Key מוזיקלי כדי שהשירים ישמעו הרמוניים.", tag: "טכניקה" },
+];
+
+// ============================================================
+// STATE MANAGEMENT
+// ============================================================
+let lessonsData = JSON.parse(localStorage.getItem('lessonsData')) || {};
+let quizScores = JSON.parse(localStorage.getItem('quizScores')) || {};
+let currentFontSize = localStorage.getItem('fontSize') || 'normal';
+
+function loadData() {
+  document.documentElement.style.setProperty('--font-size', {
+    'small': '13px',
+    'normal': '15px',
+    'large': '18px'
+  }[currentFontSize]);
+}
+
+function setFontSize(size) {
+  currentFontSize = size;
+  localStorage.setItem('fontSize', size);
+  document.documentElement.style.setProperty('--font-size', {
+    'small': '13px',
+    'normal': '15px',
+    'large': '18px'
+  }[size]);
+  document.querySelectorAll('.font-btn').forEach(b => b.classList.remove('active'));
+  event.target.classList.add('active');
+}
+
+// ============================================================
+// QUIZ FUNCTIONS
+// ============================================================
+function renderQuizzes() {
+  for (let i = 1; i <= 10; i++) {
+    const container = document.getElementById(`quiz-${i}-questions`);
+    if (!container) continue;
+    
+    const questions = QUIZZES[i];
+    let html = '';
+    
+    questions.forEach((q, idx) => {
+      html += `
+        <div class="quiz-question">
+          <div class="question-number">שאלה ${idx + 1} מתוך ${questions.length}</div>
+          <div class="question-text">${q.q}</div>
+          <div class="quiz-options">
+            ${q.opts.map((opt, oidx) => `
+              <div class="quiz-option" onclick="selectAnswer(${i}, ${idx}, ${oidx})" data-lesson="${i}" data-question="${idx}" data-option="${oidx}">
+                ${opt}
+              </div>
+            `).join('')}
+          </div>
+          <div class="quiz-feedback" id="feedback-${i}-${idx}"></div>
+        </div>
+      `;
+    });
+    
+    container.innerHTML = html;
+  }
+}
+
+function selectAnswer(lesson, question, option) {
+  const opts = document.querySelectorAll(`[data-lesson="${lesson}"][data-question="${question}"]`);
+  opts.forEach(o => o.classList.remove('selected', 'correct', 'wrong'));
+  opts[option].classList.add('selected');
+}
+
+function submitQuiz(lesson) {
+  const questions = QUIZZES[lesson];
+  let score = 0;
+  
+  questions.forEach((q, idx) => {
+    const selectedOpts = document.querySelectorAll(`[data-lesson="${lesson}"][data-question="${idx}"].selected`);
+    if (selectedOpts.length === 0) return;
+    
+    const selectedOption = parseInt(selectedOpts[0].getAttribute('data-option'));
+    const isCorrect = selectedOption === q.correct;
+    
+    const feedback = document.getElementById(`feedback-${lesson}-${idx}`);
+    feedback.classList.add('show', isCorrect ? 'correct' : 'wrong');
+    feedback.innerHTML = `<strong>${isCorrect ? '✓ נכון!' : '✗ שגוי'}</strong> ${q.explanation}`;
+    
+    selectedOpts[0].classList.add(isCorrect ? 'correct' : 'wrong');
+    
+    if (isCorrect) score++;
+  });
+  
+  const percentage = Math.round((score / questions.length) * 100);
+  quizScores[lesson] = percentage;
+  localStorage.setItem('quizScores', JSON.stringify(quizScores));
+  
+  const resultsDiv = document.getElementById(`results-${lesson}`);
+  const icon = percentage >= 70 ? '🎉' : percentage >= 50 ? '📈' : '📚';
+  const message = percentage >= 70 ? 'מעולה! עבור בהצלחה!' : percentage >= 50 ? 'טוב! עוד קצת ותגיע ל-70%' : 'נסה שנית!';
+  
+  resultsDiv.classList.add('show');
+  resultsDiv.innerHTML = `
+    <div class="results-icon">${icon}</div>
+    <div class="results-title">תוצאות הקוויז</div>
+    <div class="results-score">${percentage}%</div>
+    <div class="results-message">${message}</div>
+  `;
+  
+  document.getElementById(`quiz-${lesson}`).classList.remove('active');
+  document.getElementById(`quiz-${lesson}-controls`).style.display = 'none';
+  
+  updateLessonStatus();
+  createConfetti();
+  checkCertificate();
+}
+
+function resetQuiz(lesson) {
+  document.getElementById(`quiz-${lesson}`).classList.add('active');
+  document.getElementById(`results-${lesson}`).classList.remove('show');
+  document.getElementById(`quiz-${lesson}-controls`).style.display = 'flex';
+  
+  const questions = QUIZZES[lesson];
+  questions.forEach((q, idx) => {
+    const feedback = document.getElementById(`feedback-${lesson}-${idx}`);
+    feedback.classList.remove('show');
+    
+    document.querySelectorAll(`[data-lesson="${lesson}"][data-question="${idx}"]`).forEach(o => {
+      o.classList.remove('selected', 'correct', 'wrong');
+    });
+  });
+}
+
+// ============================================================
+// NAVIGATION & COMPLETION
+// ============================================================
+function showPage(pageId) {
+  document.querySelectorAll('.lesson-page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.lesson-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(pageId).classList.add('active');
+  document.getElementById('btn-' + pageId)?.classList.add('active');
+  window.scrollTo(0, 0);
+  if (document.getElementById('sidebar').classList.contains('open')) toggleSidebar();
+  if (pageId === 'glossary') renderGlossary();
+}
+
+function showLesson(num) {
+  document.querySelectorAll('.lesson-page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.lesson-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('lesson-' + num).classList.add('active');
+  document.getElementById('btn-' + num).classList.add('active');
+  window.scrollTo(0, 0);
+  if (document.getElementById('sidebar').classList.contains('open')) toggleSidebar();
+  
+  renderQuizzes();
+  updateLessonStatus();
+}
+
+function nextLesson(current) {
+  if (current < 10) showLesson(current + 1);
+}
+
+function prevLesson(current) {
+  if (current > 1) showLesson(current - 1);
+}
+
+function markComplete(num) {
+  lessonsData[num] = { completed: true, date: new Date().toISOString() };
+  localStorage.setItem('lessonsData', JSON.stringify(lessonsData));
+  
+  const btn = document.getElementById('complete-' + num);
+  if (btn) {
+    btn.classList.add('done');
+    btn.textContent = '✓ שיעור ' + num + ' הושלם!';
+    btn.disabled = true;
+  }
+  
+  updateLessonStatus();
+  checkCertificate();
+}
+
+function updateLessonStatus() {
+  let completedCount = 0;
+  
+  for (let i = 1; i <= 10; i++) {
+    const status = document.querySelector(`#btn-${i} .lesson-status`);
+    const scoreEl = document.getElementById(`score-${i}`);
+    
+    if (!status) continue;
+    
+    const hasScore = quizScores[i] !== undefined;
+    const isCompleted = lessonsData[i] && lessonsData[i].completed;
+    
+    if (isCompleted) {
+      status.textContent = '✅';
+      completedCount++;
+    } else if (hasScore) {
+      status.textContent = '🔵';
+      if (scoreEl) scoreEl.textContent = `${quizScores[i]}%`;
+    } else {
+      status.textContent = '⚪';
+    }
+  }
+  
+  const progress = (completedCount / 10) * 100;
+  document.getElementById('progress-fill').style.width = progress + '%';
+  document.getElementById('progress-label').textContent = completedCount + ' / 10 שיעורים הושלמו';
+  
+  // Update home stats
+  const stat = document.getElementById('stat-progress');
+  if (stat) stat.textContent = Math.round(progress);
+  
+  // Update badges
+  updateBadges(completedCount);
+}
+
+function updateBadges(completedCount) {
+  if (completedCount > 0) {
+    document.getElementById('badge-first')?.classList.add('earned');
+  }
+  if (completedCount >= 5) {
+    document.getElementById('badge-halfway')?.classList.add('earned');
+  }
+  
+  let allAbove70 = true;
+  for (let i = 1; i <= 10; i++) {
+    if ((quizScores[i] || 0) < 70) allAbove70 = false;
+  }
+  if (allAbove70 && Object.keys(quizScores).length === 10) {
+    document.getElementById('badge-quizmaster')?.classList.add('earned');
+  }
+  
+  if (completedCount === 10) {
+    document.getElementById('badge-graduate')?.classList.add('earned');
+  }
+}
+
+function checkCertificate() {
+  let completedCount = 0;
+  let allScores = [];
+  
+  for (let i = 1; i <= 10; i++) {
+    if (lessonsData[i] && lessonsData[i].completed) completedCount++;
+    if (quizScores[i] !== undefined) allScores.push(quizScores[i]);
+  }
+  
+  if (completedCount === 10 && allScores.length === 10) {
+    const avgScore = Math.round(allScores.reduce((a, b) => a + b, 0) / allScores.length);
+    if (avgScore >= 70) {
+      showCertificate(avgScore);
+    }
+  }
+}
+
+function showCertificate(avgScore) {
+  const modal = document.getElementById('certificate-modal');
+  document.getElementById('cert-name').textContent = 'בוגר קורס DJ';
+  document.getElementById('cert-date').textContent = new Date().toLocaleDateString('he-IL');
+  modal.style.display = 'flex';
+  
+  const avgElement = modal.querySelector('div[style*="font-size: 36px"]');
+  if (avgElement) avgElement.textContent = avgScore + '%';
+  
+  createConfetti(100);
+}
+
+function closeCertificate() {
+  document.getElementById('certificate-modal').style.display = 'none';
+}
+
+function shareCertificate() {
+  const msg = 'סיימתי את קורס DJ מאפס ב-DJ Academy IL! 🎉';
+  if (navigator.share) {
+    navigator.share({ title: 'תעודה דיגיטלית', text: msg });
+  } else {
+    alert(msg);
+  }
+}
+
+// ============================================================
+// GLOSSARY
+// ============================================================
+function renderGlossary(filter = '') {
+  const grid = document.getElementById('glossary-grid');
+  if (!grid) return;
+  
+  const fl = filter.toLowerCase();
+  grid.innerHTML = GLOSSARY.map(g => {
+    const match = !fl || g.term.toLowerCase().includes(fl) || g.he.includes(filter) || g.def.includes(filter);
+    return `
+      <div class="glossary-item${!match ? ' hidden' : ''}">
+        <div class="g-term">${g.term}</div>
+        <div class="g-he">${g.he}</div>
+        <div class="g-def">${g.def}</div>
+        <span class="g-tag">${g.tag}</span>
+      </div>
+    `;
+  }).join('');
+}
+
+function filterGlossary(val) {
+  renderGlossary(val);
+}
+
+// ============================================================
+// UI FUNCTIONS
+// ============================================================
+function toggleSidebar() {
+  document.getElementById('sidebar').classList.toggle('open');
+  document.getElementById('sidebar-overlay').classList.toggle('open');
+}
+
+function scrollToTop() {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function showProgress() {
+  const modal = document.getElementById('progress-modal');
+  let html = '<div style="text-align: right;">';
+  
+  for (let i = 1; i <= 10; i++) {
+    const score = quizScores[i];
+    const completed = lessonsData[i] && lessonsData[i].completed;
+    const status = completed ? '✅ הושלם' : score !== undefined ? `📊 ${score}%` : '⏳ לא התחיל';
+    html += `<p>שיעור ${i}: ${status}</p>`;
+  }
+  
+  html += '</div>';
+  document.getElementById('modal-progress').innerHTML = html;
+  modal.style.display = 'flex';
+  
+  setTimeout(() => {
+    modal.style.display = 'none';
+  }, 5000);
+}
+
+function createConfetti(count = 50) {
+  for (let i = 0; i < count; i++) {
+    const confetti = document.createElement('div');
+    confetti.className = 'confetti';
+    confetti.style.left = Math.random() * 100 + 'vw';
+    confetti.style.background = [
+      'var(--accent)',
+      'var(--accent2)',
+      'var(--green)',
+      'var(--yellow)',
+      'var(--accent3)'
+    ][Math.floor(Math.random() * 5)];
+    document.body.appendChild(confetti);
+    setTimeout(() => confetti.remove(), 3000);
+  }
+}
+
+// ============================================================
+// COLLAPSIBLE SECTIONS
+// ============================================================
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll('.collapsible-section').forEach(section => {
+    const header = section.querySelector('.collapsible-header');
+    header.addEventListener('click', function() {
+      section.classList.toggle('open');
+    });
+  });
+  
+  loadData();
+  renderGlossary();
+  renderQuizzes();
+  updateLessonStatus();
+});
+
+// Keyboard navigation
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'ArrowRight') {
+    const current = document.querySelector('.lesson-page.active');
+    if (!current) return;
+    const id = current.id;
+    const match = id.match(/lesson-(\d+)/);
+    if (match) nextLesson(parseInt(match[1]));
+  } else if (e.key === 'ArrowLeft') {
+    const current = document.querySelector('.lesson-page.active');
+    if (!current) return;
+    const id = current.id;
+    const match = id.match(/lesson-(\d+)/);
+    if (match) prevLesson(parseInt(match[1]));
+  }
+});
+
+// SEARCH
+function doSearch(val) {
+  const res = document.getElementById('search-results');
+  if (!val || val.length < 2) { res.classList.remove('visible'); return; }
+  
+  const fl = val.toLowerCase();
+  const glossaryMatches = GLOSSARY.filter(g =>
+    g.term.toLowerCase().includes(fl) || g.he.includes(val)
+  ).slice(0, 3);
+  
+  if (glossaryMatches.length === 0) {
+    res.innerHTML = '<div class="search-result-item"><div class="sr-text" style="color:var(--text-dim)">אין תוצאות</div></div>';
+  } else {
+    res.innerHTML = glossaryMatches.map(g => `
+      <div class="search-result-item" onclick="showPage('glossary');hideSearch()">
+        <div class="sr-lesson">📖 מילון מונחים</div>
+        <div class="sr-text"><strong>${g.term}</strong> — ${g.he}</div>
+      </div>
+    `).join('');
+  }
+  
+  res.classList.add('visible');
+}
+
+function hideSearch() {
+  document.getElementById('search-results').classList.remove('visible');
+  document.getElementById('search-input').value = '';
+}
+
+</script>
+
+</body>
+</html>

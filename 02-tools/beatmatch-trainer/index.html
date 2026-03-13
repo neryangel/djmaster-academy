@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; media-src 'self' blob:;">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Beatmatch Trainer — DJMaster Academy</title>
+<meta name="description" content="אימון ביטמאצ׳ינג אינטראקטיבי — למד לסנכרן BPM בין שני דקים כמו דיג׳יי מקצועי">
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;700;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+<!-- === OPEN SOURCE LIBRARIES FROM GITHUB === -->
+<!-- Tone.js (11K⭐) — github.com/Tonejs/Tone.js — Audio synthesis & effects -->
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.min.js" crossorigin="anonymous"></script>
+<!-- wavesurfer.js (8.2K⭐) — github.com/katspaugh/wavesurfer.js — Waveform visualization -->
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/wavesurfer.js/7.8.6/wavesurfer.min.js" crossorigin="anonymous"></script>
+
+<style>
+:root {
+  --bg: #0A0A0F;
+  --surface: #12121F;
+  --elevated: #1A1A2E;
+  --border: #2A2A3E;
+  --cyan: #00d4ff;
+  --purple: #7b2fff;
+  --pink: #ff3d6e;
+  --green: #00ff9d;
+  --yellow: #ffd60a;
+  --orange: #ff8c00;
+  --text: #ffffff;
+  --text-dim: #a0a0b0;
+  --text-muted: #5a5a6a;
+  --radius: 12px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Heebo', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+.header {
+  text-align: center;
+  padding: 20px 16px 12px;
+  border-bottom: 1px solid var(--border);
+}
+
+.header h1 {
+  font-family: 'Space Mono', monospace;
+  font-size: clamp(1.3rem, 4vw, 2rem);
+  background: linear-gradient(135deg, var(--cyan), var(--purple));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 4px;
+}
+
+.header .sub { color: var(--text-dim); font-size: 0.85rem; }
+.header .libs {
+  color: var(--text-muted);
+  font-size: 0.7rem;
+  margin-top: 4px;
+  font-family: 'Space Mono', monospace;
+}
+
+.header .libs a { color: var(--cyan); text-decoration: none; }
+.header .libs a:hover { text-decoration: underline; }
+
+/* Score */
+.score-bar {
+  display: flex; justify-content: center; gap: 20px;
+  padding: 10px; background: var(--surface); border-bottom: 1px solid var(--border);
+}
+.sc { text-align: center; }
+.sc .l { font-size: 0.65rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; }
+.sc .v { font-family: 'Space Mono', monospace; font-size: 1.2rem; font-weight: 700; }
+.sc .v.xp { color: var(--yellow); }
+.sc .v.st { color: var(--orange); }
+.sc .v.ac { color: var(--green); }
+.sc .v.lv { color: var(--purple); }
+
+/* Difficulty */
+.diff-bar { display: flex; justify-content: center; gap: 8px; padding: 10px; }
+.d-btn {
+  padding: 5px 14px; border: 1px solid var(--border); border-radius: 20px;
+  background: transparent; color: var(--text-dim); font-family: 'Heebo'; font-size: 0.78rem;
+  cursor: pointer; transition: all 0.2s;
+}
+.d-btn:hover { border-color: var(--cyan); color: var(--cyan); }
+.d-btn.on { background: var(--cyan); color: var(--bg); border-color: var(--cyan); font-weight: 700; }
+
+/* Layout */
+.main {
+  max-width: 1000px; margin: 0 auto; padding: 16px;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 14px;
+}
+
+/* Deck */
+.deck {
+  background: var(--surface); border-radius: var(--radius);
+  border: 1px solid var(--border); padding: 14px; position: relative; overflow: hidden;
+}
+.deck::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+}
+.deck.da::before { background: linear-gradient(90deg, var(--cyan), var(--purple)); }
+.deck.db::before { background: linear-gradient(90deg, var(--pink), var(--orange)); }
+
+.deck-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+.deck-label { font-family: 'Space Mono', monospace; font-weight: 700; font-size: 0.85rem; }
+.da .deck-label { color: var(--cyan); }
+.db .deck-label { color: var(--pink); }
+.deck-bpm { font-family: 'Space Mono', monospace; font-size: 1.1rem; font-weight: 700; }
+
+/* Waveform */
+.wave-wrap {
+  height: 64px; background: var(--elevated); border-radius: 8px;
+  margin-bottom: 10px; overflow: hidden; position: relative;
+}
+
+/* Controls */
+.ctrl { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+
+.btn-play {
+  width: 38px; height: 38px; border-radius: 50%; border: 2px solid;
+  background: transparent; cursor: pointer; display: flex; align-items: center;
+  justify-content: center; transition: all 0.15s; flex-shrink: 0;
+}
+.da .btn-play { border-color: var(--cyan); color: var(--cyan); }
+.db .btn-play { border-color: var(--pink); color: var(--pink); }
+.btn-play:hover { transform: scale(1.08); }
+.btn-play.on { color: var(--bg); }
+.da .btn-play.on { background: var(--cyan); }
+.db .btn-play.on { background: var(--pink); }
+.btn-play svg { width: 14px; height: 14px; fill: currentColor; }
+
+/* Slider */
+.slider-wrap { flex: 1; }
+.slider-top { display: flex; justify-content: space-between; font-size: 0.68rem; color: var(--text-muted); margin-bottom: 3px; }
+input[type=range] {
+  width: 100%; -webkit-appearance: none; height: 5px;
+  border-radius: 3px; background: var(--elevated); outline: none;
+}
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none; width: 16px; height: 16px; border-radius: 50%; cursor: pointer;
+}
+.da input[type=range]::-webkit-slider-thumb { background: var(--cyan); }
+.db input[type=range]::-webkit-slider-thumb { background: var(--pink); }
+
+.diff-txt {
+  font-family: 'Space Mono', monospace; font-size: 0.75rem;
+  text-align: center; margin-top: 4px;
+}
+
+/* Sync */
+.sync-box {
+  grid-column: 1 / -1; background: var(--surface); border-radius: var(--radius);
+  border: 1px solid var(--border); padding: 18px; text-align: center;
+}
+.sync-box .title {
+  font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase;
+  letter-spacing: 2px; margin-bottom: 10px;
+}
+.meter {
+  width: 100%; max-width: 420px; height: 36px; margin: 0 auto 10px;
+  background: var(--elevated); border-radius: 18px; overflow: hidden; position: relative;
+}
+.meter-fill {
+  height: 100%; border-radius: 18px; transition: width 0.15s, background 0.3s;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Space Mono', monospace; font-weight: 700; font-size: 0.85rem; min-width: 50px;
+}
+.sync-status { font-size: 1.1rem; font-weight: 700; margin-bottom: 3px; }
+.sync-hint { font-size: 0.78rem; color: var(--text-dim); }
+
+/* Beat grid */
+.beats-box {
+  grid-column: 1 / -1; background: var(--surface); border-radius: var(--radius);
+  border: 1px solid var(--border); padding: 14px; text-align: center;
+}
+.beats-box .title {
+  font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase;
+  letter-spacing: 2px; margin-bottom: 8px;
+}
+.beat-row { display: flex; gap: 3px; align-items: center; justify-content: center; margin-bottom: 4px; }
+.beat-row .rl { font-family: 'Space Mono', monospace; font-size: 0.6rem; width: 18px; }
+.dot {
+  width: 14px; height: 14px; border-radius: 50%;
+  background: var(--elevated); border: 1px solid var(--border); transition: all 0.06s;
+}
+.dot.a { background: var(--cyan); border-color: var(--cyan); box-shadow: 0 0 8px rgba(0,212,255,0.5); }
+.dot.b { background: var(--pink); border-color: var(--pink); box-shadow: 0 0 8px rgba(255,61,110,0.5); }
+.dot.sync { background: var(--green); border-color: var(--green); box-shadow: 0 0 10px rgba(0,255,157,0.6); }
+
+/* Actions */
+.actions {
+  grid-column: 1 / -1; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;
+}
+.a-btn {
+  padding: 9px 20px; border-radius: 8px; border: 1px solid var(--border);
+  background: var(--surface); color: var(--text); font-family: 'Heebo';
+  font-size: 0.82rem; font-weight: 500; cursor: pointer; transition: all 0.2s;
+}
+.a-btn:hover { border-color: var(--cyan); color: var(--cyan); }
+.a-btn.pri { background: var(--cyan); color: var(--bg); border-color: var(--cyan); font-weight: 700; }
+.a-btn.ok { background: var(--green); color: var(--bg); border-color: var(--green); }
+
+/* History */
+.hist {
+  grid-column: 1 / -1; background: var(--surface); border-radius: var(--radius);
+  border: 1px solid var(--border); padding: 14px;
+}
+.hist .title { font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 6px; }
+.hist-list { display: flex; gap: 5px; overflow-x: auto; padding-bottom: 3px; }
+.chip {
+  padding: 3px 9px; border-radius: 10px; font-family: 'Space Mono', monospace;
+  font-size: 0.65rem; white-space: nowrap; flex-shrink: 0;
+}
+.chip.perfect { background: rgba(0,255,157,0.12); color: var(--green); border: 1px solid rgba(0,255,157,0.25); }
+.chip.good { background: rgba(255,214,10,0.12); color: var(--yellow); border: 1px solid rgba(255,214,10,0.25); }
+.chip.miss { background: rgba(255,61,110,0.12); color: var(--pink); border: 1px solid rgba(255,61,110,0.25); }
+
+/* Keys */
+.keys-hint {
+  grid-column: 1 / -1; text-align: center; padding: 8px;
+  font-size: 0.7rem; color: var(--text-muted);
+}
+.keys-hint kbd {
+  background: var(--elevated); padding: 2px 6px; border-radius: 3px;
+  border: 1px solid var(--border); font-family: 'Space Mono', monospace;
+  font-size: 0.65rem;
+}
+
+/* Toast */
+.toast {
+  position: fixed; top: 18px; left: 50%; transform: translateX(-50%) translateY(-100px);
+  padding: 10px 22px; border-radius: 8px; font-weight: 700; font-size: 0.95rem;
+  z-index: 100; transition: transform 0.35s cubic-bezier(0.34,1.56,0.64,1); pointer-events: none;
+}
+.toast.show { transform: translateX(-50%) translateY(0); }
+.toast.perfect { background: var(--green); color: var(--bg); }
+.toast.good { background: var(--yellow); color: var(--bg); }
+.toast.miss { background: var(--pink); color: var(--text); }
+
+@media (max-width: 700px) {
+  .main { grid-template-columns: 1fr; }
+  .sync-box, .beats-box, .actions, .hist, .keys-hint { grid-column: 1; }
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>🎧 Beatmatch Trainer</h1>
+  <div class="sub">תרגול Beatmatching ידני — התאם את הטמפו בין שני טראקים</div>
+  <div class="libs">
+    powered by
+    <a href="https://github.com/Tonejs/Tone.js" target="_blank">Tone.js</a> +
+    <a href="https://github.com/katspaugh/wavesurfer.js" target="_blank">wavesurfer.js</a>
+  </div>
+</div>
+
+<div class="score-bar">
+  <div class="sc"><div class="l">XP</div><div class="v xp" id="xpVal">0</div></div>
+  <div class="sc"><div class="l">רצף</div><div class="v st" id="stVal">0</div></div>
+  <div class="sc"><div class="l">דיוק</div><div class="v ac" id="acVal">—</div></div>
+  <div class="sc"><div class="l">רמה</div><div class="v lv" id="lvVal">1</div></div>
+</div>
+
+<div class="diff-bar">
+  <button class="d-btn on" data-d="easy" onclick="setDiff('easy')">קל (±3)</button>
+  <button class="d-btn" data-d="medium" onclick="setDiff('medium')">בינוני (±8)</button>
+  <button class="d-btn" data-d="hard" onclick="setDiff('hard')">קשה (±15)</button>
+  <button class="d-btn" data-d="pro" onclick="setDiff('pro')">Pro (±25)</button>
+</div>
+
+<div class="main">
+
+  <!-- DECK A -->
+  <div class="deck da">
+    <div class="deck-top">
+      <span class="deck-label">DECK A — Master</span>
+      <span class="deck-bpm" id="bpmA">128.0</span>
+    </div>
+    <div class="wave-wrap" id="waveWrapA"></div>
+    <div class="ctrl">
+      <button class="btn-play" id="playA" onclick="toggleDeck('A')">
+        <svg viewBox="0 0 24 24"><polygon points="8,5 19,12 8,19"/></svg>
+      </button>
+      <div class="slider-wrap">
+        <div class="slider-top"><span>BPM נעול (Master)</span><span id="lblA">128.0</span></div>
+        <input type="range" min="70" max="170" value="128" step="0.1" disabled>
+      </div>
+    </div>
+  </div>
+
+  <!-- DECK B -->
+  <div class="deck db">
+    <div class="deck-top">
+      <span class="deck-label">DECK B — התאם!</span>
+      <span class="deck-bpm" id="bpmB">128.0</span>
+    </div>
+    <div class="wave-wrap" id="waveWrapB"></div>
+    <div class="ctrl">
+      <button class="btn-play" id="playB" onclick="toggleDeck('B')">
+        <svg viewBox="0 0 24 24"><polygon points="8,5 19,12 8,19"/></svg>
+      </button>
+      <div class="slider-wrap">
+        <div class="slider-top"><span>התאם את הטמפו ←</span><span id="lblB">128.0</span></div>
+        <input type="range" id="sliderB" min="70" max="170" value="128" step="0.1" oninput="onSliderB()">
+      </div>
+    </div>
+    <div class="diff-txt" id="diffTxt" style="color:var(--text-muted)">הפרש: 0.0 BPM</div>
+  </div>
+
+  <!-- SYNC METER -->
+  <div class="sync-box">
+    <div class="title">מד סינכרון</div>
+    <div class="meter"><div class="meter-fill" id="mFill" style="width:0%;background:var(--pink)">0%</div></div>
+    <div class="sync-status" id="sStatus">⏸ הפעל את שני הטראקים</div>
+    <div class="sync-hint" id="sHint">לחץ Play על שני ה-Decks ואז התאם את הטמפו של Deck B</div>
+  </div>
+
+  <!-- BEAT GRID -->
+  <div class="beats-box">
+    <div class="title">Beat Grid</div>
+    <div class="beat-row"><span class="rl" style="color:var(--cyan)">A</span><span id="dotsA"></span></div>
+    <div class="beat-row"><span class="rl" style="color:var(--pink)">B</span><span id="dotsB"></span></div>
+  </div>
+
+  <!-- ACTIONS -->
+  <div class="actions">
+    <button class="a-btn pri" onclick="newRound()">🎲 סיבוב חדש</button>
+    <button class="a-btn ok" onclick="checkSync()">✅ בדוק סינכרון</button>
+    <button class="a-btn" onclick="nudge(-0.5)">⏪ -0.5</button>
+    <button class="a-btn" onclick="nudge(+0.5)">⏩ +0.5</button>
+  </div>
+
+  <!-- HISTORY -->
+  <div class="hist">
+    <div class="title">היסטוריית סיבובים</div>
+    <div class="hist-list" id="hList"><span style="color:var(--text-muted);font-size:0.75rem">לחץ "סיבוב חדש" כדי להתחיל</span></div>
+  </div>
+
+  <!-- KEYBOARD SHORTCUTS -->
+  <div class="keys-hint">
+    <kbd>Q</kbd> Play A &nbsp; <kbd>W</kbd> Play B &nbsp;
+    <kbd>↑↓</kbd> ±0.1 BPM &nbsp; <kbd>←→</kbd> ±0.5 BPM &nbsp;
+    <kbd>Enter</kbd> בדוק &nbsp; <kbd>Space</kbd> סיבוב חדש
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// =====================================================
+//  DJMaster Beatmatch Trainer
+//  Built with: Tone.js + wavesurfer.js (open source)
+// =====================================================
+
+// --- State ---
+const S = {
+  diff: 'easy',
+  bpmA: 128, bpmB: 128,
+  onA: false, onB: false,
+  xp: 0, streak: 0, level: 1,
+  rounds: 0, perfects: 0, goods: 0, misses: 0,
+  history: [],
+};
+
+const DIFFS = {
+  easy:   { range: 3,  perf: 0.3, good: 1.0, mult: 1 },
+  medium: { range: 8,  perf: 0.5, good: 1.5, mult: 2 },
+  hard:   { range: 15, perf: 0.5, good: 2.0, mult: 3 },
+  pro:    { range: 25, perf: 0.3, good: 1.0, mult: 5 },
+};
+
+// --- Tone.js Metronome ---
+// Using Tone.js MembraneSynth for realistic kick-like click
+let synthA, synthB, loopA, loopB;
+
+function initTone() {
+  // Deck A: high pitched click (like hi-hat)
+  synthA = new Tone.MetalSynth({
+    frequency: 400, envelope: { attack: 0.001, decay: 0.05, release: 0.01 },
+    harmonicity: 5.1, modulationIndex: 16, resonance: 2000, octaves: 0.5, volume: -12
+  }).toDestination();
+
+  // Deck B: low membrane click (like kick)
+  synthB = new Tone.MembraneSynth({
+    pitchDecay: 0.01, octaves: 2, envelope: { attack: 0.001, decay: 0.08, sustain: 0, release: 0.04 },
+    volume: -10
+  }).toDestination();
+}
+
+function startLoop(deck) {
+  if (Tone.context.state !== 'running') Tone.start();
+  if (!synthA) initTone();
+
+  const bpm = deck === 'A' ? S.bpmA : S.bpmB;
+  const synth = deck === 'A' ? synthA : synthB;
+  const note = deck === 'A' ? 'C6' : 'C2';
+
+  // Tone.js Transport-free scheduling using Tone.Loop
+  const interval = 60 / bpm;
+
+  if (deck === 'A') {
+    if (loopA) loopA.dispose();
+    loopA = new Tone.Loop(time => {
+      synthA.triggerAttackRelease(note, '32n', time);
+      updateBeatDot('A');
+    }, interval).start(0);
+  } else {
+    if (loopB) loopB.dispose();
+    loopB = new Tone.Loop(time => {
+      synthB.triggerAttackRelease(note, '32n', time);
+      updateBeatDot('B');
+    }, interval).start(0);
+  }
+
+  if (Tone.Transport.state !== 'started') Tone.Transport.start();
+}
+
+function stopLoop(deck) {
+  if (deck === 'A' && loopA) { loopA.stop(); loopA.dispose(); loopA = null; }
+  if (deck === 'B' && loopB) { loopB.stop(); loopB.dispose(); loopB = null; }
+
+  if (!loopA && !loopB) Tone.Transport.stop();
+}
+
+function updateLoopInterval(deck) {
+  const bpm = deck === 'A' ? S.bpmA : S.bpmB;
+  const loop = deck === 'A' ? loopA : loopB;
+  if (loop) loop.interval = 60 / bpm;
+}
+
+// --- wavesurfer.js Visualization ---
+let wsA, wsB;
+
+function initWavesurfers() {
+  // Generate a synthetic waveform as peaks data
+  // (In production, this would use real audio files)
+  const peaksA = generateSyntheticPeaks(S.bpmA);
+  const peaksB = generateSyntheticPeaks(S.bpmB);
+
+  if (wsA) wsA.destroy();
+  if (wsB) wsB.destroy();
+
+  wsA = WaveSurfer.create({
+    container: '#waveWrapA',
+    waveColor: '#00d4ff40',
+    progressColor: '#00d4ff',
+    cursorColor: '#ffffff',
+    cursorWidth: 2,
+    barWidth: 2,
+    barGap: 1,
+    barRadius: 2,
+    height: 64,
+    normalize: true,
+    interact: false,
+    peaks: [peaksA],
+    duration: 8,
+  });
+
+  wsB = WaveSurfer.create({
+    container: '#waveWrapB',
+    waveColor: '#ff3d6e40',
+    progressColor: '#ff3d6e',
+    cursorColor: '#ffffff',
+    cursorWidth: 2,
+    barWidth: 2,
+    barGap: 1,
+    barRadius: 2,
+    height: 64,
+    normalize: true,
+    interact: false,
+    peaks: [peaksB],
+    duration: 8,
+  });
+}
+
+function generateSyntheticPeaks(bpm) {
+  // Generate peaks that look like a DJ track waveform
+  const length = 800;
+  const peaks = new Float32Array(length);
+  const beatsPerSec = bpm / 60;
+  const duration = 8; // seconds
+
+  for (let i = 0; i < length; i++) {
+    const t = (i / length) * duration;
+    const beatPhase = (t * beatsPerSec) % 1;
+
+    // Transient at beat start
+    const transient = beatPhase < 0.1 ? (1 - beatPhase / 0.1) * 0.9 : 0;
+
+    // Body of beat
+    const body = Math.sin(beatPhase * Math.PI) * 0.5;
+
+    // Random texture
+    const noise = (Math.random() - 0.5) * 0.2;
+
+    // Musical variation (bar-level dynamics)
+    const barPhase = (t * beatsPerSec / 4) % 1;
+    const barDynamic = 0.7 + 0.3 * Math.sin(barPhase * Math.PI * 2);
+
+    peaks[i] = Math.min(1, Math.max(-1, (transient + body + noise) * barDynamic));
+  }
+
+  return peaks;
+}
+
+function animateWavesurfers() {
+  if (S.onA && wsA) {
+    const pos = ((performance.now() / 1000 * S.bpmA / 60) % 32) / 32;
+    wsA.seekTo(pos);
+  }
+  if (S.onB && wsB) {
+    const pos = ((performance.now() / 1000 * S.bpmB / 60) % 32) / 32;
+    wsB.seekTo(pos);
+  }
+  if (S.onA || S.onB) {
+    updateSyncMeter();
+    requestAnimationFrame(animateWavesurfers);
+  }
+}
+
+// --- Beat Grid ---
+const DOTS = 16;
+let beatCountA = 0, beatCountB = 0;
+
+function initDots() {
+  ['dotsA', 'dotsB'].forEach(id => {
+    const el = document.getElementById(id);
+    el.innerHTML = '';
+    el.style.display = 'flex';
+    el.style.gap = '3px';
+    for (let i = 0; i < DOTS; i++) {
+      const d = document.createElement('div');
+      d.className = 'dot';
+      el.appendChild(d);
+    }
+  });
+}
+initDots();
+
+function updateBeatDot(deck) {
+  if (deck === 'A') {
+    beatCountA = (beatCountA + 1) % DOTS;
+    const dots = document.getElementById('dotsA').children;
+    for (let i = 0; i < DOTS; i++) dots[i].className = 'dot' + (i === beatCountA ? ' a' : '');
+  } else {
+    beatCountB = (beatCountB + 1) % DOTS;
+    const dotsA = document.getElementById('dotsA').children;
+    const dotsB = document.getElementById('dotsB').children;
+    for (let i = 0; i < DOTS; i++) {
+      const isSync = dotsA[i]?.classList.contains('a') && i === beatCountB;
+      dotsB[i].className = 'dot' + (i === beatCountB ? (isSync ? ' sync' : ' b') : '');
+    }
+  }
+}
+
+// --- Sync Meter ---
+function getSyncPct() {
+  const diff = Math.abs(S.bpmA - S.bpmB);
+  const max = DIFFS[S.diff].range;
+  return Math.max(0, Math.min(100, (1 - diff / max) * 100));
+}
+
+function updateSyncMeter() {
+  const pct = getSyncPct();
+  const diff = Math.abs(S.bpmA - S.bpmB);
+  const d = DIFFS[S.diff];
+  const fill = document.getElementById('mFill');
+
+  fill.style.width = pct + '%';
+  fill.textContent = Math.round(pct) + '%';
+
+  if (diff <= d.perf) {
+    fill.style.background = 'var(--green)';
+    document.getElementById('sStatus').textContent = '🔥 PERFECT SYNC!';
+    document.getElementById('sStatus').style.color = 'var(--green)';
+    document.getElementById('sHint').textContent = 'מושלם! הטראקים מסונכרנים בדיוק';
+  } else if (diff <= d.good) {
+    fill.style.background = 'var(--yellow)';
+    document.getElementById('sStatus').textContent = '👍 כמעט שם!';
+    document.getElementById('sStatus').style.color = 'var(--yellow)';
+    document.getElementById('sHint').textContent = `הפרש: ${diff.toFixed(1)} BPM — כוונן עוד קצת`;
+  } else {
+    fill.style.background = 'linear-gradient(90deg, var(--pink), var(--orange))';
+    document.getElementById('sStatus').textContent = '🎯 התאם את הטמפו';
+    document.getElementById('sStatus').style.color = 'var(--pink)';
+    const dir = S.bpmB > S.bpmA ? 'הורד' : 'העלה';
+    document.getElementById('sHint').textContent = `${dir} את הטמפו של Deck B — הפרש: ${diff.toFixed(1)} BPM`;
+  }
+}
+
+// --- UI ---
+function toggleDeck(deck) {
+  const key = deck === 'A' ? 'onA' : 'onB';
+  S[key] = !S[key];
+  const btn = document.getElementById('play' + deck);
+
+  if (S[key]) {
+    btn.classList.add('on');
+    btn.innerHTML = '<svg viewBox="0 0 24 24"><rect x="7" y="5" width="3" height="14"/><rect x="14" y="5" width="3" height="14"/></svg>';
+    startLoop(deck);
+    animateWavesurfers();
+  } else {
+    btn.classList.remove('on');
+    btn.innerHTML = '<svg viewBox="0 0 24 24"><polygon points="8,5 19,12 8,19"/></svg>';
+    stopLoop(deck);
+  }
+}
+
+function onSliderB() {
+  const v = parseFloat(document.getElementById('sliderB').value);
+  S.bpmB = v;
+  document.getElementById('bpmB').textContent = v.toFixed(1);
+  document.getElementById('lblB').textContent = v.toFixed(1);
+  updateLoopInterval('B');
+
+  const diff = Math.abs(S.bpmA - S.bpmB);
+  const el = document.getElementById('diffTxt');
+  el.textContent = `הפרש: ${diff.toFixed(1)} BPM`;
+  el.style.color = diff < 1 ? 'var(--green)' : diff < 3 ? 'var(--yellow)' : 'var(--pink)';
+}
+
+function nudge(delta) {
+  const sl = document.getElementById('sliderB');
+  sl.value = parseFloat(sl.value) + delta;
+  onSliderB();
+}
+
+function setDiff(d) {
+  S.diff = d;
+  document.querySelectorAll('.d-btn').forEach(b => b.classList.toggle('on', b.dataset.d === d));
+  newRound();
+}
+
+function newRound() {
+  const d = DIFFS[S.diff];
+  const base = 100 + Math.random() * 50;
+  S.bpmA = Math.round(base * 10) / 10;
+  const offset = (Math.random() * 2 - 1) * d.range;
+  S.bpmB = Math.round((S.bpmA + offset) * 10) / 10;
+
+  document.getElementById('bpmA').textContent = S.bpmA.toFixed(1);
+  document.getElementById('lblA').textContent = S.bpmA.toFixed(1);
+  document.getElementById('bpmB').textContent = S.bpmB.toFixed(1);
+  document.getElementById('lblB').textContent = S.bpmB.toFixed(1);
+
+  const sl = document.getElementById('sliderB');
+  sl.min = Math.max(60, S.bpmA - 30);
+  sl.max = Math.min(180, S.bpmA + 30);
+  sl.value = S.bpmB;
+  onSliderB();
+
+  // Regenerate wavesurfer peaks
+  initWavesurfers();
+
+  // Restart loops if playing
+  if (S.onA) { stopLoop('A'); startLoop('A'); }
+  if (S.onB) { stopLoop('B'); startLoop('B'); }
+  if (S.onA || S.onB) animateWavesurfers();
+
+  beatCountA = 0; beatCountB = 0;
+  initDots();
+
+  toast(`🎲 BPM יעד: ${S.bpmA} — התאם את Deck B!`, 'good');
+}
+
+function checkSync() {
+  const diff = Math.abs(S.bpmA - S.bpmB);
+  const d = DIFFS[S.diff];
+  S.rounds++;
+
+  let res, xp, cls;
+  if (diff <= d.perf) {
+    res = 'perfect'; xp = 100 * d.mult; S.streak++; S.perfects++;
+    if (S.streak > 1) xp *= (1 + S.streak * 0.1);
+    cls = 'perfect';
+    toast(`🔥 PERFECT! +${Math.round(xp)} XP (רצף: ${S.streak})`, cls);
+  } else if (diff <= d.good) {
+    res = 'good'; xp = 50 * d.mult; S.streak++; S.goods++;
+    cls = 'good';
+    toast(`👍 טוב! +${Math.round(xp)} XP (הפרש: ${diff.toFixed(1)})`, cls);
+  } else {
+    res = 'miss'; xp = 10; S.streak = 0; S.misses++;
+    cls = 'miss';
+    toast(`❌ לא מדויק — הפרש: ${diff.toFixed(1)} BPM`, cls);
+  }
+
+  S.xp += Math.round(xp);
+  S.level = Math.floor(S.xp / 500) + 1;
+  S.history.unshift({ diff: diff.toFixed(1), res, bpm: S.bpmA });
+
+  updateScore();
+  updateHist();
+}
+
+function updateScore() {
+  document.getElementById('xpVal').textContent = S.xp;
+  document.getElementById('stVal').textContent = S.streak;
+  document.getElementById('lvVal').textContent = S.level;
+  if (S.rounds > 0) {
+    document.getElementById('acVal').textContent = ((S.perfects + S.goods) / S.rounds * 100).toFixed(0) + '%';
+  }
+}
+
+function updateHist() {
+  const el = document.getElementById('hList');
+  el.innerHTML = '';
+  S.history.slice(0, 25).forEach(h => {
+    const c = document.createElement('span');
+    c.className = `chip ${h.res}`;
+    c.textContent = `${h.bpm} → Δ${h.diff}`;
+    el.appendChild(c);
+  });
+}
+
+function toast(msg, type) {
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.className = `toast ${type} show`;
+  setTimeout(() => t.classList.remove('show'), 2500);
+}
+
+// --- Keyboard ---
+document.addEventListener('keydown', e => {
+  if (e.key === 'q' || e.key === 'Q') toggleDeck('A');
+  if (e.key === 'w' || e.key === 'W') toggleDeck('B');
+  if (e.key === 'ArrowUp') nudge(0.1);
+  if (e.key === 'ArrowDown') nudge(-0.1);
+  if (e.key === 'ArrowRight') nudge(0.5);
+  if (e.key === 'ArrowLeft') nudge(-0.5);
+  if (e.key === 'Enter') checkSync();
+  if (e.key === ' ') { e.preventDefault(); newRound(); }
+});
+
+// --- Init ---
+initWavesurfers();
+newRound();
+</script>
+</body>
+</html>

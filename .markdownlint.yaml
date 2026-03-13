@@ -1,0 +1,28 @@
+# Markdown Lint — DJMaster Academy
+# Course content has specific needs
+
+extends: default
+
+MD003:
+  style: "consistent"
+
+MD004:
+  style: "consistent"
+
+MD013:
+  line_length: 150
+  heading_line_length: 120
+  code_block_line_length: false
+
+MD024: false    # Allow duplicate headings (common in courses)
+MD025: false    # Allow multiple top-level headings
+MD033:          # Allow specific HTML elements
+  allowed_html:
+    - br
+    - details
+    - summary
+    - span
+    - div
+    - dir
+
+MD041: false    # Don't require first line heading (YAML frontmatter)

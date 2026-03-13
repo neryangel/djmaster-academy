@@ -1,0 +1,1093 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; connect-src 'self' https://cdn.jsdelivr.net; img-src 'self' data:; media-src 'self' blob:;">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BPM Calculator — DJMaster Academy</title>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+<!-- === OPEN SOURCE LIBRARIES === -->
+<!-- Tone.js (11K⭐) — github.com/Tonejs/Tone.js — Audio click feedback & metronome -->
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.min.js" crossorigin="anonymous"></script>
+<!-- realtime-bpm-analyzer (v5) — github.com/dlepaux/realtime-bpm-analyzer — Auto BPM detection from audio -->
+<!-- Loaded as ESM module for progressive enhancement -->
+
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Heebo', sans-serif;
+    background: #0A0A0F;
+    color: #e8e8e8;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+  }
+
+  .container {
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  h1 {
+    font-size: clamp(1.5rem, 5vw, 2.5rem);
+    color: #00d4ff;
+    margin-bottom: 8px;
+    text-align: center;
+    font-family: 'Space Mono', monospace;
+    font-weight: 700;
+  }
+
+  .subtitle {
+    color: #888;
+    margin-bottom: 30px;
+    font-size: 0.95rem;
+    text-align: center;
+  }
+
+  /* Main tap zone */
+  .tap-zone {
+    width: clamp(200px, 60vw, 280px);
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #1A1A2E 0%, #12121F 100%);
+    border: 3px solid #00d4ff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.1s ease-out;
+    box-shadow: 0 0 30px rgba(0, 212, 255, 0.2), inset 0 0 30px rgba(0, 212, 255, 0.05);
+    user-select: none;
+    margin: 0 auto 30px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .tap-zone::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(0, 212, 255, 0.3) 0%, transparent 70%);
+    opacity: 0;
+    animation: none;
+  }
+
+  .tap-zone.tap-active::before {
+    animation: ripple 0.6s ease-out;
+  }
+
+  @keyframes ripple {
+    0% {
+      transform: scale(0);
+      opacity: 0.8;
+    }
+    100% {
+      transform: scale(1.5);
+      opacity: 0;
+    }
+  }
+
+  .tap-zone:active, .tap-zone.flashing {
+    background: linear-gradient(135deg, #00d4ff 0%, #7b2fff 100%);
+    transform: scale(0.96);
+    box-shadow: 0 0 60px rgba(0, 212, 255, 0.6), inset 0 0 30px rgba(0, 212, 255, 0.2);
+  }
+
+  .pulse-ring {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 2px solid #00d4ff;
+    animation: none;
+  }
+
+  .pulse-ring.active {
+    animation: pulse-out 0.6s ease-out;
+  }
+
+  @keyframes pulse-out {
+    0% {
+      transform: scale(1);
+      opacity: 1;
+    }
+    100% {
+      transform: scale(1.3);
+      opacity: 0;
+    }
+  }
+
+  .tap-zone-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+  }
+
+  .bpm-display {
+    font-size: clamp(2.5rem, 10vw, 4rem);
+    font-weight: 700;
+    color: #fff;
+    line-height: 1;
+    font-family: 'Space Mono', monospace;
+    letter-spacing: 2px;
+  }
+
+  .bpm-label {
+    font-size: 0.9rem;
+    color: #aaa;
+    margin-top: 4px;
+  }
+
+  .tap-hint {
+    font-size: 0.8rem;
+    color: #00d4ff;
+    margin-top: 8px;
+    opacity: 0.8;
+  }
+
+  /* Waveform visualization */
+  .waveform-container {
+    width: 100%;
+    height: 60px;
+    margin: 20px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    background: rgba(0, 212, 255, 0.05);
+    border-radius: 12px;
+    padding: 10px;
+  }
+
+  .waveform-bar {
+    width: 8px;
+    height: 30px;
+    background: linear-gradient(180deg, #00d4ff 0%, #7b2fff 100%);
+    border-radius: 4px;
+    opacity: 0.3;
+    transition: all 0.1s ease-out;
+  }
+
+  .waveform-bar.active {
+    height: 50px;
+    opacity: 1;
+  }
+
+  /* Controls section */
+  .controls {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  button.ctrl, input.ctrl {
+    padding: 12px 16px;
+    border: 1px solid #2A2A3E;
+    background: #12121F;
+    color: #e8e8e8;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-family: 'Heebo', sans-serif;
+    transition: all 0.2s;
+    font-weight: 500;
+  }
+
+  button.ctrl:hover, input.ctrl:focus {
+    border-color: #00d4ff;
+    color: #00d4ff;
+    box-shadow: 0 0 20px rgba(0, 212, 255, 0.2);
+  }
+
+  button.ctrl:active {
+    transform: scale(0.95);
+  }
+
+  input.ctrl {
+    width: 120px;
+    padding: 10px 12px;
+    text-align: right;
+  }
+
+  input.ctrl::placeholder {
+    color: #555;
+  }
+
+  /* Keyboard hint */
+  .keyboard-hint {
+    font-size: 0.8rem;
+    color: #00d4ff;
+    opacity: 0.6;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  /* BPM History */
+  .history-section {
+    background: #12121F;
+    border: 1px solid #2A2A3E;
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 20px;
+    max-width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .history-section h3 {
+    color: #00d4ff;
+    font-size: 0.9rem;
+    margin-bottom: 12px;
+    font-weight: 600;
+  }
+
+  .history-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .history-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #1A1A2E;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    border-left: 3px solid #00d4ff;
+  }
+
+  .history-item.old {
+    opacity: 0.5;
+    border-left-color: #7b2fff;
+  }
+
+  .history-bpm {
+    font-weight: 600;
+    color: #00d4ff;
+    font-family: 'Space Mono', monospace;
+  }
+
+  /* Genre Detection */
+  .genre-section {
+    background: #12121F;
+    border: 1px solid #2A2A3E;
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  .genre-section h3 {
+    color: #00d4ff;
+    font-size: 0.9rem;
+    margin-bottom: 12px;
+    font-weight: 600;
+  }
+
+  .genre-tag {
+    display: inline-block;
+    background: linear-gradient(135deg, #7b2fff 0%, #00d4ff 100%);
+    color: #fff;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin: 4px;
+  }
+
+  .genre-empty {
+    color: #555;
+    font-size: 0.85rem;
+  }
+
+  /* Accuracy indicator */
+  .accuracy-section {
+    background: #12121F;
+    border: 1px solid #2A2A3E;
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 20px;
+    max-width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .accuracy-section h3 {
+    color: #00d4ff;
+    font-size: 0.9rem;
+    margin-bottom: 12px;
+    font-weight: 600;
+  }
+
+  .accuracy-bar {
+    width: 100%;
+    height: 8px;
+    background: #1A1A2E;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 8px;
+  }
+
+  .accuracy-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #00ff9d 0%, #00d4ff 100%);
+    border-radius: 4px;
+    transition: width 0.3s ease-out;
+  }
+
+  .accuracy-text {
+    font-size: 0.85rem;
+    color: #aaa;
+    font-family: 'Space Mono', monospace;
+  }
+
+  /* Time/Interval section */
+  .interval-box {
+    background: #12121F;
+    border: 1px solid #2A2A3E;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  .interval-big {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #00d4ff;
+    font-family: 'Space Mono', monospace;
+  }
+
+  .interval-label {
+    color: #888;
+    font-size: 0.85rem;
+    margin-top: 4px;
+  }
+
+  /* Multiplier controls */
+  .multiplier-buttons {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+  }
+
+  .multiplier-btn {
+    padding: 10px 14px;
+    border: 1px solid #2A2A3E;
+    background: #12121F;
+    color: #e8e8e8;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-family: 'Space Mono', monospace;
+    transition: all 0.2s;
+    font-weight: 600;
+  }
+
+  .multiplier-btn:hover {
+    border-color: #7b2fff;
+    color: #7b2fff;
+    box-shadow: 0 0 15px rgba(123, 47, 255, 0.2);
+  }
+
+  .multiplier-btn:active {
+    transform: scale(0.95);
+  }
+
+  /* Copy button */
+  .copy-button {
+    padding: 10px 16px;
+    background: linear-gradient(135deg, #00d4ff 0%, #7b2fff 100%);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: all 0.2s;
+    font-family: 'Heebo', sans-serif;
+  }
+
+  .copy-button:hover {
+    box-shadow: 0 0 30px rgba(0, 212, 255, 0.4);
+    transform: translateY(-2px);
+  }
+
+  .copy-button:active {
+    transform: scale(0.95);
+  }
+
+  .copy-feedback {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    left: 20px;
+    max-width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+    background: #00d4ff;
+    color: #0A0A0F;
+    padding: 12px 20px;
+    border-radius: 8px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 0.9rem;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s;
+    z-index: 1000;
+  }
+
+  .copy-feedback.show {
+    opacity: 1;
+  }
+
+  /* Tables */
+  .tables {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    width: 100%;
+    margin-bottom: 30px;
+  }
+
+  .table-card {
+    background: #12121F;
+    border: 1px solid #2A2A3E;
+    border-radius: 12px;
+    padding: 20px;
+  }
+
+  .table-card h3 {
+    color: #00d4ff;
+    margin-bottom: 14px;
+    font-size: 1rem;
+    font-weight: 600;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  td, th {
+    padding: 10px 8px;
+    text-align: right;
+    font-size: 0.85rem;
+    border-bottom: 1px solid #1A1A2E;
+  }
+
+  th {
+    color: #888;
+    font-weight: 500;
+    font-size: 0.8rem;
+  }
+
+  .highlight {
+    color: #00d4ff;
+    font-weight: 600;
+    font-family: 'Space Mono', monospace;
+  }
+
+  .compatible {
+    color: #00ff9d;
+    font-weight: 600;
+  }
+
+  /* Responsive design */
+  @media (max-width: 768px) {
+    body {
+      padding: 12px;
+    }
+
+    h1 {
+      margin-bottom: 6px;
+    }
+
+    .subtitle {
+      margin-bottom: 20px;
+    }
+
+    .tap-zone {
+      margin-bottom: 20px;
+    }
+
+    .controls {
+      gap: 8px;
+    }
+
+    button.ctrl, input.ctrl {
+      padding: 10px 14px;
+      font-size: 0.85rem;
+    }
+
+    .tables {
+      gap: 12px;
+    }
+
+    .table-card {
+      padding: 16px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    h1 {
+      font-size: 1.5rem;
+    }
+
+    .bpm-display {
+      font-size: 2.5rem;
+    }
+
+    .interval-big {
+      font-size: 1.8rem;
+    }
+
+    .controls {
+      gap: 6px;
+    }
+
+    button.ctrl, input.ctrl {
+      padding: 10px 12px;
+      font-size: 0.8rem;
+    }
+
+    input.ctrl {
+      width: 100px;
+    }
+
+    .multiplier-buttons {
+      gap: 6px;
+    }
+
+    .multiplier-btn {
+      padding: 8px 12px;
+      font-size: 0.75rem;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <h1>🥁 BPM Calculator</h1>
+  <p class="subtitle">לחץ על הכפתור בקצב המוזיקה — או הקלד BPM ידנית</p>
+
+  <div class="keyboard-hint">💡 Space = Tap</div>
+
+  <div class="tap-zone" id="tapBtn" onclick="tap()">
+    <div class="pulse-ring" id="pulseRing"></div>
+    <div class="tap-zone-content">
+      <div class="bpm-display" id="bpmDisplay">--</div>
+      <div class="bpm-label">BPM</div>
+      <div class="tap-hint">לחץ בקצב ♩</div>
+    </div>
+  </div>
+
+  <!-- Waveform visualization -->
+  <div class="waveform-container" id="waveform">
+    <div class="waveform-bar"></div>
+    <div class="waveform-bar"></div>
+    <div class="waveform-bar"></div>
+    <div class="waveform-bar"></div>
+    <div class="waveform-bar"></div>
+    <div class="waveform-bar"></div>
+    <div class="waveform-bar"></div>
+  </div>
+
+  <!-- Controls -->
+  <div class="controls">
+    <button class="ctrl" onclick="reset()">איפוס</button>
+    <input id="manualBpm" type="number" min="40" max="220" placeholder="הזן BPM" class="ctrl"
+      oninput="setManual(this.value)">
+    <button class="copy-button" id="copyBtn" onclick="copyBPM()" style="display:none;">📋 Copy BPM</button>
+    <button class="ctrl" id="metronomeBtn" onclick="toggleMetronome()">🔊 מטרונום</button>
+    <label class="ctrl" id="autoDetectLabel" style="cursor:pointer;position:relative;overflow:hidden;">
+      🎵 זיהוי אוטומטי
+      <input type="file" id="audioFileInput" accept="audio/*" style="position:absolute;top:0;left:0;width:100%;height:100%;opacity:0;cursor:pointer;" aria-label="בחר קובץ אודיו לזיהוי BPM אוטומטי">
+    </label>
+  </div>
+
+  <!-- Auto-detect progress -->
+  <div id="autoDetectStatus" style="display:none;text-align:center;padding:12px;background:#12121F;border-radius:12px;margin:12px auto;max-width:500px;">
+    <div id="autoDetectText" style="color:#00d4ff;font-size:0.9rem;">🔍 מנתח אודיו...</div>
+    <div style="background:#1A1A2E;border-radius:6px;overflow:hidden;height:6px;margin-top:8px;">
+      <div id="autoDetectProgress" style="width:0%;height:100%;background:linear-gradient(90deg,#00d4ff,#7b2fff);transition:width 0.3s;border-radius:6px;"></div>
+    </div>
+  </div>
+
+  <!-- Multiplier controls -->
+  <div class="multiplier-buttons" id="multiplierSection" style="display:none;">
+    <button class="multiplier-btn" onclick="setMultiplier(0.5)">½</button>
+    <button class="multiplier-btn" onclick="setMultiplier(2)">2×</button>
+  </div>
+
+  <!-- BPM History -->
+  <div class="history-section" id="historySection" style="display:none;">
+    <h3>📊 History (Last 5)</h3>
+    <div class="history-list" id="historyList"></div>
+  </div>
+
+  <!-- Genre Detection -->
+  <div class="genre-section" id="genreSection" style="display:none;">
+    <h3>🎵 Genre Range</h3>
+    <div id="genreDisplay" class="genre-empty">Tap to detect genre...</div>
+  </div>
+
+  <!-- Accuracy Indicator -->
+  <div class="accuracy-section" id="accuracySection" style="display:none;">
+    <h3>🎯 Tap Consistency</h3>
+    <div class="accuracy-bar">
+      <div class="accuracy-fill" id="accuracyFill" style="width:0%"></div>
+    </div>
+    <div class="accuracy-text" id="accuracyText">Waiting for taps...</div>
+  </div>
+
+  <!-- Interval display -->
+  <div class="interval-box">
+    <div class="interval-big" id="intervalDisplay">—</div>
+    <div class="interval-label">ms בין כל beat (interval)</div>
+  </div>
+
+  <!-- Tables -->
+  <div class="tables">
+    <div class="table-card">
+      <h3>⚡ מכפלות ושברים</h3>
+      <table>
+        <tr><th>יחס</th><th>BPM</th></tr>
+        <tbody id="multiplesTable"><tr><td colspan="2" style="color:#555">לחץ Tap כדי לחשב</td></tr></tbody>
+      </table>
+    </div>
+    <div class="table-card">
+      <h3>🎯 BPM תואמים למיקס</h3>
+      <table>
+        <tr><th>BPM</th><th>הפרש</th><th>מתאים?</th></tr>
+        <tbody id="compatibleTable"><tr><td colspan="3" style="color:#555">לחץ Tap כדי לחשב</td></tr></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class="copy-feedback" id="copyFeedback">✓ BPM copied to clipboard!</div>
+
+<script>
+let taps = [];
+let resetTimer = null;
+let bpmHistory = [];
+const MAX_HISTORY = 5;
+let metronomeLoop = null;
+let metronomeActive = false;
+
+// === TONE.JS AUDIO ENGINE ===
+// Click sound via Tone.js MetalSynth — crisp metronome tick
+let clickSynth = null;
+
+async function initToneClick() {
+  if (clickSynth) return;
+  try {
+    if (typeof Tone === 'undefined') return; // Library not loaded yet
+    await Tone.start();
+  } catch (err) {
+    console.warn('Audio init deferred:', err.message);
+    return;
+  }
+  clickSynth = new Tone.MetalSynth({
+    frequency: 400,
+    envelope: { attack: 0.001, decay: 0.05, release: 0.01 },
+    harmonicity: 5.1,
+    modulationIndex: 16,
+    resonance: 2000,
+    octaves: 0.5,
+    volume: -15
+  }).toDestination();
+}
+
+function playClick() {
+  if (!clickSynth) { initToneClick(); return; }
+  clickSynth.triggerAttackRelease('C4', '32n');
+}
+
+function toggleMetronome() {
+  if (!clickSynth) { initToneClick(); return; }
+  const bpm = parseInt(document.getElementById('bpmDisplay').textContent);
+  if (!bpm || isNaN(bpm)) return;
+
+  const metBtn = document.getElementById('metronomeBtn');
+
+  if (metronomeActive) {
+    if (metronomeLoop) { metronomeLoop.stop(); metronomeLoop.dispose(); metronomeLoop = null; }
+    Tone.Transport.stop();
+    metronomeActive = false;
+    metBtn.textContent = '🔊 מטרונום';
+    metBtn.style.borderColor = '#2A2A3E';
+    metBtn.style.color = '#e8e8e8';
+    return;
+  }
+
+  Tone.Transport.bpm.value = bpm;
+  metronomeLoop = new Tone.Loop(time => {
+    clickSynth.triggerAttackRelease('C4', '32n', time);
+  }, '4n');
+  metronomeLoop.start(0);
+  Tone.Transport.start();
+  metronomeActive = true;
+  metBtn.textContent = '🔇 עצור מטרונום';
+  metBtn.style.borderColor = '#00d4ff';
+  metBtn.style.color = '#00d4ff';
+}
+
+const GENRES = [
+  { name: 'Hip Hop', min: 80, max: 100 },
+  { name: 'R&B', min: 70, max: 100 },
+  { name: 'Pop', min: 100, max: 130 },
+  { name: 'House', min: 120, max: 130 },
+  { name: 'Tech House', min: 127, max: 133 },
+  { name: 'Techno', min: 130, max: 145 },
+  { name: 'Trance', min: 130, max: 150 },
+  { name: 'Drum & Bass', min: 160, max: 180 }
+];
+
+function tap() {
+  const now = Date.now();
+  taps.push(now);
+
+  // Tone.js click feedback
+  playClick();
+
+  // Ripple effect
+  const btn = document.getElementById('tapBtn');
+  btn.classList.add('tap-active');
+  setTimeout(() => btn.classList.remove('tap-active'), 600);
+
+  // Pulse ring
+  const ring = document.getElementById('pulseRing');
+  ring.classList.remove('active');
+  void ring.offsetWidth; // Trigger reflow to restart animation
+  ring.classList.add('active');
+
+  // Flash effect
+  btn.classList.add('flashing');
+  setTimeout(() => btn.classList.remove('flashing'), 100);
+
+  // Animate waveform bars
+  const bars = document.querySelectorAll('.waveform-bar');
+  const barIndex = (taps.length - 1) % bars.length;
+  bars[barIndex].classList.add('active');
+  setTimeout(() => bars[barIndex].classList.remove('active'), 200);
+
+  // Need at least 2 taps
+  if (taps.length < 2) {
+    document.getElementById('bpmDisplay').textContent = '...';
+    return;
+  }
+
+  // Use last 8 taps max
+  if (taps.length > 8) taps = taps.slice(-8);
+
+  // Calculate average interval
+  let intervals = [];
+  for (let i = 1; i < taps.length; i++) {
+    intervals.push(taps[i] - taps[i-1]);
+  }
+  const avgInterval = intervals.reduce((a, b) => a + b, 0) / intervals.length;
+  const bpm = Math.round(60000 / avgInterval);
+
+  // Calculate standard deviation for accuracy
+  const variance = intervals.reduce((sum, interval) => sum + Math.pow(interval - avgInterval, 2), 0) / intervals.length;
+  const stdDev = Math.sqrt(variance);
+
+  updateDisplay(bpm, avgInterval, stdDev, intervals);
+
+  // Auto-reset after 3 seconds of no tapping
+  clearTimeout(resetTimer);
+  resetTimer = setTimeout(() => { taps = []; }, 3000);
+}
+
+function setManual(val) {
+  const bpm = parseInt(val);
+  if (bpm >= 40 && bpm <= 220) {
+    const interval = 60000 / bpm;
+    updateDisplay(bpm, interval, 0, []);
+  }
+}
+
+function updateDisplay(bpm, interval, stdDev, intervals) {
+  document.getElementById('bpmDisplay').textContent = bpm;
+  document.getElementById('intervalDisplay').textContent = Math.round(interval) + ' ms';
+  document.getElementById('copyBtn').style.display = 'inline-block';
+  document.getElementById('multiplierSection').style.display = 'flex';
+
+  // Update history
+  updateHistory(bpm);
+
+  // Update genre detection
+  updateGenreDetection(bpm);
+
+  // Update accuracy indicator
+  updateAccuracy(stdDev, intervals);
+
+  updateMultiples(bpm);
+  updateCompatible(bpm);
+
+  // Sync metronome BPM if running
+  if (metronomeActive) {
+    Tone.Transport.bpm.value = bpm;
+  }
+}
+
+function updateHistory(bpm) {
+  // Add to history only if different from last entry
+  if (bpmHistory.length === 0 || bpmHistory[0] !== bpm) {
+    bpmHistory.unshift(bpm);
+    if (bpmHistory.length > MAX_HISTORY) {
+      bpmHistory.pop();
+    }
+  }
+
+  const section = document.getElementById('historySection');
+  section.style.display = 'block';
+
+  const list = document.getElementById('historyList');
+  list.innerHTML = bpmHistory.map((bpm, idx) => `
+    <div class="history-item ${idx >= 3 ? 'old' : ''}">
+      <span>#${idx + 1}</span>
+      <span class="history-bpm">${bpm}</span>
+    </div>
+  `).join('');
+}
+
+function updateGenreDetection(bpm) {
+  const section = document.getElementById('genreSection');
+  section.style.display = 'block';
+
+  const matchingGenres = GENRES.filter(g => bpm >= g.min && bpm <= g.max);
+
+  const display = document.getElementById('genreDisplay');
+  if (matchingGenres.length === 0) {
+    display.innerHTML = '<span class="genre-empty">Out of typical genre range</span>';
+  } else {
+    display.innerHTML = matchingGenres.map(g => `<span class="genre-tag">${g.name}</span>`).join('');
+  }
+}
+
+function updateAccuracy(stdDev, intervals) {
+  const section = document.getElementById('accuracySection');
+  section.style.display = 'block';
+
+  if (intervals.length < 2) {
+    document.getElementById('accuracyText').textContent = 'Tap more times...';
+    document.getElementById('accuracyFill').style.width = '0%';
+    return;
+  }
+
+  // Calculate consistency score (lower stdDev = higher consistency)
+  // Max expected stdDev is around 100ms for loose tapping
+  const consistency = Math.max(0, 100 - (stdDev / 10));
+  const consistencyPercent = Math.min(100, consistency);
+
+  document.getElementById('accuracyFill').style.width = consistencyPercent + '%';
+
+  let quality = 'Perfect';
+  if (consistencyPercent < 50) quality = 'Loose';
+  else if (consistencyPercent < 75) quality = 'Good';
+  else if (consistencyPercent < 90) quality = 'Very Good';
+
+  document.getElementById('accuracyText').textContent = `${quality} • ${consistencyPercent.toFixed(0)}%`;
+}
+
+function updateMultiples(bpm) {
+  const ratios = [
+    { label: '÷4 (Quarter)', factor: 0.25 },
+    { label: '÷2 (Half)', factor: 0.5 },
+    { label: '×1 (Original)', factor: 1, current: true },
+    { label: '×2 (Double)', factor: 2 },
+    { label: '×4', factor: 4 },
+  ];
+  const tbody = document.getElementById('multiplesTable');
+  tbody.innerHTML = ratios.map(r => `
+    <tr>
+      <td style="color:#aaa">${r.label}</td>
+      <td class="${r.current ? 'highlight' : ''}">${Math.round(bpm * r.factor)}</td>
+    </tr>
+  `).join('');
+}
+
+function updateCompatible(bpm) {
+  const candidates = [];
+  for (let delta = -20; delta <= 20; delta += 2) {
+    const candidate = bpm + delta;
+    if (candidate !== bpm && candidate >= 60 && candidate <= 200) {
+      const percent = Math.abs(delta / bpm * 100);
+      candidates.push({ bpm: candidate, delta, percent });
+    }
+  }
+  const good = candidates.filter(c => Math.abs(c.delta) <= Math.round(bpm * 0.06));
+  const show = good.slice(0, 6);
+
+  const tbody = document.getElementById('compatibleTable');
+  if (show.length === 0) {
+    tbody.innerHTML = '<tr><td colspan="3" style="color:#555">אין טווח מתאים</td></tr>';
+    return;
+  }
+  tbody.innerHTML = show.map(c => `
+    <tr>
+      <td class="compatible">${c.bpm}</td>
+      <td style="color:#aaa">${c.delta > 0 ? '+' : ''}${c.delta}</td>
+      <td class="compatible">✓ מתאים</td>
+    </tr>
+  `).join('');
+}
+
+function reset() {
+  taps = [];
+  bpmHistory = [];
+  clearTimeout(resetTimer);
+  document.getElementById('bpmDisplay').textContent = '--';
+  document.getElementById('intervalDisplay').textContent = '—';
+  document.getElementById('multiplesTable').innerHTML = '<tr><td colspan="2" style="color:#555">לחץ Tap כדי לחשב</td></tr>';
+  document.getElementById('compatibleTable').innerHTML = '<tr><td colspan="3" style="color:#555">לחץ Tap כדי לחשב</td></tr>';
+  document.getElementById('manualBpm').value = '';
+  document.getElementById('copyBtn').style.display = 'none';
+  document.getElementById('multiplierSection').style.display = 'none';
+  document.getElementById('historySection').style.display = 'none';
+  document.getElementById('genreSection').style.display = 'none';
+  document.getElementById('accuracySection').style.display = 'none';
+}
+
+function copyBPM() {
+  const bpm = document.getElementById('bpmDisplay').textContent;
+  if (bpm !== '--') {
+    navigator.clipboard.writeText(bpm).then(() => {
+      const feedback = document.getElementById('copyFeedback');
+      feedback.classList.add('show');
+      setTimeout(() => feedback.classList.remove('show'), 2000);
+    });
+  }
+}
+
+function setMultiplier(factor) {
+  const currentBpm = parseInt(document.getElementById('bpmDisplay').textContent);
+  if (currentBpm && currentBpm !== NaN) {
+    const newBpm = Math.round(currentBpm * factor);
+    document.getElementById('manualBpm').value = newBpm;
+    setManual(newBpm);
+  }
+}
+
+// Spacebar support
+document.addEventListener('keydown', e => {
+  if (e.code === 'Space' && e.target.tagName !== 'INPUT') {
+    e.preventDefault();
+    tap();
+  }
+});
+</script>
+
+<!-- realtime-bpm-analyzer (github.com/dlepaux/realtime-bpm-analyzer) — ESM module for auto BPM detection -->
+<script type="module">
+const fileInput = document.getElementById('audioFileInput');
+const statusEl = document.getElementById('autoDetectStatus');
+const textEl = document.getElementById('autoDetectText');
+const progressEl = document.getElementById('autoDetectProgress');
+
+if (fileInput) {
+  fileInput.addEventListener('change', async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    statusEl.style.display = 'block';
+    textEl.textContent = '🔍 טוען קובץ אודיו...';
+    progressEl.style.width = '10%';
+
+    try {
+      // Step 1: Decode audio file to AudioBuffer
+      const arrayBuffer = await file.arrayBuffer();
+      progressEl.style.width = '25%';
+      textEl.textContent = '🎵 מפענח אודיו...';
+
+      const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      const audioBuffer = await audioCtx.decodeAudioData(arrayBuffer);
+      progressEl.style.width = '40%';
+      textEl.textContent = '🔬 מנתח BPM...';
+
+      // Step 2: Import realtime-bpm-analyzer
+      const { analyzeFullBuffer } = await import(
+        'https://cdn.jsdelivr.net/npm/realtime-bpm-analyzer@5/+esm'
+      );
+      progressEl.style.width = '55%';
+
+      // Step 3: Analyze — the library works with OfflineAudioContext internally
+      const result = await analyzeFullBuffer(audioBuffer);
+      progressEl.style.width = '90%';
+
+      if (result && result.length > 0) {
+        // Sort candidates by count (confidence)
+        const sorted = result.sort((a, b) => b.count - a.count);
+        const detectedBpm = Math.round(sorted[0].tempo);
+
+        progressEl.style.width = '100%';
+        textEl.textContent = `✅ BPM שזוהה: ${detectedBpm}`;
+        textEl.style.color = '#00ff9d';
+
+        // Update the main display using existing function
+        const manualInput = document.getElementById('manualBpm');
+        if (manualInput) manualInput.value = detectedBpm;
+        if (typeof window.setManual === 'function') {
+          window.setManual(detectedBpm);
+        } else if (typeof setManual === 'function') {
+          setManual(detectedBpm);
+        }
+
+        // Show confidence if multiple candidates
+        if (sorted.length > 1) {
+          const alt = sorted.slice(1, 3).map(c => Math.round(c.tempo)).join(', ');
+          textEl.textContent += ` (אפשרויות: ${alt})`;
+        }
+      } else {
+        progressEl.style.width = '100%';
+        textEl.textContent = '⚠️ לא זוהה BPM — נסה קובץ אחר';
+        textEl.style.color = '#ff8c00';
+      }
+
+      // Clean up
+      audioCtx.close();
+    } catch (err) {
+      console.warn('Auto BPM detection failed:', err.message);
+      progressEl.style.width = '100%';
+      textEl.textContent = '❌ שגיאה בניתוח — ' + (err.message || 'נסה קובץ אחר');
+      textEl.style.color = '#ff3d6e';
+    }
+
+    // Reset after delay
+    setTimeout(() => {
+      statusEl.style.display = 'none';
+      textEl.style.color = '#00d4ff';
+      progressEl.style.width = '0%';
+      fileInput.value = '';
+    }, 5000);
+  });
+}
+
+// Expose setManual globally so the ESM module can call it
+if (typeof window.setManual === 'undefined') {
+  window.setManual = function(v) {
+    const el = document.getElementById('bpmDisplay');
+    if (el) el.textContent = v;
+  };
+}
+</script>
+</body>
+</html>

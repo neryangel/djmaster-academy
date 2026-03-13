@@ -1,0 +1,253 @@
+---
+import { getCollection, getEntry } from 'astro:content';
+import CourseLayout from '@layouts/CourseLayout.astro';
+
+export async function getStaticPaths() {
+  const courses = await getCollection('courses');
+  return courses.map((course) => ({
+    params: { slug: course.data.slug },
+    props: { course },
+  }));
+}
+
+interface Props {
+  course: any;
+}
+
+const { course } = Astro.props;
+const { title, description, metadata } = course.data;
+
+// Get lessons for this course
+const allLessons = await getCollection('lessons');
+const courseLessons = allLessons.filter((lesson) => lesson.data.course_id === course.data.id);
+
+// Sort lessons by lesson number
+courseLessons.sort((a, b) => a.data.lesson_number - b.data.lesson_number);
+
+// Group lessons by module
+const lessonsByModule = new Map();
+course.data.modules.forEach((moduleId: string) => {
+  const moduleLessons = courseLessons.filter((l) => l.data.module_id === moduleId);
+  if (moduleLessons.length > 0) {
+    lessonsByModule.set(moduleId, moduleLessons);
+  }
+});
+---
+
+<CourseLayout
+  title={title}
+  description={description.full}
+  level={metadata.level}
+  duration={metadata.duration_minutes}
+  lessonCount={metadata.lesson_count}
+>
+  <!-- Sidebar with lessons -->
+  <div slot="sidebar">
+    {Array.from(lessonsByModule.entries()).map(([moduleId, lessons]: [string, any[]]) => (
+      <div class="mb-6">
+        <h4 class="text-sm font-bold text-white/70 mb-3 uppercase tracking-wide">{moduleId}</h4>
+        <ul class="space-y-2">
+          {lessons.map((lesson, idx) => (
+            <li>
+              <a
+                href={`#lesson-${idx}`}
+                class="text-sm text-white/60 hover:text-[#00d4ff] transition block py-2 pl-3 border-l border-white/10 hover:border-[#00d4ff]"
+              >
+                {lesson.data.lesson_number}. {lesson.data.title}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    ))}
+  </div>
+
+  <!-- Main content -->
+  <div class="space-y-12">
+    <!-- Course Overview -->
+    <section>
+      <h2 class="text-3xl font-bold mb-6">📚 סקירת הקורס</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div class="bg-white/5 rounded-lg p-4 border border-white/10">
+          <div class="text-3xl font-bold text-[#00d4ff] mb-2">{metadata.lesson_count}</div>
+          <div class="text-white/60 text-sm">שיעורים</div>
+        </div>
+        <div class="bg-white/5 rounded-lg p-4 border border-white/10">
+          <div class="text-3xl font-bold text-[#7b2fff] mb-2">{metadata.duration_minutes}</div>
+          <div class="text-white/60 text-sm">דקות לימוד</div>
+        </div>
+        <div class="bg-white/5 rounded-lg p-4 border border-white/10">
+          <div class="text-3xl font-bold text-[#4ade80] mb-2">{metadata.module_count}</div>
+          <div class="text-white/60 text-sm">מודולים</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Learning Objectives -->
+    <section>
+      <h2 class="text-2xl font-bold mb-6">🎯 מטרות הלימוד</h2>
+      <ul class="space-y-3">
+        {course.data.learning_objectives.map((objective: string) => (
+          <li class="flex items-start gap-3">
+            <span class="text-[#00d4ff] mt-1">✓</span>
+            <span class="text-white/70">{objective}</span>
+          </li>
+        ))}
+      </ul>
+    </section>
+
+    <!-- Equipment Requirements -->
+    {course.data.equipment && (
+      <section>
+        <h2 class="text-2xl font-bold mb-6">🎛️ דרישות ציוד</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div>
+            <h3 class="text-white font-semibold mb-3">נדרש</h3>
+            <ul class="space-y-2">
+              {course.data.equipment.required.map((item: string) => (
+                <li class="flex items-center gap-2 text-white/70">
+                  <span class="text-[#FF6584]">•</span>
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+          {course.data.equipment.recommended.length > 0 && (
+            <div>
+              <h3 class="text-white font-semibold mb-3">מומלץ</h3>
+              <ul class="space-y-2">
+                {course.data.equipment.recommended.map((item: string) => (
+                  <li class="flex items-center gap-2 text-white/70">
+                    <span class="text-[#fbbf24]">•</span>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </div>
+      </section>
+    )}
+
+    <!-- Course Content/Lessons -->
+    <section>
+      <h2 class="text-2xl font-bold mb-6">📖 תוכן הקורס</h2>
+      <div class="space-y-8">
+        {Array.from(lessonsByModule.entries()).map(([moduleId, lessons]: [string, any[]]) => (
+          <div>
+            <h3 class="text-lg font-bold text-[#00d4ff] mb-4 uppercase tracking-wider">{moduleId}</h3>
+            <div class="space-y-4">
+              {lessons.map((lesson, idx) => (
+                <div
+                  id={`lesson-${idx}`}
+                  class="bg-white/5 border border-white/10 rounded-lg p-6 hover:border-white/20 transition"
+                >
+                  <div class="flex items-start justify-between mb-3">
+                    <h4 class="text-lg font-semibold text-white flex items-center gap-2">
+                      <span class="text-sm font-mono text-[#00d4ff] bg-[#00d4ff]/10 px-2 py-1 rounded">
+                        {lesson.data.lesson_number}
+                      </span>
+                      {lesson.data.title}
+                    </h4>
+                    {lesson.data.duration_minutes && (
+                      <span class="text-sm text-white/50">⏱️ {lesson.data.duration_minutes} דקות</span>
+                    )}
+                  </div>
+
+                  {lesson.data.description && (
+                    <p class="text-white/70 mb-4">{lesson.data.description}</p>
+                  )}
+
+                  {/* Key Terms */}
+                  {lesson.data.key_terms && lesson.data.key_terms.length > 0 && (
+                    <div class="mb-4">
+                      <h5 class="text-sm font-semibold text-[#7b2fff] mb-2">מונחים חשובים:</h5>
+                      <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
+                        {lesson.data.key_terms.map((term: any) => (
+                          <div class="text-sm bg-[#7b2fff]/10 rounded p-2">
+                            <strong class="text-white">{term.term}:</strong>
+                            <p class="text-white/70 text-xs mt-1">{term.definition}</p>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Audio Examples */}
+                  {lesson.data.audio_examples && lesson.data.audio_examples.length > 0 && (
+                    <div>
+                      <h5 class="text-sm font-semibold text-[#4ade80] mb-2">דוגמאות אודיו:</h5>
+                      <ul class="space-y-1">
+                        {lesson.data.audio_examples.map((example: any) => (
+                          <li class="text-sm text-white/70 flex items-center gap-2">
+                            <span>🎵</span>
+                            <a
+                              href={example.url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              class="text-[#00d4ff] hover:underline"
+                            >
+                              {example.title}
+                            </a>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- Completion Info -->
+    {course.data.completion && (
+      <section class="bg-[#6C63FF]/10 border border-[#6C63FF]/20 rounded-lg p-6">
+        <h2 class="text-2xl font-bold mb-4">✅ דרישות השלמה</h2>
+        <ul class="space-y-2 text-white/70">
+          {course.data.completion.quizzes_required && (
+            <li class="flex items-center gap-2">
+              <span class="text-[#6C63FF]">✓</span>
+              השלמת כל החידונים עם ציון מינימלי של {course.data.completion.min_quiz_score}%
+            </li>
+          )}
+          {course.data.completion.exercises_min > 0 && (
+            <li class="flex items-center gap-2">
+              <span class="text-[#6C63FF]">✓</span>
+              השלמת לפחות {course.data.completion.exercises_min} תרגילים מעשיים
+            </li>
+          )}
+          {course.data.completion.certificate && (
+            <li class="flex items-center gap-2">
+              <span class="text-[#6C63FF]">✓</span>
+              קבלת תעודה בסיום הקורס
+            </li>
+          )}
+        </ul>
+      </section>
+    )}
+
+    <!-- CTA -->
+    <section class="bg-gradient-to-r from-[#7b2fff]/20 to-[#00d4ff]/20 border border-[#00d4ff]/30 rounded-lg p-8 text-center">
+      <h2 class="text-2xl font-bold mb-3">מוכנים להתחיל?</h2>
+      <p class="text-white/70 mb-6">הקורס מתחיל עכשיו — אין הרשמה מסובכת, אין עלויות נסתרות</p>
+      <a
+        href="#"
+        style="
+          display: inline-block;
+          background: linear-gradient(135deg, #7b2fff, #00d4ff);
+          padding: 14px 40px;
+          border-radius: 12px;
+          color: white;
+          text-decoration: none;
+          font-weight: 700;
+          transition: all 0.3s;
+        "
+      >
+        🚀 התחל את הקורס עכשיו
+      </a>
+    </section>
+  </div>
+</CourseLayout>

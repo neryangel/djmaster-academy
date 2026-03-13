@@ -1,0 +1,1323 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:;">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Harmonic Mixing Wheel — DJMaster Academy</title>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Heebo', sans-serif;
+    background: #0A0A0F;
+    color: #e8e8e8;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    overflow-x: hidden;
+  }
+
+  h1 {
+    font-size: 2rem;
+    color: #7b2fff;
+    margin-bottom: 6px;
+    text-align: center;
+  }
+
+  .subtitle {
+    color: #888;
+    margin-bottom: 30px;
+    font-size: 0.95rem;
+    text-align: center;
+  }
+
+  .layout {
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+    width: 100%;
+    max-width: 1400px;
+  }
+
+  .canvas-wrapper {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+  }
+
+  canvas {
+    cursor: pointer;
+    border-radius: 50%;
+    background: radial-gradient(circle, #1A1A2E 0%, #12121F 70%, #0A0A0F 100%);
+    border: 2px solid #2A2A3E;
+    max-width: 100%;
+    height: auto;
+    touch-action: none;
+    display: block;
+  }
+
+  .keyboard-hint {
+    font-size: 0.8rem;
+    color: #888;
+    text-align: center;
+  }
+
+  .info-panel {
+    width: 100%;
+    max-width: 320px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  /* Two-Key Mode */
+  .two-key-mode {
+    background: #12121F;
+    border: 1px solid #2A2A3E;
+    border-radius: 12px;
+    padding: 16px;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+  }
+
+  .key-slot {
+    flex: 1;
+    padding: 12px;
+    background: #1A1A2E;
+    border: 2px dashed #2A2A3E;
+    border-radius: 8px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s;
+    min-height: 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .key-slot:hover {
+    border-color: #7b2fff;
+    background: #1f1a2e;
+  }
+
+  .key-slot.active {
+    border-color: #00d4ff;
+    border-style: solid;
+    background: rgba(0, 212, 255, 0.1);
+  }
+
+  .key-slot .slot-label {
+    font-size: 0.75rem;
+    color: #888;
+    margin-bottom: 4px;
+  }
+
+  .key-slot .slot-value {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #7b2fff;
+  }
+
+  .key-slot.filled .slot-value {
+    color: #00d4ff;
+  }
+
+  .vs-text {
+    color: #888;
+    font-size: 0.9rem;
+    text-align: center;
+  }
+
+  /* Compatibility Score */
+  .compatibility-score {
+    background: #12121F;
+    border: 1px solid #2A2A3E;
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+    display: none;
+  }
+
+  .compatibility-score.show {
+    display: block;
+    animation: slideIn 0.3s ease;
+  }
+
+  @keyframes slideIn {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .score-title {
+    color: #7b2fff;
+    font-size: 0.9rem;
+    margin-bottom: 8px;
+    font-weight: 600;
+  }
+
+  .score-bar {
+    height: 8px;
+    background: #1A1A2E;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 12px;
+  }
+
+  .score-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #7b2fff, #00d4ff);
+    transition: width 0.3s ease;
+  }
+
+  .score-value {
+    font-size: 1.8rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, #7b2fff, #00d4ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 8px;
+  }
+
+  .score-label {
+    font-size: 0.85rem;
+    color: #00ff9d;
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+
+  .score-explanation {
+    font-size: 0.8rem;
+    color: #aaa;
+    line-height: 1.4;
+  }
+
+  /* Key Finder */
+  .key-finder {
+    background: #12121F;
+    border: 1px solid #2A2A3E;
+    border-radius: 12px;
+    padding: 16px;
+  }
+
+  .key-finder h3 {
+    color: #7b2fff;
+    margin-bottom: 12px;
+    font-size: 0.95rem;
+  }
+
+  .finder-input-group {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+
+  .finder-input {
+    flex: 1;
+    padding: 10px 12px;
+    background: #1A1A2E;
+    border: 1px solid #2A2A3E;
+    border-radius: 8px;
+    color: #e8e8e8;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.9rem;
+  }
+
+  .finder-input:focus {
+    outline: none;
+    border-color: #00d4ff;
+    background: #1f1f3e;
+    box-shadow: 0 0 8px rgba(0, 212, 255, 0.2);
+  }
+
+  .finder-suggestions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .suggestion-tag {
+    padding: 6px 12px;
+    background: #1A1A2E;
+    border: 1px solid #2A2A3E;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    transition: all 0.2s;
+  }
+
+  .suggestion-tag:hover {
+    border-color: #7b2fff;
+    background: #1f1a3e;
+  }
+
+  .suggestion-tag.active {
+    background: #7b2fff;
+    border-color: #7b2fff;
+    color: #fff;
+  }
+
+  /* Selected Key Display */
+  .selected-key {
+    background: linear-gradient(135deg, #1a1a2e 0%, #12121f 100%);
+    border: 2px solid #7b2fff;
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .selected-key::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(circle, rgba(123, 47, 255, 0.1) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+  }
+
+  .selected-key .key-name {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #00d4ff;
+    font-family: 'Space Mono', monospace;
+    position: relative;
+    z-index: 1;
+  }
+
+  .selected-key .key-detail {
+    font-size: 0.9rem;
+    color: #aaa;
+    margin-top: 8px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .copy-button {
+    margin-top: 12px;
+    padding: 8px 16px;
+    background: #7b2fff;
+    border: none;
+    border-radius: 6px;
+    color: #fff;
+    cursor: pointer;
+    font-size: 0.8rem;
+    font-weight: 600;
+    transition: all 0.2s;
+    position: relative;
+    z-index: 1;
+  }
+
+  .copy-button:hover {
+    background: #9d4aff;
+    box-shadow: 0 0 12px rgba(123, 47, 255, 0.4);
+  }
+
+  .copy-button.copied {
+    background: #00ff9d;
+    color: #0A0A0F;
+  }
+
+  /* Transition Suggestions */
+  .card {
+    background: #12121F;
+    border: 1px solid #2A2A3E;
+    border-radius: 12px;
+    padding: 16px;
+  }
+
+  .card h3 {
+    color: #7b2fff;
+    margin-bottom: 12px;
+    font-size: 0.95rem;
+    font-weight: 600;
+  }
+
+  .transition-group {
+    margin-bottom: 16px;
+  }
+
+  .transition-type {
+    font-size: 0.8rem;
+    color: #888;
+    font-weight: 600;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+  }
+
+  .key-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .key-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+    border-radius: 8px;
+    border: 1px solid #2A2A3E;
+    cursor: pointer;
+    transition: all 0.2s;
+    background: #1A1A2E;
+  }
+
+  .key-item:hover {
+    border-color: #7b2fff;
+    background: #1f1a3e;
+    transform: translateX(-4px);
+  }
+
+  .key-item .dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .key-item .key-id {
+    font-weight: 700;
+    min-width: 40px;
+    font-family: 'Space Mono', monospace;
+  }
+
+  .key-item .key-note {
+    color: #aaa;
+    font-size: 0.8rem;
+    flex: 1;
+  }
+
+  .key-item .mix-type {
+    font-size: 0.75rem;
+    color: #888;
+    white-space: nowrap;
+  }
+
+  .legend {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 12px;
+  }
+
+  .leg-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.75rem;
+    color: #aaa;
+  }
+
+  .leg-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+  }
+
+  .tip {
+    background: rgba(0, 255, 157, 0.05);
+    border: 1px solid #00ff9d;
+    border-radius: 8px;
+    padding: 12px 14px;
+    font-size: 0.8rem;
+    color: #aaa;
+    line-height: 1.6;
+  }
+
+  .tip strong {
+    color: #00ff9d;
+  }
+
+  /* Tutorial Overlay */
+  .tutorial-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(10, 10, 15, 0.95);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    backdrop-filter: blur(4px);
+  }
+
+  .tutorial-content {
+    background: linear-gradient(135deg, #1A1A2E 0%, #12121F 100%);
+    border: 2px solid #7b2fff;
+    border-radius: 16px;
+    padding: 40px;
+    max-width: 500px;
+    text-align: center;
+    animation: fadeInScale 0.3s ease;
+  }
+
+  @keyframes fadeInScale {
+    from {
+      opacity: 0;
+      transform: scale(0.9);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  .tutorial-content h2 {
+    font-size: 1.8rem;
+    color: #00d4ff;
+    margin-bottom: 16px;
+  }
+
+  .tutorial-content p {
+    color: #aaa;
+    line-height: 1.7;
+    margin-bottom: 12px;
+    font-size: 0.95rem;
+  }
+
+  .tutorial-steps {
+    text-align: left;
+    background: #1A1A2E;
+    border-radius: 8px;
+    padding: 16px;
+    margin: 20px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .tutorial-step {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+
+  .step-number {
+    min-width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: #7b2fff;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  .step-text {
+    color: #aaa;
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+
+  .tutorial-button {
+    margin-top: 24px;
+    padding: 12px 32px;
+    background: linear-gradient(135deg, #7b2fff, #00d4ff);
+    border: none;
+    border-radius: 8px;
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: all 0.3s;
+  }
+
+  .tutorial-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(123, 47, 255, 0.3);
+  }
+
+  /* Responsive */
+  @media (max-width: 1024px) {
+    .layout {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .info-panel {
+      width: 100%;
+      max-width: 320px;
+    }
+  }
+
+  @media (max-width: 600px) {
+    h1 {
+      font-size: 1.5rem;
+    }
+
+    .layout {
+      gap: 20px;
+      padding: 0 10px;
+    }
+
+    canvas {
+      width: 90vw;
+      max-width: 320px;
+    }
+
+    .info-panel {
+      width: 90vw;
+      max-width: 100%;
+    }
+
+    .tutorial-content {
+      padding: 30px 20px;
+      margin: 20px;
+      max-width: 90vw;
+    }
+
+    .tutorial-content h2 {
+      font-size: 1.4rem;
+    }
+  }
+
+  /* Empty state */
+  .empty-state {
+    color: #666;
+    font-size: 0.85rem;
+    padding: 12px;
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+
+<h1>🎡 Harmonic Mixing Wheel</h1>
+<p class="subtitle">Camelot System — בחר מפתח ורואה אילו שירים ניתן לערבב</p>
+
+<div class="layout">
+  <div class="canvas-wrapper">
+    <canvas id="wheel"></canvas>
+    <div class="keyboard-hint">⌨️ Arrow keys to navigate • Enter to select</div>
+  </div>
+
+  <div class="info-panel">
+    <!-- Two-Key Mode -->
+    <div class="two-key-mode">
+      <div class="key-slot" id="keySlot1">
+        <div class="slot-label">Key 1</div>
+        <div class="slot-value">?</div>
+      </div>
+      <div class="vs-text">vs</div>
+      <div class="key-slot" id="keySlot2">
+        <div class="slot-label">Key 2</div>
+        <div class="slot-value">?</div>
+      </div>
+    </div>
+
+    <!-- Compatibility Score -->
+    <div class="compatibility-score" id="compatScore">
+      <div class="score-title">⚡ COMPATIBILITY</div>
+      <div class="score-value" id="scoreValue">85%</div>
+      <div class="score-bar">
+        <div class="score-fill" id="scoreFill" style="width: 85%"></div>
+      </div>
+      <div class="score-label" id="scoreLabel">Perfect Match</div>
+      <div class="score-explanation" id="scoreExplain">Matching keys create seamless transitions with minimal tempo adjustment needed.</div>
+    </div>
+
+    <!-- Selected Key -->
+    <div class="selected-key" id="selectedPanel">
+      <div class="key-name" id="selectedKey">בחר מפתח</div>
+      <div class="key-detail" id="selectedDetail">לחץ על הגלגל או השתמש בחצים</div>
+      <button class="copy-button" id="copyBtn" style="display:none">Copy Code</button>
+    </div>
+
+    <!-- Key Finder -->
+    <div class="key-finder">
+      <h3>🔍 Key Finder</h3>
+      <div class="finder-input-group">
+        <input type="text" class="finder-input" id="finderInput" placeholder="Type: Am, C Major...">
+      </div>
+      <div class="finder-suggestions" id="finderSuggestions"></div>
+    </div>
+
+    <!-- Compatible Keys / Transition Suggestions -->
+    <div class="card">
+      <h3>🎯 Mixing Ideas</h3>
+      <div class="legend">
+        <div class="leg-item"><div class="leg-dot" style="background:#00ff9d"></div>Perfect</div>
+        <div class="leg-item"><div class="leg-dot" style="background:#ffd60a"></div>Energy</div>
+        <div class="leg-item"><div class="leg-dot" style="background:#00d4ff"></div>Safe</div>
+      </div>
+      <div id="transitionContainer"></div>
+    </div>
+
+    <div class="tip">
+      <strong>💡 Quick Guide:</strong> Perfect = same key or ±1 in A/B • Energy = +1 jump • Safe = switch A↔B at same number
+    </div>
+  </div>
+</div>
+
+<!-- Tutorial Overlay -->
+<div class="tutorial-overlay" id="tutorialOverlay">
+  <div class="tutorial-content">
+    <h2>Welcome to Harmonic Mixing!</h2>
+    <p>Master the Camelot Wheel system to find compatible keys for your DJ sets.</p>
+
+    <div class="tutorial-steps">
+      <div class="tutorial-step">
+        <div class="step-number">1</div>
+        <div class="step-text"><strong>Select a Key:</strong> Click on the wheel or use arrow keys</div>
+      </div>
+      <div class="tutorial-step">
+        <div class="step-number">2</div>
+        <div class="step-text"><strong>Compare Two Keys:</strong> Click two keys to see compatibility</div>
+      </div>
+      <div class="tutorial-step">
+        <div class="step-number">3</div>
+        <div class="step-text"><strong>Find Keys:</strong> Search by name (Am, C Major, etc)</div>
+      </div>
+      <div class="tutorial-step">
+        <div class="step-number">4</div>
+        <div class="step-text"><strong>Copy & Use:</strong> Click copy to use the code in your DJ software</div>
+      </div>
+    </div>
+
+    <p style="font-size: 0.85rem; color: #888; margin-top: 16px;">🎯 התאמה מושלמת • ⚡ שינוי אנרגיה • 🎭 שינוי מצב רוח • 🔮 מעברים מתקדמים<br><span style="color:#555;font-size:0.75rem;">מבוסס על 9 כללי Camelot-Wheel-Notation</span></p>
+
+    <button class="tutorial-button" id="tutorialBtn">Got It!</button>
+  </div>
+</div>
+
+<script>
+const CAMELOT = [
+  { id: '1A',  note: 'Ab minor',  noteHe: 'לה♭ מינור',  color: '#1abc9c', angle: 0 },
+  { id: '2A',  note: 'Eb minor',  noteHe: 'מי♭ מינור',  color: '#16a085', angle: 30 },
+  { id: '3A',  note: 'Bb minor',  noteHe: 'סי♭ מינור',  color: '#27ae60', angle: 60 },
+  { id: '4A',  note: 'F minor',   noteHe: 'פה מינור',   color: '#2ecc71', angle: 90 },
+  { id: '5A',  note: 'C minor',   noteHe: 'דו מינור',   color: '#f39c12', angle: 120 },
+  { id: '6A',  note: 'G minor',   noteHe: 'סול מינור',  color: '#e67e22', angle: 150 },
+  { id: '7A',  note: 'D minor',   noteHe: 'רה מינור',   color: '#e74c3c', angle: 180 },
+  { id: '8A',  note: 'A minor',   noteHe: 'לה מינור',   color: '#c0392b', angle: 210 },
+  { id: '9A',  note: 'E minor',   noteHe: 'מי מינור',   color: '#9b59b6', angle: 240 },
+  { id: '10A', note: 'B minor',   noteHe: 'סי מינור',   color: '#8e44ad', angle: 270 },
+  { id: '11A', note: 'F# minor',  noteHe: 'פה# מינור',  color: '#2980b9', angle: 300 },
+  { id: '12A', note: 'Db minor',  noteHe: 'רה♭ מינור',  color: '#3498db', angle: 330 },
+  { id: '1B',  note: 'B major',   noteHe: 'סי מז\'ור',   color: '#1abc9c', angle: 0 },
+  { id: '2B',  note: 'F# major',  noteHe: 'פה# מז\'ור',  color: '#16a085', angle: 30 },
+  { id: '3B',  note: 'Db major',  noteHe: 'רה♭ מז\'ור',  color: '#27ae60', angle: 60 },
+  { id: '4B',  note: 'Ab major',  noteHe: 'לה♭ מז\'ור',  color: '#2ecc71', angle: 90 },
+  { id: '5B',  note: 'Eb major',  noteHe: 'מי♭ מז\'ור',  color: '#f39c12', angle: 120 },
+  { id: '6B',  note: 'Bb major',  noteHe: 'סי♭ מז\'ור',  color: '#e67e22', angle: 150 },
+  { id: '7B',  note: 'F major',   noteHe: 'פה מז\'ור',   color: '#e74c3c', angle: 180 },
+  { id: '8B',  note: 'C major',   noteHe: 'דו מז\'ור',   color: '#c0392b', angle: 210 },
+  { id: '9B',  note: 'E major',   noteHe: 'מי מז\'ור',   color: '#9b59b6', angle: 240 },
+  { id: '10B', note: 'A major',   noteHe: 'לה מז\'ור',   color: '#8e44ad', angle: 270 },
+  { id: '11B', note: 'B major',   noteHe: 'סי מז\'ור',   color: '#2980b9', angle: 300 },
+  { id: '12B', note: 'G major',   noteHe: 'סול מז\'ור',  color: '#3498db', angle: 330 },
+];
+
+// Musical note aliases for key finder
+const NOTE_ALIASES = {
+  'am': '8A', 'a minor': '8A', 'la': '8A', 'la minor': '8A',
+  'em': '9A', 'e minor': '9A', 'mi': '9A', 'mi minor': '9A',
+  'dm': '7A', 'd minor': '7A', 're': '7A', 're minor': '7A',
+  'bm': '10A', 'b minor': '10A', 'si': '10A', 'si minor': '10A',
+  'gm': '6A', 'g minor': '6A', 'sol': '6A', 'sol minor': '6A',
+  'fm': '4A', 'f minor': '4A', 'fa': '4A', 'fa minor': '4A',
+  'cm': '5A', 'c minor': '5A', 'do': '5A', 'do minor': '5A',
+  'c': '8B', 'c major': '8B', 'do': '8B', 'do major': '8B',
+  'g': '6B', 'g major': '6B', 'sol': '6B', 'sol major': '6B',
+  'd': '2A', 'd major': '2B', 're': '2B', 're major': '2B',
+  'a': '8B', 'a major': '10B', 'la': '10B', 'la major': '10B',
+  'e': '9B', 'e major': '9B', 'mi': '9B', 'mi major': '9B',
+  'b': '1B', 'b major': '1B', 'si': '1B', 'si major': '1B',
+  'f': '7B', 'f major': '7B', 'fa': '7B', 'fa major': '7B',
+  'ab': '4B', 'ab major': '4B', 'la♭': '4B',
+  'eb': '5B', 'eb major': '5B', 'mi♭': '5B',
+  'bb': '6B', 'bb major': '6B', 'si♭': '6B',
+  'db': '3B', 'db major': '3B', 're♭': '3B',
+  'gb': '2B', 'gb major': '2B', 'sol♭': '2B',
+  'f#': '2B', 'f# major': '2B', 'fa#': '2B',
+};
+
+const A_KEYS = CAMELOT.slice(0, 12);
+const B_KEYS = CAMELOT.slice(12, 24);
+
+let selectedIdx = null;
+let selectedType = null;
+let secondaryIdx = null;
+let secondaryType = null;
+let keyboardIdx = 0;
+let keyboardType = 'A';
+let showTutorial = !localStorage.getItem('harmonic-wheel-visited');
+
+const canvas = document.getElementById('wheel');
+const ctx = canvas.getContext('2d');
+
+// Responsive canvas sizing
+function resizeCanvas() {
+  const container = canvas.parentElement;
+  const maxSize = Math.min(window.innerWidth - 40, 400);
+  const size = Math.max(280, Math.min(maxSize, 400));
+
+  canvas.width = size;
+  canvas.height = size;
+
+  drawWheel();
+}
+
+const outerR = 0.45, innerR = 0.28, centerR = 0.16;
+const sliceAngle = (2 * Math.PI) / 12;
+
+function getCanvasCoords() {
+  const size = canvas.width;
+  return {
+    cx: size / 2,
+    cy: size / 2,
+    size: size,
+    outerR: size * outerR,
+    innerR: size * innerR,
+    centerR: size * centerR
+  };
+}
+
+function drawWheel(hovIdx = null, hovType = null) {
+  const coords = getCanvasCoords();
+  const { cx, cy, size, outerR, innerR, centerR } = coords;
+
+  ctx.clearRect(0, 0, size, size);
+
+  // Draw gradient background
+  const bgGrad = ctx.createRadialGradient(cx, cy, 0, cx, cy, outerR + 20);
+  bgGrad.addColorStop(0, 'rgba(123, 47, 255, 0.05)');
+  bgGrad.addColorStop(1, 'rgba(0, 0, 0, 0)');
+  ctx.fillStyle = bgGrad;
+  ctx.fillRect(0, 0, size, size);
+
+  for (let i = 0; i < 12; i++) {
+    const startAngle = i * sliceAngle - Math.PI / 2 - sliceAngle / 2;
+    const endAngle = startAngle + sliceAngle;
+    const isSelA = selectedType === 'A' && selectedIdx === i;
+    const isSelB = selectedType === 'B' && selectedIdx === i;
+    const isSecA = secondaryType === 'A' && secondaryIdx === i;
+    const isSecB = secondaryType === 'B' && secondaryIdx === i;
+    const isHovA = hovType === 'A' && hovIdx === i;
+    const isHovB = hovType === 'B' && hovIdx === i;
+    const isKbdA = keyboardType === 'A' && keyboardIdx === i;
+    const isKbdB = keyboardType === 'B' && keyboardIdx === i;
+    const isCompatA = selectedIdx !== null && isCompatible(i, 'A');
+    const isCompatB = selectedIdx !== null && isCompatible(i, 'B');
+
+    // Outer ring (B - major)
+    ctx.beginPath();
+    ctx.moveTo(cx, cy);
+    ctx.arc(cx, cy, outerR, startAngle, endAngle);
+    ctx.closePath();
+    let colorB = B_KEYS[i].color;
+
+    if (isSelB) {
+      ctx.fillStyle = '#fff';
+      ctx.shadowColor = 'rgba(0, 212, 255, 0.5)';
+      ctx.shadowBlur = 15;
+    } else if (isSecB) {
+      ctx.fillStyle = lighten(colorB, 0.6);
+      ctx.shadowColor = 'rgba(123, 47, 255, 0.3)';
+      ctx.shadowBlur = 10;
+    } else if (isHovB || isKbdB) {
+      ctx.fillStyle = lighten(colorB);
+      ctx.shadowBlur = 0;
+    } else if (isCompatB) {
+      ctx.fillStyle = lighten(colorB, 0.3);
+      ctx.shadowBlur = 0;
+    } else {
+      ctx.fillStyle = darken(colorB, 0.5);
+      ctx.shadowBlur = 0;
+    }
+    ctx.fill();
+    ctx.shadowColor = 'transparent';
+    ctx.strokeStyle = '#2A2A3E';
+    ctx.lineWidth = size > 350 ? 3 : 2;
+    ctx.stroke();
+
+    // Inner ring (A - minor)
+    ctx.beginPath();
+    ctx.moveTo(cx, cy);
+    ctx.arc(cx, cy, innerR, startAngle, endAngle);
+    ctx.closePath();
+    let colorA = A_KEYS[i].color;
+
+    if (isSelA) {
+      ctx.fillStyle = '#fff';
+      ctx.shadowColor = 'rgba(0, 212, 255, 0.5)';
+      ctx.shadowBlur = 15;
+    } else if (isSecA) {
+      ctx.fillStyle = lighten(colorA, 0.6);
+      ctx.shadowColor = 'rgba(123, 47, 255, 0.3)';
+      ctx.shadowBlur = 10;
+    } else if (isHovA || isKbdA) {
+      ctx.fillStyle = lighten(colorA);
+      ctx.shadowBlur = 0;
+    } else if (isCompatA) {
+      ctx.fillStyle = lighten(colorA, 0.3);
+      ctx.shadowBlur = 0;
+    } else {
+      ctx.fillStyle = darken(colorA, 0.5);
+      ctx.shadowBlur = 0;
+    }
+    ctx.fill();
+    ctx.shadowColor = 'transparent';
+    ctx.strokeStyle = '#2A2A3E';
+    ctx.lineWidth = size > 350 ? 3 : 2;
+    ctx.stroke();
+
+    // Labels
+    const midAngle = startAngle + sliceAngle / 2;
+    const num = i + 1;
+
+    // B label (outer)
+    const bR = (outerR + innerR) / 2;
+    ctx.save();
+    ctx.translate(cx + bR * Math.cos(midAngle), cy + bR * Math.sin(midAngle));
+    ctx.fillStyle = isSelB || isSecB ? '#7b2fff' : '#fff';
+    ctx.font = `bold ${Math.max(10, size / 30)}px 'Space Mono'`;
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText(num + 'B', 0, 0);
+    ctx.restore();
+
+    // A label (inner)
+    const aR = (innerR + centerR) / 2;
+    ctx.save();
+    ctx.translate(cx + aR * Math.cos(midAngle), cy + aR * Math.sin(midAngle));
+    ctx.fillStyle = isSelA || isSecA ? '#7b2fff' : '#fff';
+    ctx.font = `bold ${Math.max(10, size / 30)}px 'Space Mono'`;
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText(num + 'A', 0, 0);
+    ctx.restore();
+  }
+
+  // Center circle
+  ctx.beginPath();
+  ctx.arc(cx, cy, centerR, 0, 2 * Math.PI);
+
+  const centerGrad = ctx.createRadialGradient(cx, cy, 0, cx, cy, centerR);
+  centerGrad.addColorStop(0, '#1f1a3e');
+  centerGrad.addColorStop(1, '#1a1a2e');
+  ctx.fillStyle = centerGrad;
+  ctx.fill();
+
+  ctx.strokeStyle = '#7b2fff';
+  ctx.lineWidth = 2;
+  ctx.stroke();
+
+  ctx.fillStyle = '#7b2fff';
+  ctx.font = `bold ${Math.max(10, size / 28)}px 'Space Mono'`;
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.fillText('Camelot', cx, cy - centerR * 0.3);
+
+  ctx.fillStyle = '#888';
+  ctx.font = `${Math.max(8, size / 40)}px 'Heebo'`;
+  ctx.fillText('System', cx, cy + centerR * 0.3);
+}
+
+function lighten(hex, factor = 0.5) {
+  const r = parseInt(hex.slice(1, 3), 16);
+  const g = parseInt(hex.slice(3, 5), 16);
+  const b = parseInt(hex.slice(5, 7), 16);
+  return `rgba(${r},${g},${b},${0.5 + factor * 0.5})`;
+}
+
+function darken(hex, factor = 0.5) {
+  const r = Math.round(parseInt(hex.slice(1, 3), 16) * factor);
+  const g = Math.round(parseInt(hex.slice(3, 5), 16) * factor);
+  const b = Math.round(parseInt(hex.slice(5, 7), 16) * factor);
+  return `rgb(${r},${g},${b})`;
+}
+
+function getSliceAt(x, y) {
+  const coords = getCanvasCoords();
+  const { cx, cy, outerR, innerR, centerR } = coords;
+
+  const dx = x - cx, dy = y - cy;
+  const dist = Math.sqrt(dx * dx + dy * dy);
+  if (dist < centerR || dist > outerR) return null;
+  const type = dist < innerR ? 'A' : 'B';
+  let angle = Math.atan2(dy, dx) + Math.PI / 2 + sliceAngle / 2;
+  if (angle < 0) angle += 2 * Math.PI;
+  const idx = Math.floor(((angle % (2 * Math.PI)) / (2 * Math.PI)) * 12);
+  return { idx: idx % 12, type };
+}
+
+// ═══════════════════════════════════════════════════════════════
+// Camelot-Wheel-Notation — 9 harmonic mixing rules
+// Based on: github.com/regorxxx/Camelot-Wheel-Notation
+// Rules: perfectMatch, energyBoost, energyDrop, energySwitch,
+//        moodBoost, moodDrop, domKey, subDomKey, energyRaise
+// ═══════════════════════════════════════════════════════════════
+
+function wrapNum(n) { return ((n - 1 + 12) % 12) + 1; }
+
+function getHarmonicRelation(num1, type1, num2, type2) {
+  // Returns { rule, score, label, labelHe, explain } or null
+  const n1 = num1, t1 = type1, n2 = num2, t2 = type2;
+
+  // 1. Identical Key — same number, same type
+  if (n1 === n2 && t1 === t2)
+    return { rule: 'identical', score: 100, label: 'Identical Key', labelHe: 'מפתח זהה',
+      explain: 'מפתח ומוד זהים. המעבר החלק ביותר.' };
+
+  // 2. Perfect Match — same number, A↔B (relative major/minor)
+  if (n1 === n2 && t1 !== t2)
+    return { rule: 'perfectMatch', score: 95, label: 'Perfect Match', labelHe: 'התאמה מושלמת',
+      explain: 'מעבר בין מינור למז\'ור (או להיפך) באותו מספר Camelot. שינוי מצב רוח עדין.' };
+
+  // 3. Energy Boost — +1 same type (move clockwise)
+  if (t1 === t2 && n2 === wrapNum(n1 + 1))
+    return { rule: 'energyBoost', score: 80, label: 'Energy Boost', labelHe: 'העלאת אנרגיה',
+      explain: 'צעד אחד בכיוון השעון. מעלה את האנרגיה בעדינות.' };
+
+  // 4. Energy Drop — -1 same type (move counter-clockwise)
+  if (t1 === t2 && n2 === wrapNum(n1 - 1))
+    return { rule: 'energyDrop', score: 80, label: 'Energy Drop', labelHe: 'הורדת אנרגיה',
+      explain: 'צעד אחד נגד כיוון השעון. מוריד את האנרגיה בהדרגה.' };
+
+  // 5. Mood Boost — A→B at +1 (brighter energy) — must be before generic energySwitch
+  if (t1 === 'A' && t2 === 'B' && n2 === wrapNum(n1 + 1))
+    return { rule: 'moodBoost', score: 65, label: 'Mood Boost', labelHe: 'העלאת מצב רוח',
+      explain: 'ממינור למז\'ור עם צעד קדימה. מוסיף בהירות ואופטימיות.' };
+
+  // 6. Mood Drop — B→A at -1 (darker energy) — must be before generic energySwitch
+  if (t1 === 'B' && t2 === 'A' && n2 === wrapNum(n1 - 1))
+    return { rule: 'moodDrop', score: 65, label: 'Mood Drop', labelHe: 'הורדת מצב רוח',
+      explain: 'ממז\'ור למינור עם צעד אחורה. מוסיף עומק ורצינות.' };
+
+  // 7. Energy Switch — A↔B at ±1 (remaining cross-mode ±1 cases)
+  if (t1 !== t2 && (n2 === wrapNum(n1 + 1) || n2 === wrapNum(n1 - 1)))
+    return { rule: 'energySwitch', score: 60, label: 'Energy Switch', labelHe: 'החלפת אנרגיה',
+      explain: 'שינוי מוד + צעד. מעבר בטוח עם שינוי מצב רוח ואנרגיה.' };
+
+  // 8. Dominant Key — +7 semitones (same type)
+  if (t1 === t2 && n2 === wrapNum(n1 + 7))
+    return { rule: 'domKey', score: 50, label: 'Dominant Key', labelHe: 'מפתח דומיננטי',
+      explain: 'קפיצה לדומיננטה (+7). מעבר דרמטי אך הרמוני.' };
+
+  // 9. Sub-dominant Key — -7 semitones (same type)
+  if (t1 === t2 && n2 === wrapNum(n1 - 7))
+    return { rule: 'subDomKey', score: 50, label: 'Sub-Dominant Key', labelHe: 'מפתח סאב-דומיננטי',
+      explain: 'קפיצה לסאב-דומיננטה (-7). מעבר דרמטי עם תחושת "חזרה הביתה".' };
+
+  // 10. Energy Raise — +2 same type (double boost)
+  if (t1 === t2 && n2 === wrapNum(n1 + 2))
+    return { rule: 'energyRaise', score: 40, label: 'Energy Raise', labelHe: 'קפיצת אנרגיה',
+      explain: 'שני צעדים קדימה. קפיצת אנרגיה ניכרת — מתאים לבילדאפים.' };
+
+  return null;
+}
+
+function isCompatible(idx, type) {
+  if (selectedIdx === null) return false;
+  const rel = getHarmonicRelation(selectedIdx + 1, selectedType, idx + 1, type);
+  return rel !== null;
+}
+
+function getCompatibilityScore(idx1, type1, idx2, type2) {
+  if (idx1 === null || idx2 === null) return null;
+  const rel = getHarmonicRelation(idx1 + 1, type1, idx2 + 1, type2);
+  if (rel) return { score: rel.score, label: rel.labelHe, explain: rel.explain };
+  return { score: 15, label: 'מיקס מסוכן', explain: 'המפתחות לא תואמים הרמונית. המיקס עלול להישמע צורם.' };
+}
+
+function selectKey(idx, type) {
+  selectedIdx = idx;
+  selectedType = type;
+  secondaryIdx = null;
+  secondaryType = null;
+
+  updateDisplay();
+  drawWheel();
+}
+
+function selectSecondaryKey(idx, type) {
+  secondaryIdx = idx;
+  secondaryType = type;
+  updateDisplay();
+  drawWheel();
+}
+
+function updateDisplay() {
+  const key = selectedType ? (selectedType === 'A' ? A_KEYS[selectedIdx] : B_KEYS[selectedIdx]) : null;
+
+  if (key) {
+    document.getElementById('selectedKey').textContent = key.id;
+    document.getElementById('selectedDetail').textContent = key.noteHe + ' • ' + key.note;
+    document.getElementById('copyBtn').style.display = 'block';
+  } else {
+    document.getElementById('selectedKey').textContent = 'בחר מפתח';
+    document.getElementById('selectedDetail').textContent = 'לחץ על הגלגל או השתמש בחצים';
+    document.getElementById('copyBtn').style.display = 'none';
+  }
+
+  // Update key slots
+  document.getElementById('keySlot1').classList.toggle('filled', selectedIdx !== null);
+  document.getElementById('keySlot1').querySelector('.slot-value').textContent = selectedIdx !== null ?
+    `${selectedIdx + 1}${selectedType}` : '?';
+
+  document.getElementById('keySlot2').classList.toggle('filled', secondaryIdx !== null);
+  document.getElementById('keySlot2').querySelector('.slot-value').textContent = secondaryIdx !== null ?
+    `${secondaryIdx + 1}${secondaryType}` : '?';
+
+  // Update compatibility score
+  const scoreData = getCompatibilityScore(selectedIdx, selectedType, secondaryIdx, secondaryType);
+  const scoreEl = document.getElementById('compatScore');
+
+  if (scoreData && secondaryIdx !== null) {
+    scoreEl.classList.add('show');
+    document.getElementById('scoreValue').textContent = scoreData.score + '%';
+    document.getElementById('scoreFill').style.width = scoreData.score + '%';
+    document.getElementById('scoreLabel').textContent = scoreData.label;
+    document.getElementById('scoreExplain').textContent = scoreData.explain;
+  } else {
+    scoreEl.classList.remove('show');
+  }
+
+  // Update compatible keys list
+  if (selectedIdx !== null) {
+    const compats = getCompatibles();
+    updateTransitionSuggestions(compats);
+  } else {
+    document.getElementById('transitionContainer').innerHTML =
+      '<div class="empty-state">בחר מפתח כדי לראות הצעות</div>';
+  }
+}
+
+function getCompatibles() {
+  if (selectedIdx === null) return [];
+  const selNum = selectedIdx + 1;
+  const results = { perfect: [], energy: [], mood: [], advanced: [] };
+
+  for (let i = 0; i < 12; i++) {
+    const num = i + 1;
+    ['A', 'B'].forEach(type => {
+      if (i === selectedIdx && type === selectedType) return;
+      const rel = getHarmonicRelation(selNum, selectedType, num, type);
+      if (!rel) return;
+
+      const key = type === 'A' ? A_KEYS[i] : B_KEYS[i];
+      const entry = { id: `${num}${type}`, num, type, rule: rel.rule, key, rel };
+
+      if (rel.rule === 'perfectMatch' || rel.rule === 'identical')
+        results.perfect.push(entry);
+      else if (rel.rule === 'energyBoost' || rel.rule === 'energyDrop')
+        results.energy.push(entry);
+      else if (rel.rule === 'moodBoost' || rel.rule === 'moodDrop' || rel.rule === 'energySwitch')
+        results.mood.push(entry);
+      else
+        results.advanced.push(entry);
+    });
+  }
+  return results;
+}
+
+function updateTransitionSuggestions(groups) {
+  let html = '';
+
+  const sections = [
+    { key: 'perfect', icon: '🎯', title: 'התאמה מושלמת', color: '#00ff9d' },
+    { key: 'energy',  icon: '⚡', title: 'שינוי אנרגיה', color: '#ffd60a' },
+    { key: 'mood',    icon: '🎭', title: 'שינוי מצב רוח', color: '#00d4ff' },
+    { key: 'advanced',icon: '🔮', title: 'מעברים מתקדמים', color: '#7b2fff' },
+  ];
+
+  let hasAny = false;
+  sections.forEach(sec => {
+    if (!groups[sec.key] || !groups[sec.key].length) return;
+    hasAny = true;
+    html += '<div class="transition-group">';
+    html += `<div class="transition-type">${sec.icon} ${sec.title}</div>`;
+    html += '<div class="key-list">';
+    groups[sec.key].forEach(c => {
+      html += `
+        <div class="key-item" onclick="selectSecondaryKey(${c.num - 1}, '${c.type}')" title="${c.rel.explain}">
+          <div class="dot" style="background:${sec.color}"></div>
+          <span class="key-id">${c.id}</span>
+          <span class="key-note">${c.key.noteHe}</span>
+          <span class="mix-type">${c.rel.labelHe}</span>
+        </div>
+      `;
+    });
+    html += '</div></div>';
+  });
+
+  if (!hasAny) {
+    html = '<div class="empty-state">לא נמצאו מפתחות תואמים</div>';
+  }
+
+  document.getElementById('transitionContainer').innerHTML = html;
+}
+
+// Key finder
+document.getElementById('finderInput').addEventListener('input', (e) => {
+  const query = e.target.value.toLowerCase().trim();
+  const suggestions = document.getElementById('finderSuggestions');
+
+  if (!query) {
+    suggestions.innerHTML = '';
+    return;
+  }
+
+  let matches = [];
+  for (const [alias, code] of Object.entries(NOTE_ALIASES)) {
+    if (alias.includes(query)) {
+      matches.push({ alias, code });
+    }
+  }
+
+  // Also search by camelot code
+  if (/^\d+[ab]$/i.test(query)) {
+    const code = query.toUpperCase();
+    const key = CAMELOT.find(k => k.id === code);
+    if (key) matches.unshift({ alias: key.note, code });
+  }
+
+  suggestions.innerHTML = matches.slice(0, 6).map(m => `
+    <div class="suggestion-tag" onclick="selectFromFinder('${m.code}')">${m.code}</div>
+  `).join('');
+});
+
+function selectFromFinder(code) {
+  const key = CAMELOT.find(k => k.id === code);
+  if (key) {
+    const idx = key.id.slice(0, -1) - 1;
+    const type = key.id.slice(-1);
+    selectKey(idx, type);
+    document.getElementById('finderInput').value = '';
+    document.getElementById('finderSuggestions').innerHTML = '';
+  }
+}
+
+// Copy to clipboard
+document.getElementById('copyBtn').addEventListener('click', () => {
+  const code = `${selectedIdx + 1}${selectedType}`;
+  navigator.clipboard.writeText(code).then(() => {
+    const btn = document.getElementById('copyBtn');
+    btn.classList.add('copied');
+    btn.textContent = 'Copied!';
+    setTimeout(() => {
+      btn.classList.remove('copied');
+      btn.textContent = 'Copy Code';
+    }, 2000);
+  });
+});
+
+// Keyboard navigation
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'ArrowUp') {
+    e.preventDefault();
+    keyboardType = keyboardType === 'A' ? 'B' : 'A';
+    drawWheel(keyboardIdx, keyboardType);
+  } else if (e.key === 'ArrowDown') {
+    e.preventDefault();
+    keyboardType = keyboardType === 'A' ? 'B' : 'A';
+    drawWheel(keyboardIdx, keyboardType);
+  } else if (e.key === 'ArrowLeft') {
+    e.preventDefault();
+    keyboardIdx = (keyboardIdx - 1 + 12) % 12;
+    drawWheel(keyboardIdx, keyboardType);
+  } else if (e.key === 'ArrowRight') {
+    e.preventDefault();
+    keyboardIdx = (keyboardIdx + 1) % 12;
+    drawWheel(keyboardIdx, keyboardType);
+  } else if (e.key === 'Enter') {
+    e.preventDefault();
+    selectKey(keyboardIdx, keyboardType);
+  }
+});
+
+// Canvas events
+canvas.addEventListener('click', (e) => {
+  const rect = canvas.getBoundingClientRect();
+  const hit = getSliceAt(e.clientX - rect.left, e.clientY - rect.top);
+  if (!hit) return;
+
+  if (selectedIdx === hit.idx && selectedType === hit.type) {
+    selectSecondaryKey(hit.idx, hit.type);
+  } else {
+    selectKey(hit.idx, hit.type);
+  }
+});
+
+canvas.addEventListener('mousemove', (e) => {
+  const rect = canvas.getBoundingClientRect();
+  const hit = getSliceAt(e.clientX - rect.left, e.clientY - rect.top);
+  canvas.style.cursor = hit ? 'pointer' : 'default';
+  drawWheel(hit ? hit.idx : null, hit ? hit.type : null);
+});
+
+canvas.addEventListener('mouseleave', () => drawWheel());
+
+// Touch events for mobile
+canvas.addEventListener('touchstart', (e) => {
+  const touch = e.touches[0];
+  const rect = canvas.getBoundingClientRect();
+  const hit = getSliceAt(touch.clientX - rect.left, touch.clientY - rect.top);
+  if (!hit) return;
+
+  if (selectedIdx === hit.idx && selectedType === hit.type) {
+    selectSecondaryKey(hit.idx, hit.type);
+  } else {
+    selectKey(hit.idx, hit.type);
+  }
+});
+
+// Tutorial
+document.getElementById('tutorialBtn').addEventListener('click', () => {
+  document.getElementById('tutorialOverlay').style.display = 'none';
+  localStorage.setItem('harmonic-wheel-visited', 'true');
+});
+
+// Key slots for two-key selection
+document.getElementById('keySlot1').addEventListener('click', () => {
+  if (selectedIdx !== null) {
+    secondaryIdx = null;
+    secondaryType = null;
+    updateDisplay();
+    drawWheel();
+  }
+});
+
+document.getElementById('keySlot2').addEventListener('click', () => {
+  if (selectedIdx !== null) {
+    selectSecondaryKey(null, null);
+  }
+});
+
+// Initialize
+window.addEventListener('resize', resizeCanvas);
+resizeCanvas();
+
+if (showTutorial) {
+  document.getElementById('tutorialOverlay').style.display = 'flex';
+}
+</script>
+</body>
+</html>

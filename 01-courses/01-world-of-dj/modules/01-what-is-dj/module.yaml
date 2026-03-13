@@ -1,0 +1,35 @@
+id: "01-what-is-dj"
+title: "מה זה DJ בעצם?"
+order: 1
+
+duration_minutes: 40
+description: "הגדרת DJ, תפקידו, וסוגי ה-DJ-ים השונים בתעשייה"
+
+lessons:
+  - id: "01-definition"
+    title: "הגדרה ותפקיד הDJ"
+    duration_minutes: 12
+    type: "theory"
+
+  - id: "02-dj-types"
+    title: "סוגי DJ-ים בעולם"
+    duration_minutes: 12
+    type: "theory"
+
+exercises:
+  - id: "01-dj-profile"
+    title: "פרופיל DJ אישי"
+    duration_minutes: 15
+    type: "reflection"
+
+  - id: "02-dj-research"
+    title: "מחקר DJ מועדף"
+    duration_minutes: 20
+    type: "research"
+
+quiz:
+  questions_count: 6
+  min_score: 70
+  attempts: 3
+
+prerequisite_modules: []

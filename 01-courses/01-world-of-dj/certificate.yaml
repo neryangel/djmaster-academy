@@ -1,0 +1,25 @@
+course: "01-world-of-dj"
+title: "תעודת סיום — עולם הדי-ג'יי"
+version: "2.0.0"
+
+requirements:
+  min_quiz_average: 70
+  min_exercises_completed: 3
+  total_exercises: 6
+  final_quiz_passed: true
+  modules_completed:
+    - "01-what-is-dj"
+    - "02-history-equipment"
+    - "03-career-first-steps"
+
+certificate:
+  template: "basic"
+  fields:
+    - student_name
+    - completion_date
+    - course_title
+    - instructor_name
+  branding:
+    logo: "djmaster-academy-logo"
+    accent_color: "#6C3CE1"
+    font: "Heebo"

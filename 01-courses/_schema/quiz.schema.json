@@ -1,0 +1,90 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://djmaster.academy/schemas/quiz.json",
+  "title": "DJMaster Quiz Schema",
+  "description": "Validates quiz JSON files with multiple question types",
+  "type": "object",
+  "required": ["module", "version", "settings", "questions"],
+  "additionalProperties": false,
+  "properties": {
+    "module": {
+      "type": "string",
+      "pattern": "^[0-9]{2}-[a-z-]+$"
+    },
+    "course": {
+      "type": "string",
+      "pattern": "^[0-9]{2}-[a-z-]+$"
+    },
+    "type": {
+      "type": "string",
+      "enum": ["module-quiz", "final-quiz", "practice"]
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+    },
+    "settings": {
+      "type": "object",
+      "required": ["passing_score", "max_attempts"],
+      "properties": {
+        "shuffle_questions": { "type": "boolean" },
+        "shuffle_options": { "type": "boolean" },
+        "show_correct_answer": { "type": "boolean" },
+        "show_explanation": { "type": "boolean" },
+        "max_attempts": { "type": "integer", "minimum": 1, "maximum": 10 },
+        "passing_score": { "type": "integer", "minimum": 0, "maximum": 100 },
+        "time_limit_minutes": { "type": ["integer", "null"], "minimum": 1 }
+      }
+    },
+    "questions": {
+      "type": "array",
+      "minItems": 3,
+      "items": {
+        "type": "object",
+        "required": ["id", "type", "text", "points"],
+        "properties": {
+          "id": { "type": "string" },
+          "type": {
+            "type": "string",
+            "enum": ["multiple_choice", "true_false", "matching", "fill_blank", "ordering"]
+          },
+          "difficulty": {
+            "type": "string",
+            "enum": ["easy", "medium", "hard"]
+          },
+          "points": { "type": "integer", "minimum": 1 },
+          "text": { "type": "string", "minLength": 5 },
+          "options": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "correct": {
+            "oneOf": [
+              { "type": "integer" },
+              { "type": "boolean" },
+              { "type": "string" },
+              { "type": "array" }
+            ]
+          },
+          "pairs": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["left", "right"],
+              "properties": {
+                "left": { "type": "string" },
+                "right": { "type": "string" }
+              }
+            }
+          },
+          "explanation": { "type": "string" },
+          "related_lesson": { "type": "string" },
+          "tags": {
+            "type": "array",
+            "items": { "type": "string" }
+          }
+        }
+      }
+    }
+  }
+}

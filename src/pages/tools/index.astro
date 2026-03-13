@@ -1,0 +1,57 @@
+---
+// Tools index page
+const tools = [
+  { name: 'מחשבון BPM', slug: 'bpm-calculator', icon: '🥁', description: 'זהה קצב שירים בטאפ או ניתוח אוטומטי', color: '#00d4ff' },
+  { name: 'גלגל הרמוני', slug: 'harmonic-wheel', icon: '🎡', description: 'מצא מפתחות תואמים למיקס מושלם', color: '#7b2fff' },
+  { name: 'אימון EQ', slug: 'eq-trainer', icon: '🎚️', description: 'פתח את האוזן לזהות תדרים', color: '#FF6584' },
+  { name: 'אימון Beatmatch', slug: 'beatmatch-trainer', icon: '🎯', description: 'למד לסנכרן ביטים בלי sync', color: '#4ade80' },
+  { name: 'מתכנן סטים', slug: 'set-planner', icon: '📋', description: 'תכנן סט מושלם עם ניתוח מעברים', color: '#fbbf24' },
+];
+---
+
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>כלי DJ | DJMaster Academy</title>
+  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Heebo', sans-serif; background: #0A0A0F; color: #fff; min-height: 100vh; }
+    .gradient-text { background: linear-gradient(135deg, #00d4ff, #7b2fff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .tool-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 20px; padding: 2.5rem; transition: all 0.3s; text-decoration: none; color: white; display: block; }
+    .tool-card:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.2); transform: translateY(-6px); }
+  </style>
+</head>
+<body>
+  <nav style="border-bottom: 1px solid rgba(255,255,255,0.1); padding: 1rem 2rem;">
+    <div style="max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between;">
+      <a href="/" style="font-size: 1.5rem; font-weight: 800; text-decoration: none;" class="gradient-text">DJMaster Academy</a>
+      <div style="display: flex; gap: 2rem;">
+        <a href="/courses" style="color: rgba(255,255,255,0.7); text-decoration: none;">קורסים</a>
+        <a href="/tools" style="color: white; text-decoration: none; font-weight: 600;">כלים</a>
+      </div>
+    </div>
+  </nav>
+
+  <main style="max-width: 1200px; margin: 0 auto; padding: 3rem 2rem;">
+    <div style="text-align: center; margin-bottom: 3rem;">
+      <h1 style="font-size: 2.5rem; font-weight: 800; margin-bottom: 0.75rem;">כלי <span class="gradient-text">DJ</span> אינטראקטיביים</h1>
+      <p style="color: rgba(255,255,255,0.5); font-size: 1.1rem;">תרגול מעשי ישירות בדפדפן — בלי להתקין כלום</p>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem;">
+      {tools.map(tool => (
+        <a href={`/tools/${tool.slug}`} class="tool-card">
+          <span style="font-size: 3rem; display: block; margin-bottom: 1rem;">{tool.icon}</span>
+          <h2 style="font-size: 1.4rem; font-weight: 700; margin-bottom: 0.5rem;">{tool.name}</h2>
+          <p style="color: rgba(255,255,255,0.5); line-height: 1.6;">{tool.description}</p>
+          <div style={`margin-top: 1.5rem; color: ${tool.color}; font-weight: 600; font-size: 0.95rem;`}>
+            פתח כלי ←
+          </div>
+        </a>
+      ))}
+    </div>
+  </main>
+</body>
+</html>

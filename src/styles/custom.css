@@ -1,0 +1,203 @@
+/* DJMaster Academy — Global Custom Styles */
+
+/* RTL-first design tokens */
+:root {
+  --dj-bg-primary: #0A0A0F;
+  --dj-bg-card: #1A1A2E;
+  --dj-bg-panel: #16213E;
+  --dj-border: #2A2A3E;
+  --dj-text-primary: #E8E8E8;
+  --dj-text-secondary: #A0A0B0;
+  --dj-text-muted: #666680;
+  --dj-cyan: #00D4FF;
+  --dj-purple: #7B2FFF;
+  --dj-green: #00FF88;
+  --dj-orange: #FF8C00;
+  --dj-accent: #FF6584;
+  --dj-primary: #6C63FF;
+
+  /* Spacing (RTL-safe logical properties) */
+  --dj-radius-sm: 6px;
+  --dj-radius-md: 12px;
+  --dj-radius-lg: 20px;
+  --dj-radius-full: 9999px;
+
+  /* Shadows */
+  --dj-shadow-glow: 0 0 20px rgba(108, 99, 255, 0.3);
+  --dj-shadow-card: 0 4px 24px rgba(0, 0, 0, 0.4);
+  --dj-shadow-elevation: 0 8px 32px rgba(0, 0, 0, 0.6);
+
+  /* Transitions */
+  --dj-transition-fast: 150ms ease;
+  --dj-transition-normal: 300ms ease;
+  --dj-transition-slow: 500ms ease;
+
+  /* Waveform colors */
+  --waveform-color: var(--dj-primary);
+  --waveform-progress: var(--dj-accent);
+  --waveform-cursor: var(--dj-cyan);
+  --beat-grid-color: rgba(108, 99, 255, 0.3);
+}
+
+/* Dark DJ theme base */
+html {
+  color-scheme: dark;
+}
+
+body {
+  font-family: 'Heebo', 'Assistant', sans-serif;
+  background: var(--dj-bg-primary);
+  color: var(--dj-text-primary);
+}
+
+/* RTL-optimized Starlight overrides */
+[dir="rtl"] .sl-sidebar {
+  border-inline-start: none;
+  border-inline-end: 1px solid var(--dj-border);
+}
+
+/* DJ-themed card component */
+.dj-card {
+  background: var(--dj-bg-card);
+  border: 1px solid var(--dj-border);
+  border-radius: var(--dj-radius-md);
+  padding: 1.5rem;
+  box-shadow: var(--dj-shadow-card);
+  transition: transform var(--dj-transition-fast), box-shadow var(--dj-transition-fast);
+}
+.dj-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--dj-shadow-glow);
+}
+
+/* DJ-themed button */
+.dj-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--dj-radius-full);
+  font-family: 'Heebo', sans-serif;
+  font-weight: 600;
+  font-size: 0.9rem;
+  border: none;
+  cursor: pointer;
+  transition: all var(--dj-transition-fast);
+  text-decoration: none;
+}
+.dj-btn-primary {
+  background: linear-gradient(135deg, var(--dj-primary), var(--dj-purple));
+  color: white;
+}
+.dj-btn-primary:hover {
+  box-shadow: var(--dj-shadow-glow);
+  transform: translateY(-1px);
+}
+.dj-btn-accent {
+  background: linear-gradient(135deg, var(--dj-accent), #ff3d6b);
+  color: white;
+}
+
+/* Waveform container */
+.waveform-container {
+  background: var(--dj-bg-card);
+  border: 1px solid var(--dj-border);
+  border-radius: var(--dj-radius-md);
+  padding: 1rem;
+  position: relative;
+}
+
+/* Audio player */
+.audio-player {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  background: var(--dj-bg-panel);
+  border-radius: var(--dj-radius-md);
+}
+
+/* Beat grid overlay */
+.beat-grid {
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    90deg,
+    var(--beat-grid-color) 0px,
+    var(--beat-grid-color) 1px,
+    transparent 1px,
+    transparent
+  );
+  pointer-events: none;
+}
+
+/* Progress indicator */
+.progress-ring {
+  background: conic-gradient(
+    var(--dj-primary) var(--progress, 0%),
+    var(--dj-border) var(--progress, 0%)
+  );
+  border-radius: 50%;
+  padding: 3px;
+}
+.progress-ring-inner {
+  background: var(--dj-bg-primary);
+  border-radius: 50%;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Badge */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: var(--dj-radius-full);
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+.badge-xp { background: rgba(0, 212, 255, 0.15); color: var(--dj-cyan); }
+.badge-level { background: rgba(108, 99, 255, 0.15); color: var(--dj-primary); }
+.badge-achievement { background: rgba(0, 255, 136, 0.15); color: var(--dj-green); }
+
+/* Tooltip */
+[data-tooltip] {
+  position: relative;
+}
+[data-tooltip]::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  inset-block-end: calc(100% + 8px);
+  inset-inline-start: 50%;
+  transform: translateX(-50%);
+  background: var(--dj-bg-panel);
+  color: var(--dj-text-primary);
+  padding: 0.5rem 0.75rem;
+  border-radius: var(--dj-radius-sm);
+  font-size: 0.8rem;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity var(--dj-transition-fast);
+}
+[data-tooltip]:hover::after { opacity: 1; }
+
+/* Responsive audio tool layout */
+@media (max-width: 768px) {
+  .audio-player {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .dj-card {
+    padding: 1rem;
+  }
+}
+
+/* Print styles */
+@media print {
+  .dj-btn, .audio-player, .waveform-container { display: none; }
+}

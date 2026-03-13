@@ -1,0 +1,104 @@
+{
+  "module": "01-what-is-dj",
+  "version": "2.0.0",
+  "settings": {
+    "shuffle_questions": true,
+    "shuffle_options": true,
+    "show_correct_answer": true,
+    "show_explanation": true,
+    "max_attempts": 3,
+    "passing_score": 70,
+    "time_limit_minutes": null
+  },
+  "questions": [
+    {
+      "id": "m1-q1",
+      "type": "multiple_choice",
+      "difficulty": "easy",
+      "points": 10,
+      "text": "מה ראשי התיבות DJ?",
+      "options": ["Digital Jockey", "Disc Jockey", "Dance Jockey", "Dynamic Jockey"],
+      "correct": 1,
+      "explanation": "DJ = Disc Jockey. השם מגיע מתקופת הוויניל, כשה-DJ סובב תקליטים (Discs).",
+      "related_lesson": "01-definition",
+      "tags": ["terminology"]
+    },
+    {
+      "id": "m1-q2",
+      "type": "multiple_choice",
+      "difficulty": "medium",
+      "points": 10,
+      "text": "מה התפקיד העיקרי של DJ בהופעה חיה?",
+      "options": [
+        "לנגן את השירים הפופולריים ביותר",
+        "לנהל את זרימת האנרגיה במקום",
+        "להשמיע רק מוזיקה חדשה",
+        "לרקוד עם הקהל"
+      ],
+      "correct": 1,
+      "explanation": "התפקיד המרכזי הוא ניהול אנרגיה — לבנות מסע מוזיקלי שלוקח את הקהל ממקום אחד למקום אחר.",
+      "related_lesson": "01-definition",
+      "tags": ["core-concept"]
+    },
+    {
+      "id": "m1-q3",
+      "type": "true_false",
+      "difficulty": "easy",
+      "points": 5,
+      "text": "Club DJ ו-Mobile DJ הם אותו סוג DJ.",
+      "correct": false,
+      "explanation": "Club DJ מתמחה בז'אנר אחד ועובד במועדונים. Mobile DJ עובד באירועים פרטיים עם מגוון רחב של מוזיקה.",
+      "related_lesson": "02-dj-types",
+      "tags": ["dj-types"]
+    },
+    {
+      "id": "m1-q4",
+      "type": "matching",
+      "difficulty": "medium",
+      "points": 20,
+      "text": "התאם כל סוג DJ לסביבת העבודה שלו:",
+      "pairs": [
+        { "left": "Club DJ", "right": "מועדונים ופסטיבלים" },
+        { "left": "Mobile DJ", "right": "חתונות ואירועים פרטיים" },
+        { "left": "Radio DJ", "right": "תחנת רדיו או פודקאסט" },
+        { "left": "Turntablist", "right": "תחרויות ומופעי סקראצ׳" }
+      ],
+      "related_lesson": "02-dj-types",
+      "tags": ["dj-types"]
+    },
+    {
+      "id": "m1-q5",
+      "type": "multiple_choice",
+      "difficulty": "medium",
+      "points": 10,
+      "text": "איזו מיומנות מאפשרת ל-DJ להחליט מתי לשנות שיר לפי תגובת הקהל?",
+      "options": [
+        "ניהול צליל (EQ)",
+        "קריאת קהל",
+        "בחירת שירים",
+        "Beatmatching"
+      ],
+      "correct": 1,
+      "explanation": "קריאת קהל היא היכולת להרגיש את האווירה ברחבה ולהגיב בהתאם — אם הרחבה מתרוקנת, DJ טוב ישנה כיוון.",
+      "related_lesson": "01-definition",
+      "tags": ["skills"]
+    },
+    {
+      "id": "m1-q6",
+      "type": "multiple_choice",
+      "difficulty": "easy",
+      "points": 10,
+      "text": "מהו הקצב הטיפוסי (BPM) של Club DJ שמנגן House?",
+      "options": [
+        "80-90 BPM",
+        "100-110 BPM",
+        "120-130 BPM",
+        "150-160 BPM"
+      ],
+      "correct": 2,
+      "explanation": "House ו-Techno נעים בדרך כלל בטווח 120-130 BPM. זה הקצב שגורם לאנשים לרקוד בצורה טבעית.",
+      "related_lesson": "02-dj-types",
+      "tags": ["bpm", "genres"]
+    }
+  ]
+}

@@ -1,0 +1,55 @@
+id: "05-manual-beatmatching"
+title: "ביטמאצ׳ ידני"
+slug: "manual-beatmatching"
+version: "2.0.0"
+
+description:
+  short: "שלוט בתכנית Beatmatching ללא Sync — הדרך הנכונה של DJ"
+  full: >
+    קורס מעמיק על Beatmatching ידני. נלמד למה זה חשוב,
+    Pitch Fader, האזנה עם Headphones, זיהוי Beat, Nudging,
+    תיקון Drift, וביצוע שלב אחר שלב עם דוגמאות מעשיות.
+
+metadata:
+  level: "intermediate"
+  duration_minutes: 120
+  lesson_count: 1
+  module_count: 1
+  language: "he"
+  direction: "rtl"
+
+prerequisites:
+  - "01-world-of-dj"
+  - "02-flx4-equipment"
+  - "04-music-structure"
+
+equipment:
+  required:
+    - "DDJ-FLX4"
+    - "מחשב (Laptop)"
+    - "אוזניות איכותיות"
+    - "Rekordbox"
+    - "שירים בקבצי MP3/WAV"
+
+learning_objectives:
+  - "להבין למה Beatmatching חשוב"
+  - "ללמוד שליטה בPitch Fader"
+  - "להבין האזנה עם Headphones (Cue/Master Mix)"
+  - "ללמוד זיהוי Beat הראשון"
+  - "ללמוד Nudging — דחיפה עדינה של הטראק"
+  - "ללמוד תיקון Drift בזמן אמת"
+  - "להבין Beatmatching ללא Sync"
+  - "לתרגל באופן שיטתי"
+
+completion:
+  quizzes_required: true
+  min_quiz_score: 75
+  exercises_min: 5
+  certificate: false
+
+tags: ["intermediate", "advanced", "technique", "beatmatching", "practical"]
+
+modules:
+  - "01-beatmatching-basics"
+
+pricing_tier: "mentorship"

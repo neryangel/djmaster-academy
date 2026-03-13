@@ -1,0 +1,148 @@
+---
+import ToolLayout from '@layouts/ToolLayout.astro';
+import SetPlanner from '@components/tools/SetPlanner';
+---
+
+<ToolLayout
+  title="מתכנן סטים"
+  description="תכנן סט מושלם עם ניתוח מעברים"
+  icon="📋"
+>
+  <div class="space-y-8">
+    <!-- Tool Component -->
+    <div class="flex justify-center">
+      <SetPlanner client:load />
+    </div>
+
+    <!-- Instructions -->
+    <div class="border-t border-white/10 pt-8">
+      <h2 class="text-2xl font-bold mb-4">איך לתכנן סט מושלם</h2>
+
+      <div class="space-y-6">
+        <div>
+          <h3 class="text-lg font-semibold text-[#fbbf24] mb-2">מהו Set Planning?</h3>
+          <p class="text-white/70 mb-3">
+            Set Planning היא האמנות של בחירת רצף של שירים שיצרו סיפור משכנע, עלייה ודעיכה, וקשרים טבעיים בין כל שיר.
+            סט טוב נראה כמו תנועה מוזיקלית — לא רק אוסף של שירים טובים.
+          </p>
+          <p class="text-white/70">
+            כלי זה עוזר לך לתכנן וניתוח המעברים בין שירים, מה שמבטיח מעבר חלק וטבעי.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-lg font-semibold text-[#fbbf24] mb-2">שלבים בתכנון סט:</h3>
+          <ol class="list-decimal list-inside space-y-3 text-white/70 ml-4">
+            <li>
+              <strong class="text-white">בחרו את הנושא או המטרה</strong> — האם זה קונצרט, מסיבה, תרנודון, או ניט לאירוע בחיים?
+            </li>
+            <li>
+              <strong class="text-white">התחילו עם מפת הדרך</strong> — חשבו על העלייה (מתחיל לאט, מתסיים בקצב) או סיפור משנה
+            </li>
+            <li>
+              <strong class="text-white">בחרו שירים בקטגוריות</strong> — כל קטגוריה צריכה להיות עקבית בזאנר, מזג, ובניים
+            </li>
+            <li>
+              <strong class="text-white">אנלזו מעברים</strong> — בדקו BPM, מפתחות, וחלקות בין השירים
+            </li>
+            <li>
+              <strong class="text-white">תרגלו את הסט</strong> — רוגעו אותו מראש כדי לדעת היכן אתם צריכים כלים או מעברים מתוך רעם
+            </li>
+          </ol>
+        </div>
+
+        <div class="bg-[#fbbf24]/5 border border-[#fbbf24]/20 rounded-lg p-4">
+          <h3 class="text-lg font-semibold text-[#fbbf24] mb-3">אלמנטים של סט טוב:</h3>
+          <ul class="list-disc list-inside space-y-2 text-white/70 ml-4">
+            <li>
+              <strong class="text-white">פתיח חזק:</strong> ישנו אתכם עם משהו מרתק אבל לא עדיין בקודקוד
+            </li>
+            <li>
+              <strong class="text-white">בנייה הדרגתית:</strong> כל שיר צריך להיות טוב קצת יותר מהקודם
+            </li>
+            <li>
+              <strong class="text-white">קודקוד/שפר:</strong> השיר הטוב ביותר או הרגע הנומנטלי, בדרך כלל באמצע או סוף
+            </li>
+            <li>
+              <strong class="text-white">מעברים חלקים:</strong> שימוש ב-beatmatch, EQ, וטכניקות אחרות ליצור זרימה
+            </li>
+            <li>
+              <strong class="text-white">סיום משביע רצון:</strong> אם הוא "סט עדיוג", הסתיים עם משהו זיכרוני
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="text-lg font-semibold text-[#fbbf24] mb-2">בחירת שירים חכמה:</h3>
+          <ul class="list-disc list-inside space-y-2 text-white/70 ml-4">
+            <li>
+              <strong class="text-white">BPM Progression:</strong> כדי ליצור עלייה, בדרך כלל אתם מתחילים באט (100-110 BPM)
+              וסיום מהיר יותר (130-140 BPM)
+            </li>
+            <li>
+              <strong class="text-white">ניגודים:</strong> לאחר שיר מהיר מאוד, חזרו לאט כדי להשאיר נשימה
+            </li>
+            <li>
+              <strong class="text-white">Harmonic Mixing:</strong> השתמשו בגלגל ההרמוני כדי לוודא קשרים טובים
+            </li>
+            <li>
+              <strong class="text-white">דגים:</strong> ניסיתם שיר חדש? אתחיל בקטע מדוגמה פחות סיכון
+            </li>
+          </ul>
+        </div>
+
+        <div class="bg-[#00d4ff]/5 border border-[#00d4ff]/20 rounded-lg p-4">
+          <p class="text-white/70 mb-2"><strong>🎵 דוגמאות תוכניות סטים:</strong></p>
+          <div class="space-y-3 text-white/70 ml-4 text-sm">
+            <div>
+              <strong class="text-white">House Set (60 דקות):</strong>
+              <div class="ml-4 mt-1">
+                התחילו: 120 BPM, מצב קל | בנייה: 122-126 BPM, עלייה הדרגתית | קודקוד: 128-130 BPM, ריכוז מוח | סיום: 125 BPM, מעבר חלק
+              </div>
+            </div>
+            <div>
+              <strong class="text-white">Techno Set (90 דקות):</strong>
+              <div class="ml-4 mt-1">
+                התחילו: 125 BPM, סביבה כהה | בנייה: 128-132 BPM, הוספת אלמנטים | קודקוד: 135-140 BPM, אנרגיה מקסימלית | סיום: 132 BPM, ירידה קל
+              </div>
+            </div>
+            <div>
+              <strong class="text-white">Deep House Set (45 דקות):</strong>
+              <div class="ml-4 mt-1">
+                התחילו: 110 BPM, מרגיע | בנייה: 115-120 BPM, רומנטיקה | קודקוד: 120-122 BPM, שיא ברגש | סיום: 115 BPM, כתם רך
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-[#6C63FF]/5 border border-[#6C63FF]/20 rounded-lg p-4">
+          <p class="text-white/70 mb-2"><strong>💡 טיעון מתקדם:</strong></p>
+          <ul class="list-disc list-inside space-y-1 text-white/70 ml-4 mt-2 text-sm">
+            <li><strong class="text-white">Mashups:</strong> דחוף שני שירים בעלי BPM תואמים ליצור משהו חדש</li>
+            <li><strong class="text-white">Acapella Mixes:</strong> שימוש בווקאלים מעל רמקולים אחרים לסיפור משנה</li>
+            <li><strong class="text-white">Extended Mixes:</strong> לשירים בעלי מבנה מעניין, תחזיקו עליו יותר זמן</li>
+            <li><strong class="text-white">Remixing Live:</strong> לא שוכנעים? שנו את הקול עם EQ או אפקטים</li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="text-lg font-semibold text-[#fbbf24] mb-2">טיעון לתרגול:</h3>
+          <ul class="list-disc list-inside space-y-2 text-white/70 ml-4">
+            <li>
+              <strong class="text-white">ענקלות:</strong> הריכו את הסט שלכם שלוש-ארבע פעמים לפני שתבצעו אותו בפומבי
+            </li>
+            <li>
+              <strong class="text-white">קבלו משוב:</strong> הקשיבו לקולות של אחרים — מה עובד? מה לא?
+            </li>
+            <li>
+              <strong class="text-white">התרחב:</strong> כל אירוע שונה — פתחו את הנשמה שלכם וצאו מהתבנית
+            </li>
+            <li>
+              <strong class="text-white">אל תחשבו קשה:</strong> הסט המושלם הוא לעולם עוד יום אחד — כל פעם, אתם מתחדדים יותר
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</ToolLayout>

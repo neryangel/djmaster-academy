@@ -1,0 +1,180 @@
+{
+  "quiz_id": "world-of-dj-final",
+  "title": "עולם הDJ — בחינה סופית",
+  "description": "בחינה סופית לקורס עולם הDJ — בחן את כל הידע שרכשת",
+  "course_id": "01-world-of-dj",
+  "module_id": "final",
+  "settings": {
+    "shuffle_questions": true,
+    "shuffle_options": true,
+    "show_correct_answer": false,
+    "show_explanation": true,
+    "max_attempts": 2,
+    "passing_score": 75,
+    "time_limit_minutes": 30
+  },
+  "question_pool": {
+    "total_questions": 15,
+    "sources": [
+      {
+        "module": "01-what-is-dj",
+        "question_count": 5,
+        "topics": ["dj-definition", "dj-types", "skills"]
+      },
+      {
+        "module": "02-history-equipment",
+        "question_count": 5,
+        "topics": ["history", "equipment", "setup"]
+      },
+      {
+        "module": "03-career-first-steps",
+        "question_count": 5,
+        "topics": ["career", "income", "first-steps"],
+        "status": "placeholder"
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "final-q1",
+      "type": "multiple_choice",
+      "difficulty": "beginner",
+      "points": 10,
+      "text": "מה ראשי התיבות DJ?",
+      "options": ["Digital Jockey", "Disc Jockey", "Dance Jockey", "Dynamic Jockey"],
+      "correct": 1,
+      "explanation": "DJ = Disc Jockey. השם מגיע מתקופת הוויניל, כשה-DJ סובב תקליטים (Discs).",
+      "tags": ["terminology"]
+    },
+    {
+      "id": "final-q2",
+      "type": "multiple_choice",
+      "difficulty": "intermediate",
+      "points": 10,
+      "text": "כמה ארבע מיומנויות בסיסיות צריך כל DJ?",
+      "options": [
+        "Scratching, Mixing, Cuing, Beatmatching",
+        "ניהול אנרגיה, ניהול צליל, קריאת קהל, בחירת שירים",
+        "Juggling, Turntablism, scratching, looping",
+        "רקידה, שירה, דיבור, ניגון"
+      ],
+      "correct": 1,
+      "explanation": "ארבע המיומנויות בסיסיות: ניהול אנרגיה, ניהול צליל (EQ), קריאת קהל, ובחירת שירים ורצף.",
+      "tags": ["skills", "core-concept"]
+    },
+    {
+      "id": "final-q3",
+      "type": "true_false",
+      "difficulty": "intermediate",
+      "points": 10,
+      "text": "Mobile DJ ו-Club DJ עובדים בדיוק באותו מקום ועם אותה מוזיקה.",
+      "correct": false,
+      "explanation": "Club DJ עובד במועדונים עם ז'אנר אחד בקצב קבוע. Mobile DJ עובד באירועים פרטיים עם מגוון רחב של מוזיקה.",
+      "tags": ["dj-types"]
+    },
+    {
+      "id": "final-q4",
+      "type": "multiple_choice",
+      "difficulty": "beginner",
+      "points": 10,
+      "text": "מה היה הציוד של DJ-ים בתקופת הוויניל?",
+      "options": [
+        "שני פטיפונים, מיקסר, אוזניות",
+        "לפטופ, תוכנה, בקר MIDI",
+        "נגני CD רובוטיים",
+        "מיקרופון ומגברים"
+      ],
+      "correct": 0,
+      "explanation": "בתקופת הוויניל (שנות 50-70) DJ-ים השתמשו בשני פטיפונים, מיקסר לערבוב, ואוזניות לקיו.",
+      "tags": ["history", "vinyl"]
+    },
+    {
+      "id": "final-q5",
+      "type": "multiple_choice",
+      "difficulty": "intermediate",
+      "points": 10,
+      "text": "מהו הקצב הטיפוסי של House Music?",
+      "options": [
+        "90-100 BPM",
+        "120-130 BPM",
+        "140-150 BPM",
+        "160-170 BPM"
+      ],
+      "correct": 1,
+      "explanation": "House Music נעים בדרך כלל בטווח 120-130 BPM. זה הקצב השכיח ביותר למועדונים.",
+      "tags": ["bpm", "genres"]
+    },
+    {
+      "id": "final-q6",
+      "type": "matching",
+      "difficulty": "intermediate",
+      "points": 20,
+      "text": "התאם כל סוג DJ לתיאור שלו:",
+      "pairs": [
+        { "left": "Club DJ", "right": "עובד במועדונים עם ז'אנר אחד, בקצב 120-130 BPM" },
+        { "left": "Mobile DJ", "right": "עובד באירועים פרטיים עם מגוון מוזיקה רחב" },
+        { "left": "Turntablist", "right": "משתמש בטכניקות Scratch מתקדמות" },
+        { "left": "Streaming DJ", "right": "משדר מהבית דרך Twitch או YouTube" }
+      ],
+      "tags": ["dj-types"]
+    },
+    {
+      "id": "final-q7",
+      "type": "multiple_choice",
+      "difficulty": "beginner",
+      "points": 10,
+      "text": "מה החלק החיוני בתחתון הבקר DDJ-FLX4?",
+      "options": [
+        "Jog Wheels",
+        "Performance Pads",
+        "USB Connection",
+        "Crossfader"
+      ],
+      "correct": 2,
+      "explanation": "USB Connection בתחתון הבקר מחבר אותו ללפטופ ומעביר אודיו ו-MIDI.",
+      "tags": ["equipment", "hardware"]
+    },
+    {
+      "id": "final-q8",
+      "type": "true_false",
+      "difficulty": "intermediate",
+      "points": 10,
+      "text": "Beatmatching הוא ניסיון להנעת שני שירים בדיוק אותו הקצב בו-זמנית.",
+      "correct": true,
+      "explanation": "בדיוק! Beatmatching היא התאמת ה-BPM של שני שירים כך שהם ינגנו בסנכרון מושלם.",
+      "tags": ["technique", "beatmatching"]
+    },
+    {
+      "id": "final-q9",
+      "type": "multiple_choice",
+      "difficulty": "beginner",
+      "points": 10,
+      "text": "איזה מרכיב אינו חיוני ל-DJ מתחיל?",
+      "options": [
+        "לפטופ",
+        "תוכנה (Rekordbox)",
+        "בקר (DDJ-FLX4)",
+        "מיקרופון לרדיו"
+      ],
+      "correct": 3,
+      "explanation": "מיקרופון לרדיו הוא רק עבור Radio DJ-ים. מתחילים צריכים: לפטופ, תוכנה, בקר.",
+      "tags": ["equipment", "setup"]
+    },
+    {
+      "id": "final-q10",
+      "type": "multiple_choice",
+      "difficulty": "intermediate",
+      "points": 10,
+      "text": "מה המהפכה הגדולה בעולם הDJ בשנות 1990-2000?",
+      "options": [
+        "מצאו את הוויניל היקר",
+        "לפטופ + תוכנה החליפו ארגזי תקליטים",
+        "בקרי USB הפכו לעיקריים",
+        "כל DJ-ים התחילו להשתמש בלוויית מוקדשת"
+      ],
+      "correct": 1,
+      "explanation": "במהפכה הדיגיטלית של שנות 1990-2000, לפטופ + תוכנה (Serato, Traktor) החליפו את ארגזי התקליטים הכבדים.",
+      "tags": ["history", "equipment"]
+    }
+  ]
+}

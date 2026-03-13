@@ -1,0 +1,1352 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; connect-src 'self' https://cdn.jsdelivr.net; img-src 'self' data:; media-src 'self' blob:;">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EQ Frequency Trainer — DJMaster Academy</title>
+<meta name="description" content="אימון זיהוי תדרים — למד לזהות Low, Mid, High כמו דיג׳יי מקצועי עם EQ Trainer">
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;700;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+<!-- === OPEN SOURCE LIBRARIES === -->
+<!-- Tone.js (11K⭐) — github.com/Tonejs/Tone.js — Audio synthesis, effects & analysis -->
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.min.js" crossorigin="anonymous"></script>
+<!-- audioMotion-analyzer (1.8K⭐) — github.com/hvianna/audioMotion-analyzer — High-res spectrum visualizer, zero deps -->
+<!-- Loaded as ESM module in the script section below -->
+
+<style>
+:root {
+  --bg: #0A0A0F;
+  --surface: #12121F;
+  --elevated: #1A1A2E;
+  --border: #2A2A3E;
+  --cyan: #00d4ff;
+  --purple: #7b2fff;
+  --pink: #ff3d6e;
+  --green: #00ff9d;
+  --yellow: #ffd60a;
+  --orange: #ff8c00;
+  --text: #ffffff;
+  --text-dim: #a0a0b0;
+  --text-muted: #5a5a6a;
+  --radius: 12px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Heebo', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+.header {
+  text-align: center;
+  padding: 20px 16px 12px;
+  border-bottom: 1px solid var(--border);
+}
+
+.header h1 {
+  font-family: 'Space Mono', monospace;
+  font-size: clamp(1.2rem, 4vw, 1.8rem);
+  background: linear-gradient(135deg, var(--cyan), var(--purple));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 4px;
+}
+
+.header p { color: var(--text-dim); font-size: 0.9rem; }
+
+/* Stats Bar */
+.stats-bar {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  padding: 12px 16px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  flex-wrap: wrap;
+}
+
+.stat {
+  text-align: center;
+  min-width: 60px;
+}
+
+.stat-value {
+  font-family: 'Space Mono', monospace;
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+
+.stat-label {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Main Layout */
+.main {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Difficulty Selector */
+.difficulty-bar {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.diff-btn {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text-dim);
+  padding: 8px 16px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-family: 'Heebo', sans-serif;
+  font-size: 0.85rem;
+  transition: all 0.2s;
+}
+
+.diff-btn:hover { border-color: var(--cyan); color: var(--text); }
+.diff-btn.active {
+  background: linear-gradient(135deg, var(--cyan), var(--purple));
+  border-color: transparent;
+  color: white;
+  font-weight: 700;
+}
+
+/* Spectrum Visualizer */
+.spectrum-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.spectrum-header {
+  padding: 12px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--border);
+}
+
+.spectrum-title {
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+.freq-labels {
+  display: flex;
+  gap: 8px;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.7rem;
+  color: var(--text-muted);
+}
+
+#spectrumCanvas {
+  width: 100%;
+  height: 180px;
+  display: block;
+}
+
+.freq-axis {
+  display: flex;
+  justify-content: space-between;
+  padding: 4px 16px 8px;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.65rem;
+  color: var(--text-muted);
+}
+
+/* EQ Controls */
+.eq-section {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px;
+}
+
+.eq-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.eq-band {
+  text-align: center;
+  padding: 12px;
+  background: var(--elevated);
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  transition: all 0.3s;
+}
+
+.eq-band.boosted { border-color: var(--pink); box-shadow: 0 0 15px rgba(255, 61, 110, 0.2); }
+.eq-band.cut { border-color: var(--cyan); box-shadow: 0 0 15px rgba(0, 212, 255, 0.2); }
+
+.eq-band-label {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 4px;
+}
+
+.eq-band-freq {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.8rem;
+  color: var(--text-dim);
+  margin-bottom: 8px;
+}
+
+.eq-knob-wrapper {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 8px;
+}
+
+.eq-knob-svg {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-135deg);
+}
+
+.eq-knob-track {
+  fill: none;
+  stroke: var(--border);
+  stroke-width: 6;
+  stroke-linecap: round;
+}
+
+.eq-knob-fill {
+  fill: none;
+  stroke-width: 6;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 0.3s, stroke 0.3s;
+}
+
+.eq-db-value {
+  font-family: 'Space Mono', monospace;
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+/* Quiz Area */
+.quiz-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+  text-align: center;
+}
+
+.quiz-question {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+.quiz-options {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.quiz-option {
+  background: var(--elevated);
+  border: 2px solid var(--border);
+  color: var(--text);
+  padding: 14px 12px;
+  border-radius: var(--radius);
+  cursor: pointer;
+  font-family: 'Heebo', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: all 0.2s;
+  position: relative;
+  overflow: hidden;
+}
+
+.quiz-option:hover:not(:disabled) {
+  border-color: var(--cyan);
+  transform: translateY(-2px);
+}
+
+.quiz-option.correct {
+  border-color: var(--green);
+  background: rgba(0, 255, 157, 0.1);
+  animation: correctPulse 0.5s ease;
+}
+
+.quiz-option.wrong {
+  border-color: var(--pink);
+  background: rgba(255, 61, 110, 0.1);
+  animation: wrongShake 0.4s ease;
+}
+
+.quiz-option .freq-detail {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+@keyframes correctPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+@keyframes wrongShake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  75% { transform: translateX(5px); }
+}
+
+/* Controls */
+.controls {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.btn {
+  padding: 12px 24px;
+  border: none;
+  border-radius: var(--radius);
+  cursor: pointer;
+  font-family: 'Heebo', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--cyan), var(--purple));
+  color: white;
+}
+
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 4px 20px rgba(0, 212, 255, 0.3); }
+
+.btn-secondary {
+  background: var(--elevated);
+  border: 1px solid var(--border);
+  color: var(--text-dim);
+}
+
+.btn-secondary:hover { border-color: var(--cyan); color: var(--text); }
+
+.btn-toggle-eq {
+  background: var(--elevated);
+  border: 2px solid var(--orange);
+  color: var(--orange);
+}
+
+.btn-toggle-eq.active {
+  background: var(--orange);
+  color: white;
+}
+
+/* Hint Tag */
+.hint-tag {
+  display: inline-block;
+  padding: 4px 12px;
+  background: rgba(255, 214, 10, 0.1);
+  border: 1px solid var(--yellow);
+  border-radius: 20px;
+  color: var(--yellow);
+  font-size: 0.8rem;
+  margin-top: 10px;
+}
+
+/* History */
+.history {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  justify-content: center;
+  min-height: 30px;
+}
+
+.history-chip {
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-family: 'Space Mono', monospace;
+  animation: chipIn 0.3s ease;
+}
+
+.history-chip.correct { background: rgba(0, 255, 157, 0.15); color: var(--green); }
+.history-chip.wrong { background: rgba(255, 61, 110, 0.15); color: var(--pink); }
+
+@keyframes chipIn {
+  from { transform: scale(0); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+/* Keyboard Guide */
+.keyboard-guide {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  padding: 8px;
+}
+
+.key-hint {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.key-hint kbd {
+  background: var(--elevated);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 2px 6px;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.7rem;
+  color: var(--text-dim);
+}
+
+/* Toast */
+.toast {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%) translateY(-100px);
+  padding: 12px 24px;
+  border-radius: var(--radius);
+  font-weight: 700;
+  z-index: 100;
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  pointer-events: none;
+}
+
+.toast.show { transform: translateX(-50%) translateY(0); }
+.toast.success { background: var(--green); color: #000; }
+.toast.error { background: var(--pink); color: #fff; }
+.toast.info { background: var(--cyan); color: #000; }
+.toast.streak { background: var(--yellow); color: #000; }
+
+/* Freq Map Reference */
+.freq-map {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px;
+}
+
+.freq-map h3 {
+  font-size: 0.9rem;
+  margin-bottom: 10px;
+  color: var(--text-dim);
+}
+
+.freq-map-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 8px;
+}
+
+.freq-map-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+  background: var(--elevated);
+  border-radius: 8px;
+  font-size: 0.8rem;
+}
+
+.freq-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.freq-map-item span:last-child {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  margin-right: auto;
+}
+
+@media (max-width: 600px) {
+  .eq-grid { grid-template-columns: 1fr; }
+  .quiz-options { grid-template-columns: 1fr 1fr; }
+}
+</style>
+</head>
+<body>
+
+<div class="header" role="banner">
+  <h1>🎛️ EQ Frequency Trainer</h1>
+  <p>למד לזהות תדרים — מיומנות חובה לדיג'יי מקצועי</p>
+</div>
+
+<div class="stats-bar">
+  <div class="stat">
+    <div class="stat-value" style="color: var(--cyan)" id="xpDisplay">0</div>
+    <div class="stat-label">XP</div>
+  </div>
+  <div class="stat">
+    <div class="stat-value" style="color: var(--green)" id="accuracyDisplay">0%</div>
+    <div class="stat-label">דיוק</div>
+  </div>
+  <div class="stat">
+    <div class="stat-value" style="color: var(--yellow)" id="streakDisplay">0</div>
+    <div class="stat-label">רצף 🔥</div>
+  </div>
+  <div class="stat">
+    <div class="stat-value" style="color: var(--purple)" id="levelDisplay">1</div>
+    <div class="stat-label">רמה</div>
+  </div>
+  <div class="stat">
+    <div class="stat-value" style="color: var(--text-dim)" id="roundDisplay">0/0</div>
+    <div class="stat-label">סבב</div>
+  </div>
+</div>
+
+<div class="main">
+  <!-- Difficulty -->
+  <div class="difficulty-bar">
+    <button class="diff-btn active" data-diff="easy">🟢 קל — 3 תדרים</button>
+    <button class="diff-btn" data-diff="medium">🟡 בינוני — 5 תדרים</button>
+    <button class="diff-btn" data-diff="hard">🔴 קשה — 8 תדרים</button>
+    <button class="diff-btn" data-diff="pro">⚫ מקצועי — 12 תדרים</button>
+  </div>
+
+  <!-- Spectrum Visualizer -->
+  <div class="spectrum-card">
+    <div class="spectrum-header">
+      <span class="spectrum-title">📊 ספקטרום תדרים</span>
+      <div class="freq-labels">
+        <span id="currentFreqLabel">—</span>
+      </div>
+    </div>
+    <div id="spectrumContainer" style="width:100%;height:180px;position:relative;">
+      <canvas id="spectrumCanvas"></canvas>
+      <!-- audioMotion-analyzer renders here when available, canvas is fallback -->
+      <div id="audioMotionMount" style="width:100%;height:100%;position:absolute;top:0;left:0;display:none;"></div>
+      <!-- Boost highlight overlay -->
+      <div id="boostOverlay" style="position:absolute;top:0;height:100%;width:3px;display:none;pointer-events:none;z-index:10;"></div>
+    </div>
+    <div class="freq-axis">
+      <span>20Hz</span><span>100</span><span>500</span><span>1K</span><span>5K</span><span>10K</span><span>20KHz</span>
+    </div>
+  </div>
+
+  <!-- EQ Bands -->
+  <div class="eq-section">
+    <div class="eq-grid">
+      <div class="eq-band" id="bandLow">
+        <div class="eq-band-label">LOW</div>
+        <div class="eq-band-freq">20–250 Hz</div>
+        <div class="eq-knob-wrapper">
+          <svg class="eq-knob-svg" viewBox="0 0 80 80">
+            <circle class="eq-knob-track" cx="40" cy="40" r="30" stroke-dasharray="141.37" stroke-dashoffset="0" />
+            <circle class="eq-knob-fill" cx="40" cy="40" r="30" stroke="var(--cyan)" stroke-dasharray="141.37" stroke-dashoffset="70.69" id="knobLow" />
+          </svg>
+        </div>
+        <div class="eq-db-value" id="dbLow">0 dB</div>
+      </div>
+      <div class="eq-band" id="bandMid">
+        <div class="eq-band-label">MID</div>
+        <div class="eq-band-freq">250–4K Hz</div>
+        <div class="eq-knob-wrapper">
+          <svg class="eq-knob-svg" viewBox="0 0 80 80">
+            <circle class="eq-knob-track" cx="40" cy="40" r="30" stroke-dasharray="141.37" stroke-dashoffset="0" />
+            <circle class="eq-knob-fill" cx="40" cy="40" r="30" stroke="var(--purple)" stroke-dasharray="141.37" stroke-dashoffset="70.69" id="knobMid" />
+          </svg>
+        </div>
+        <div class="eq-db-value" id="dbMid">0 dB</div>
+      </div>
+      <div class="eq-band" id="bandHigh">
+        <div class="eq-band-label">HIGH</div>
+        <div class="eq-band-freq">4K–20K Hz</div>
+        <div class="eq-knob-wrapper">
+          <svg class="eq-knob-svg" viewBox="0 0 80 80">
+            <circle class="eq-knob-track" cx="40" cy="40" r="30" stroke-dasharray="141.37" stroke-dashoffset="0" />
+            <circle class="eq-knob-fill" cx="40" cy="40" r="30" stroke="var(--pink)" stroke-dasharray="141.37" stroke-dashoffset="70.69" id="knobHigh" />
+          </svg>
+        </div>
+        <div class="eq-db-value" id="dbHigh">0 dB</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Quiz -->
+  <div class="quiz-card" role="main" aria-label="אזור החידון">
+    <div class="quiz-question" id="quizQuestion" role="status" aria-live="polite">לחץ "סבב חדש" כדי להתחיל 🎧</div>
+    <div class="quiz-options" id="quizOptions" role="group" aria-label="אפשרויות תשובה"></div>
+    <div class="controls">
+      <button class="btn btn-primary" id="btnNewRound" onclick="newRound()" aria-label="התחל סבב חדש">🎲 סבב חדש</button>
+      <button class="btn btn-toggle-eq" id="btnToggle" onclick="toggleEQ()" aria-label="השמע או השתק את בוסט התדר">🔊 השמע בוסט</button>
+      <button class="btn btn-secondary" onclick="playReference()" aria-label="השמע טון רפרנס">🎵 השמע רפרנס</button>
+      <button class="btn btn-secondary" id="btnHint" onclick="showHint()" style="display:none" aria-label="הצג רמז">💡 רמז</button>
+    </div>
+    <div id="hintArea"></div>
+  </div>
+
+  <!-- History -->
+  <div class="history" id="historyArea"></div>
+
+  <!-- Frequency Reference Map -->
+  <div class="freq-map">
+    <h3>🗺️ מפת תדרים — מדריך מהיר לדיג'יי</h3>
+    <div class="freq-map-grid">
+      <div class="freq-map-item">
+        <div class="freq-dot" style="background: #ff3d6e"></div>
+        <span>Sub Bass</span>
+        <span>20–60 Hz</span>
+      </div>
+      <div class="freq-map-item">
+        <div class="freq-dot" style="background: #ff8c00"></div>
+        <span>Bass</span>
+        <span>60–250 Hz</span>
+      </div>
+      <div class="freq-map-item">
+        <div class="freq-dot" style="background: #ffd60a"></div>
+        <span>Low Mids</span>
+        <span>250–500 Hz</span>
+      </div>
+      <div class="freq-map-item">
+        <div class="freq-dot" style="background: #00ff9d"></div>
+        <span>Mids</span>
+        <span>500–2K Hz</span>
+      </div>
+      <div class="freq-map-item">
+        <div class="freq-dot" style="background: #00d4ff"></div>
+        <span>Upper Mids</span>
+        <span>2K–4K Hz</span>
+      </div>
+      <div class="freq-map-item">
+        <div class="freq-dot" style="background: #7b2fff"></div>
+        <span>Presence</span>
+        <span>4K–8K Hz</span>
+      </div>
+      <div class="freq-map-item">
+        <div class="freq-dot" style="background: #c060ff"></div>
+        <span>Brilliance</span>
+        <span>8K–16K Hz</span>
+      </div>
+      <div class="freq-map-item">
+        <div class="freq-dot" style="background: #ffffff50"></div>
+        <span>Air</span>
+        <span>16K–20K Hz</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Keyboard Shortcuts -->
+  <div class="keyboard-guide">
+    <span class="key-hint"><kbd>Space</kbd> סבב חדש</span>
+    <span class="key-hint"><kbd>E</kbd> בוסט/שטוח</span>
+    <span class="key-hint"><kbd>R</kbd> רפרנס</span>
+    <span class="key-hint"><kbd>1-9</kbd> בחר תשובה</span>
+    <span class="key-hint"><kbd>H</kbd> רמז</span>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* ============================================================
+   EQ FREQUENCY TRAINER — DJMaster Academy
+   Built with Tone.js (github.com/Tonejs/Tone.js)
+   ============================================================ */
+
+// === FREQUENCY DATABASE ===
+const ALL_FREQUENCIES = [
+  { freq: 40,    name: 'Sub Bass',     nameHe: 'סאב בס',        band: 'low',  color: '#ff3d6e', hint: 'רטט עמוק שמרגישים בבטן, בייס של קיק דראם' },
+  { freq: 80,    name: 'Deep Bass',    nameHe: 'בס עמוק',       band: 'low',  color: '#ff3d6e', hint: 'הבסיס של הקיק, תחושת "בום" בחזה' },
+  { freq: 125,   name: 'Bass',         nameHe: 'בס',            band: 'low',  color: '#ff8c00', hint: 'בס ליין ברור, גוף של הקיק' },
+  { freq: 250,   name: 'Low Mid',      nameHe: 'מיד נמוך',      band: 'low',  color: '#ffd60a', hint: 'חמימות, עלול להיות "מאדי" (muddy) אם יותר מדי' },
+  { freq: 500,   name: 'Mid',          nameHe: 'אמצע',          band: 'mid',  color: '#00ff9d', hint: 'גוף של ווקאל וכלים, "תיבתיות" (boxy)' },
+  { freq: 1000,  name: '1K Mid',       nameHe: 'מיד 1K',        band: 'mid',  color: '#00ff9d', hint: 'התקפה של כלים, בהירות ווקאל' },
+  { freq: 2000,  name: '2K Mid',       nameHe: 'מיד 2K',        band: 'mid',  color: '#00d4ff', hint: 'נשמע "נזלי" (nasal), חדות ווקאל' },
+  { freq: 3000,  name: '3K Presence',  nameHe: 'נוכחות 3K',     band: 'mid',  color: '#00d4ff', hint: 'האוזן הכי רגישה כאן, ווקאל חד וברור' },
+  { freq: 4000,  name: '4K Edge',      nameHe: 'חדות 4K',       band: 'high', color: '#7b2fff', hint: 'חדות, יכול להיות "חותך" אם מוגזם' },
+  { freq: 6000,  name: '6K Sibilance', nameHe: 'סיבילנס 6K',   band: 'high', color: '#7b2fff', hint: 'צלילי "ס" ו"ש", דה-אסר פועל כאן' },
+  { freq: 8000,  name: '8K Brilliance',nameHe: 'בריליאנס 8K',  band: 'high', color: '#c060ff', hint: 'ברק וזוהר, היי-האטים' },
+  { freq: 12000, name: '12K Air',      nameHe: 'אוויר 12K',    band: 'high', color: '#c060ff', hint: 'תחושת אוויר ומרחב, סימבלים' },
+];
+
+// === DIFFICULTY LEVELS ===
+const DIFFICULTIES = {
+  easy:   { count: 3, freqs: [125, 1000, 8000], boostDb: 12, label: 'קל' },
+  medium: { count: 5, freqs: [80, 250, 1000, 4000, 8000], boostDb: 9, label: 'בינוני' },
+  hard:   { count: 8, freqs: [40, 125, 500, 1000, 2000, 4000, 6000, 12000], boostDb: 6, label: 'קשה' },
+  pro:    { count: 12, freqs: ALL_FREQUENCIES.map(f => f.freq), boostDb: 4, label: 'מקצועי' },
+};
+
+// === STATE ===
+let state = {
+  difficulty: 'easy',
+  currentFreq: null,
+  isBoostActive: false,
+  answered: false,
+  round: 0,
+  totalRounds: 0,
+  correct: 0,
+  streak: 0,
+  bestStreak: 0,
+  xp: 0,
+  level: 1,
+  history: [],
+};
+
+// === TONE.JS AUDIO ENGINE ===
+let noiseSource = null;
+let eqFilter = null;
+let analyser = null;
+let isPlaying = false;
+let animFrame = null;
+
+async function initAudio() {
+  try {
+    if (typeof Tone === 'undefined') {
+      showToast('⚠️ ספריית Tone.js לא נטענה — בדוק חיבור אינטרנט', 'error');
+      return false;
+    }
+    await Tone.start();
+  } catch (err) {
+    showToast('⚠️ לא ניתן להפעיל אודיו — לחץ על הדף ונסה שוב', 'error');
+    console.error('Audio init failed:', err);
+    return false;
+  }
+
+  // Pink noise → sounds more natural for frequency training
+  noiseSource = new Tone.Noise('pink');
+
+  // Parametric EQ — a peaking filter we'll sweep across frequencies
+  eqFilter = new Tone.Filter({
+    type: 'peaking',
+    frequency: 1000,
+    Q: 4,
+    gain: 0,
+  });
+
+  // FFT Analyser for spectrum visualization
+  analyser = new Tone.Analyser('fft', 2048);
+
+  // Signal chain: Noise → EQ Filter → Analyser → Output
+  noiseSource.connect(eqFilter);
+  eqFilter.connect(analyser);
+  analyser.toDestination();
+
+  noiseSource.volume.value = -18;
+
+  // Connect to audioMotion-analyzer if available (progressive enhancement)
+  if (typeof window._connectToAudioMotion === 'function') {
+    window._connectToAudioMotion(analyser);
+  }
+}
+
+function startNoise() {
+  if (!noiseSource) return;
+  if (noiseSource.state !== 'started') {
+    noiseSource.start();
+  }
+  isPlaying = true;
+  drawSpectrum();
+}
+
+function stopNoise() {
+  if (!noiseSource) return;
+  if (noiseSource.state === 'started') {
+    noiseSource.stop();
+  }
+  isPlaying = false;
+}
+
+function setEQBoost(freq, gainDb) {
+  if (!eqFilter) return;
+  eqFilter.frequency.value = freq;
+  // Q varies: wider for low freqs, narrower for high
+  eqFilter.Q.value = freq < 200 ? 2 : freq < 2000 ? 4 : 6;
+  eqFilter.gain.value = gainDb;
+
+  // Show boost overlay on audioMotion spectrum
+  if (state.currentFreq && typeof window._showBoostOverlay === 'function') {
+    window._showBoostOverlay(freq, state.currentFreq.color);
+  }
+}
+
+function flattenEQ() {
+  if (!eqFilter) return;
+  eqFilter.gain.value = 0;
+  if (typeof window._hideBoostOverlay === 'function') window._hideBoostOverlay();
+}
+
+// === SPECTRUM VISUALIZER ===
+const canvas = document.getElementById('spectrumCanvas');
+const ctx = canvas.getContext('2d');
+
+function resizeCanvas() {
+  const rect = canvas.parentElement.getBoundingClientRect();
+  canvas.width = rect.width * window.devicePixelRatio;
+  canvas.height = 180 * window.devicePixelRatio;
+  ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+  canvas.style.width = rect.width + 'px';
+  canvas.style.height = '180px';
+}
+
+function freqToX(freq, width) {
+  // Log scale mapping: 20Hz – 20000Hz
+  const minLog = Math.log10(20);
+  const maxLog = Math.log10(20000);
+  return ((Math.log10(freq) - minLog) / (maxLog - minLog)) * width;
+}
+
+function drawSpectrum() {
+  if (!isPlaying || !analyser) return;
+
+  const w = canvas.width / window.devicePixelRatio;
+  const h = canvas.height / window.devicePixelRatio;
+  const data = analyser.getValue(); // Float32Array in dB
+
+  ctx.clearRect(0, 0, w, h);
+
+  // Background grid lines
+  const gridFreqs = [100, 500, 1000, 5000, 10000];
+  ctx.strokeStyle = 'rgba(42, 42, 62, 0.5)';
+  ctx.lineWidth = 1;
+  for (const gf of gridFreqs) {
+    const x = freqToX(gf, w);
+    ctx.beginPath();
+    ctx.moveTo(x, 0);
+    ctx.lineTo(x, h);
+    ctx.stroke();
+  }
+
+  // Draw spectrum
+  const binCount = data.length;
+  const sampleRate = Tone.context.sampleRate;
+
+  ctx.beginPath();
+  ctx.moveTo(0, h);
+
+  let prevX = 0;
+  for (let i = 1; i < binCount; i++) {
+    const freq = (i * sampleRate) / (binCount * 2);
+    if (freq < 20 || freq > 20000) continue;
+
+    const x = freqToX(freq, w);
+    // Map dB to y position (-100 dB at bottom, 0 dB at top)
+    const db = Math.max(data[i], -100);
+    const y = h - ((db + 100) / 100) * h * 0.9;
+
+    if (x - prevX < 1 && i < binCount - 1) continue; // Skip sub-pixel steps
+    ctx.lineTo(x, y);
+    prevX = x;
+  }
+
+  ctx.lineTo(w, h);
+  ctx.closePath();
+
+  // Gradient fill
+  const grad = ctx.createLinearGradient(0, 0, w, 0);
+  grad.addColorStop(0, 'rgba(255, 61, 110, 0.3)');
+  grad.addColorStop(0.25, 'rgba(255, 140, 0, 0.3)');
+  grad.addColorStop(0.45, 'rgba(0, 255, 157, 0.3)');
+  grad.addColorStop(0.65, 'rgba(0, 212, 255, 0.3)');
+  grad.addColorStop(1, 'rgba(123, 47, 255, 0.3)');
+  ctx.fillStyle = grad;
+  ctx.fill();
+
+  // Stroke line
+  const lineGrad = ctx.createLinearGradient(0, 0, w, 0);
+  lineGrad.addColorStop(0, '#ff3d6e');
+  lineGrad.addColorStop(0.25, '#ff8c00');
+  lineGrad.addColorStop(0.45, '#00ff9d');
+  lineGrad.addColorStop(0.65, '#00d4ff');
+  lineGrad.addColorStop(1, '#7b2fff');
+  ctx.strokeStyle = lineGrad;
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  prevX = 0;
+  for (let i = 1; i < binCount; i++) {
+    const freq = (i * sampleRate) / (binCount * 2);
+    if (freq < 20 || freq > 20000) continue;
+    const x = freqToX(freq, w);
+    const db = Math.max(data[i], -100);
+    const y = h - ((db + 100) / 100) * h * 0.9;
+    if (x - prevX < 1 && i < binCount - 1) continue;
+    if (i === 1) ctx.moveTo(x, y);
+    else ctx.lineTo(x, y);
+    prevX = x;
+  }
+  ctx.stroke();
+
+  // Highlight current boosted frequency
+  if (state.currentFreq && state.isBoostActive) {
+    const bx = freqToX(state.currentFreq.freq, w);
+    const freqInfo = state.currentFreq;
+    ctx.strokeStyle = freqInfo.color;
+    ctx.lineWidth = 2;
+    ctx.setLineDash([4, 4]);
+    ctx.beginPath();
+    ctx.moveTo(bx, 0);
+    ctx.lineTo(bx, h);
+    ctx.stroke();
+    ctx.setLineDash([]);
+
+    // Glow at boost point
+    const glowGrad = ctx.createRadialGradient(bx, h * 0.3, 0, bx, h * 0.3, 40);
+    glowGrad.addColorStop(0, freqInfo.color + '60');
+    glowGrad.addColorStop(1, 'transparent');
+    ctx.fillStyle = glowGrad;
+    ctx.fillRect(bx - 40, 0, 80, h);
+  }
+
+  animFrame = requestAnimationFrame(drawSpectrum);
+}
+
+// === EQ KNOB VISUALIZATION ===
+function updateKnobs() {
+  if (!state.currentFreq || !state.isBoostActive) {
+    // Reset all knobs to center
+    updateKnob('Low', 0, 'var(--cyan)');
+    updateKnob('Mid', 0, 'var(--purple)');
+    updateKnob('High', 0, 'var(--pink)');
+    ['bandLow', 'bandMid', 'bandHigh'].forEach(id => {
+      document.getElementById(id).className = 'eq-band';
+    });
+    return;
+  }
+
+  const diff = DIFFICULTIES[state.difficulty];
+  const band = state.currentFreq.band;
+  const db = diff.boostDb;
+
+  // Reset all
+  updateKnob('Low', 0, 'var(--cyan)');
+  updateKnob('Mid', 0, 'var(--purple)');
+  updateKnob('High', 0, 'var(--pink)');
+  ['bandLow', 'bandMid', 'bandHigh'].forEach(id => {
+    document.getElementById(id).className = 'eq-band';
+  });
+
+  if (band === 'low') {
+    updateKnob('Low', db, 'var(--cyan)');
+    document.getElementById('bandLow').classList.add('boosted');
+  } else if (band === 'mid') {
+    updateKnob('Mid', db, 'var(--purple)');
+    document.getElementById('bandMid').classList.add('boosted');
+  } else {
+    updateKnob('High', db, 'var(--pink)');
+    document.getElementById('bandHigh').classList.add('boosted');
+  }
+}
+
+function updateKnob(name, db, color) {
+  const maxDb = 15;
+  const circumference = 141.37;
+  const center = circumference / 2; // 0 dB position
+  const offset = center - (db / maxDb) * center;
+
+  const knob = document.getElementById('knob' + name);
+  const label = document.getElementById('db' + name);
+
+  knob.style.strokeDashoffset = offset;
+  knob.style.stroke = db > 0 ? color : 'var(--border)';
+  label.textContent = (db > 0 ? '+' : '') + db + ' dB';
+  label.style.color = db > 0 ? color : 'var(--text-dim)';
+}
+
+// === GAME LOGIC ===
+async function newRound() {
+  if (!analyser) await initAudio();
+
+  const diff = DIFFICULTIES[state.difficulty];
+  const freqPool = ALL_FREQUENCIES.filter(f => diff.freqs.includes(f.freq));
+
+  // Pick random frequency
+  state.currentFreq = freqPool[Math.floor(Math.random() * freqPool.length)];
+  state.answered = false;
+  state.isBoostActive = false;
+  state.round++;
+  state.totalRounds++;
+
+  // Update UI
+  document.getElementById('quizQuestion').textContent = '🎧 לאיזה תדר נעשה בוסט?';
+  document.getElementById('roundDisplay').textContent = `${state.round}`;
+  document.getElementById('currentFreqLabel').textContent = '???';
+  document.getElementById('btnToggle').classList.remove('active');
+  document.getElementById('btnToggle').textContent = '🔊 השמע בוסט';
+  document.getElementById('btnHint').style.display = state.difficulty !== 'easy' ? 'flex' : 'none';
+  document.getElementById('hintArea').innerHTML = '';
+
+  // Generate options
+  const optionsEl = document.getElementById('quizOptions');
+  optionsEl.innerHTML = '';
+
+  const options = generateOptions(state.currentFreq, freqPool);
+  options.forEach((opt, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'quiz-option';
+    btn.innerHTML = `${opt.name}<div class="freq-detail">${formatFreq(opt.freq)}</div>`;
+    btn.onclick = () => checkAnswer(opt, btn);
+    btn.dataset.index = i + 1;
+    optionsEl.appendChild(btn);
+  });
+
+  // Start playing and apply boost
+  flattenEQ();
+  startNoise();
+  updateKnobs();
+
+  // Auto-engage boost after short delay
+  setTimeout(() => {
+    if (!state.answered) {
+      state.isBoostActive = true;
+      setEQBoost(state.currentFreq.freq, diff.boostDb);
+      document.getElementById('btnToggle').classList.add('active');
+      document.getElementById('btnToggle').textContent = '🔇 שטח EQ';
+      updateKnobs();
+    }
+  }, 500);
+}
+
+function generateOptions(correct, pool) {
+  const options = [correct];
+  const available = pool.filter(f => f.freq !== correct.freq);
+
+  // Shuffle and pick
+  for (let i = available.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [available[i], available[j]] = [available[j], available[i]];
+  }
+
+  const numOptions = Math.min(pool.length, state.difficulty === 'easy' ? 3 : state.difficulty === 'medium' ? 4 : 5);
+  for (let i = 0; options.length < numOptions && i < available.length; i++) {
+    options.push(available[i]);
+  }
+
+  // Shuffle final options
+  for (let i = options.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [options[i], options[j]] = [options[j], options[i]];
+  }
+
+  return options;
+}
+
+function checkAnswer(selected, btnEl) {
+  if (state.answered) return;
+  state.answered = true;
+
+  const isCorrect = selected.freq === state.currentFreq.freq;
+  const diff = DIFFICULTIES[state.difficulty];
+
+  if (isCorrect) {
+    state.correct++;
+    state.streak++;
+    if (state.streak > state.bestStreak) state.bestStreak = state.streak;
+
+    // XP based on difficulty
+    const xpBase = { easy: 10, medium: 20, hard: 35, pro: 50 }[state.difficulty];
+    const streakBonus = Math.min(state.streak * 5, 50);
+    state.xp += xpBase + streakBonus;
+
+    btnEl.classList.add('correct');
+    showToast(`✅ ${state.currentFreq.nameHe} — ${formatFreq(state.currentFreq.freq)}`, 'success');
+
+    if (state.streak >= 5 && state.streak % 5 === 0) {
+      setTimeout(() => showToast(`🔥 רצף ${state.streak}! +${streakBonus} XP בונוס`, 'streak'), 800);
+    }
+  } else {
+    state.streak = 0;
+    btnEl.classList.add('wrong');
+
+    // Highlight correct answer
+    document.querySelectorAll('.quiz-option').forEach(btn => {
+      const idx = parseInt(btn.dataset.index) - 1;
+      // find which option matches correct freq
+    });
+
+    // Find and highlight correct button
+    const allBtns = document.querySelectorAll('.quiz-option');
+    allBtns.forEach(b => {
+      if (b.querySelector('.freq-detail').textContent === formatFreq(state.currentFreq.freq)) {
+        b.classList.add('correct');
+      }
+    });
+
+    showToast(`❌ זה היה ${state.currentFreq.nameHe} (${formatFreq(state.currentFreq.freq)})`, 'error');
+  }
+
+  // Update level
+  state.level = Math.floor(state.xp / 200) + 1;
+
+  // Show the boosted freq
+  state.isBoostActive = true;
+  setEQBoost(state.currentFreq.freq, diff.boostDb);
+  document.getElementById('btnToggle').classList.add('active');
+  document.getElementById('currentFreqLabel').textContent = `${state.currentFreq.name} — ${formatFreq(state.currentFreq.freq)}`;
+  updateKnobs();
+
+  // Add to history
+  state.history.unshift({ freq: state.currentFreq, correct: isCorrect });
+  updateHistory();
+
+  // Update stats
+  updateStats();
+
+  // Stop after 3 seconds
+  setTimeout(() => {
+    flattenEQ();
+    state.isBoostActive = false;
+    updateKnobs();
+  }, 3000);
+}
+
+function toggleEQ() {
+  if (!state.currentFreq || state.answered) return;
+
+  const diff = DIFFICULTIES[state.difficulty];
+
+  if (state.isBoostActive) {
+    flattenEQ();
+    state.isBoostActive = false;
+    document.getElementById('btnToggle').classList.remove('active');
+    document.getElementById('btnToggle').textContent = '🔊 השמע בוסט';
+  } else {
+    setEQBoost(state.currentFreq.freq, diff.boostDb);
+    state.isBoostActive = true;
+    document.getElementById('btnToggle').classList.add('active');
+    document.getElementById('btnToggle').textContent = '🔇 שטח EQ';
+  }
+  updateKnobs();
+}
+
+function playReference() {
+  if (!state.currentFreq) return;
+  // Play a short sine tone at the frequency for reference
+  const synth = new Tone.Oscillator({
+    frequency: state.currentFreq.freq,
+    type: 'sine',
+    volume: -20,
+  }).toDestination();
+
+  synth.start();
+  setTimeout(() => {
+    synth.stop();
+    synth.dispose();
+  }, 800);
+
+  showToast(`🎵 טון רפרנס: ${formatFreq(state.currentFreq.freq)}`, 'info');
+}
+
+function showHint() {
+  if (!state.currentFreq) return;
+  document.getElementById('hintArea').innerHTML =
+    `<div class="hint-tag">💡 ${state.currentFreq.hint}</div>`;
+}
+
+// === UI UPDATES ===
+function updateStats() {
+  document.getElementById('xpDisplay').textContent = state.xp;
+  document.getElementById('streakDisplay').textContent = state.streak;
+  document.getElementById('levelDisplay').textContent = state.level;
+
+  const accuracy = state.totalRounds > 0 ? Math.round((state.correct / state.totalRounds) * 100) : 0;
+  document.getElementById('accuracyDisplay').textContent = accuracy + '%';
+}
+
+function updateHistory() {
+  const area = document.getElementById('historyArea');
+  area.innerHTML = state.history.slice(0, 20).map(h =>
+    `<span class="history-chip ${h.correct ? 'correct' : 'wrong'}">${formatFreq(h.freq.freq)} ${h.correct ? '✓' : '✗'}</span>`
+  ).join('');
+}
+
+function formatFreq(freq) {
+  if (freq >= 1000) return (freq / 1000) + 'K Hz';
+  return freq + ' Hz';
+}
+
+function showToast(msg, type) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = `toast ${type} show`;
+  setTimeout(() => t.classList.remove('show'), 2500);
+}
+
+// === DIFFICULTY BUTTONS ===
+document.querySelectorAll('.diff-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.diff-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    state.difficulty = btn.dataset.diff;
+    state.round = 0;
+    state.correct = 0;
+    state.streak = 0;
+    state.history = [];
+    updateStats();
+    document.getElementById('historyArea').innerHTML = '';
+    document.getElementById('quizQuestion').textContent = `🎛️ רמה: ${DIFFICULTIES[state.difficulty].label} — לחץ "סבב חדש"`;
+    document.getElementById('quizOptions').innerHTML = '';
+    flattenEQ();
+    stopNoise();
+    updateKnobs();
+  });
+});
+
+// === KEYBOARD SHORTCUTS ===
+document.addEventListener('keydown', (e) => {
+  if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); newRound(); }
+  if (e.key === 'e' || e.key === 'E') toggleEQ();
+  if (e.key === 'r' || e.key === 'R') playReference();
+  if (e.key === 'h' || e.key === 'H') showHint();
+
+  // Number keys for answers
+  const num = parseInt(e.key);
+  if (num >= 1 && num <= 9 && !state.answered) {
+    const btns = document.querySelectorAll('.quiz-option');
+    if (btns[num - 1]) btns[num - 1].click();
+  }
+});
+
+// === INIT ===
+window.addEventListener('resize', resizeCanvas);
+resizeCanvas();
+
+// Initial spectrum draw (static)
+ctx.fillStyle = 'rgba(42, 42, 62, 0.3)';
+const w = canvas.width / window.devicePixelRatio;
+const h = canvas.height / window.devicePixelRatio;
+for (let x = 0; x < w; x += 4) {
+  const barH = Math.random() * h * 0.3 + h * 0.1;
+  ctx.fillRect(x, h - barH, 3, barH);
+}
+</script>
+
+<!-- audioMotion-analyzer — ESM progressive enhancement -->
+<script type="module">
+// === audioMotion-analyzer — Professional spectrum visualization ===
+// github.com/hvianna/audioMotion-analyzer (1.8K⭐) — Zero dependencies, ~30KB
+// Falls back to canvas-based spectrum if ESM/CDN fails
+let audioMotion = null;
+
+async function initAudioMotion() {
+  try {
+    const { default: AudioMotionAnalyzer } = await import(
+      'https://cdn.jsdelivr.net/npm/audiomotion-analyzer@4/+esm'
+    );
+
+    const mount = document.getElementById('audioMotionMount');
+    const canvasFallback = document.getElementById('spectrumCanvas');
+
+    // Wait for Tone.js audio context to be available
+    if (typeof Tone === 'undefined' || !Tone.context) return;
+
+    audioMotion = new AudioMotionAnalyzer(mount, {
+      audioCtx: Tone.context.rawContext, // Share Tone.js AudioContext
+      connectSpeakers: false,            // Tone.js handles output
+      mode: 10,                          // Line/area graph (mode 10)
+      frequencyScale: 'log',             // Logarithmic frequency scale
+      minFreq: 20,
+      maxFreq: 20000,
+      smoothing: 0.7,
+      fftSize: 8192,
+      showBgColor: true,
+      bgColor: '#0A0A0F',
+      showPeaks: true,
+      showScaleX: false,                 // We have our own freq axis
+      showScaleY: false,
+      lineWidth: 2,
+      fillAlpha: 0.3,
+      overlay: true,
+      gradient: 'custom-dj',
+      height: mount.clientHeight,
+    });
+
+    // Register DJMaster custom gradient (matching our design system)
+    audioMotion.registerGradient('custom-dj', {
+      colorStops: [
+        { color: '#ff3d6e', pos: 0 },     // Low — pink
+        { color: '#ff8c00', pos: 0.25 },   // Low-mid — orange
+        { color: '#00ff9d', pos: 0.45 },   // Mid — green
+        { color: '#00d4ff', pos: 0.65 },   // Mid-high — cyan
+        { color: '#7b2fff', pos: 1 },      // High — purple
+      ]
+    });
+
+    audioMotion.gradient = 'custom-dj';
+
+    // Show audioMotion, hide canvas fallback
+    mount.style.display = 'block';
+    canvasFallback.style.display = 'none';
+
+    console.log('✅ audioMotion-analyzer initialized — professional spectrum active');
+  } catch (err) {
+    console.warn('audioMotion-analyzer not available, using canvas fallback:', err.message);
+  }
+}
+
+// Connect the Tone.js audio node to audioMotion when noise starts
+const origStartNoise = window.startNoise;
+if (typeof origStartNoise !== 'function') {
+  // Listen for audio engine readiness — Tone.js audio context
+  document.addEventListener('click', async function initOnClick() {
+    if (typeof Tone !== 'undefined' && Tone.context) {
+      setTimeout(initAudioMotion, 500); // Wait for Tone.start()
+    }
+    document.removeEventListener('click', initOnClick);
+  }, { once: false });
+}
+
+// Expose a function to connect audio node to audioMotion
+window._connectToAudioMotion = function(node) {
+  if (audioMotion && node) {
+    try {
+      audioMotion.connectInput(node.output || node);
+    } catch (e) {
+      console.warn('audioMotion connect failed:', e.message);
+    }
+  }
+};
+
+// Boost overlay — shows a glowing line at the boosted frequency
+window._showBoostOverlay = function(freq, color) {
+  const overlay = document.getElementById('boostOverlay');
+  if (!overlay) return;
+  // Map freq to position (log scale, 20Hz-20KHz)
+  const minLog = Math.log10(20);
+  const maxLog = Math.log10(20000);
+  const pct = ((Math.log10(freq) - minLog) / (maxLog - minLog)) * 100;
+  overlay.style.left = pct + '%';
+  overlay.style.background = color;
+  overlay.style.boxShadow = `0 0 12px ${color}, 0 0 24px ${color}40`;
+  overlay.style.display = 'block';
+};
+
+window._hideBoostOverlay = function() {
+  const overlay = document.getElementById('boostOverlay');
+  if (overlay) overlay.style.display = 'none';
+};
+</script>
+</body>
+</html>
