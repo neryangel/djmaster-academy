@@ -1,130 +1,198 @@
 ---
-title: "Export Mode ו-Performance Mode"
-description: "הבן את שני המצבים של Rekordbox ואיך לעבוד עם USB ובקר"
+title: "Export Mode ו-Performance Mode — זרימת עבודה מלאה"
+description: "למד את שני המצבים של Rekordbox, ייצוא USB מקצועי, הכנה להופעה, והפלטפורמות השונות"
 lesson_number: 5
 module_id: "01-rekordbox-basics"
 course_id: "03-rekordbox"
-duration_minutes: 12
+duration_minutes: 20
 difficulty: "beginner"
 key_terms:
   - term: "Export Mode"
-    definition: "מצב הכנה — ייבוא, ניתוח, ארגון, וייצוא ל-USB"
+    definition: "מצב הכנה — ייבוא, ניתוח, ארגון, ויצוא ל-USB לשימוש ב-CDJ"
   - term: "Performance Mode"
-    definition: "מצב ביצוע — DJing חי עם בקר מחובר"
+    definition: "מצב ביצוע — DJing חי עם בקר מחובר ללפטופ"
   - term: "USB Export"
-    definition: "ייצוא ספרייה ופלייליסטים לדיסק-און-קי לשימוש ב-CDJ"
+    definition: "ייצוא ספרייה ופלייליסטים ל-USB לשימוש ב-CDJ במועדון"
+  - term: "PRO DJ LINK"
+    definition: "פרוטוקול Pioneer שמחבר CDJ-ים ומיקסר ברשת — שיתוף ספרייה ומידע"
 learning_objectives:
-  - "להבין מתי להשתמש בExport ומתי ב-Performance"
-  - "ללמוד לייצא מוזיקה ל-USB בפורמט הנכון"
-  - "להכיר את הממשק של Performance Mode"
-tags: ["export-mode", "performance-mode", "usb", "workflow"]
+  - "להבין מתי להשתמש בכל מצב"
+  - "ללמוד ייצוא USB מקצועי ל-CDJ"
+  - "להכיר את ממשק Performance Mode"
+  - "להבין מעבר מ-FLX4 ל-CDJ במועדון"
+tags: ["export-mode", "performance-mode", "usb", "cdj", "workflow"]
 ---
 
-# Export Mode ו-Performance Mode
+# Export Mode ו-Performance Mode — זרימת עבודה מלאה
 
 ## שני מצבים, שתי מטרות
 
-Rekordbox עובד בשני מצבים שונים לחלוטין:
+```
+┌──────────────────┐         ┌──────────────────┐
+│   EXPORT MODE    │         │ PERFORMANCE MODE │
+│                  │         │                  │
+│  📥 ייבוא        │         │  🎧 DJing חי      │
+│  📊 ניתוח        │         │  🎛 EQ, Effects   │
+│  🏷 תיוג         │         │  🔄 מעברים        │
+│  💾 USB Export   │         │  🔴 הקלטה         │
+│                  │         │                  │
+│  🖥 מחשב בלבד    │         │  🖥 מחשב + בקר     │
+└──────────────────┘         └──────────────────┘
+     הכנה בבית                 ביצוע/תרגול
+```
 
 | מאפיין | Export Mode | Performance Mode |
 |---------|------------|-----------------|
-| מטרה | הכנה וארגון | DJing חי |
-| ציוד | מחשב בלבד | מחשב + בקר/CDJ |
-| מה עושים | ייבוא, ניתוח, Cues, פלייליסטים | מיקס, אפקטים, הקלטה |
-| יציאה | USB לCDJ | ישירות לרמקולים |
-| חינמי? | ✅ כן | ✅ בסיסי חינם |
+| **מטרה** | הכנה וארגון | DJing חי |
+| **ציוד** | מחשב בלבד | מחשב + DDJ-FLX4 |
+| **Audio** | רק דרך רמקולי המחשב | דרך הבקר (RCA + Phones) |
+| **Cues & Grid** | מלא — עריכה, סימון | שימוש — לא עריכה |
+| **יציאה** | USB → CDJ-3000 | רמקולים → קהל |
+| **חינמי** | ✅ | ✅ (עם בקר מחובר) |
 
-## Export Mode — הכנה
+---
 
-### זרימת עבודה
+## Export Mode — זרימת הכנה מקצועית
+
+### העבודה השקטה בבית
+
+כל מה שעושים **לפני** שמגיעים להופעה:
 
 ```
-מוזיקה חדשה
-    ↓
-ייבוא ל-Rekordbox
-    ↓
-ניתוח אוטומטי (BPM, Key, Waveform)
-    ↓
-בדיקת Beat Grid + תיקון
-    ↓
-הגדרת Hot Cues
-    ↓
-ארגון בפלייליסטים
-    ↓
-ייצוא ל-USB
-    ↓
-USB → CDJ במועדון
+📥 ייבוא מוזיקה חדשה
+     ↓
+📊 ניתוח אוטומטי (BPM, Key, Waveform)
+     ↓
+🔍 בדיקת Beat Grid + תיקון ידני (אם צריך)
+     ↓
+🎯 הגדרת Hot Cues (8 נקודות לכל שיר)
+     ↓
+⭐ דירוג (1-5 כוכבים)
+     ↓
+📂 ארגון בפלייליסטים
+     ↓
+💾 ייצוא ל-USB
 ```
 
-### ייצוא ל-USB
+### ייצוא ל-USB — שלב אחר שלב
 
-#### הכנת USB
-1. **פורמט**: FAT32 (עד 32GB) או exFAT (מעל 32GB)
-2. **מחשב Mac**: Disk Utility → Erase → FAT32/exFAT
-3. **מחשב PC**: Right Click → Format → FAT32/exFAT
+#### הכנת ה-USB
+
+| שלב | פעולה | הערה |
+|------|--------|------|
+| 1 | **בחר USB** | לפחות 16 GB, מומלץ 32-64 GB |
+| 2 | **פורמט** | FAT32 (עד 32GB) או exFAT (מעל) |
+| 3 | Mac: Disk Utility → Erase | Windows: Right Click → Format |
 
 #### תהליך הייצוא
+
+```
 1. חבר USB למחשב
-2. ב-Rekordbox — ה-USB יופיע בצד שמאל
-3. **גרור** פלייליסט אל ה-USB
-4. חכה שהייצוא יסתיים (אל תנתק!)
-5. בצע **Safely Eject** לפני ניתוק
+2. Rekordbox → ה-USB מופיע בצד שמאל (כמו Device)
+3. גרור פלייליסט אל ה-USB
+4. Rekordbox מייצא:
+   □ קבצי אודיו
+   □ Beat Grid + BPM + Key
+   □ Hot Cues + Memory Cues
+   □ Waveforms
+   □ Colors + Ratings
+   □ כל ה-Metadata
+5. המתן שהייצוא יסתיים!
+6. Safely Eject → נתק
+```
 
-#### מה מיוצא?
-- קבצי האודיו עצמם
-- Beat Grid, BPM, Key
-- Hot Cues ו-Memory Cues
-- Waveforms
-- כל המטא-דאטה
+> **כלל ברזל: שני USB-ים זהים תמיד!** USB ראשי + USB גיבוי. אם אחד נפגם — יש החלפה מיידית.
 
-> **חשוב:** תמיד שמור **2 USB זהים** — גיבוי במקרה שאחד נהרס.
+---
 
 ## Performance Mode — ביצוע חי
 
-### מתי משתמשים?
-- כשמנגנים עם **DDJ-FLX4** או בקר אחר
-- כשהמחשב הוא מקור האודיו (לא USB+CDJ)
-- כשרוצים **הקלטה** של הסט
+### מתי משתמשים
+
+- **תרגול בבית** עם DDJ-FLX4
+- **אירוע קטן** עם FLX4 + לפטופ
+- **Streaming** (Twitch/YouTube)
+- **הקלטת סטים**
 
 ### ממשק Performance Mode
 
-| אזור | מה מוצג |
-|-------|---------|
-| Decks (למעלה) | 2-4 שחקנים עם Waveform |
-| Browser (למטה) | ספרייה, פלייליסטים, חיפוש |
-| Mixer (אמצע) | EQ, Faders, Effects |
-| Sampler | Pads של סאונדים |
+```
+┌──────────────────────────────────────────────┐
+│              PERFORMANCE MODE                │
+├──────────────────────────────────────────────┤
+│  ┌─── DECK A ───┐    ┌─── DECK B ───┐       │
+│  │ Waveform ═══  │    │  ═══ Waveform│       │
+│  │ BPM: 128.00   │    │   128.00 :BPM│       │
+│  │ Key: 8A       │    │       11B :Key│       │
+│  │ Time: -2:30   │    │    3:45 :Time│       │
+│  └───────────────┘    └──────────────┘       │
+│                                              │
+│  ┌──────────── BROWSER ──────────────┐       │
+│  │ Collection │ Playlists │ Search   │       │
+│  │ ──────────────────────────────── │       │
+│  │ Track Name    │ BPM │ Key │ ★★★  │       │
+│  │ Track Name    │ BPM │ Key │ ★★★★ │       │
+│  └──────────────────────────────────┘       │
+└──────────────────────────────────────────────┘
+```
 
-### תכונות ב-Performance Mode
+---
 
-#### חינמיות:
-- מיקס 2 ערוצים
-- EQ ואפקטים בסיסיים
-- הגדרת Hot Cues
-- Beat Sync
+## מעבר מ-FLX4 ל-CDJ — מה שונה ומה זהה
 
-#### בתשלום (או עם בקר):
-- מיקס 4 ערוצים
-- הקלטת סטים
-- DVS (Vinyl Control)
-- אפקטים מתקדמים
+| קריטריון | DDJ-FLX4 | CDJ-3000 + DJM |
+|----------|----------|----------------|
+| **Layout** | מאוד דומה | סטנדרט מועדוני |
+| **Jog Wheels** | 111.6mm | 206mm (גדולים!) |
+| **מסכים** | על הלפטופ | מסך 9" מובנה |
+| **USB** | צריך לפטופ | USB בלבד (בלי מחשב) |
+| **Cues** | מ-Rekordbox | מ-USB (אותם Cues!) |
+| **EQ** | 3-Band | 4-Band/Isolator |
+| **Effects** | Software FX | Hardware FX |
+| **Mixer** | מובנה בבקר | חיצוני (DJM) |
 
-## איך הFLX4 פותח Performance Mode
+### ההכנה למועדון
 
-כשמחברים DDJ-FLX4 ל-Rekordbox:
-1. Rekordbox מזהה אוטומטית
-2. עובר ל-Performance Mode
-3. כל כפתור בFLX4 ממופה אוטומטית
-4. מוכנים לנגן
+```
+בבית:                          במועדון:
+┌─────────────────┐           ┌─────────────────┐
+│ Rekordbox       │           │ CDJ-3000        │
+│     ↓           │   USB     │     ↓           │
+│ Export → USB    │ ────────→ │ USB → Play      │
+│     ↓           │           │     ↓           │
+│ Hot Cues ✓      │           │ Hot Cues ✓      │
+│ Beat Grid ✓     │           │ Beat Grid ✓     │
+│ Playlists ✓     │           │ Playlists ✓     │
+└─────────────────┘           └─────────────────┘
+```
 
-> **טיפ:** פתח Rekordbox **לפני** שמחבר את הFLX4. ככה Rekordbox טוען את הDriver הנכון.
+> **הנקודה החשובה:** כל ההכנה שעשית בבית ב-Rekordbox — **מופיעה בדיוק** על CDJ-3000 במועדון. **אותם Cues, אותם צבעים, אותם פלייליסטים.**
 
-## סיכום: מתי מה?
+---
 
-| אני רוצה... | מצב | הסבר |
-|-------------|------|-------|
-| לארגן מוזיקה | Export | ייבוא, תיוג, פלייליסטים |
-| להכין שירים לאירוע | Export | Beat Grid, Hot Cues, ייצוא USB |
-| לתרגל מיקס בבית | Performance | FLX4 + Rekordbox |
-| לנגן באירוע עם בקר | Performance | FLX4 + לפטופ + רמקולים |
-| לנגן במועדון עם CDJs | Export → USB | USB בלבד, בלי לפטופ |
+## צ'קליסט הכנה להופעה (15 שלבים)
+
+```
+7 ימים לפני:
+□ חפש מוזיקה חדשה (Beatport/Bandcamp)
+□ ייבא ונתח ב-Rekordbox
+□ סמן Hot Cues בכל שיר חדש
+
+3 ימים לפני:
+□ בנה פלייליסט ייעודי לאירוע
+□ ארגן לפי אנרגיה: Opener → Build → Peak → Close
+□ בדוק Beat Grid של כל שיר
+
+1 יום לפני:
+□ ייצא ל-USB (×2!)
+□ בדוק שה-USB עובד (חבר ל-Rekordbox ונגן)
+□ טען סוללת מחשב / ודא חשמל
+□ בדוק כבלים (USB-C, RCA, אוזניות)
+
+ביום ההופעה:
+□ הגע 30 דק' מוקדם
+□ חבר ובדוק צליל (Sound Check)
+□ בדוק Levels — Master ב-צהוב
+□ ודא אוזניות עובדות
+□ נשום עמוק — אתה מוכן! 🎧
+```
