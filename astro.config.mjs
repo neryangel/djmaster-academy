@@ -17,21 +17,21 @@ export default defineConfig({
         {
           label: 'קורסים',
           items: [
-            { label: 'עולם הדי-ג\'יי', link: '/courses/01-world-of-dj/' },
-            { label: 'ציוד DDJ-FLX4', link: '/courses/02-flx4-equipment/' },
-            { label: 'Rekordbox', link: '/courses/03-rekordbox/' },
-            { label: 'מבנה מוזיקלי', link: '/courses/04-music-structure/' },
-            { label: 'ביטמאצ\'ינג ידני', link: '/courses/05-manual-beatmatching/' },
+            { label: 'עולם הדי-ג\'יי', link: '/courses/world-of-dj/' },
+            { label: 'ציוד DDJ-FLX4', link: '/courses/flx4-equipment/' },
+            { label: 'Rekordbox', link: '/courses/rekordbox/' },
+            { label: 'מבנה מוזיקלי', link: '/courses/music-structure/' },
+            { label: 'ביטמאצ\'ינג ידני', link: '/courses/manual-beatmatching/' },
           ],
         },
         {
           label: 'כלים אינטראקטיביים',
           items: [
-            { label: 'BPM Calculator', link: '/tools/bpm-calculator/' },
-            { label: 'Harmonic Wheel', link: '/tools/harmonic-wheel/' },
-            { label: 'EQ Trainer', link: '/tools/eq-trainer/' },
-            { label: 'Beatmatch Trainer', link: '/tools/beatmatch-trainer/' },
-            { label: 'Set Planner', link: '/tools/set-planner/' },
+            { label: 'מחשבון BPM', link: '/tools/bpm-calculator/' },
+            { label: 'גלגל הרמוני', link: '/tools/harmonic-wheel/' },
+            { label: 'אימון EQ', link: '/tools/eq-trainer/' },
+            { label: 'אימון Beatmatch', link: '/tools/beatmatch-trainer/' },
+            { label: 'מתכנן סטים', link: '/tools/set-planner/' },
           ],
         },
       ],
@@ -40,9 +40,4 @@ export default defineConfig({
     react(),
     tailwind({ applyBaseStyles: false }),
   ],
-  vite: {
-    ssr: {
-      noExternal: ['wavesurfer.js'],
-    },
-  },
 });

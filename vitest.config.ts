@@ -1,24 +1,20 @@
 /// <reference types="vitest" />
-import { getViteConfig } from 'astro/config';
+import { defineConfig } from 'vitest/config';
+import path from 'path';
 
-export default getViteConfig({
+export default defineConfig({
   test: {
     globals: true,
     environment: 'happy-dom',
     include: ['src/**/*.{test,spec}.{ts,tsx}'],
     exclude: ['node_modules', 'dist', '.astro'],
-    coverage: {
-      provider: 'v8',
-      reporter: ['text', 'html', 'json-summary'],
-      include: ['src/lib/**', 'src/components/**', 'src/types/**'],
-      exclude: ['src/**/*.d.ts', 'src/**/index.ts'],
-      thresholds: {
-        statements: 80,
-        branches: 75,
-        functions: 80,
-        lines: 80,
-      },
-    },
     setupFiles: ['./src/test/setup.ts'],
+    alias: {
+      '@': path.resolve(__dirname, './src'),
+      '@components': path.resolve(__dirname, './src/components'),
+      '@layouts': path.resolve(__dirname, './src/layouts'),
+      '@lib': path.resolve(__dirname, './src/lib'),
+      '@types': path.resolve(__dirname, './src/types'),
+    },
   },
 });

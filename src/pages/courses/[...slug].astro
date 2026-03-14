@@ -32,6 +32,22 @@ course.data.modules.forEach((moduleId: string) => {
     lessonsByModule.set(moduleId, moduleLessons);
   }
 });
+
+// Create readable Hebrew label for each module from its ID
+// e.g. "01-what-is-dj" → "מהו DJ", "02-history-equipment" → "היסטוריה וציוד"
+const moduleLabels: Record<string, string> = {};
+for (const [moduleId, lessons] of lessonsByModule.entries()) {
+  // Use the first lesson's title prefix or derive from ID
+  const firstLesson = (lessons as any[])[0];
+  if (firstLesson) {
+    // Extract a clean label from module ID parts
+    const parts = moduleId.replace(/^\d+-/, '').split('-');
+    const humanized = parts.join(' ');
+    // Use the course title + module index as fallback
+    const moduleIndex = course.data.modules.indexOf(moduleId) + 1;
+    moduleLabels[moduleId] = `מודול ${moduleIndex} — ${firstLesson.data.title.split(' ').slice(0, 3).join(' ')}`;
+  }
+}
 ---
 
 <CourseLayout
@@ -45,7 +61,7 @@ course.data.modules.forEach((moduleId: string) => {
   <div slot="sidebar">
     {Array.from(lessonsByModule.entries()).map(([moduleId, lessons]: [string, any[]]) => (
       <div class="mb-6">
-        <h4 class="text-sm font-bold text-white/70 mb-3 uppercase tracking-wide">{moduleId}</h4>
+        <h4 class="text-sm font-bold text-white/70 mb-3 uppercase tracking-wide">{moduleLabels[moduleId] || moduleId}</h4>
         <ul class="space-y-2">
           {lessons.map((lesson, idx) => (
             <li>
@@ -135,7 +151,7 @@ course.data.modules.forEach((moduleId: string) => {
       <div class="space-y-8">
         {Array.from(lessonsByModule.entries()).map(([moduleId, lessons]: [string, any[]]) => (
           <div>
-            <h3 class="text-lg font-bold text-[#00d4ff] mb-4 uppercase tracking-wider">{moduleId}</h3>
+            <h3 class="text-lg font-bold text-[#00d4ff] mb-4 tracking-wider">{moduleLabels[moduleId] || moduleId}</h3>
             <div class="space-y-4">
               {lessons.map((lesson, idx) => (
                 <div
