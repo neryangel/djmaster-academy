@@ -2,7 +2,7 @@
 title: "Pitch Fader ו-Headphone Cueing"
 description: "שלב 1 של Beatmatching ידני — התאמת קצב בסיסית עם Pitch Fader ואוזניות"
 lesson_number: 2
-module_id: "01-beatmatch-basics"
+module_id: "01-beatmatching-basics"
 course_id: "05-manual-beatmatching"
 duration_minutes: 20
 difficulty: "intermediate"

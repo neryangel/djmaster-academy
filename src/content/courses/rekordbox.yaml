@@ -13,8 +13,8 @@ description:
 metadata:
   level: "beginner"
   duration_minutes: 100
-  lesson_count: 5
-  module_count: 1
+  lesson_count: 6
+  module_count: 2
   language: "he"
   direction: "rtl"
 
@@ -46,5 +46,6 @@ tags: ["beginner", "software", "rekordbox", "music-management"]
 
 modules:
   - "01-rekordbox-setup"
+  - "01-rekordbox-basics"
 
 pricing_tier: "pro"

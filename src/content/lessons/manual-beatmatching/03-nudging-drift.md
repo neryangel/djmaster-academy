@@ -2,7 +2,7 @@
 title: "Nudging ותיקון סחיפה"
 description: "שלב 2 של Beatmatching — יישור ביטים, Nudging, ותיקון סחיפה בזמן אמת"
 lesson_number: 3
-module_id: "01-beatmatch-basics"
+module_id: "01-beatmatching-basics"
 course_id: "05-manual-beatmatching"
 duration_minutes: 20
 difficulty: "intermediate"
