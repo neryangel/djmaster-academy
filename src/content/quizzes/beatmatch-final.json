@@ -1,0 +1,107 @@
+{
+  "quiz_id": "beatmatch-final",
+  "title": "Beatmatching — מבחן מסכם",
+  "description": "מבחן מסכם על כל טכניקות הBeatmatching — מPitch Fader ועד Full Mix",
+  "course_id": "05-manual-beatmatching",
+  "module_id": "01-beatmatching-basics",
+  "settings": {
+    "shuffle_questions": true,
+    "shuffle_options": true,
+    "show_correct_answer": true,
+    "show_explanation": true,
+    "max_attempts": 3,
+    "passing_score": 75,
+    "time_limit_minutes": null
+  },
+  "questions": [
+    {
+      "id": "bmf-q1",
+      "type": "matching",
+      "difficulty": "intermediate",
+      "points": 20,
+      "text": "התאם כל סוג מעבר לתיאורו:",
+      "pairs": [
+        { "left": "Hard Cut", "right": "מעבר מיידי — שיר A נעצר, B מתחיל" },
+        { "left": "EQ Swap", "right": "החלפת Bass הדרגתית בין שירים" },
+        { "left": "Echo Out", "right": "Echo על סוף שיר A, שיר B נכנס" },
+        { "left": "Double Drop", "right": "שני Drops מנגנים בו-זמנית" }
+      ],
+      "related_lesson": "04-transitions",
+      "tags": ["transitions", "types"]
+    },
+    {
+      "id": "bmf-q2",
+      "type": "multiple_choice",
+      "difficulty": "intermediate",
+      "points": 10,
+      "text": "מה הטכניקה הכי חשובה ושימושית למעברים?",
+      "options": ["Hard Cut", "Fade", "EQ Swap (Bass Swap)", "Backspin"],
+      "correct": 2,
+      "explanation": "EQ Swap (Bass Swap) הוא הטכניקה שDJ-ים מקצועיים משתמשים ב-90% מהזמן. הכלל: רק שיר אחד עם Bass מלא.",
+      "related_lesson": "04-transitions",
+      "tags": ["eq-swap", "best-practice"]
+    },
+    {
+      "id": "bmf-q3",
+      "type": "multiple_choice",
+      "difficulty": "intermediate",
+      "points": 10,
+      "text": "מתי כדאי להשתמש ב-Echo Out?",
+      "options": [
+        "כשה-BPM של שני השירים זהה",
+        "כשיש BPM שונה בין שירים או שינוי ז'אנר",
+        "רק ב-Warm-up",
+        "תמיד"
+      ],
+      "correct": 1,
+      "explanation": "Echo Out מושלם כשלא ניתן לBeatmatch (BPM שונה מדי) או כשרוצים שינוי ז'אנר דרמטי.",
+      "related_lesson": "04-transitions",
+      "tags": ["echo-out", "when-to-use"]
+    },
+    {
+      "id": "bmf-q4",
+      "type": "true_false",
+      "difficulty": "intermediate",
+      "points": 5,
+      "text": "ל-Double Drop, שני השירים צריכים להיות באותו BPM ובמפתחות (Keys) תואמים.",
+      "correct": true,
+      "explanation": "Double Drop דורש: (1) אותו BPM, (2) מפתחות תואמים (Camelot), (3) Phrase Matching מדויק. בלי אלו — זה נשמע גרוע.",
+      "related_lesson": "04-transitions",
+      "tags": ["double-drop", "requirements"]
+    },
+    {
+      "id": "bmf-q5",
+      "type": "multiple_choice",
+      "difficulty": "intermediate",
+      "points": 10,
+      "text": "בChecklist של Full Mix — מה הכי חשוב לבדוק?",
+      "options": [
+        "שכל השירים מאותו ז'אנר",
+        "שהBass נקי בכל רגע (לא כפול)",
+        "שכל המעברים זהים",
+        "שהסט באורך בדיוק 30 דקות"
+      ],
+      "correct": 1,
+      "explanation": "Bass נקי = סימן למקצועיות. שני שירים עם Bass מלא ביחד = בלגן. EQ Swap מבטיח שרק אחד שולט בBass.",
+      "related_lesson": "05-full-mix",
+      "tags": ["full-mix", "quality-check"]
+    },
+    {
+      "id": "bmf-q6",
+      "type": "multiple_choice",
+      "difficulty": "beginner",
+      "points": 10,
+      "text": "מתי אתה מוכן לנגן בפני קהל?",
+      "options": [
+        "אחרי שבוע של תרגול",
+        "כשסט של 5 שירים נשמע חלק ומקצועי",
+        "כשקנית ציוד יקר",
+        "כשיש לך 1000 שירים"
+      ],
+      "correct": 1,
+      "explanation": "כשאתה מגיע לנקודה שסט של 5 שירים נשמע חלק ומקצועי — הכן Demo Mix של 30 דקות והתחל לחפש הופעות.",
+      "related_lesson": "05-full-mix",
+      "tags": ["readiness", "next-steps"]
+    }
+  ]
+}

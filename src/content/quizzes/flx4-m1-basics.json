@@ -1,0 +1,97 @@
+{
+  "quiz_id": "flx4-m1-basics",
+  "title": "ציוד FLX4 — חלקים בסיסיים",
+  "description": "בחן את הידע שלך על מבנה ה-DDJ-FLX4 — Jog Wheels, Pads, וחיבורים",
+  "course_id": "02-flx4-equipment",
+  "module_id": "01-flx4-overview",
+  "settings": {
+    "shuffle_questions": true,
+    "shuffle_options": true,
+    "show_correct_answer": true,
+    "show_explanation": true,
+    "max_attempts": 3,
+    "passing_score": 70,
+    "time_limit_minutes": null
+  },
+  "questions": [
+    {
+      "id": "flx4-q1",
+      "type": "multiple_choice",
+      "difficulty": "beginner",
+      "points": 10,
+      "text": "כמה Decks יש ב-DDJ-FLX4?",
+      "options": ["1", "2", "4", "6"],
+      "correct": 1,
+      "explanation": "ה-DDJ-FLX4 הוא בקר 2-ערוצים עם Deck A (שמאל) ו-Deck B (ימין).",
+      "related_lesson": "01-overview",
+      "tags": ["hardware", "basics"]
+    },
+    {
+      "id": "flx4-q2",
+      "type": "multiple_choice",
+      "difficulty": "beginner",
+      "points": 10,
+      "text": "מה קורה כשלוחצים על Jog Wheel במצב Vinyl Mode?",
+      "options": [
+        "השיר מואץ",
+        "השיר נעצר",
+        "השיר קופץ לנקודה אחרת",
+        "הצליל מתעוות"
+      ],
+      "correct": 1,
+      "explanation": "במצב Vinyl Mode, נגיעה בחלק העליון של ה-Jog Wheel עוצרת את השיר, בדיוק כמו שמניחים יד על תקליט אמיתי.",
+      "related_lesson": "03-jog-wheels",
+      "tags": ["jog-wheels", "vinyl-mode"]
+    },
+    {
+      "id": "flx4-q3",
+      "type": "true_false",
+      "difficulty": "beginner",
+      "points": 5,
+      "text": "Pitch Bend עם Jog Wheel משנה את ה-BPM של השיר לצמיתות.",
+      "correct": false,
+      "explanation": "Pitch Bend הוא זמני — מאיץ או מאט את השיר רק כל עוד לוחצים. ה-Pitch Fader הוא מה שמשנה BPM לצמיתות.",
+      "related_lesson": "03-jog-wheels",
+      "tags": ["pitch-bend", "jog-wheels"]
+    },
+    {
+      "id": "flx4-q4",
+      "type": "multiple_choice",
+      "difficulty": "intermediate",
+      "points": 10,
+      "text": "כמה מצבים שונים יש ל-Performance Pads ב-FLX4?",
+      "options": ["2", "4", "6", "8"],
+      "correct": 2,
+      "explanation": "6 מצבים: Hot Cue, Beat Loop, Beat Jump, Sampler, Key Shift, Roll.",
+      "related_lesson": "04-performance-pads",
+      "tags": ["pads", "modes"]
+    },
+    {
+      "id": "flx4-q5",
+      "type": "matching",
+      "difficulty": "intermediate",
+      "points": 20,
+      "text": "התאם כל מצב Pad לתפקודו:",
+      "pairs": [
+        { "left": "Hot Cue", "right": "קפיצה לנקודה מסומנת בשיר" },
+        { "left": "Beat Loop", "right": "לולאה חוזרת באורך מוגדר" },
+        { "left": "Beat Jump", "right": "קפיצה קדימה/אחורה בלי לעצור" },
+        { "left": "Roll", "right": "לולאה שהשיר ממשיך מתחתיה" }
+      ],
+      "related_lesson": "04-performance-pads",
+      "tags": ["pads", "functions"]
+    },
+    {
+      "id": "flx4-q6",
+      "type": "multiple_choice",
+      "difficulty": "beginner",
+      "points": 10,
+      "text": "מהו חיבור האודיו שמשמש לחיבור FLX4 למחשב?",
+      "options": ["HDMI", "USB-C", "Bluetooth בלבד", "Jack 3.5mm"],
+      "correct": 1,
+      "explanation": "ה-DDJ-FLX4 מתחבר למחשב דרך USB-C. הוא גם מקבל חשמל דרך אותו כבל.",
+      "related_lesson": "02-connections",
+      "tags": ["connections", "usb"]
+    }
+  ]
+}

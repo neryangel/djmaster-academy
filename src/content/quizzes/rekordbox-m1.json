@@ -1,0 +1,102 @@
+{
+  "quiz_id": "rekordbox-m1",
+  "title": "Rekordbox — ניהול ספרייה",
+  "description": "בחן את הידע שלך על ניהול מוזיקה, Beat Grid, ו-Hot Cues ב-Rekordbox",
+  "course_id": "03-rekordbox",
+  "module_id": "01-rekordbox-basics",
+  "settings": {
+    "shuffle_questions": true,
+    "shuffle_options": true,
+    "show_correct_answer": true,
+    "show_explanation": true,
+    "max_attempts": 3,
+    "passing_score": 70,
+    "time_limit_minutes": null
+  },
+  "questions": [
+    {
+      "id": "rb-q1",
+      "type": "multiple_choice",
+      "difficulty": "beginner",
+      "points": 10,
+      "text": "מה האיכות המינימלית המומלצת לקבצי MP3 לDJing?",
+      "options": ["128kbps", "192kbps", "256kbps", "320kbps"],
+      "correct": 2,
+      "explanation": "לעולם אל תנגן MP3 מתחת ל-256kbps באירוע. 320kbps הוא הסטנדרט, אבל 256kbps הוא המינימום.",
+      "related_lesson": "02-library",
+      "tags": ["audio-quality", "formats"]
+    },
+    {
+      "id": "rb-q2",
+      "type": "multiple_choice",
+      "difficulty": "intermediate",
+      "points": 10,
+      "text": "מה Rekordbox מנתח אוטומטית כשמייבאים שיר?",
+      "options": [
+        "רק BPM",
+        "BPM ו-Key בלבד",
+        "BPM, Key, ו-Waveform",
+        "BPM, Key, Waveform, ומילות השיר"
+      ],
+      "correct": 2,
+      "explanation": "Rekordbox מנתח אוטומטית BPM (קצב), Key (מפתח מוזיקלי), ו-Waveform (צורת גל). מילות שיר לא נכללות.",
+      "related_lesson": "02-library",
+      "tags": ["analysis", "bpm", "key"]
+    },
+    {
+      "id": "rb-q3",
+      "type": "true_false",
+      "difficulty": "intermediate",
+      "points": 5,
+      "text": "Beat Grid תמיד מדויק ב-100% ואין צורך לתקן אותו ידנית.",
+      "correct": false,
+      "explanation": "ניתוח Beat Grid אוטומטי מדויק ב-99% למוזיקה אלקטרונית, אבל יכול לטעות במוזיקה חיה (70% דיוק). תמיד צריך לבדוק.",
+      "related_lesson": "03-beat-grid",
+      "tags": ["beat-grid", "accuracy"]
+    },
+    {
+      "id": "rb-q4",
+      "type": "matching",
+      "difficulty": "intermediate",
+      "points": 20,
+      "text": "התאם כל סוג Cue לתפקודו:",
+      "pairs": [
+        { "left": "Hot Cue", "right": "קופץ לנקודה ומנגן מיד" },
+        { "left": "Memory Cue", "right": "קופץ לנקודה ועוצר" },
+        { "left": "Beat Loop", "right": "לולאה באורך מוגדר" },
+        { "left": "Quantize", "right": "מצמיד פעולות לביט הקרוב" }
+      ],
+      "related_lesson": "04-hot-cues",
+      "tags": ["cues", "functions"]
+    },
+    {
+      "id": "rb-q5",
+      "type": "multiple_choice",
+      "difficulty": "beginner",
+      "points": 10,
+      "text": "מה הפורמט המומלץ לUSB שמיוצא מRekordbox ל-CDJ?",
+      "options": ["NTFS", "FAT32 או exFAT", "APFS", "ext4"],
+      "correct": 1,
+      "explanation": "FAT32 (עד 32GB) או exFAT (מעל 32GB) — CDJ תומך בפורמטים אלו. NTFS ו-APFS לא נתמכים.",
+      "related_lesson": "05-export-performance",
+      "tags": ["usb", "export"]
+    },
+    {
+      "id": "rb-q6",
+      "type": "multiple_choice",
+      "difficulty": "intermediate",
+      "points": 10,
+      "text": "מה ההבדל בין Export Mode ל-Performance Mode?",
+      "options": [
+        "אין הבדל",
+        "Export = הכנה וארגון, Performance = DJing חי",
+        "Export = DJing חי, Performance = הכנה",
+        "Export = רק PC, Performance = רק Mac"
+      ],
+      "correct": 1,
+      "explanation": "Export Mode = הכנה (ייבוא, ניתוח, Cues, ייצוא USB). Performance Mode = DJing חי עם בקר מחובר.",
+      "related_lesson": "05-export-performance",
+      "tags": ["modes", "workflow"]
+    }
+  ]
+}

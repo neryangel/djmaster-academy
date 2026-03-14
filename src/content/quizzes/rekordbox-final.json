@@ -1,0 +1,87 @@
+{
+  "quiz_id": "rekordbox-final",
+  "title": "Rekordbox — מבחן מסכם",
+  "description": "מבחן מסכם על כל נושאי Rekordbox — מייבוא ועד הקלטת מיקסים",
+  "course_id": "03-rekordbox",
+  "module_id": "01-rekordbox-basics",
+  "settings": {
+    "shuffle_questions": true,
+    "shuffle_options": true,
+    "show_correct_answer": true,
+    "show_explanation": true,
+    "max_attempts": 3,
+    "passing_score": 75,
+    "time_limit_minutes": null
+  },
+  "questions": [
+    {
+      "id": "rbf-q1",
+      "type": "multiple_choice",
+      "difficulty": "intermediate",
+      "points": 10,
+      "text": "מהו דירוג 5 כוכבים במערכת התיוג?",
+      "options": [
+        "שיר שאני מכיר",
+        "שיר מצוין שתמיד עובד",
+        "המתנה שלי — Secret Weapon",
+        "שיר חדש שלא בדקתי"
+      ],
+      "correct": 2,
+      "explanation": "5 כוכבים = Secret Weapon — השיר הכי טוב שלך, שמור אותו לרגע המושלם.",
+      "related_lesson": "02-library",
+      "tags": ["rating", "organization"]
+    },
+    {
+      "id": "rbf-q2",
+      "type": "multiple_choice",
+      "difficulty": "intermediate",
+      "points": 10,
+      "text": "מה הצבע המומלץ ל-Hot Cue של ה-Drop?",
+      "options": ["ירוק", "אדום", "כחול", "כתום"],
+      "correct": 1,
+      "explanation": "לפי שיטת 4 Cues המקצועית: 1=ירוק (Intro), 2=אדום (Drop), 3=כחול (Breakdown), 4=כתום (Outro).",
+      "related_lesson": "04-hot-cues",
+      "tags": ["hot-cues", "color-coding"]
+    },
+    {
+      "id": "rbf-q3",
+      "type": "true_false",
+      "difficulty": "beginner",
+      "points": 5,
+      "text": "מומלץ להגדיר Hot Cues תוך כדי אירוע, לא לפני.",
+      "correct": false,
+      "explanation": "הגדר Hot Cues לפני האירוע, לא תוך כדי. הכנה מסודרת = ביצוע חלק.",
+      "related_lesson": "04-hot-cues",
+      "tags": ["hot-cues", "preparation"]
+    },
+    {
+      "id": "rbf-q4",
+      "type": "multiple_choice",
+      "difficulty": "intermediate",
+      "points": 10,
+      "text": "מה הפלטפורמה הבטוחה ביותר לשיתוף DJ Mixes מבחינת זכויות יוצרים?",
+      "options": ["SoundCloud", "YouTube", "Mixcloud", "Spotify"],
+      "correct": 2,
+      "explanation": "Mixcloud מיועדת במיוחד ל-DJ Mixes — היא חוקית עם מוזיקה מוגנת זכויות יוצרים.",
+      "related_lesson": "06-recording",
+      "tags": ["sharing", "copyright"]
+    },
+    {
+      "id": "rbf-q5",
+      "type": "multiple_choice",
+      "difficulty": "beginner",
+      "points": 10,
+      "text": "מה הפורמט המומלץ להקלטת סט ב-Rekordbox?",
+      "options": [
+        "MP3 128kbps — קובץ קטן",
+        "WAV — שמירה, MP3 320kbps — שיתוף",
+        "AAC — איכות טובה",
+        "FLAC — Lossless"
+      ],
+      "correct": 1,
+      "explanation": "הקלט ב-WAV (איכות מקסימלית, שמור עותק), שתף ב-MP3 320kbps (גודל סביר, איכות מצוינת).",
+      "related_lesson": "06-recording",
+      "tags": ["recording", "formats"]
+    }
+  ]
+}

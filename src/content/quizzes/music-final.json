@@ -1,0 +1,87 @@
+{
+  "quiz_id": "music-final",
+  "title": "מבנה מוזיקלי — מבחן מסכם",
+  "description": "מבחן מסכם על כל נושאי המבנה המוזיקלי — ממבנה שיר ועד Harmonic Mixing",
+  "course_id": "04-music-structure",
+  "module_id": "01-music-basics",
+  "settings": {
+    "shuffle_questions": true,
+    "shuffle_options": true,
+    "show_correct_answer": true,
+    "show_explanation": true,
+    "max_attempts": 3,
+    "passing_score": 75,
+    "time_limit_minutes": null
+  },
+  "questions": [
+    {
+      "id": "msf-q1",
+      "type": "multiple_choice",
+      "difficulty": "intermediate",
+      "points": 10,
+      "text": "שיר Dubstep עם BPM של 140 — באיזה BPM הוא 'מרגיש'?",
+      "options": ["70 (Half-Time)", "100", "140", "280 (Double-Time)"],
+      "correct": 0,
+      "explanation": "Dubstep משתמש ב-Half-Time — ה-Kick פוגע רק כל 2 beats, אז 140 BPM מרגיש כמו 70.",
+      "related_lesson": "03-bpm-genres",
+      "tags": ["half-time", "dubstep"]
+    },
+    {
+      "id": "msf-q2",
+      "type": "multiple_choice",
+      "difficulty": "intermediate",
+      "points": 10,
+      "text": "כמה BPM אפשר לשנות בין שני שירים בלי שיורגש מאוד?",
+      "options": ["±0-2", "±5-8", "±10-15", "±20+"],
+      "correct": 0,
+      "explanation": "שינוי של ±0-2 BPM כמעט לא מורגש. ±3-5 מורגש קלות. מעל ±6 מורגש מאוד.",
+      "related_lesson": "03-bpm-genres",
+      "tags": ["bpm", "transitions"]
+    },
+    {
+      "id": "msf-q3",
+      "type": "multiple_choice",
+      "difficulty": "intermediate",
+      "points": 10,
+      "text": "מה כלל ה-10-6 בהכנת סט?",
+      "options": [
+        "לנגן 10 שירים ב-6 דקות",
+        "להכין 10 שירים לכל 6 שצריך",
+        "10 מעברים ב-6 שעות",
+        "6 ז'אנרים ב-10 שירים"
+      ],
+      "correct": 1,
+      "explanation": "כלל ה-10-6: הכן 10 שירים לכל 6 שאתה צריך. ככה יש גמישות להגיב לקהל.",
+      "related_lesson": "04-energy-management",
+      "tags": ["preparation", "set-building"]
+    },
+    {
+      "id": "msf-q4",
+      "type": "true_false",
+      "difficulty": "intermediate",
+      "points": 5,
+      "text": "מעבר בין Major ל-Minor באותו מספר Camelot (למשל 8A → 8B) הוא מעבר הרמוני תקין.",
+      "correct": true,
+      "explanation": "זה נקרא Relative Key — מעבר מCSS/מוד (Major↔Minor) בלי לשנות את הסולם. נשמע מצוין.",
+      "related_lesson": "06-harmonic-mixing",
+      "tags": ["camelot", "relative-key"]
+    },
+    {
+      "id": "msf-q5",
+      "type": "multiple_choice",
+      "difficulty": "beginner",
+      "points": 10,
+      "text": "מה הטעות הנפוצה ביותר בבניית סט?",
+      "options": [
+        "להתחיל עם שירים רגועים",
+        "להתחיל עם Bangers",
+        "לנגן שירים מוכרים",
+        "לעשות מעברים ארוכים"
+      ],
+      "correct": 1,
+      "explanation": "התחלה עם Bangers = אין לאן לעלות. שמור את השירים הכי חזקים ל-Peak Time.",
+      "related_lesson": "04-energy-management",
+      "tags": ["mistakes", "set-building"]
+    }
+  ]
+}

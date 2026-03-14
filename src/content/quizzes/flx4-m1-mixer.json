@@ -1,0 +1,107 @@
+{
+  "quiz_id": "flx4-m1-mixer",
+  "title": "ציוד FLX4 — מיקסר ואפקטים",
+  "description": "בחן את הידע שלך על EQ, Faders, Filter, ואפקטים ב-DDJ-FLX4",
+  "course_id": "02-flx4-equipment",
+  "module_id": "01-flx4-overview",
+  "settings": {
+    "shuffle_questions": true,
+    "shuffle_options": true,
+    "show_correct_answer": true,
+    "show_explanation": true,
+    "max_attempts": 3,
+    "passing_score": 70,
+    "time_limit_minutes": null
+  },
+  "questions": [
+    {
+      "id": "mixer-q1",
+      "type": "multiple_choice",
+      "difficulty": "beginner",
+      "points": 10,
+      "text": "כמה טווחי EQ יש לכל ערוץ ב-DDJ-FLX4?",
+      "options": ["1 (Bass בלבד)", "2 (Bass ו-Treble)", "3 (High, Mid, Low)", "4 (High, Mid-High, Mid-Low, Low)"],
+      "correct": 2,
+      "explanation": "ה-FLX4 כולל 3-Band EQ: High (גבוהים), Mid (אמצעיים), Low (נמוכים).",
+      "related_lesson": "05-mixer",
+      "tags": ["eq", "mixer"]
+    },
+    {
+      "id": "mixer-q2",
+      "type": "multiple_choice",
+      "difficulty": "intermediate",
+      "points": 10,
+      "text": "בטכניקת EQ Swap, מה הכלל החשוב ביותר?",
+      "options": [
+        "להגביר את כל התדרים של שני השירים",
+        "תמיד רק שיר אחד עם Bass מלא",
+        "להוריד את כל התדרים של שני השירים",
+        "להשתמש רק ב-Crossfader"
+      ],
+      "correct": 1,
+      "explanation": "כלל הבסים: תמיד רק שיר אחד עם Bass (LOW) מלא. שני שירים עם Bass חזק ביחד = בלגן.",
+      "related_lesson": "05-mixer",
+      "tags": ["eq-swap", "bass"]
+    },
+    {
+      "id": "mixer-q3",
+      "type": "true_false",
+      "difficulty": "beginner",
+      "points": 5,
+      "text": "ה-Level Meter צריך להיות באדום כדי שהצליל יהיה חזק מספיק.",
+      "correct": false,
+      "explanation": "אדום = Clipping = עיוות. ה-Level Meter צריך להיות בצהוב — זו העוצמה האופטימלית.",
+      "related_lesson": "05-mixer",
+      "tags": ["gain", "clipping"]
+    },
+    {
+      "id": "mixer-q4",
+      "type": "multiple_choice",
+      "difficulty": "intermediate",
+      "points": 10,
+      "text": "מה עושה Smart CFX ב-DDJ-FLX4?",
+      "options": [
+        "מתאים BPM אוטומטית",
+        "מפעיל אפקטים מורכבים דרך כפתור ה-Filter",
+        "מנגן סאמפלים",
+        "מתקן Beat Grid"
+      ],
+      "correct": 1,
+      "explanation": "Smart CFX מאפשר להפעיל אפקטים מורכבים (Echo, Reverb, Noise) דרך כפתור ה-Filter — קל לשימוש למתחילים.",
+      "related_lesson": "06-smart-features",
+      "tags": ["smart-cfx", "effects"]
+    },
+    {
+      "id": "mixer-q5",
+      "type": "matching",
+      "difficulty": "intermediate",
+      "points": 20,
+      "text": "התאם כל אפקט לתיאורו:",
+      "pairs": [
+        { "left": "Echo", "right": "חזרות שנעלמות בהדרגה" },
+        { "left": "Reverb", "right": "מדמה אקוסטיקה של חלל" },
+        { "left": "Flanger", "right": "צליל מסתחרר כמו מטוס סילון" },
+        { "left": "Filter Sweep", "right": "סינון הדרגתי של תדרים" }
+      ],
+      "related_lesson": "07-effects",
+      "tags": ["effects", "definitions"]
+    },
+    {
+      "id": "mixer-q6",
+      "type": "multiple_choice",
+      "difficulty": "intermediate",
+      "points": 10,
+      "text": "מהו הכלל החשוב ביותר בשימוש באפקטים?",
+      "options": [
+        "להשתמש בכמה שיותר אפקטים",
+        "Less is More — להשתמש במטרה ברורה",
+        "להפעיל אפקט על כל מעבר",
+        "להשאיר את ה-Dry/Wet ב-100%"
+      ],
+      "correct": 1,
+      "explanation": "Less is More — אפקטים צריכים לשמש מטרה ברורה. שימוש מוגזם נשמע חובבני.",
+      "related_lesson": "07-effects",
+      "tags": ["effects", "best-practice"]
+    }
+  ]
+}

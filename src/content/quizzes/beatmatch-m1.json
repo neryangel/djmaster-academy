@@ -1,0 +1,111 @@
+{
+  "quiz_id": "beatmatch-m1",
+  "title": "Beatmatching — טכניקה בסיסית",
+  "description": "בחן את הידע שלך על Pitch Fader, Nudging, ו-Headphone Cueing",
+  "course_id": "05-manual-beatmatching",
+  "module_id": "01-beatmatching-basics",
+  "settings": {
+    "shuffle_questions": true,
+    "shuffle_options": true,
+    "show_correct_answer": true,
+    "show_explanation": true,
+    "max_attempts": 3,
+    "passing_score": 70,
+    "time_limit_minutes": null
+  },
+  "questions": [
+    {
+      "id": "bm-q1",
+      "type": "multiple_choice",
+      "difficulty": "beginner",
+      "points": 10,
+      "text": "מה ההבדל בין Pitch Fader ל-Nudging?",
+      "options": [
+        "אין הבדל",
+        "Pitch Fader = שינוי קבוע ב-BPM, Nudging = דחיפה זמנית",
+        "Nudging = שינוי קבוע, Pitch Fader = זמני",
+        "שניהם זמניים"
+      ],
+      "correct": 1,
+      "explanation": "Pitch Fader משנה BPM לצמיתות. Nudging (Jog Wheel) = דחיפה זמנית ליישור ביטים, בלי לשנות BPM.",
+      "related_lesson": "02-pitch-and-cueing",
+      "tags": ["pitch-fader", "nudging"]
+    },
+    {
+      "id": "bm-q2",
+      "type": "matching",
+      "difficulty": "intermediate",
+      "points": 20,
+      "text": "התאם כל שיטת האזנה באוזניות לתיאורה:",
+      "pairs": [
+        { "left": "אוזן אחת פנימה", "right": "אוזנייה בשמאל, ימין חשופה לרמקולים" },
+        { "left": "שתי אוזניות + Cue/Mix", "right": "כפתור שולט על מה שומעים" },
+        { "left": "Split Cue", "right": "שיר A לאוזן אחת, שיר B לאחרת" }
+      ],
+      "related_lesson": "02-pitch-and-cueing",
+      "tags": ["headphone-cueing", "methods"]
+    },
+    {
+      "id": "bm-q3",
+      "type": "true_false",
+      "difficulty": "beginner",
+      "points": 5,
+      "text": "הדרך הטובה ביותר לתרגל Beatmatch היא לטעון את אותו שיר בשני ה-Decks.",
+      "correct": true,
+      "explanation": "אותו שיר בשני ה-Decks = אתה יודע מה צריך להישמע. הזז Pitch ב-3% ונסה להחזיר — בלי להסתכל!",
+      "related_lesson": "02-pitch-and-cueing",
+      "tags": ["practice", "technique"]
+    },
+    {
+      "id": "bm-q4",
+      "type": "multiple_choice",
+      "difficulty": "intermediate",
+      "points": 10,
+      "text": "מה זה 'סחיפה' (Drift)?",
+      "options": [
+        "כשה-Jog Wheel תקוע",
+        "כשהביטים מתרחקים לאט למרות BPM תואם",
+        "כשהשיר עוצר",
+        "כשהFilter פתוח"
+      ],
+      "correct": 1,
+      "explanation": "Drift = סחיפה — הביטים מתרחקים בהדרגה. קורה כי ה-Pitch Fader לא מדויק ב-100%. הפתרון: Nudge + Pitch Riding.",
+      "related_lesson": "03-nudging-drift",
+      "tags": ["drift", "sync"]
+    },
+    {
+      "id": "bm-q5",
+      "type": "multiple_choice",
+      "difficulty": "beginner",
+      "points": 10,
+      "text": "מהו כלל ה-1%?",
+      "options": [
+        "לשנות בדיוק 1% ב-Pitch כל פעם",
+        "שינוי של פחות מ-1% מספיק לשירים עם BPM קרוב",
+        "1% מהקהל תמיד לא מרוצה",
+        "להקליט 1% מכל סט"
+      ],
+      "correct": 1,
+      "explanation": "כלל ה-1%: אם שני שירים קרובים ב-BPM (±3), שינוי של פחות מ-1% ב-Pitch בדרך כלל מספיק.",
+      "related_lesson": "02-pitch-and-cueing",
+      "tags": ["1-percent-rule", "pitch"]
+    },
+    {
+      "id": "bm-q6",
+      "type": "multiple_choice",
+      "difficulty": "intermediate",
+      "points": 10,
+      "text": "מה הכלל לגבי תדירות תרגול?",
+      "options": [
+        "2 שעות פעם בשבוע",
+        "15 דקות ביום",
+        "שעה כל יומיים",
+        "רק לפני אירועים"
+      ],
+      "correct": 1,
+      "explanation": "15 דקות ביום עדיף על 2 שעות פעם בשבוע. עקביות > אינטנסיביות.",
+      "related_lesson": "03-nudging-drift",
+      "tags": ["practice", "consistency"]
+    }
+  ]
+}

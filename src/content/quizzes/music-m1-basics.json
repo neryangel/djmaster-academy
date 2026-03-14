@@ -1,0 +1,97 @@
+{
+  "quiz_id": "music-m1-basics",
+  "title": "מבנה מוזיקלי — יסודות",
+  "description": "בחן את הידע שלך על מבנה שיר, BPM, ופרייזינג",
+  "course_id": "04-music-structure",
+  "module_id": "01-music-basics",
+  "settings": {
+    "shuffle_questions": true,
+    "shuffle_options": true,
+    "show_correct_answer": true,
+    "show_explanation": true,
+    "max_attempts": 3,
+    "passing_score": 70,
+    "time_limit_minutes": null
+  },
+  "questions": [
+    {
+      "id": "ms-q1",
+      "type": "multiple_choice",
+      "difficulty": "beginner",
+      "points": 10,
+      "text": "כמה beats יש ב-Bar אחד (תיבה) במוזיקה 4/4?",
+      "options": ["2", "3", "4", "8"],
+      "correct": 2,
+      "explanation": "במוזיקה 4/4 (הנפוצה ביותר) יש 4 beats בכל Bar. נספרים: 1-2-3-4.",
+      "related_lesson": "01-basics",
+      "tags": ["beats", "bars", "basics"]
+    },
+    {
+      "id": "ms-q2",
+      "type": "multiple_choice",
+      "difficulty": "intermediate",
+      "points": 10,
+      "text": "כמה Bars יש ב-Phrase (משפט מוזיקלי) סטנדרטי?",
+      "options": ["4", "8", "16", "32"],
+      "correct": 1,
+      "explanation": "Phrase סטנדרטי = 8 Bars = 32 Beats. שינויים מוזיקליים קורים בדרך כלל כל 8 Bars.",
+      "related_lesson": "05-phrasing",
+      "tags": ["phrasing", "bars"]
+    },
+    {
+      "id": "ms-q3",
+      "type": "matching",
+      "difficulty": "intermediate",
+      "points": 20,
+      "text": "התאם כל חלק בשיר לתיאורו:",
+      "pairs": [
+        { "left": "Intro", "right": "פרקאסיה בלבד, נקודת כניסה לDJ" },
+        { "left": "Drop", "right": "השיא — Kick ו-Bass מלאים" },
+        { "left": "Breakdown", "right": "ירידה באנרגיה, מלודיה רכה" },
+        { "left": "Outro", "right": "סיום השיר, נקודת יציאה לDJ" }
+      ],
+      "related_lesson": "02-song-structure",
+      "tags": ["song-structure", "sections"]
+    },
+    {
+      "id": "ms-q4",
+      "type": "multiple_choice",
+      "difficulty": "beginner",
+      "points": 10,
+      "text": "מה הטווח הטיפוסי של BPM ל-House?",
+      "options": ["70-90", "100-110", "120-130", "150-170"],
+      "correct": 2,
+      "explanation": "House נע בטווח 120-130 BPM. זה הקצב הנפוץ ביותר במוזיקת מחול אלקטרונית.",
+      "related_lesson": "03-bpm-genres",
+      "tags": ["bpm", "genres", "house"]
+    },
+    {
+      "id": "ms-q5",
+      "type": "true_false",
+      "difficulty": "intermediate",
+      "points": 5,
+      "text": "Half-Time הוא כשהBPM בפועל מוכפל.",
+      "correct": false,
+      "explanation": "Half-Time = הBPM מרגיש כמו חצי. למשל Dubstep ב-140 BPM מרגיש כמו 70 כי ה-Kick פוגע רק כל 2 beats. Double-Time הוא ההפך.",
+      "related_lesson": "03-bpm-genres",
+      "tags": ["half-time", "bpm"]
+    },
+    {
+      "id": "ms-q6",
+      "type": "multiple_choice",
+      "difficulty": "beginner",
+      "points": 10,
+      "text": "מהי הנקודה הטובה ביותר למעבר בין שירים?",
+      "options": [
+        "באמצע ה-Drop",
+        "Intro של שיר B + Outro של שיר A",
+        "באמצע ה-Verse",
+        "ב-Build-up"
+      ],
+      "correct": 1,
+      "explanation": "Intro + Outro = הנקודה האידיאלית. שני החלקים מעוצבים בדיוק בשביל ערבוב.",
+      "related_lesson": "02-song-structure",
+      "tags": ["mixing-point", "transitions"]
+    }
+  ]
+}

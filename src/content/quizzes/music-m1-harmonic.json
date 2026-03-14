@@ -1,0 +1,112 @@
+{
+  "quiz_id": "music-m1-harmonic",
+  "title": "מבנה מוזיקלי — Harmonic Mixing",
+  "description": "בחן את הידע שלך על גלגל Camelot, מפתחות תואמים, וניהול אנרגיה",
+  "course_id": "04-music-structure",
+  "module_id": "01-music-basics",
+  "settings": {
+    "shuffle_questions": true,
+    "shuffle_options": true,
+    "show_correct_answer": true,
+    "show_explanation": true,
+    "max_attempts": 3,
+    "passing_score": 70,
+    "time_limit_minutes": null
+  },
+  "questions": [
+    {
+      "id": "hm-q1",
+      "type": "multiple_choice",
+      "difficulty": "intermediate",
+      "points": 10,
+      "text": "במערכת Camelot, מה מייצגים ה-A וה-B?",
+      "options": [
+        "A = Deck A, B = Deck B",
+        "A = Minor, B = Major",
+        "A = Fast, B = Slow",
+        "A = Acoustic, B = Bass"
+      ],
+      "correct": 1,
+      "explanation": "A = Minor (כהה, רגשי). B = Major (שמח, מואר). הטבעת הפנימית = A, החיצונית = B.",
+      "related_lesson": "06-harmonic-mixing",
+      "tags": ["camelot", "keys"]
+    },
+    {
+      "id": "hm-q2",
+      "type": "multiple_choice",
+      "difficulty": "intermediate",
+      "points": 10,
+      "text": "איזה מעבר Camelot נקרא Energy Boost?",
+      "options": [
+        "אותו מספר (8A → 8A)",
+        "±1 (8A → 9A)",
+        "+7 (5A → 12A)",
+        "Major ↔ Minor (8A → 8B)"
+      ],
+      "correct": 2,
+      "explanation": "Energy Boost = +7 על הגלגל = חצי טון למעלה. נשמע כמו הרמת אנרגיה דרמטית.",
+      "related_lesson": "06-harmonic-mixing",
+      "tags": ["camelot", "energy-boost"]
+    },
+    {
+      "id": "hm-q3",
+      "type": "true_false",
+      "difficulty": "beginner",
+      "points": 5,
+      "text": "מעבר מ-8A ל-2A על גלגל Camelot הוא מעבר הרמוני טוב.",
+      "correct": false,
+      "explanation": "8A ל-2A = קפיצה של 6 = 4 צלילים שונים = צורם. מעברים טובים: אותו מספר, ±1, או Major↔Minor.",
+      "related_lesson": "06-harmonic-mixing",
+      "tags": ["camelot", "bad-transitions"]
+    },
+    {
+      "id": "hm-q4",
+      "type": "multiple_choice",
+      "difficulty": "intermediate",
+      "points": 10,
+      "text": "מהו 'The One'?",
+      "options": [
+        "השיר הכי טוב בסט",
+        "ביט 1 של תיבה 1 של משפט חדש",
+        "הDJ הכי מפורסם",
+        "ה-BPM הממוצע"
+      ],
+      "correct": 1,
+      "explanation": "The One = ביט 1 של תיבה 1 של משפט חדש — הנקודה המושלמת להכניס שיר חדש או לעשות מעבר.",
+      "related_lesson": "05-phrasing",
+      "tags": ["phrasing", "the-one"]
+    },
+    {
+      "id": "hm-q5",
+      "type": "matching",
+      "difficulty": "intermediate",
+      "points": 20,
+      "text": "התאם כל שלב בסט לאנרגיה המתאימה:",
+      "pairs": [
+        { "left": "Warm-up", "right": "אנרגיה 3-5, שירים רגועים" },
+        { "left": "Build", "right": "אנרגיה 5-7, House ורמיקסים" },
+        { "left": "Peak Time", "right": "אנרגיה 8-10, Bangers ושירים מוכרים" },
+        { "left": "Wind Down", "right": "אנרגיה 5-3, ירידה הדרגתית" }
+      ],
+      "related_lesson": "04-energy-management",
+      "tags": ["energy", "set-building"]
+    },
+    {
+      "id": "hm-q6",
+      "type": "multiple_choice",
+      "difficulty": "intermediate",
+      "points": 10,
+      "text": "מה הסימן שהאנרגיה ברחבה לא נכונה?",
+      "options": [
+        "אנשים רוקדים",
+        "אנשים מסתכלים בטלפון",
+        "אנשים נכנסים לרחבה",
+        "אנשים מזמינים שתייה ברחבה"
+      ],
+      "correct": 1,
+      "explanation": "אנשים על הטלפון = לא מתעניינים במוזיקה. סימנים טובים: ריקוד, כניסה לרחבה, שתייה ברחבה.",
+      "related_lesson": "04-energy-management",
+      "tags": ["crowd-reading", "energy"]
+    }
+  ]
+}

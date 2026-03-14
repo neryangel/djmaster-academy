@@ -1,0 +1,97 @@
+{
+  "quiz_id": "flx4-final",
+  "title": "ציוד FLX4 — מבחן מסכם",
+  "description": "מבחן מסכם על כל הנושאים בקורס ציוד DDJ-FLX4",
+  "course_id": "02-flx4-equipment",
+  "module_id": "01-flx4-overview",
+  "settings": {
+    "shuffle_questions": true,
+    "shuffle_options": true,
+    "show_correct_answer": true,
+    "show_explanation": true,
+    "max_attempts": 3,
+    "passing_score": 75,
+    "time_limit_minutes": null
+  },
+  "questions": [
+    {
+      "id": "flx4f-q1",
+      "type": "multiple_choice",
+      "difficulty": "intermediate",
+      "points": 10,
+      "text": "מתי כדאי להשתמש ב-Smart Fader?",
+      "options": [
+        "תמיד — זה עדיף מ-Beatmatch ידני",
+        "כשמערבבים שירים עם BPM שונה מאוד",
+        "רק כש-Scratching",
+        "אף פעם — זה לא מקצועי"
+      ],
+      "correct": 1,
+      "explanation": "Smart Fader שימושי כשמעבירים בין שירים עם BPM שונה מאוד (למשל Hip-Hop 85 → House 128). למעברים רגילים, Beatmatch ידני עדיף.",
+      "related_lesson": "06-smart-features",
+      "tags": ["smart-fader"]
+    },
+    {
+      "id": "flx4f-q2",
+      "type": "multiple_choice",
+      "difficulty": "intermediate",
+      "points": 10,
+      "text": "באיזה סדר כדאי לבדוק את אותות המיקסר?",
+      "options": [
+        "Fader → EQ → Trim",
+        "EQ → Fader → Trim",
+        "Trim → EQ → Fader",
+        "Crossfader → EQ → Trim"
+      ],
+      "correct": 2,
+      "explanation": "הסדר הנכון: Trim (ודא שהעוצמה בצהוב) → EQ (התאם תדרים) → Fader (שלוט בעוצמה). Trim הוא הנקודה הראשונה.",
+      "related_lesson": "05-mixer",
+      "tags": ["signal-flow", "mixer"]
+    },
+    {
+      "id": "flx4f-q3",
+      "type": "true_false",
+      "difficulty": "beginner",
+      "points": 5,
+      "text": "ה-Filter ב-FLX4 עובד רק בכיוון אחד.",
+      "correct": false,
+      "explanation": "ה-Filter עובד בשני כיוונים: שמאל מ-12 = Low Pass (רק Bass), ימין מ-12 = High Pass (רק גבוהים).",
+      "related_lesson": "05-mixer",
+      "tags": ["filter"]
+    },
+    {
+      "id": "flx4f-q4",
+      "type": "multiple_choice",
+      "difficulty": "beginner",
+      "points": 10,
+      "text": "מה ההבדל בין Channel Fader ל-Crossfader?",
+      "options": [
+        "אין הבדל",
+        "Channel Fader שולט בעוצמת ערוץ אחד, Crossfader באיזון בין שניהם",
+        "Crossfader שולט ב-EQ",
+        "Channel Fader משנה BPM"
+      ],
+      "correct": 1,
+      "explanation": "Channel Fader = עוצמת ערוץ אחד (A או B). Crossfader = איזון בין שני הערוצים (שמאל=A, ימין=B).",
+      "related_lesson": "05-mixer",
+      "tags": ["faders", "mixer"]
+    },
+    {
+      "id": "flx4f-q5",
+      "type": "multiple_choice",
+      "difficulty": "intermediate",
+      "points": 10,
+      "text": "מתי הכי כדאי להשתמש ב-Filter Sweep כאפקט?",
+      "options": [
+        "כל הזמן",
+        "ב-Build-up לפני Drop",
+        "רק ב-Outro",
+        "רק ב-Intro"
+      ],
+      "correct": 1,
+      "explanation": "Filter Sweep (Low Pass) מושלם ל-Build-up: מסנן הדרגתית את הגבוהים, יוצר מתח, ואז שחרור ב-Drop = אנרגיה מקסימלית.",
+      "related_lesson": "07-effects",
+      "tags": ["filter", "effects", "build-up"]
+    }
+  ]
+}
