@@ -103,7 +103,12 @@ export default function BpmCalculator() {
       }
     });
     observer.observe(document.body, { attributes: true, attributeFilter: ['data-e2e-bpm'] });
-    return () => observer.disconnect();
+    // Signal to Playwright that the observer is live
+    (window as any).__bpmObserverReady = true;
+    return () => {
+      observer.disconnect();
+      delete (window as any).__bpmObserverReady;
+    };
   }, []);
 
   const displayBpm = manualBpm ? parseFloat(manualBpm) || 0 : tapState.bpm;

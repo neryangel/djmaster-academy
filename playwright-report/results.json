@@ -94,12 +94,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 1231,
+                      "duration": 1222,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-15T05:07:46.576Z",
+                      "startTime": "2026-03-15T05:13:31.909Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -128,12 +128,12 @@
                       "workerIndex": 1,
                       "parallelIndex": 1,
                       "status": "passed",
-                      "duration": 1236,
+                      "duration": 1261,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-15T05:07:46.539Z",
+                      "startTime": "2026-03-15T05:13:32.199Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -162,12 +162,12 @@
                       "workerIndex": 2,
                       "parallelIndex": 2,
                       "status": "passed",
-                      "duration": 1131,
+                      "duration": 1258,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-15T05:07:46.729Z",
+                      "startTime": "2026-03-15T05:13:31.955Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -196,12 +196,12 @@
                       "workerIndex": 3,
                       "parallelIndex": 3,
                       "status": "passed",
-                      "duration": 1153,
+                      "duration": 1374,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-15T05:07:46.533Z",
+                      "startTime": "2026-03-15T05:13:31.802Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -230,12 +230,12 @@
                       "workerIndex": 4,
                       "parallelIndex": 4,
                       "status": "passed",
-                      "duration": 1227,
+                      "duration": 1273,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-15T05:07:46.507Z",
+                      "startTime": "2026-03-15T05:13:32.068Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -261,15 +261,15 @@
                   "projectName": "chromium",
                   "results": [
                     {
-                      "workerIndex": 3,
-                      "parallelIndex": 3,
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 986,
+                      "duration": 1134,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-15T05:07:48.525Z",
+                      "startTime": "2026-03-15T05:13:34.262Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -295,15 +295,15 @@
                   "projectName": "chromium",
                   "results": [
                     {
-                      "workerIndex": 4,
-                      "parallelIndex": 4,
+                      "workerIndex": 2,
+                      "parallelIndex": 2,
                       "status": "passed",
-                      "duration": 1071,
+                      "duration": 962,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-15T05:07:48.588Z",
+                      "startTime": "2026-03-15T05:13:34.304Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -329,15 +329,15 @@
                   "projectName": "chromium",
                   "results": [
                     {
-                      "workerIndex": 0,
-                      "parallelIndex": 0,
+                      "workerIndex": 4,
+                      "parallelIndex": 4,
                       "status": "passed",
-                      "duration": 927,
+                      "duration": 936,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-15T05:07:48.598Z",
+                      "startTime": "2026-03-15T05:13:34.317Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -366,12 +366,12 @@
                       "workerIndex": 1,
                       "parallelIndex": 1,
                       "status": "passed",
-                      "duration": 936,
+                      "duration": 915,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-15T05:07:48.607Z",
+                      "startTime": "2026-03-15T05:13:34.316Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -397,15 +397,15 @@
                   "projectName": "chromium",
                   "results": [
                     {
-                      "workerIndex": 2,
-                      "parallelIndex": 2,
+                      "workerIndex": 3,
+                      "parallelIndex": 3,
                       "status": "passed",
-                      "duration": 1063,
+                      "duration": 861,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-15T05:07:48.836Z",
+                      "startTime": "2026-03-15T05:13:34.411Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -431,15 +431,15 @@
                   "projectName": "chromium",
                   "results": [
                     {
-                      "workerIndex": 3,
-                      "parallelIndex": 3,
+                      "workerIndex": 1,
+                      "parallelIndex": 1,
                       "status": "passed",
-                      "duration": 883,
+                      "duration": 861,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-15T05:07:49.549Z",
+                      "startTime": "2026-03-15T05:13:35.255Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -465,15 +465,15 @@
                   "projectName": "chromium",
                   "results": [
                     {
-                      "workerIndex": 0,
-                      "parallelIndex": 0,
+                      "workerIndex": 4,
+                      "parallelIndex": 4,
                       "status": "passed",
-                      "duration": 881,
+                      "duration": 960,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-15T05:07:49.570Z",
+                      "startTime": "2026-03-15T05:13:35.271Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -499,15 +499,15 @@
                   "projectName": "chromium",
                   "results": [
                     {
-                      "workerIndex": 1,
-                      "parallelIndex": 1,
+                      "workerIndex": 3,
+                      "parallelIndex": 3,
                       "status": "passed",
-                      "duration": 1016,
+                      "duration": 1129,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-15T05:07:49.575Z",
+                      "startTime": "2026-03-15T05:13:35.289Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -533,15 +533,15 @@
                   "projectName": "chromium",
                   "results": [
                     {
-                      "workerIndex": 4,
-                      "parallelIndex": 4,
+                      "workerIndex": 2,
+                      "parallelIndex": 2,
                       "status": "passed",
-                      "duration": 780,
+                      "duration": 886,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-15T05:07:49.677Z",
+                      "startTime": "2026-03-15T05:13:35.287Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -567,15 +567,15 @@
                   "projectName": "chromium",
                   "results": [
                     {
-                      "workerIndex": 2,
-                      "parallelIndex": 2,
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 1273,
+                      "duration": 1096,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-15T05:07:49.930Z",
+                      "startTime": "2026-03-15T05:13:35.423Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -601,15 +601,15 @@
                   "projectName": "chromium",
                   "results": [
                     {
-                      "workerIndex": 3,
-                      "parallelIndex": 3,
+                      "workerIndex": 1,
+                      "parallelIndex": 1,
                       "status": "passed",
-                      "duration": 732,
+                      "duration": 841,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-15T05:07:50.454Z",
+                      "startTime": "2026-03-15T05:13:36.152Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -635,15 +635,15 @@
                   "projectName": "chromium",
                   "results": [
                     {
-                      "workerIndex": 0,
-                      "parallelIndex": 0,
+                      "workerIndex": 2,
+                      "parallelIndex": 2,
                       "status": "passed",
-                      "duration": 813,
+                      "duration": 658,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-15T05:07:50.466Z",
+                      "startTime": "2026-03-15T05:13:36.243Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -689,12 +689,12 @@
                       "workerIndex": 4,
                       "parallelIndex": 4,
                       "status": "passed",
-                      "duration": 808,
+                      "duration": 667,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-15T05:07:50.481Z",
+                      "startTime": "2026-03-15T05:13:36.292Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -709,76 +709,7 @@
             },
             {
               "title": "BPM Calculator tap functionality works",
-              "ok": false,
-              "tags": [],
-              "tests": [
-                {
-                  "timeout": 30000,
-                  "annotations": [],
-                  "expectedStatus": "passed",
-                  "projectId": "chromium",
-                  "projectName": "chromium",
-                  "results": [
-                    {
-                      "workerIndex": 1,
-                      "parallelIndex": 1,
-                      "status": "failed",
-                      "duration": 10970,
-                      "error": {
-                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('div.text-\\\\[80px\\\\]').first()\nExpected: \u001b[32m\"128.5\"\u001b[39m\nReceived: \u001b[31m\"00.0\"\u001b[39m\nTimeout:  10000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" with timeout 10000ms\u001b[22m\n\u001b[2m  - waiting for locator('div.text-\\\\[80px\\\\]').first()\u001b[22m\n\u001b[2m    14 × locator resolved to <div class=\"text-[80px] font-mono leading-none tracking-tighter transition-all duration-150 text-white/10\">00.0</div>\u001b[22m\n\u001b[2m       - unexpected value \"00.0\"\u001b[22m\n",
-                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('div.text-\\\\[80px\\\\]').first()\nExpected: \u001b[32m\"128.5\"\u001b[39m\nReceived: \u001b[31m\"00.0\"\u001b[39m\nTimeout:  10000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" with timeout 10000ms\u001b[22m\n\u001b[2m  - waiting for locator('div.text-\\\\[80px\\\\]').first()\u001b[22m\n\u001b[2m    14 × locator resolved to <div class=\"text-[80px] font-mono leading-none tracking-tighter transition-all duration-150 text-white/10\">00.0</div>\u001b[22m\n\u001b[2m       - unexpected value \"00.0\"\u001b[22m\n\n    at /Users/user/Documents/קורס DJ/djmaster-academy/e2e/tools.spec.ts:38:30",
-                        "location": {
-                          "file": "/Users/user/Documents/קורס DJ/djmaster-academy/e2e/tools.spec.ts",
-                          "column": 30,
-                          "line": 38
-                        },
-                        "snippet": "\u001b[0m \u001b[90m 36 |\u001b[39m     \u001b[90m// Value should change from 00.0 to the manually inputted 128.5\u001b[39m\n \u001b[90m 37 |\u001b[39m     \u001b[36mconst\u001b[39m bpmDisplay \u001b[33m=\u001b[39m page\u001b[33m.\u001b[39mlocator(\u001b[32m'div.text-\\\\[80px\\\\]'\u001b[39m)\u001b[33m.\u001b[39mfirst()\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 38 |\u001b[39m     \u001b[36mawait\u001b[39m expect(bpmDisplay)\u001b[33m.\u001b[39mtoHaveText(\u001b[32m'128.5'\u001b[39m\u001b[33m,\u001b[39m { timeout\u001b[33m:\u001b[39m \u001b[35m10000\u001b[39m })\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                              \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 39 |\u001b[39m   })\u001b[33m;\u001b[39m\n \u001b[90m 40 |\u001b[39m\n \u001b[90m 41 |\u001b[39m   test(\u001b[32m'BPM Calculator reset button works'\u001b[39m\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m ({ page }) \u001b[33m=>\u001b[39m {\u001b[0m"
-                      },
-                      "errors": [
-                        {
-                          "location": {
-                            "file": "/Users/user/Documents/קורס DJ/djmaster-academy/e2e/tools.spec.ts",
-                            "column": 30,
-                            "line": 38
-                          },
-                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('div.text-\\\\[80px\\\\]').first()\nExpected: \u001b[32m\"128.5\"\u001b[39m\nReceived: \u001b[31m\"00.0\"\u001b[39m\nTimeout:  10000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" with timeout 10000ms\u001b[22m\n\u001b[2m  - waiting for locator('div.text-\\\\[80px\\\\]').first()\u001b[22m\n\u001b[2m    14 × locator resolved to <div class=\"text-[80px] font-mono leading-none tracking-tighter transition-all duration-150 text-white/10\">00.0</div>\u001b[22m\n\u001b[2m       - unexpected value \"00.0\"\u001b[22m\n\n\n\u001b[0m \u001b[90m 36 |\u001b[39m     \u001b[90m// Value should change from 00.0 to the manually inputted 128.5\u001b[39m\n \u001b[90m 37 |\u001b[39m     \u001b[36mconst\u001b[39m bpmDisplay \u001b[33m=\u001b[39m page\u001b[33m.\u001b[39mlocator(\u001b[32m'div.text-\\\\[80px\\\\]'\u001b[39m)\u001b[33m.\u001b[39mfirst()\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 38 |\u001b[39m     \u001b[36mawait\u001b[39m expect(bpmDisplay)\u001b[33m.\u001b[39mtoHaveText(\u001b[32m'128.5'\u001b[39m\u001b[33m,\u001b[39m { timeout\u001b[33m:\u001b[39m \u001b[35m10000\u001b[39m })\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                              \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 39 |\u001b[39m   })\u001b[33m;\u001b[39m\n \u001b[90m 40 |\u001b[39m\n \u001b[90m 41 |\u001b[39m   test(\u001b[32m'BPM Calculator reset button works'\u001b[39m\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m ({ page }) \u001b[33m=>\u001b[39m {\u001b[0m\n\u001b[2m    at /Users/user/Documents/קורס DJ/djmaster-academy/e2e/tools.spec.ts:38:30\u001b[22m"
-                        }
-                      ],
-                      "stdout": [],
-                      "stderr": [],
-                      "retry": 0,
-                      "startTime": "2026-03-15T05:07:50.613Z",
-                      "annotations": [],
-                      "attachments": [
-                        {
-                          "name": "screenshot",
-                          "contentType": "image/png",
-                          "path": "/Users/user/Documents/קורס DJ/djmaster-academy/test-results/tools-Tools-Pages-E2E-BPM-Calculator-tap-functionality-works-chromium/test-failed-1.png"
-                        },
-                        {
-                          "name": "error-context",
-                          "contentType": "text/markdown",
-                          "path": "/Users/user/Documents/קורס DJ/djmaster-academy/test-results/tools-Tools-Pages-E2E-BPM-Calculator-tap-functionality-works-chromium/error-context.md"
-                        }
-                      ],
-                      "errorLocation": {
-                        "file": "/Users/user/Documents/קורס DJ/djmaster-academy/e2e/tools.spec.ts",
-                        "column": 30,
-                        "line": 38
-                      }
-                    }
-                  ],
-                  "status": "unexpected"
-                }
-              ],
-              "id": "28ac77d690f1704d1b07-f848187f98fb5d80b1cd",
-              "file": "tools.spec.ts",
-              "line": 26,
-              "column": 3
-            },
-            {
-              "title": "BPM Calculator reset button works",
-              "ok": false,
+              "ok": true,
               "tags": [],
               "tests": [
                 {
@@ -791,58 +722,57 @@
                     {
                       "workerIndex": 3,
                       "parallelIndex": 3,
-                      "status": "failed",
-                      "duration": 5696,
-                      "error": {
-                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('div.text-\\\\[80px\\\\]').first()\nExpected: \u001b[32m\"128.5\"\u001b[39m\nReceived: \u001b[31m\"00.0\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('div.text-\\\\[80px\\\\]').first()\u001b[22m\n\u001b[2m    9 × locator resolved to <div class=\"text-[80px] font-mono leading-none tracking-tighter transition-all duration-150 text-white/10\">00.0</div>\u001b[22m\n\u001b[2m      - unexpected value \"00.0\"\u001b[22m\n",
-                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('div.text-\\\\[80px\\\\]').first()\nExpected: \u001b[32m\"128.5\"\u001b[39m\nReceived: \u001b[31m\"00.0\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('div.text-\\\\[80px\\\\]').first()\u001b[22m\n\u001b[2m    9 × locator resolved to <div class=\"text-[80px] font-mono leading-none tracking-tighter transition-all duration-150 text-white/10\">00.0</div>\u001b[22m\n\u001b[2m      - unexpected value \"00.0\"\u001b[22m\n\n    at /Users/user/Documents/קורס DJ/djmaster-academy/e2e/tools.spec.ts:49:30",
-                        "location": {
-                          "file": "/Users/user/Documents/קורס DJ/djmaster-academy/e2e/tools.spec.ts",
-                          "column": 30,
-                          "line": 49
-                        },
-                        "snippet": "\u001b[0m \u001b[90m 47 |\u001b[39m     \u001b[90m// Value should change from 00.0 to the manually inputted 128.5\u001b[39m\n \u001b[90m 48 |\u001b[39m     \u001b[36mconst\u001b[39m bpmDisplay \u001b[33m=\u001b[39m page\u001b[33m.\u001b[39mlocator(\u001b[32m'div.text-\\\\[80px\\\\]'\u001b[39m)\u001b[33m.\u001b[39mfirst()\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 49 |\u001b[39m     \u001b[36mawait\u001b[39m expect(bpmDisplay)\u001b[33m.\u001b[39mtoHaveText(\u001b[32m'128.5'\u001b[39m\u001b[33m,\u001b[39m { timeout\u001b[33m:\u001b[39m \u001b[35m5000\u001b[39m })\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                              \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 50 |\u001b[39m\n \u001b[90m 51 |\u001b[39m     \u001b[90m// Click reset button (CLEAR)\u001b[39m\n \u001b[90m 52 |\u001b[39m     \u001b[36mconst\u001b[39m resetButton \u001b[33m=\u001b[39m page\u001b[33m.\u001b[39mlocator(\u001b[32m'button'\u001b[39m)\u001b[33m.\u001b[39mfilter({ hasText\u001b[33m:\u001b[39m \u001b[35m/CLEAR|אפס/i\u001b[39m })\u001b[33m.\u001b[39mfirst()\u001b[33m;\u001b[39m\u001b[0m"
-                      },
-                      "errors": [
-                        {
-                          "location": {
-                            "file": "/Users/user/Documents/קורס DJ/djmaster-academy/e2e/tools.spec.ts",
-                            "column": 30,
-                            "line": 49
-                          },
-                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('div.text-\\\\[80px\\\\]').first()\nExpected: \u001b[32m\"128.5\"\u001b[39m\nReceived: \u001b[31m\"00.0\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('div.text-\\\\[80px\\\\]').first()\u001b[22m\n\u001b[2m    9 × locator resolved to <div class=\"text-[80px] font-mono leading-none tracking-tighter transition-all duration-150 text-white/10\">00.0</div>\u001b[22m\n\u001b[2m      - unexpected value \"00.0\"\u001b[22m\n\n\n\u001b[0m \u001b[90m 47 |\u001b[39m     \u001b[90m// Value should change from 00.0 to the manually inputted 128.5\u001b[39m\n \u001b[90m 48 |\u001b[39m     \u001b[36mconst\u001b[39m bpmDisplay \u001b[33m=\u001b[39m page\u001b[33m.\u001b[39mlocator(\u001b[32m'div.text-\\\\[80px\\\\]'\u001b[39m)\u001b[33m.\u001b[39mfirst()\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 49 |\u001b[39m     \u001b[36mawait\u001b[39m expect(bpmDisplay)\u001b[33m.\u001b[39mtoHaveText(\u001b[32m'128.5'\u001b[39m\u001b[33m,\u001b[39m { timeout\u001b[33m:\u001b[39m \u001b[35m5000\u001b[39m })\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                              \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 50 |\u001b[39m\n \u001b[90m 51 |\u001b[39m     \u001b[90m// Click reset button (CLEAR)\u001b[39m\n \u001b[90m 52 |\u001b[39m     \u001b[36mconst\u001b[39m resetButton \u001b[33m=\u001b[39m page\u001b[33m.\u001b[39mlocator(\u001b[32m'button'\u001b[39m)\u001b[33m.\u001b[39mfilter({ hasText\u001b[33m:\u001b[39m \u001b[35m/CLEAR|אפס/i\u001b[39m })\u001b[33m.\u001b[39mfirst()\u001b[33m;\u001b[39m\u001b[0m\n\u001b[2m    at /Users/user/Documents/קורס DJ/djmaster-academy/e2e/tools.spec.ts:49:30\u001b[22m"
-                        }
-                      ],
+                      "status": "passed",
+                      "duration": 1113,
+                      "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-15T05:07:51.256Z",
+                      "startTime": "2026-03-15T05:13:36.453Z",
                       "annotations": [],
-                      "attachments": [
-                        {
-                          "name": "screenshot",
-                          "contentType": "image/png",
-                          "path": "/Users/user/Documents/קורס DJ/djmaster-academy/test-results/tools-Tools-Pages-E2E-BPM-Calculator-reset-button-works-chromium/test-failed-1.png"
-                        },
-                        {
-                          "name": "error-context",
-                          "contentType": "text/markdown",
-                          "path": "/Users/user/Documents/קורס DJ/djmaster-academy/test-results/tools-Tools-Pages-E2E-BPM-Calculator-reset-button-works-chromium/error-context.md"
-                        }
-                      ],
-                      "errorLocation": {
-                        "file": "/Users/user/Documents/קורס DJ/djmaster-academy/e2e/tools.spec.ts",
-                        "column": 30,
-                        "line": 49
-                      }
+                      "attachments": []
                     }
                   ],
-                  "status": "unexpected"
+                  "status": "expected"
+                }
+              ],
+              "id": "28ac77d690f1704d1b07-f848187f98fb5d80b1cd",
+              "file": "tools.spec.ts",
+              "line": 26,
+              "column": 3
+            },
+            {
+              "title": "BPM Calculator reset button works",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 703,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-15T05:13:36.545Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
                 }
               ],
               "id": "28ac77d690f1704d1b07-f4e9128c9716c476ea66",
               "file": "tools.spec.ts",
-              "line": 41,
+              "line": 46,
               "column": 3
             },
             {
@@ -861,12 +791,12 @@
                       "workerIndex": 2,
                       "parallelIndex": 2,
                       "status": "passed",
-                      "duration": 818,
+                      "duration": 601,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-15T05:07:51.244Z",
+                      "startTime": "2026-03-15T05:13:36.992Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -876,7 +806,7 @@
               ],
               "id": "28ac77d690f1704d1b07-0284f2bf33a38f21056d",
               "file": "tools.spec.ts",
-              "line": 59,
+              "line": 63,
               "column": 3
             },
             {
@@ -892,15 +822,15 @@
                   "projectName": "chromium",
                   "results": [
                     {
-                      "workerIndex": 0,
-                      "parallelIndex": 0,
+                      "workerIndex": 4,
+                      "parallelIndex": 4,
                       "status": "passed",
-                      "duration": 668,
+                      "duration": 605,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-15T05:07:51.318Z",
+                      "startTime": "2026-03-15T05:13:36.992Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -910,7 +840,7 @@
               ],
               "id": "28ac77d690f1704d1b07-74d656ea142593a0c99b",
               "file": "tools.spec.ts",
-              "line": 72,
+              "line": 76,
               "column": 3
             },
             {
@@ -926,15 +856,15 @@
                   "projectName": "chromium",
                   "results": [
                     {
-                      "workerIndex": 4,
-                      "parallelIndex": 4,
+                      "workerIndex": 1,
+                      "parallelIndex": 1,
                       "status": "passed",
-                      "duration": 616,
+                      "duration": 551,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-15T05:07:51.306Z",
+                      "startTime": "2026-03-15T05:13:37.039Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -944,7 +874,7 @@
               ],
               "id": "28ac77d690f1704d1b07-7404997f75c1f80900b9",
               "file": "tools.spec.ts",
-              "line": 85,
+              "line": 89,
               "column": 3
             },
             {
@@ -960,15 +890,15 @@
                   "projectName": "chromium",
                   "results": [
                     {
-                      "workerIndex": 4,
-                      "parallelIndex": 4,
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 5757,
+                      "duration": 5634,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-15T05:07:51.936Z",
+                      "startTime": "2026-03-15T05:13:37.258Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -978,7 +908,7 @@
               ],
               "id": "28ac77d690f1704d1b07-7441ec3a2251e1196082",
               "file": "tools.spec.ts",
-              "line": 96,
+              "line": 100,
               "column": 3
             },
             {
@@ -994,15 +924,15 @@
                   "projectName": "chromium",
                   "results": [
                     {
-                      "workerIndex": 0,
-                      "parallelIndex": 0,
+                      "workerIndex": 3,
+                      "parallelIndex": 3,
                       "status": "passed",
-                      "duration": 591,
+                      "duration": 570,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-15T05:07:52.000Z",
+                      "startTime": "2026-03-15T05:13:37.582Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -1012,7 +942,7 @@
               ],
               "id": "28ac77d690f1704d1b07-896bf35df488cf9bde98",
               "file": "tools.spec.ts",
-              "line": 114,
+              "line": 118,
               "column": 3
             },
             {
@@ -1028,15 +958,15 @@
                   "projectName": "chromium",
                   "results": [
                     {
-                      "workerIndex": 2,
-                      "parallelIndex": 2,
+                      "workerIndex": 1,
+                      "parallelIndex": 1,
                       "status": "passed",
-                      "duration": 1467,
+                      "duration": 1498,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-15T05:07:52.153Z",
+                      "startTime": "2026-03-15T05:13:37.605Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -1046,7 +976,7 @@
               ],
               "id": "28ac77d690f1704d1b07-cbf435dce45680187b2a",
               "file": "tools.spec.ts",
-              "line": 136,
+              "line": 140,
               "column": 3
             },
             {
@@ -1062,15 +992,15 @@
                   "projectName": "chromium",
                   "results": [
                     {
-                      "workerIndex": 0,
-                      "parallelIndex": 0,
+                      "workerIndex": 2,
+                      "parallelIndex": 2,
                       "status": "passed",
-                      "duration": 461,
+                      "duration": 525,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-15T05:07:52.607Z",
+                      "startTime": "2026-03-15T05:13:37.611Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -1080,7 +1010,7 @@
               ],
               "id": "28ac77d690f1704d1b07-ab1cc53dca4be9b78599",
               "file": "tools.spec.ts",
-              "line": 150,
+              "line": 154,
               "column": 3
             },
             {
@@ -1096,15 +1026,15 @@
                   "projectName": "chromium",
                   "results": [
                     {
-                      "workerIndex": 0,
-                      "parallelIndex": 0,
+                      "workerIndex": 4,
+                      "parallelIndex": 4,
                       "status": "passed",
-                      "duration": 457,
+                      "duration": 590,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-15T05:07:53.081Z",
+                      "startTime": "2026-03-15T05:13:37.613Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -1114,7 +1044,7 @@
               ],
               "id": "28ac77d690f1704d1b07-b729611fe2315efe7020",
               "file": "tools.spec.ts",
-              "line": 163,
+              "line": 167,
               "column": 3
             },
             {
@@ -1130,15 +1060,15 @@
                   "projectName": "chromium",
                   "results": [
                     {
-                      "workerIndex": 0,
-                      "parallelIndex": 0,
+                      "workerIndex": 2,
+                      "parallelIndex": 2,
                       "status": "passed",
-                      "duration": 1221,
+                      "duration": 819,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-15T05:07:53.560Z",
+                      "startTime": "2026-03-15T05:13:38.152Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -1148,7 +1078,7 @@
               ],
               "id": "28ac77d690f1704d1b07-7925c3141da22fa09f57",
               "file": "tools.spec.ts",
-              "line": 174,
+              "line": 178,
               "column": 3
             },
             {
@@ -1164,15 +1094,15 @@
                   "projectName": "chromium",
                   "results": [
                     {
-                      "workerIndex": 2,
-                      "parallelIndex": 2,
+                      "workerIndex": 3,
+                      "parallelIndex": 3,
                       "status": "passed",
-                      "duration": 457,
+                      "duration": 529,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-15T05:07:53.639Z",
+                      "startTime": "2026-03-15T05:13:38.166Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -1182,7 +1112,7 @@
               ],
               "id": "28ac77d690f1704d1b07-a99e8dd7722aa7b3c7a0",
               "file": "tools.spec.ts",
-              "line": 192,
+              "line": 196,
               "column": 3
             },
             {
@@ -1198,15 +1128,15 @@
                   "projectName": "chromium",
                   "results": [
                     {
-                      "workerIndex": 2,
-                      "parallelIndex": 2,
+                      "workerIndex": 4,
+                      "parallelIndex": 4,
                       "status": "passed",
-                      "duration": 539,
+                      "duration": 428,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-15T05:07:54.120Z",
+                      "startTime": "2026-03-15T05:13:38.225Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -1216,12 +1146,12 @@
               ],
               "id": "28ac77d690f1704d1b07-5fa0b95f96a9e53c612b",
               "file": "tools.spec.ts",
-              "line": 204,
+              "line": 208,
               "column": 3
             },
             {
               "title": "Tool pages use correct colors theme",
-              "ok": false,
+              "ok": true,
               "tags": [],
               "tests": [
                 {
@@ -1232,57 +1162,30 @@
                   "projectName": "chromium",
                   "results": [
                     {
-                      "workerIndex": 2,
-                      "parallelIndex": 2,
-                      "status": "timedOut",
-                      "duration": 30047,
-                      "error": {
-                        "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m",
-                        "stack": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
-                      },
-                      "errors": [
-                        {
-                          "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
-                        },
-                        {
-                          "location": {
-                            "file": "/Users/user/Documents/קורס DJ/djmaster-academy/e2e/tools.spec.ts",
-                            "column": 34,
-                            "line": 219
-                          },
-                          "message": "Error: locator.evaluate: Test timeout of 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('h2').filter({ hasText: /מחשבון/ })\u001b[22m\n\n\n\u001b[0m \u001b[90m 217 |\u001b[39m     \u001b[90m// Check for dark theme colors\u001b[39m\n \u001b[90m 218 |\u001b[39m     \u001b[36mconst\u001b[39m heading \u001b[33m=\u001b[39m page\u001b[33m.\u001b[39mlocator(\u001b[32m'h2'\u001b[39m)\u001b[33m.\u001b[39mfilter({ hasText\u001b[33m:\u001b[39m \u001b[35m/מחשבון/\u001b[39m })\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 219 |\u001b[39m     \u001b[36mconst\u001b[39m styles \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m heading\u001b[33m.\u001b[39mevaluate((el) \u001b[33m=>\u001b[39m window\u001b[33m.\u001b[39mgetComputedStyle(el))\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                                  \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 220 |\u001b[39m\n \u001b[90m 221 |\u001b[39m     \u001b[90m// Check that text is visible (light text on dark background)\u001b[39m\n \u001b[90m 222 |\u001b[39m     \u001b[36mconst\u001b[39m color \u001b[33m=\u001b[39m styles\u001b[33m.\u001b[39mcolor\u001b[33m;\u001b[39m\u001b[0m\n\u001b[2m    at /Users/user/Documents/קורס DJ/djmaster-academy/e2e/tools.spec.ts:219:34\u001b[22m"
-                        }
-                      ],
+                      "workerIndex": 4,
+                      "parallelIndex": 4,
+                      "status": "passed",
+                      "duration": 541,
+                      "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-15T05:07:54.674Z",
+                      "startTime": "2026-03-15T05:13:38.664Z",
                       "annotations": [],
-                      "attachments": [
-                        {
-                          "name": "screenshot",
-                          "contentType": "image/png",
-                          "path": "/Users/user/Documents/קורס DJ/djmaster-academy/test-results/tools-Tools-Pages-E2E-Tool-pages-use-correct-colors-theme-chromium/test-failed-1.png"
-                        },
-                        {
-                          "name": "error-context",
-                          "contentType": "text/markdown",
-                          "path": "/Users/user/Documents/קורס DJ/djmaster-academy/test-results/tools-Tools-Pages-E2E-Tool-pages-use-correct-colors-theme-chromium/error-context.md"
-                        }
-                      ]
+                      "attachments": []
                     }
                   ],
-                  "status": "unexpected"
+                  "status": "expected"
                 }
               ],
               "id": "28ac77d690f1704d1b07-8d899a2ef9c5f5849d33",
               "file": "tools.spec.ts",
-              "line": 214,
+              "line": 218,
               "column": 3
             },
             {
               "title": "BPM Calculator supports keyboard shortcuts",
-              "ok": false,
+              "ok": true,
               "tags": [],
               "tests": [
                 {
@@ -1293,60 +1196,25 @@
                   "projectName": "chromium",
                   "results": [
                     {
-                      "workerIndex": 0,
-                      "parallelIndex": 0,
-                      "status": "failed",
-                      "duration": 10570,
-                      "error": {
-                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('div.text-\\\\[80px\\\\]').first()\nExpected: \u001b[32m\"\u001b[7m124\u001b[27m.0\"\u001b[39m\nReceived: \u001b[31m\"\u001b[7m00\u001b[27m.0\"\u001b[39m\nTimeout:  10000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" with timeout 10000ms\u001b[22m\n\u001b[2m  - waiting for locator('div.text-\\\\[80px\\\\]').first()\u001b[22m\n\u001b[2m    14 × locator resolved to <div class=\"text-[80px] font-mono leading-none tracking-tighter transition-all duration-150 text-white/10\">00.0</div>\u001b[22m\n\u001b[2m       - unexpected value \"00.0\"\u001b[22m\n",
-                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('div.text-\\\\[80px\\\\]').first()\nExpected: \u001b[32m\"\u001b[7m124\u001b[27m.0\"\u001b[39m\nReceived: \u001b[31m\"\u001b[7m00\u001b[27m.0\"\u001b[39m\nTimeout:  10000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" with timeout 10000ms\u001b[22m\n\u001b[2m  - waiting for locator('div.text-\\\\[80px\\\\]').first()\u001b[22m\n\u001b[2m    14 × locator resolved to <div class=\"text-[80px] font-mono leading-none tracking-tighter transition-all duration-150 text-white/10\">00.0</div>\u001b[22m\n\u001b[2m       - unexpected value \"00.0\"\u001b[22m\n\n    at /Users/user/Documents/קורס DJ/djmaster-academy/e2e/tools.spec.ts:243:30",
-                        "location": {
-                          "file": "/Users/user/Documents/קורס DJ/djmaster-academy/e2e/tools.spec.ts",
-                          "column": 30,
-                          "line": 243
-                        },
-                        "snippet": "\u001b[0m \u001b[90m 241 |\u001b[39m\n \u001b[90m 242 |\u001b[39m     \u001b[90m// Check tap count changed to our injected value\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 243 |\u001b[39m     \u001b[36mawait\u001b[39m expect(bpmDisplay)\u001b[33m.\u001b[39mtoHaveText(\u001b[32m'124.0'\u001b[39m\u001b[33m,\u001b[39m { timeout\u001b[33m:\u001b[39m \u001b[35m10000\u001b[39m })\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                              \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 244 |\u001b[39m\n \u001b[90m 245 |\u001b[39m     \u001b[90m// Press Escape to reset\u001b[39m\n \u001b[90m 246 |\u001b[39m     \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mkeyboard\u001b[33m.\u001b[39mpress(\u001b[32m'Escape'\u001b[39m)\u001b[33m;\u001b[39m\u001b[0m"
-                      },
-                      "errors": [
-                        {
-                          "location": {
-                            "file": "/Users/user/Documents/קורס DJ/djmaster-academy/e2e/tools.spec.ts",
-                            "column": 30,
-                            "line": 243
-                          },
-                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('div.text-\\\\[80px\\\\]').first()\nExpected: \u001b[32m\"\u001b[7m124\u001b[27m.0\"\u001b[39m\nReceived: \u001b[31m\"\u001b[7m00\u001b[27m.0\"\u001b[39m\nTimeout:  10000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" with timeout 10000ms\u001b[22m\n\u001b[2m  - waiting for locator('div.text-\\\\[80px\\\\]').first()\u001b[22m\n\u001b[2m    14 × locator resolved to <div class=\"text-[80px] font-mono leading-none tracking-tighter transition-all duration-150 text-white/10\">00.0</div>\u001b[22m\n\u001b[2m       - unexpected value \"00.0\"\u001b[22m\n\n\n\u001b[0m \u001b[90m 241 |\u001b[39m\n \u001b[90m 242 |\u001b[39m     \u001b[90m// Check tap count changed to our injected value\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 243 |\u001b[39m     \u001b[36mawait\u001b[39m expect(bpmDisplay)\u001b[33m.\u001b[39mtoHaveText(\u001b[32m'124.0'\u001b[39m\u001b[33m,\u001b[39m { timeout\u001b[33m:\u001b[39m \u001b[35m10000\u001b[39m })\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                              \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 244 |\u001b[39m\n \u001b[90m 245 |\u001b[39m     \u001b[90m// Press Escape to reset\u001b[39m\n \u001b[90m 246 |\u001b[39m     \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mkeyboard\u001b[33m.\u001b[39mpress(\u001b[32m'Escape'\u001b[39m)\u001b[33m;\u001b[39m\u001b[0m\n\u001b[2m    at /Users/user/Documents/קורס DJ/djmaster-academy/e2e/tools.spec.ts:243:30\u001b[22m"
-                        }
-                      ],
+                      "workerIndex": 3,
+                      "parallelIndex": 3,
+                      "status": "passed",
+                      "duration": 465,
+                      "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-15T05:07:54.800Z",
+                      "startTime": "2026-03-15T05:13:38.725Z",
                       "annotations": [],
-                      "attachments": [
-                        {
-                          "name": "screenshot",
-                          "contentType": "image/png",
-                          "path": "/Users/user/Documents/קורס DJ/djmaster-academy/test-results/tools-Tools-Pages-E2E-BPM--dc181-supports-keyboard-shortcuts-chromium/test-failed-1.png"
-                        },
-                        {
-                          "name": "error-context",
-                          "contentType": "text/markdown",
-                          "path": "/Users/user/Documents/קורס DJ/djmaster-academy/test-results/tools-Tools-Pages-E2E-BPM--dc181-supports-keyboard-shortcuts-chromium/error-context.md"
-                        }
-                      ],
-                      "errorLocation": {
-                        "file": "/Users/user/Documents/קורס DJ/djmaster-academy/e2e/tools.spec.ts",
-                        "column": 30,
-                        "line": 243
-                      }
+                      "attachments": []
                     }
                   ],
-                  "status": "unexpected"
+                  "status": "expected"
                 }
               ],
               "id": "28ac77d690f1704d1b07-20ee0865cb2660b44492",
               "file": "tools.spec.ts",
-              "line": 226,
+              "line": 232,
               "column": 3
             },
             {
@@ -1362,15 +1230,15 @@
                   "projectName": "chromium",
                   "results": [
                     {
-                      "workerIndex": 4,
-                      "parallelIndex": 4,
+                      "workerIndex": 2,
+                      "parallelIndex": 2,
                       "status": "passed",
-                      "duration": 467,
+                      "duration": 531,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-03-15T05:07:57.708Z",
+                      "startTime": "2026-03-15T05:13:38.987Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -1380,7 +1248,7 @@
               ],
               "id": "28ac77d690f1704d1b07-746e4b901e2d21a9d1c1",
               "file": "tools.spec.ts",
-              "line": 252,
+              "line": 250,
               "column": 3
             }
           ]
@@ -1390,11 +1258,11 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2026-03-15T05:07:44.906Z",
-    "duration": 39860.807,
-    "expected": 30,
+    "startTime": "2026-03-15T05:13:30.177Z",
+    "duration": 12769.564,
+    "expected": 34,
     "skipped": 0,
-    "unexpected": 4,
+    "unexpected": 0,
     "flaky": 0
   }
 }
