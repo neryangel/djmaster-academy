@@ -76,7 +76,7 @@ const SortableTrackRow = ({
   return (
     <div ref={setNodeRef} style={style} className={`group relative ${isDragging ? 'shadow-2xl ring-1 ring-[#00E5FF]/40 rounded-xl bg-[#1c1c24]' : ''}`}>
       {/* Track Row - Flat Data Grid Look */}
-      <div className={`grid grid-cols-[30px_40px_1fr_80px_60px_60px_50px] gap-4 items-center bg-transparent hover:bg-white/[0.02] border border-transparent hover:border-white/[0.05] rounded-xl p-3 mb-1 transition-colors ${isDragging ? 'bg-[#1c1c24] border-[#00E5FF]/30' : ''}`}>
+      <div className={`min-w-[540px] grid grid-cols-[30px_40px_1fr_80px_60px_60px_50px] gap-4 items-center bg-transparent hover:bg-white/[0.02] border border-transparent hover:border-white/[0.05] rounded-xl p-3 mb-1 transition-colors ${isDragging ? 'bg-[#1c1c24] border-[#00E5FF]/30' : ''}`}>
         
         {/* Drag Handle */}
         <div 
@@ -441,7 +441,7 @@ export default function SetPlanner() {
 
           {/* Column Headers */}
           {tracks.length > 0 && (
-              <div className="grid grid-cols-[30px_40px_1fr_80px_60px_60px_50px] gap-4 px-6 py-3 border-b border-white/5 bg-[#09090b] text-[10px] font-semibold text-white/40 uppercase tracking-widest sticky top-0 z-20 shrink-0">
+              <div className="min-w-[540px] grid grid-cols-[30px_40px_1fr_80px_60px_60px_50px] gap-4 px-6 py-3 border-b border-white/5 bg-[#09090b] text-[10px] font-semibold text-white/40 uppercase tracking-widest sticky top-0 z-20 shrink-0">
                 <div></div>
                 <div className="text-center">#</div>
                 <div>TRACK INFO</div>
@@ -452,8 +452,8 @@ export default function SetPlanner() {
               </div>
           )}
 
-          {/* Deck Area (DnD Wrapper) */}
-          <div className="flex-1 overflow-y-auto bg-[#09090b] p-6 relative min-h-[400px]">
+          {/* Deck Area (DnD Wrapper) — overflow-x-auto for mobile */}
+          <div className="flex-1 overflow-x-auto overflow-y-auto bg-[#09090b] relative min-h-[400px]">
             {tracks.length === 0 ? (
               <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4">
                 <div className="w-20 h-20 rounded-full border border-white/10 flex items-center justify-center mb-6 bg-white/[0.02]">
@@ -463,7 +463,7 @@ export default function SetPlanner() {
                 <p className="text-white/30 text-xs max-w-sm leading-relaxed">Add tracks using the inspector to visualize transition flows and harmonic compatibility in real-time.</p>
               </div>
             ) : (
-              <div className="pb-8 space-y-1"> 
+              <div className="min-w-[540px] p-4 sm:p-6 pb-8 space-y-1"> 
                 <DndContext 
                   sensors={sensors}
                   collisionDetection={closestCenter}

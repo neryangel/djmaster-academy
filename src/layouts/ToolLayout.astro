@@ -7,10 +7,24 @@ interface Props {
   title: string;
   description: string;
   icon: string;
-  maxWidth?: string;
+  /** Override max-width if needed. Tools with wide interfaces can use 'full' */
+  maxWidth?: 'sm' | 'md' | 'lg' | 'xl' | '2xl' | 'full';
+  /** Remove glass-card wrapper for full-bleed tools */
+  bare?: boolean;
 }
 
-const { title, description, icon, maxWidth = 'max-w-4xl' } = Astro.props;
+const { title, description, icon, maxWidth = 'xl', bare = false } = Astro.props;
+
+const widthMap: Record<string, string> = {
+  sm:   'max-w-3xl',
+  md:   'max-w-5xl',
+  lg:   'max-w-7xl',
+  xl:   'max-w-[1200px]',
+  '2xl':'max-w-[1600px]',
+  full: 'max-w-full',
+};
+
+const containerClass = widthMap[maxWidth] ?? widthMap['xl'];
 ---
 
 <BaseLayout title={title} description={description}>
@@ -22,15 +36,22 @@ const { title, description, icon, maxWidth = 'max-w-4xl' } = Astro.props;
     ]}
   />
 
-  <main class={`${maxWidth} mx-auto px-4 md:px-8 py-12 mt-16 transition-all duration-300`}>
-    <div class="mb-8 text-center fade-in-up">
-      <span class="text-5xl mb-4 block">{icon}</span>
+  <main class={`${containerClass} mx-auto px-4 sm:px-6 md:px-8 py-10 mt-16 overflow-x-hidden`}>
+    <!-- Page Header -->
+    <div class="mb-6 text-center fade-in-up">
+      <span class="text-5xl mb-3 block">{icon}</span>
       <h1 class="text-3xl md:text-4xl font-bold mb-2">{title}</h1>
-      <p class="text-white/70">{description}</p>
+      <p class="text-white/70 text-base max-w-xl mx-auto">{description}</p>
     </div>
-    <div class="glass-card p-6 md:p-8">
+
+    <!-- Tool content -->
+    {bare ? (
       <slot />
-    </div>
+    ) : (
+      <div class="glass-card p-4 sm:p-6 md:p-8 overflow-x-hidden">
+        <slot />
+      </div>
+    )}
   </main>
 
   <Footer />

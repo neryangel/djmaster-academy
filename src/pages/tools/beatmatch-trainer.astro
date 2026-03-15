@@ -7,11 +7,11 @@ import BeatmatchTrainerTool from '@components/tools/BeatmatchTrainer';
   title="אימון ביטמאצ'ינג"
   description="תרגל את השמיעה שלך ולמד לסנכרן שירים כמו מקצוען."
   icon="🎧"
-  maxWidth="max-w-6xl"
+  maxWidth="lg"
 >
   <div class="space-y-8">
-    <!-- Tool Component -->
-    <div class="flex justify-center">
+    <!-- Tool Component — full width -->
+    <div class="w-full">
       <BeatmatchTrainerTool client:load />
     </div>
 
@@ -21,12 +21,12 @@ import BeatmatchTrainerTool from '@components/tools/BeatmatchTrainer';
 
       <div class="space-y-6">
         <div>
-          <h3 class="text-lg font-semibold text-[#4ade80] mb-2">מדוע Beatmatching (התאמת ביטים) כה חשוב?</h3>
+          <h3 class="text-lg font-semibold text-[#4ade80] mb-2">מדוע Beatmatching כה חשוב?</h3>
           <p class="text-white/70 mb-3">
             ביטמאצ'ינג (Beatmatching) היא היכולת לסנכרן את הקצב (BPM) ואת הביטים של שני שירים כך שהם ינוגנו באותה מהירות ובאותו זמן. זהו הבסיס הטכני לכל מיקס חלק ומקצועי.
           </p>
           <p class="text-white/70">
-            למרות שציוד DJ מודרני מציע כפתור "Sync" מובנה שעושה את הפעולה אוטומטית, היכולת לבצע ביטמאצ'ינג בעזרת האוזניים בלבד (Manual Beatmatching) היא מיומנות קריטית שתפתח את השמיעה המוזיקלית שלכם, תעניק לכם הבנה עמוקה של קצב ותקנה לכם שליטה אמיתית במיקס — גם כשהטכנולוגיה כושלת.
+            היכולת לבצע ביטמאצ'ינג בעזרת האוזניים בלבד (Manual Beatmatching) היא מיומנות קריטית שתפתח את השמיעה המוזיקלית שלכם, תעניק לכם הבנה עמוקה של קצב ותקנה לכם שליטה אמיתית במיקס.
           </p>
         </div>
 
@@ -34,72 +34,41 @@ import BeatmatchTrainerTool from '@components/tools/BeatmatchTrainer';
           <h3 class="text-lg font-semibold text-[#4ade80] mb-2">שלבי הביצוע למתחילים:</h3>
           <ol class="list-decimal list-inside space-y-3 text-white/70 ml-4">
             <li>
-              <strong class="text-white">זיהוי הבייסליין:</strong> הקשיבו דרך האוזניות לקיק (Kick - ביט התוף) של השיר החי (זה שמתנגן ברחבה).
+              <strong class="text-white">זיהוי הבייסליין:</strong> הקשיבו דרך האוזניות לקיק (Kick - ביט התוף) של השיר החי.
             </li>
             <li>
-              <strong class="text-white">התאמת המהירות המקדימה:</strong> שנו את המהירות (Pitch Fader) בנגן החדש כדי להגיע לאותו ה-BPM בערך (ניתן להיעזר במסך בשלב ראשון לתרגול).
+              <strong class="text-white">התאמת המהירות המקדימה:</strong> שנו את המהירות (Pitch Fader) בנגן החדש כדי להגיע לאותו ה-BPM בערך.
             </li>
             <li>
-              <strong class="text-white">שחרור מדויק על הביט:</strong> לחצו Play על השיר החדש בדיוק בתחילת התיבה הבאה או בפראזה (לרוב בדיוק בציון ה-'1' של תיבת 4/4).
+              <strong class="text-white">שחרור מדויק על הביט:</strong> לחצו Play על השיר החדש בדיוק בתחילת התיבה הבאה.
             </li>
             <li>
-              <strong class="text-white">תיקון שגיאות בקצב (Nudging):</strong> השתמשו בג'וג העליון (Jog Wheel) כדי להאיץ או להאט רגעית את השיר הנכנס עד שהביטים יישבו בשלמות אחד על השני.
+              <strong class="text-white">תיקון שגיאות בקצב (Nudging):</strong> השתמשו בג'וג העליון (Jog Wheel) לתיקון מדויק.
             </li>
             <li>
-              <strong class="text-white">נעילת הפיץ':</strong> אם השירים מתחילים שוב "לברוח" מהסנכרון, תקנו שוב עם הפיץ' עד להגעה לנקודה המושלמת בה הם חופפים לאורך זמן.
+              <strong class="text-white">נעילת הפיץ':</strong> תקנו עם הפיץ' עד להגעה לנקודה המושלמת בה הם חופפים לאורך זמן.
             </li>
           </ol>
         </div>
 
         <div class="bg-[#4ade80]/5 border border-[#4ade80]/20 rounded-lg p-4">
-          <h3 class="text-lg font-semibold text-[#4ade80] mb-3">איך נשמע חוסר סנכרון? (סימנים אקוסטיים)</h3>
+          <h3 class="text-lg font-semibold text-[#4ade80] mb-3">איך נשמע חוסר סנכרון?</h3>
           <ul class="list-disc list-inside space-y-2 text-white/70 ml-4">
             <li>
-              <strong class="text-white">רעש "גלים" קצר (Phasing):</strong> השירים מנגנים כמעט באותה מהירות, אבל מפוספסים במילי-שניות בודדות. נוצר מעין אפקט מתכתי כפול, "וואששש". זה אומר שהפיץ' קרוב מאוד אבל דורש חצי לחיצת ג'וג עדינה.
+              <strong class="text-white">רעש "גלים" קצר (Phasing):</strong> מעין אפקט מתכתי כפול — הפיץ' קרוב אבל דורש חצי לחיצת ג'וג עדינה.
             </li>
             <li>
-              <strong class="text-white">צליל כפול / רכבת (Trainwreck):</strong> הקיקים לא יושבים אחד על השני ונשמעים כמו רעש לבן מבולגן או "דהרת סוסים" متמדת. הטמפו או הפאזה רחוקים מהיעד ויש לבצע דחיפה משמעותית של הג'וג.
+              <strong class="text-white">צליל כפול / רכבת (Trainwreck):</strong> הקיקים לא יושבים אחד על השני — הטמפו רחוק מהיעד.
             </li>
             <li>
-              <strong class="text-white">סנכרון מלא והרמוני:</strong> הקיקים של שני השירים נשמעים כהכאה צלולה, אחידה ושמנה אחת. שני השירים המפוצלים הופכים לכדי "שיר אחד" זורם.
+              <strong class="text-white">סנכרון מלא והרמוני:</strong> הקיקים של שני השירים נשמעים כהכאה צלולה, אחידה ושמנה אחת.
             </li>
           </ul>
-        </div>
-
-        <div>
-          <h3 class="text-lg font-semibold text-[#4ade80] mb-2">שיטות התאמה ועבודה במיקס:</h3>
-          <ul class="list-disc list-inside space-y-2 text-white/70 ml-4">
-            <li>
-              <strong class="text-white">פיץ' פיידר (Pitch Fader):</strong> שנו מיקומים זעירים כדי להימנע מבריחות קטנות במהלך מעבר ארוך.
-            </li>
-            <li>
-              <strong class="text-white">מגע על דופן הפלטה (Platter Nudge):</strong> האטו את הפלטה ע"י הנחת אצבע קלה על סיביב הג'וג החיצוני.
-            </li>
-            <li>
-              <strong class="text-white">סנכרון במערכת האוזניות:</strong> העבירו את מיקסר האוזניות כך שתוכלו לשמוע את רצועת הבסיס וגם את ערוץ העבודה הנכנס בו זמנית.
-            </li>
-          </ul>
-        </div>
-
-        <div class="bg-[#fbbf24]/5 border border-[#fbbf24]/20 rounded-lg p-4">
-          <p class="text-white/70 mb-2"><strong>🎵 דוגמאות מז'אנרים מרכזיים:</strong></p>
-          <div class="space-y-2 text-white/70 ml-4 text-sm">
-            <p>
-              <strong>האוס או אלקטרו (122-126 BPM):</strong> לרוב תשתמשו בקיק כיסוד להשוואות. הביטמאצ'ינג עובד חלק על התופים 4/4 הקלאסיים.
-            </p>
-            <p>
-              <strong>טראנס טכנו (130-140 BPM):</strong> המהירות לרוב מקשה מאוד על ההתאמה ויש לנטר בקפידה התארכות פייזינג בשכבות הבייסליין הרועשות.
-            </p>
-            <p>
-              <strong>דראם נ' בייס (170-175 BPM):</strong> הקיק והסנייר שבורים, חפשו את ה"מרצפים" או צלילי הכליים בסוף תיבות במקום לחכות לתוף הבס.
-            </p>
-          </div>
         </div>
 
         <div class="bg-[#6C63FF]/5 border border-[#6C63FF]/20 rounded-lg p-4">
           <p class="text-white/70 mb-2"><strong>💡 טיפ פז למתחילים:</strong></p>
           <ul class="list-disc list-inside space-y-1 text-white/70 ml-4 mt-2 text-sm">
-            <li>אל תתייאשו ביומיים הראשונים — לקבל "הארה" של ביטמאצ'ינג לרוב ייקח בין שבוע לפעמיים שרואים או שומעים רמזים!</li>
             <li>התחילו באימון של טראקים מאותו ה-BPM בדיוק (השאירו פיץ' ב-0%), כך תצטרכו לתרגל רק תיקון פאזות בג'וג.</li>
             <li>כבו את מסך הלפטופ במכוון כדי לפתח אינסטינקט טהור ללא השפעת עזרים.</li>
           </ul>

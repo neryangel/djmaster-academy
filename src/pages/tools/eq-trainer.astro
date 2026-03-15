@@ -7,11 +7,11 @@ import EqTrainerTool from '@components/tools/EqTrainer';
   title="אימון EQ"
   description="שפר את היכולת שלך לזהות תדרים ולהשתמש נכון באקולייזר."
   icon="🎚️"
-  maxWidth="max-w-6xl"
+  maxWidth="md"
 >
   <div class="space-y-8">
-    <!-- Tool Component -->
-    <div class="flex justify-center">
+    <!-- Tool Component — full width -->
+    <div class="w-full">
       <EqTrainerTool client:load />
     </div>
 
@@ -26,7 +26,7 @@ import EqTrainerTool from '@components/tools/EqTrainer';
             (Equalization) EQ היא אחת המיומנויות החשובות ביותר ל-DJ מקצועי. היכולת להבדיל בין טווחי התדרים בולטת מתוך המוזיקה, וקובעת אם המיקס יישמע נקי וזורם או עמוס וצורם.
           </p>
           <p class="text-white/80 leading-relaxed">
-            אימון זה מפתח את "האוזן המוזיקלית" שלכם לתדרים. בעזרתו תוכלו לזהות באופן אינטואיטיבי אילו תדרים מתנגשים, וכך לבצע חיתוכי EQ (EQ Cuts) מושלמים בזמן אמת.
+            אימון זה מפתח את "האוזן המוזיקלית" שלכם לתדרים. בעזרתו תוכלו לזהות באופן אינטואיטיבי אילו תדרים מתנגשים, וכך לבצע חיתוכי EQ מושלמים בזמן אמת.
           </p>
         </div>
 
@@ -40,19 +40,15 @@ import EqTrainerTool from '@components/tools/EqTrainer';
               <strong class="text-white">הקשיבו להגברה:</strong> המערכת תגביר טווח תדרים אחד בולט באופן אקראי. המטרה שלכם היא לזהות איזה תדר זה.
             </li>
             <li class="pl-2">
-              <strong class="text-white">בחרו את התשובה:</strong> סמנו בלחצנים את תחום התדרים (Highs, Mids, Lows) שלדעתכם שונה ולחצו עליו.
+              <strong class="text-white">בחרו את התשובה:</strong> סמנו בלחצנים את תחום התדרים שלדעתכם שונה ולחצו עליו.
             </li>
             <li class="pl-2">
-              <strong class="text-white">למידה והסקת מסקנות:</strong> המערכת תציג לכם אם צדקתם או פספסתם. נסו לשים לב לאופי הצליל של כל תדר כדי ללמוד לפעם הבאה.
+              <strong class="text-white">למידה והסקת מסקנות:</strong> המערכת תציג לכם אם צדקתם או פספסתם.
             </li>
           </ol>
         </div>
 
-            </div>
-          </div>
-        </div>
-
-        <div class="bg-[#4ade80]/5 border border-[#4ade80]/20 rounded-xl p-6 mt-8">
+        <div class="bg-[#4ade80]/5 border border-[#4ade80]/20 rounded-xl p-6">
           <h3 class="text-xl font-bold text-[#4ade80] mb-4 flex items-center gap-2">
             <span>💡 עצות לאימון יעיל (Pro Tips):</span>
           </h3>
@@ -60,19 +56,19 @@ import EqTrainerTool from '@components/tools/EqTrainer';
             <li class="flex items-start gap-3">
               <span class="text-[#4ade80] text-xl mt-0.5">•</span>
               <div>
-                <strong class="text-white">שימוש באוזניות איכותיות:</strong> אוזניות סטודיו או אוזניות DJ יעזרו לכם לשמוע במדויק, במיוחד בתדרי הסאב-בס שרמקולים פשוטים לא מצליחים לייצר.
+                <strong class="text-white">שימוש באוזניות איכותיות:</strong> אוזניות סטודיו או אוזניות DJ יעזרו לכם לשמוע במדויק, במיוחד בתדרי הסאב-בס.
               </div>
             </li>
             <li class="flex items-start gap-3">
               <span class="text-[#4ade80] text-xl mt-0.5">•</span>
               <div>
-                <strong class="text-white">אל תתישו את האוזניים:</strong> האוזן מתעייפת מהר מאימון שמיעה רצוף. התאמנו כ-10-15 דקות ביום. חשיבות להתמדה (עבודה יומיומית), ולא אימון ארוך.
+                <strong class="text-white">אל תתישו את האוזניים:</strong> האוזן מתעייפת מהר מאימון שמיעה רצוף. התאמנו כ-10-15 דקות ביום.
               </div>
             </li>
             <li class="flex items-start gap-3">
               <span class="text-[#4ade80] text-xl mt-0.5">•</span>
               <div>
-                <strong class="text-white">אימון בתנאי מציאות:</strong> לאחר שתשלטו ברעש הוורוד, נסו לפתוח שיר אמיתי בפלטה ולחשב בראש רגע לפני שאתם מסובבים את כפתור הנמוכים - מה בדיוק עומד להיעלם מהמיקס?
+                <strong class="text-white">אימון בתנאי מציאות:</strong> לאחר שתשלטו ברעש הוורוד, נסו לפתוח שיר אמיתי ולחשב מה עומד להיעלם כשתסובבו כפתור EQ.
               </div>
             </li>
           </ul>
@@ -85,10 +81,10 @@ import EqTrainerTool from '@components/tools/EqTrainer';
               הכלל החשוב ביותר: לא מערבבים 2 קווי בס (Basslines) יחד באותו היקף עוצמה לעולם. חתכו את הבס של אחד הערוצים במיקסר.
             </li>
             <li>
-              מעבר ווקאלים צורם? נסו להוריד מעט תדרי אמצע (Mids) או גבוהים באחד הערוצים כדי לתת מקום לזמר בשיר הנכנס.
+              מעבר ווקאלים צורם? נסו להוריד מעט תדרי אמצע (Mids) או גבוהים באחד הערוצים.
             </li>
             <li>
-               שימוש בכפתור ה-Filter במיקסר (LPF/HPF) הינו חיתוך אכזרי ויעיל של תדרים בעת ובעונה אחת. שלבו זאת במיקס שלכם תוך כדי ירידה בעוצמת ערוצים.
+              שימוש בכפתור ה-Filter במיקסר (LPF/HPF) הינו חיתוך אכזרי ויעיל של תדרים בעת ובעונה אחת.
             </li>
           </ul>
         </div>

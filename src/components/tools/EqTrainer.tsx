@@ -145,7 +145,7 @@ export default function EqTrainer() {
   const accuracy = score.total > 0 ? Math.round((score.correct / score.total) * 100) : 0;
 
   return (
-    <div className="flex flex-col items-center gap-6 p-6 font-hebrew max-w-2xl mx-auto" dir="rtl">
+    <div className="flex flex-col items-center gap-6 p-4 sm:p-6 font-hebrew w-full" dir="rtl">
       <h2 className="text-2xl font-bold text-dj-purple font-mono">אימון אוזן — EQ</h2>
       <p className="text-dj-text-secondary text-sm text-center">
         זהה איזה תדר הוגבר ברעש. שפר את האוזן שלך לאיקוואלייזר

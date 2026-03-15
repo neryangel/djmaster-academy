@@ -362,13 +362,11 @@ export default function BeatmatchTrainer() {
   };
 
   return (
-    <div className="w-full min-h-screen p-6 bg-[#0A0A0F] text-white" dir="rtl">
-      <div className="max-w-6xl mx-auto">
-        <h1 className="text-4xl font-bold mb-2 text-[#00d4ff]">מאמן ביטמצ׳</h1>
-        <p className="text-gray-400 mb-8">אזן עצמך למציאת ה-BPM המושלם ויישור הביטים</p>
+    <div className="w-full text-white" dir="rtl">
+        <p className="text-gray-400 mb-6">אזן עצמך למציאת ה-BPM המושלם ויישור הביטים</p>
 
         {/* Controls and Stats */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
           {/* Difficulty */}
           <div className="bg-[#1a1a1f] rounded-lg p-4 border border-[#7b2fff]/30">
             <p className="text-sm font-semibold text-gray-300 mb-3">רמת קושי</p>
@@ -410,7 +408,7 @@ export default function BeatmatchTrainer() {
         </div>
 
         {/* Decks */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
           {renderDeck('A', deckA, setDeckA)}
           {renderDeck('B', deckB, setDeckB)}
         </div>
@@ -468,7 +466,6 @@ export default function BeatmatchTrainer() {
             </div>
           </div>
         )}
-      </div>
     </div>
   );
 }
