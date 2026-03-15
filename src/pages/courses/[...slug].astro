@@ -210,6 +210,17 @@ for (const [moduleId, lessons] of lessonsByModule.entries()) {
                       </ul>
                     </div>
                   )}
+
+                  {/* Read Full Lesson Link */}
+                  <div class="mt-4 pt-3 border-t border-white/10">
+                    <a
+                      href={`/courses/${course.data.slug}/${lesson.slug.split('/').pop()}`}
+                      class="inline-flex items-center gap-2 text-sm font-semibold text-[#00d4ff] hover:text-white transition group"
+                    >
+                      <span>📖 לקריאת השיעור המלא</span>
+                      <span class="group-hover:translate-x-[-4px] transition-transform">←</span>
+                    </a>
+                  </div>
                 </div>
               ))}
             </div>

@@ -1,0 +1,89 @@
+---
+import { getCollection } from 'astro:content';
+import LessonLayout from '@layouts/LessonLayout.astro';
+
+export async function getStaticPaths() {
+  const allLessons = await getCollection('lessons');
+  const allCourses = await getCollection('courses');
+
+  // Build a map: course_id → course data
+  const courseMap = new Map();
+  for (const course of allCourses) {
+    courseMap.set(course.data.id, course.data);
+  }
+
+  // Group lessons by course_id and sort by lesson_number
+  const lessonsByCourse = new Map<string, typeof allLessons>();
+  for (const lesson of allLessons) {
+    const courseId = lesson.data.course_id;
+    if (!lessonsByCourse.has(courseId)) {
+      lessonsByCourse.set(courseId, []);
+    }
+    lessonsByCourse.get(courseId)!.push(lesson);
+  }
+
+  // Sort each course's lessons
+  for (const [, lessons] of lessonsByCourse) {
+    lessons.sort((a, b) => a.data.lesson_number - b.data.lesson_number);
+  }
+
+  const paths = [];
+
+  for (const lesson of allLessons) {
+    const courseId = lesson.data.course_id;
+    const course = courseMap.get(courseId);
+    if (!course) continue;
+
+    const courseSlug = course.slug;
+    // Lesson slug: extract from the collection slug (e.g. "world-of-dj/01-definition" → "01-definition")
+    const lessonSlug = lesson.slug.split('/').pop() || lesson.slug;
+
+    // Find prev/next lessons
+    const courseLessons = lessonsByCourse.get(courseId) || [];
+    const idx = courseLessons.findIndex((l) => l.slug === lesson.slug);
+    const prevLesson = idx > 0 ? courseLessons[idx - 1] : null;
+    const nextLesson = idx < courseLessons.length - 1 ? courseLessons[idx + 1] : null;
+
+    paths.push({
+      params: {
+        courseSlug,
+        lessonSlug,
+      },
+      props: {
+        lesson,
+        course,
+        totalLessons: courseLessons.length,
+        prevLesson: prevLesson ? {
+          title: prevLesson.data.title,
+          slug: prevLesson.slug.split('/').pop() || prevLesson.slug,
+        } : null,
+        nextLesson: nextLesson ? {
+          title: nextLesson.data.title,
+          slug: nextLesson.slug.split('/').pop() || nextLesson.slug,
+        } : null,
+      },
+    });
+  }
+
+  return paths;
+}
+
+const { lesson, course, totalLessons, prevLesson, nextLesson } = Astro.props;
+const { Content } = await lesson.render();
+---
+
+<LessonLayout
+  title={lesson.data.title}
+  description={lesson.data.description}
+  courseTitle={course.title}
+  courseSlug={course.slug}
+  lessonNumber={lesson.data.lesson_number}
+  totalLessons={totalLessons}
+  duration={lesson.data.duration_minutes}
+  difficulty={lesson.data.difficulty}
+  keyTerms={lesson.data.key_terms}
+  prevLesson={prevLesson}
+  nextLesson={nextLesson}
+>
+  <Content />
+</LessonLayout>
