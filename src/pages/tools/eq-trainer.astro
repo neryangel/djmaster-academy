@@ -5,8 +5,9 @@ import EqTrainerTool from '@components/tools/EqTrainer';
 
 <ToolLayout
   title="אימון EQ"
-  description="פתח את האוזן לזהות תדרים ותדרים"
+  description="שפר את היכולת שלך לזהות תדרים ולהשתמש נכון באקולייזר."
   icon="🎚️"
+  maxWidth="max-w-6xl"
 >
   <div class="space-y-8">
     <!-- Tool Component -->
@@ -16,104 +17,78 @@ import EqTrainerTool from '@components/tools/EqTrainer';
 
     <!-- Instructions -->
     <div class="border-t border-white/10 pt-8">
-      <h2 class="text-2xl font-bold mb-4">מהו אימון EQ ואיך זה עובד?</h2>
-
-      <div class="space-y-6">
+      <div class="space-y-8 mt-4">
         <div>
-          <h3 class="text-lg font-semibold text-[#FF6584] mb-2">מדוע חשוב אימון EQ?</h3>
-          <p class="text-white/70 mb-3">
-            EQ (Equalization) היא אחת המיומנויות החשובות ביותר ל-DJ מקצועי. היכולת להבחין בתדרים שונים
-            ודעתם כיצד להתעדכן בהם יכולה לשנות לחלוטין את איכות הקול של הסט שלך.
+          <h3 class="text-xl font-bold text-[#f43f5e] mb-3 flex items-center gap-2">
+            <span>מהו אימון EQ ואיך זה עובד?</span>
+          </h3>
+          <p class="text-white/80 leading-relaxed mb-4">
+            (Equalization) EQ היא אחת המיומנויות החשובות ביותר ל-DJ מקצועי. היכולת להבדיל בין טווחי התדרים בולטת מתוך המוזיקה, וקובעת אם המיקס יישמע נקי וזורם או עמוס וצורם.
           </p>
-          <p class="text-white/70">
-            אימון זה מעלה את הרגישות של האוזן שלך לתדרים שונים ומסייע לך להבין טוב יותר את מצעם
-            של משדר EQ בעת ביצוע.
+          <p class="text-white/80 leading-relaxed">
+            אימון זה מפתח את "האוזן המוזיקלית" שלכם לתדרים. בעזרתו תוכלו לזהות באופן אינטואיטיבי אילו תדרים מתנגשים, וכך לבצע חיתוכי EQ (EQ Cuts) מושלמים בזמן אמת.
           </p>
         </div>
 
         <div>
-          <h3 class="text-lg font-semibold text-[#FF6584] mb-2">איך להשתמש בכלי:</h3>
-          <ol class="list-decimal list-inside space-y-3 text-white/70 ml-4">
-            <li>
-              <strong class="text-white">לחצו על "התחל אימון"</strong> — הכלי יחלק דוגמה קול עם תדר מעודכן
+          <h3 class="text-xl font-bold text-[#f43f5e] mb-3">איך מתאמנים?</h3>
+          <ol class="list-decimal list-inside space-y-4 text-white/80 ml-2 marker:text-[#f43f5e] marker:font-bold">
+            <li class="pl-2">
+              <strong class="text-white">הפעילו את האימון:</strong> המערכת תנגן רעש ורוד (Pink Noise) המכיל את כל התדרים במידה שווה.
             </li>
-            <li>
-              <strong class="text-white">הקשיבו בעיון</strong> — שימו לב לשינוי בטון (גבוה, נמוך, ביניים)
+            <li class="pl-2">
+              <strong class="text-white">הקשיבו להגברה:</strong> המערכת תגביר טווח תדרים אחד בולט באופן אקראי. המטרה שלכם היא לזהות איזה תדר זה.
             </li>
-            <li>
-              <strong class="text-white">זהו את התדר</strong> — בחרו מתוך הרשימה של תדרים אפשריים
+            <li class="pl-2">
+              <strong class="text-white">בחרו את התשובה:</strong> סמנו בלחצנים את תחום התדרים (Highs, Mids, Lows) שלדעתכם שונה ולחצו עליו.
             </li>
-            <li>
-              <strong class="text-white">קבלו משוב</strong> — הכלי יגיד לכם אם צדקתם או אם שגיתם
-            </li>
-            <li>
-              <strong class="text-white">מודדים ולומדים</strong> — כל ניסיון עוזר לתחדד את האוזן שלכם
+            <li class="pl-2">
+              <strong class="text-white">למידה והסקת מסקנות:</strong> המערכת תציג לכם אם צדקתם או פספסתם. נסו לשים לב לאופי הצליל של כל תדר כדי ללמוד לפעם הבאה.
             </li>
           </ol>
         </div>
 
-        <div class="bg-[#FF6584]/5 border border-[#FF6584]/20 rounded-lg p-4">
-          <h3 class="text-lg font-semibold text-[#FF6584] mb-3">טווחי תדרים ודמיונות:</h3>
-          <div class="space-y-3 text-white/70 ml-4 text-sm">
-            <div>
-              <strong class="text-white">Sub Bass (20–60 Hz):</strong> תדרים נמוכים מאוד שמרגישים יותר מאשר שומעים
-            </div>
-            <div>
-              <strong class="text-white">Bass (60–250 Hz):</strong> חום הבס בדרך כלל כאן
-            </div>
-            <div>
-              <strong class="text-white">Mids (250 Hz–4 kHz):</strong> הגוף של המוזיקה — וקאלים, דרמס, ליד
-            </div>
-            <div>
-              <strong class="text-white">Highs (4 kHz–20 kHz):</strong> ברקות, סיימבלים, אפקטים שונים
             </div>
           </div>
         </div>
 
-        <div>
-          <h3 class="text-lg font-semibold text-[#FF6584] mb-2">טיפים לאימון יעיל:</h3>
-          <ul class="list-disc list-inside space-y-2 text-white/70 ml-4">
-            <li>
-              <strong class="text-white">שימוש אוזניות איכותיות:</strong> אוזניות טובות ישדרו את התדרים בצורה מדויקת יותר
+        <div class="bg-[#4ade80]/5 border border-[#4ade80]/20 rounded-xl p-6 mt-8">
+          <h3 class="text-xl font-bold text-[#4ade80] mb-4 flex items-center gap-2">
+            <span>💡 עצות לאימון יעיל (Pro Tips):</span>
+          </h3>
+          <ul class="space-y-4 text-white/80 ml-2">
+            <li class="flex items-start gap-3">
+              <span class="text-[#4ade80] text-xl mt-0.5">•</span>
+              <div>
+                <strong class="text-white">שימוש באוזניות איכותיות:</strong> אוזניות סטודיו או אוזניות DJ יעזרו לכם לשמוע במדויק, במיוחד בתדרי הסאב-בס שרמקולים פשוטים לא מצליחים לייצר.
+              </div>
             </li>
-            <li>
-              <strong class="text-white">סביבה שקטה:</strong> בחנו את עצמכם בחדר שקט ללא רעשים מפריעים
+            <li class="flex items-start gap-3">
+              <span class="text-[#4ade80] text-xl mt-0.5">•</span>
+              <div>
+                <strong class="text-white">אל תתישו את האוזניים:</strong> האוזן מתעייפת מהר מאימון שמיעה רצוף. התאמנו כ-10-15 דקות ביום. חשיבות להתמדה (עבודה יומיומית), ולא אימון ארוך.
+              </div>
             </li>
-            <li>
-              <strong class="text-white">תרגול יומי:</strong> אפילו 10 דקות ביום יוביל לשיפור משמעותי
+            <li class="flex items-start gap-3">
+              <span class="text-[#4ade80] text-xl mt-0.5">•</span>
+              <div>
+                <strong class="text-white">אימון בתנאי מציאות:</strong> לאחר שתשלטו ברעש הוורוד, נסו לפתוח שיר אמיתי בפלטה ולחשב בראש רגע לפני שאתם מסובבים את כפתור הנמוכים - מה בדיוק עומד להיעלם מהמיקס?
+              </div>
             </li>
-            <li>
-              <strong class="text-white">זהירות לאוזניים:</strong> אל תעלו את עוצמת הקול מדי גבוה — זה עלול להזיק
-            </li>
-            <li>
-              <strong class="text-white">התמקדו בטעויות:</strong> אם טעיתם, חזרו על זה עד שתהיו בטוחים
-            </li>
-          </ul>
-        </div>
-
-        <div class="bg-[#6C63FF]/5 border border-[#6C63FF]/20 rounded-lg p-4">
-          <p class="text-white/70 mb-2"><strong>🎵 תכונות אימון מתקדמות:</strong></p>
-          <ul class="list-disc list-inside space-y-1 text-white/70 ml-4 mt-2 text-sm">
-            <li><strong class="text-white">מוד קשה:</strong> טדרים יותר קרובים אחד לשני — אתגר גדול יותר</li>
-            <li><strong class="text-white">מוד ז'אנר:</strong> קישור תדרים ל-EQ סיטואציות ממשיות בתיאום</li>
-            <li><strong class="text-white">עקומות EQ:</strong> בחנו עקומות EQ בשרטוט ובציוד אמיתי</li>
           </ul>
         </div>
 
         <div class="bg-[#4ade80]/5 border border-[#4ade80]/20 rounded-lg p-4">
-          <p class="text-white/70 mb-2"><strong>💡 טיעון הכלי בעולם אמיתי:</strong></p>
+          <p class="text-white/70 mb-2"><strong>💡 טיפים למצב אמת בזמן אמת (Live Mixing):</strong></p>
           <ul class="list-disc list-inside space-y-1 text-white/70 ml-4 mt-2 text-sm">
             <li>
-              בעת הוצאת בס, אתה מוריד את תדר הבס (60–250 Hz) כדי לפתוח מקום לשיר הבא
+              הכלל החשוב ביותר: לא מערבבים 2 קווי בס (Basslines) יחד באותו היקף עוצמה לעולם. חתכו את הבס של אחד הערוצים במיקסר.
             </li>
             <li>
-              כדי להדגיש וקאלים, העלו את הביניים (1–4 kHz)
+              מעבר ווקאלים צורם? נסו להוריד מעט תדרי אמצע (Mids) או גבוהים באחד הערוצים כדי לתת מקום לזמר בשיר הנכנס.
             </li>
             <li>
-              כדי להוסיף ברקות והלק, הוסיפו גבוהות (10–15 kHz)
-            </li>
-            <li>
-              בתערובת מושלמת, תשתמשו ב-3 הלהקות כדי ליצור מעבר חלק
+               שימוש בכפתור ה-Filter במיקסר (LPF/HPF) הינו חיתוך אכזרי ויעיל של תדרים בעת ובעונה אחת. שלבו זאת במיקס שלכם תוך כדי ירידה בעוצמת ערוצים.
             </li>
           </ul>
         </div>

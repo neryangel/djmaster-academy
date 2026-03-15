@@ -1,6 +1,7 @@
 id: "02-flx4-equipment"
 title: "הכרת הציוד DDJ-FLX4"
 slug: "flx4-equipment"
+order: 2
 version: "2.0.0"
 
 description:
@@ -46,6 +47,19 @@ completion:
 tags: ["beginner", "hardware", "equipment", "flx4", "practical"]
 
 modules:
-  - "01-flx4-overview"
+  - id: "01-overview"
+    title: "היכרות כללית"
+  - id: "02-connections"
+    title: "חיבורים והגדרות"
+  - id: "03-jog-wheels"
+    title: "שליטה ב-Jog Wheels"
+  - id: "04-performance-pads"
+    title: "מערך הפדים (Performance Pads)"
+  - id: "05-mixer"
+    title: "אזור המיקסר (Mixer Section)"
+  - id: "06-smart-features"
+    title: "כלי העזר החכמים"
+  - id: "07-effects"
+    title: "אפקטים (Beat FX & Color FX)"
 
 pricing_tier: "pro"

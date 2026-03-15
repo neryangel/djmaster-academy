@@ -1,0 +1,31 @@
+---
+import '../styles/global.css';
+import '../styles/custom.css';
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = 'הפלטפורמה המובילה ללימוד DJ בעברית. 5 קורסים מקצועיים, כלים אינטראקטיביים, ותמיכה של מנטורים אמיתיים.' } = Astro.props;
+const fullTitle = title.includes('DJMaster') ? title : `${title} | DJMaster Academy`;
+---
+
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{fullTitle}</title>
+  <meta name="description" content={description} />
+  <meta property="og:title" content={fullTitle} />
+  <meta property="og:description" content={description} />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="he_IL" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+</head>
+<body class="bg-[#0A0A0F] text-white font-hebrew">
+  <slot />
+</body>
+</html>

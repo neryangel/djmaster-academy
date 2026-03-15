@@ -7,6 +7,7 @@ import SetPlannerTool from '@components/tools/SetPlanner';
   title="מתכנן סטים"
   description="תכנן סט מושלם עם ניתוח מעברים"
   icon="📋"
+  maxWidth="max-w-[1600px]"
 >
   <div class="space-y-8">
     <!-- Tool Component -->
@@ -20,126 +21,74 @@ import SetPlannerTool from '@components/tools/SetPlanner';
 
       <div class="space-y-6">
         <div>
-          <h3 class="text-lg font-semibold text-[#fbbf24] mb-2">מהו Set Planning?</h3>
+          <h3 class="text-lg font-semibold text-[#fbbf24] mb-2">מהו תכנון סט (Set Planning)?</h3>
           <p class="text-white/70 mb-3">
-            Set Planning היא האמנות של בחירת רצף של שירים שיצרו סיפור משכנע, עלייה ודעיכה, וקשרים טבעיים בין כל שיר.
-            סט טוב נראה כמו תנועה מוזיקלית — לא רק אוסף של שירים טובים.
+             Set Planning הוא המיומנות לבחור את הרצף הנכון של שירים כדי לייצר "סיפור מוזיקלי" משכנע — כזה שיש בו בנייה, עליות מתח (Build-ups), שיאים (Peaks) ושחרור (Release/Cool down). 
           </p>
           <p class="text-white/70">
-            כלי זה עוזר לך לתכנן וניתוח המעברים בין שירים, מה שמבטיח מעבר חלק וטבעי.
+            סט מעולה של DJ שולט ברגשות של הקהל, ולא סתם מנגן אוסף שירים. הכלי שלנו יעזור לכם לארגן את מסע השירים (Crate Flow) שלכם לפני העלייה לעמדה.
           </p>
         </div>
 
         <div>
-          <h3 class="text-lg font-semibold text-[#fbbf24] mb-2">שלבים בתכנון סט:</h3>
+          <h3 class="text-lg font-semibold text-[#fbbf24] mb-2">איך בונים סט מתוכנן היטב?</h3>
           <ol class="list-decimal list-inside space-y-3 text-white/70 ml-4">
-            <li>
-              <strong class="text-white">בחרו את הנושא או המטרה</strong> — האם זה קונצרט, מסיבה, תרנודון, או ניט לאירוע בחיים?
+             <li>
+              <strong class="text-white">בחירת יעד האירוע:</strong> האם אתם מנגנים מערכת חימום במועדון (שמירה על אנרגיות נמוכות וגרוב בועט), שיא הערב בחתונת פאר, או פסטיבל טראנס פתוח?
             </li>
             <li>
-              <strong class="text-white">התחילו עם מפת הדרך</strong> — חשבו על העלייה (מתחיל לאט, מתסיים בקצב) או סיפור משנה
+              <strong class="text-white">מפת הדרכים (The Journey):</strong> צרו עקומה רגשית גמישה בראשכם (Warm up -> Build -> Peak -> Cool down או Rolling). 
             </li>
             <li>
-              <strong class="text-white">בחרו שירים בקטגוריות</strong> — כל קטגוריה צריכה להיות עקבית בזאנר, מזג, ובניים
+              <strong class="text-white">הכנת תיקיות משנה:</strong> במקום לחפש ב-1000 שירים בתפזורת בזמן הסט, הכינו רשימות השמעה חכמות (Crates): "Bangers למקרי חירום", "Vocals שכולם מכירים", "Deep tools".
             </li>
             <li>
-              <strong class="text-white">אנלזו מעברים</strong> — בדקו BPM, מפתחות, וחלקות בין השירים
-            </li>
-            <li>
-              <strong class="text-white">תרגלו את הסט</strong> — רוגעו אותו מראש כדי לדעת היכן אתם צריכים כלים או מעברים מתוך רעם
+              <strong class="text-white">מעברים טכניים מעשיים (BPM & Key):</strong> השתמשו בכלי שמעל כדי למצוא צמדי שירים שמשלימים זה את זה. אל תקפצו בחדות מ-100 ל-128 BPM ללא הצדקה אמנותית ברורה (למשל, בברייק מוחלט בין שירים).
             </li>
           </ol>
         </div>
 
         <div class="bg-[#fbbf24]/5 border border-[#fbbf24]/20 rounded-lg p-4">
-          <h3 class="text-lg font-semibold text-[#fbbf24] mb-3">אלמנטים של סט טוב:</h3>
+          <h3 class="text-lg font-semibold text-[#fbbf24] mb-3">אלמנטים מרכזיים בסט פרונטלי יציב:</h3>
           <ul class="list-disc list-inside space-y-2 text-white/70 ml-4">
             <li>
-              <strong class="text-white">פתיח חזק:</strong> ישנו אתכם עם משהו מרתק אבל לא עדיין בקודקוד
+              <strong class="text-white">רצועת הפתיחה (Intro / Opening Track):</strong> נתינת הצהרת כוונות. אל תשרפו את כל השירים הטובים והחזקים שלכם בעשר הדקות הראשונות. תנו לתוכן להתפתח לאט.
             </li>
             <li>
-              <strong class="text-white">בנייה הדרגתית:</strong> כל שיר צריך להיות טוב קצת יותר מהקודם
+              <strong class="text-white">עלייה מתונה בעצימות (Groove progression/Tension):</strong> השתדלו להעלות BPM או שינויי אנרגיה בצורה של טיפוס מתון (למשל חצי BPM כל מעבר), ולא במאמץ אגרסיבי אחד שמתיש את הקהל מוקדם.
             </li>
             <li>
-              <strong class="text-white">קודקוד/שפר:</strong> השיר הטוב ביותר או הרגע הנומנטלי, בדרך כלל באמצע או סוף
+              <strong class="text-white">טראק השיא (Peak-Time Anthem):</strong> הנקודה בה הרחבה, האנרגיה ותשומת הלב מגיעים לרתיחה מלאה בריקוד. לרוב מתבצע בשליש המאוחר של הסט.
             </li>
             <li>
-              <strong class="text-white">מעברים חלקים:</strong> שימוש ב-beatmatch, EQ, וטכניקות אחרות ליצור זרימה
-            </li>
-            <li>
-              <strong class="text-white">סיום משביע רצון:</strong> אם הוא "סט עדיוג", הסתיים עם משהו זיכרוני
-            </li>
-          </ul>
-        </div>
-
-        <div>
-          <h3 class="text-lg font-semibold text-[#fbbf24] mb-2">בחירת שירים חכמה:</h3>
-          <ul class="list-disc list-inside space-y-2 text-white/70 ml-4">
-            <li>
-              <strong class="text-white">BPM Progression:</strong> כדי ליצור עלייה, בדרך כלל אתם מתחילים באט (100-110 BPM)
-              וסיום מהיר יותר (130-140 BPM)
-            </li>
-            <li>
-              <strong class="text-white">ניגודים:</strong> לאחר שיר מהיר מאוד, חזרו לאט כדי להשאיר נשימה
-            </li>
-            <li>
-              <strong class="text-white">Harmonic Mixing:</strong> השתמשו בגלגל ההרמוני כדי לוודא קשרים טובים
-            </li>
-            <li>
-              <strong class="text-white">דגים:</strong> ניסיתם שיר חדש? אתחיל בקטע מדוגמה פחות סיכון
+              <strong class="text-white">דינמיקת השירה (Acapellas / Sing-along):</strong> בחרו בתבונה מתי לשלב מוזיקה עם מילים מלודיות אותן הקהל יוכל לצעוק יחד, ומתי לדפוק במקצבים אינסטרומנטליים נטו לבניית קצב הגוף.
             </li>
           </ul>
         </div>
 
         <div class="bg-[#00d4ff]/5 border border-[#00d4ff]/20 rounded-lg p-4">
-          <p class="text-white/70 mb-2"><strong>🎵 דוגמאות תוכניות סטים:</strong></p>
+          <p class="text-white/70 mb-2"><strong>🎵 דוגמאות למבנה סטים קלאסיים:</strong></p>
           <div class="space-y-3 text-white/70 ml-4 text-sm">
             <div>
-              <strong class="text-white">House Set (60 דקות):</strong>
+              <strong class="text-white">האוס לחימום אירוע / מסיבת צוהריים:</strong>
               <div class="ml-4 mt-1">
-                התחילו: 120 BPM, מצב קל | בנייה: 122-126 BPM, עלייה הדרגתית | קודקוד: 128-130 BPM, ריכוז מוח | סיום: 125 BPM, מעבר חלק
+                <span class="text-[#00d4ff]">התחלה:</span> 118 BPM סולפול/אורגני. <span class="text-[#00d4ff]">עיקר:</span> 122 BPM גרוב ווקאלי ושמח. <span class="text-[#00d4ff]">סיום:</span> 124 BPM כהכנה לדי.ג'יי הבא ולשעון הזהב.
               </div>
             </div>
             <div>
-              <strong class="text-white">Techno Set (90 דקות):</strong>
+              <strong class="text-white">סט מיינסטרים אופן-פורמט (Open Format המשלב ז'אנרים שונים):</strong>
               <div class="ml-4 mt-1">
-                התחילו: 125 BPM, סביבה כהה | בנייה: 128-132 BPM, הוספת אלמנטים | קודקוד: 135-140 BPM, אנרגיה מקסימלית | סיום: 132 BPM, ירידה קל
-              </div>
-            </div>
-            <div>
-              <strong class="text-white">Deep House Set (45 דקות):</strong>
-              <div class="ml-4 mt-1">
-                התחילו: 110 BPM, מרגיע | בנייה: 115-120 BPM, רומנטיקה | קודקוד: 120-122 BPM, שיא ברגש | סיום: 115 BPM, כתם רך
+                 <span class="text-[#00d4ff]">התחלה:</span> ב-100 BPM (היפ-הופ והמנונים מוכרים). <span class="text-[#00d4ff]">זינוק בשיא:</span> מעבר מהיר ב-Breakdown (אקפלה) ישר ל-128 BPM (EDM / להיטי דאנס). <span class="text-[#00d4ff]">נחיתה בסוף הרייב:</span> ירידה מטאורית חזרה ל-110 BPM (רגטון קלאסי) שחותם את הערב לפני כיבוי האורות.
               </div>
             </div>
           </div>
         </div>
 
         <div class="bg-[#6C63FF]/5 border border-[#6C63FF]/20 rounded-lg p-4">
-          <p class="text-white/70 mb-2"><strong>💡 טיעון מתקדם:</strong></p>
+           <p class="text-white/70 mb-2"><strong>💡 קריאת הקהל מנצחת כל תכנון:</strong></p>
           <ul class="list-disc list-inside space-y-1 text-white/70 ml-4 mt-2 text-sm">
-            <li><strong class="text-white">Mashups:</strong> דחוף שני שירים בעלי BPM תואמים ליצור משהו חדש</li>
-            <li><strong class="text-white">Acapella Mixes:</strong> שימוש בווקאלים מעל רמקולים אחרים לסיפור משנה</li>
-            <li><strong class="text-white">Extended Mixes:</strong> לשירים בעלי מבנה מעניין, תחזיקו עליו יותר זמן</li>
-            <li><strong class="text-white">Remixing Live:</strong> לא שוכנעים? שנו את הקול עם EQ או אפקטים</li>
-          </ul>
-        </div>
-
-        <div>
-          <h3 class="text-lg font-semibold text-[#fbbf24] mb-2">טיעון לתרגול:</h3>
-          <ul class="list-disc list-inside space-y-2 text-white/70 ml-4">
-            <li>
-              <strong class="text-white">ענקלות:</strong> הריכו את הסט שלכם שלוש-ארבע פעמים לפני שתבצעו אותו בפומבי
-            </li>
-            <li>
-              <strong class="text-white">קבלו משוב:</strong> הקשיבו לקולות של אחרים — מה עובד? מה לא?
-            </li>
-            <li>
-              <strong class="text-white">התרחב:</strong> כל אירוע שונה — פתחו את הנשמה שלכם וצאו מהתבנית
-            </li>
-            <li>
-              <strong class="text-white">אל תחשבו קשה:</strong> הסט המושלם הוא לעולם עוד יום אחד — כל פעם, אתם מתחדדים יותר
-            </li>
+            <li>סט מתוכנן מראש בשלמותו נקרא <strong class="text-white">Pre-recorded / Fixed Set</strong> - הוא פתרון מועדף אך ורק בפסטיבל ענק היכן שיש הכרח לסנכרן זמן תאורה (Timecode) ולייזרים. במסיבת בר מצווה - תכנון כזה יקרוס כשדודה שושנה תגיע.</li>
+            <li>אך במועדונים רגילים או מסיבות נוער: <strong>קריאת הקהל חשובה מאלף תוכניות</strong>. הפתרון המקומי: תכננו "מיני-בלוקים" (Mini blocks) - רצפים של 3 שירים שזורמים פצצה ביחד מהבית, ובנו את הסט בלייב כמערום של "קוביות לגו טקטיות" הארוזות אחת אחרי השנייה.</li>
           </ul>
         </div>
       </div>

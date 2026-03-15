@@ -134,7 +134,16 @@ Traktor משתמש ב-Open Key. Rekordbox משתמש בשניהם.
 
 ## כלי עזר: Harmonic Wheel באתר
 
-> **הכלי "גלגל הרמוני" באתר הזה** נבנה בדיוק בשביל זה — לתרגל ולהבין את הקשרים בין מפתחות ויזואלית.
+import { InteractiveWidget } from '../../../components/content/InteractiveWidget';
+import HarmonicWheel from '../../../components/tools/HarmonicWheel';
+
+<InteractiveWidget title="גלגל ההרמוניות — תרגול בזמן אמת">
+  <div className="w-full relative h-[600px] bg-black rounded-lg overflow-hidden border border-[#00E5FF]/20">
+    <HarmonicWheel client:load />
+  </div>
+</InteractiveWidget>
+
+> **הכלי למעלה** נבנה בדיוק בשביל זה — שחק איתו כדי להבין את הקשרים בין מפתחות ויזואלית תוך כדי קריאת השיעור.
 
 ## סיכום: 3 הכללים שצריך לזכור
 
@@ -142,4 +151,8 @@ Traktor משתמש ב-Open Key. Rekordbox משתמש בשניהם.
 2. **±1** = כמעט תמיד עובד (8A → 7A, 8A → 9A)
 3. **+7** = Energy Boost (5A → 12A)
 
-> **כל השאר — תסמוך על האוזניים.** אם נשמע טוב, זה טוב.
+import { ProTip } from '../../../components/content/ProTip';
+
+<ProTip>
+  **כל השאר — תסמוך על האוזניים.** תיאוריה מוזיקלית היא כלי מצוין, אבל בסוף היום, אם מעבר לא-הרמוני נשמע אדיר ברחבה ועובד על הקהל — הוא טוב. הבלטה של Key Clash יכולה להיות אפקטיבית כדי ליצור מתח ושבירה (Tension & Release).
+</ProTip>

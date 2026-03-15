@@ -348,13 +348,13 @@ export default function BeatmatchTrainer() {
             onClick={() => nudgePhase(deck, 'back')}
             className="flex-1 py-2 bg-[#7b2fff]/30 hover:bg-[#7b2fff]/50 text-white rounded transition text-sm font-semibold"
           >
-            ← נדנד לאחור
+            ← דחיפה לאחור
           </button>
           <button
             onClick={() => nudgePhase(deck, 'forward')}
             className="flex-1 py-2 bg-[#7b2fff]/30 hover:bg-[#7b2fff]/50 text-white rounded transition text-sm font-semibold"
           >
-            נדנד קדימה →
+            דחיפה קדימה →
           </button>
         </div>
       </div>
@@ -403,9 +403,9 @@ export default function BeatmatchTrainer() {
 
           {/* Streak */}
           <div className="bg-[#1a1a1f] rounded-lg p-4 border border-[#7b2fff]/30">
-            <p className="text-sm font-semibold text-gray-300 mb-1">רצף מובילה</p>
+            <p className="text-sm font-semibold text-gray-300 mb-1">רצף התאמות</p>
             <p className="text-3xl font-bold text-[#7b2fff]">{streak}</p>
-            <p className="text-xs text-gray-500 mt-2">תאומים בהצליחה ברציפות</p>
+            <p className="text-xs text-gray-500 mt-2">התאמות מוצלחות ברצף</p>
           </div>
         </div>
 

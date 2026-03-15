@@ -1,7 +1,8 @@
 id: "05-manual-beatmatching"
 title: "ביטמאצ׳ ידני"
 slug: "manual-beatmatching"
-version: "2.0.0"
+order: 5
+version: "1.0.0"
 
 description:
   short: "שלוט בתכנית Beatmatching ללא Sync — הדרך הנכונה של DJ"
@@ -50,6 +51,15 @@ completion:
 tags: ["intermediate", "advanced", "technique", "beatmatching", "practical"]
 
 modules:
-  - "01-beatmatching-basics"
+  - id: "01-theory"
+    title: "התיאוריה מאחורי הקצב"
+  - id: "02-pitch-and-cueing"
+    title: "שליטה בפאנל הפיץ' והקיו"
+  - id: "03-nudging-drift"
+    title: "תיקון סטיות (Nudging & Drift)"
+  - id: "04-transitions"
+    title: "טכניקות מעבר בזמן אמת"
+  - id: "05-full-mix"
+    title: "מיקס רציף של שעה"
 
 pricing_tier: "mentorship"

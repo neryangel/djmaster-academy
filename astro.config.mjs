@@ -2,6 +2,7 @@ import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 import react from '@astrojs/react';
 import tailwind from '@astrojs/tailwind';
+import mdx from '@astrojs/mdx';
 
 export default defineConfig({
   site: 'https://djmaster.academy',
@@ -9,6 +10,7 @@ export default defineConfig({
     starlight({
       title: 'DJMaster Academy',
       defaultLocale: 'he',
+      disable404Route: true,
       locales: {
         he: { label: 'עברית', dir: 'rtl' },
         en: { label: 'English', dir: 'ltr' },
@@ -39,5 +41,6 @@ export default defineConfig({
     }),
     react(),
     tailwind({ applyBaseStyles: false }),
+    mdx(),
   ],
 });

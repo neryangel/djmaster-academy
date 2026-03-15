@@ -35,12 +35,12 @@ export async function getStaticPaths() {
     if (!course) continue;
 
     const courseSlug = course.slug;
-    // Lesson slug: extract from the collection slug (e.g. "world-of-dj/01-definition" → "01-definition")
     const lessonSlug = lesson.slug.split('/').pop() || lesson.slug;
 
-    // Find prev/next lessons
+    // Find prev/next lessons using optimized index derived during sorting
     const courseLessons = lessonsByCourse.get(courseId) || [];
-    const idx = courseLessons.findIndex((l) => l.slug === lesson.slug);
+    // Optimization: Since we already sorted courseLessons, we can just find our index once
+    const idx = courseLessons.indexOf(lesson);
     const prevLesson = idx > 0 ? courseLessons[idx - 1] : null;
     const nextLesson = idx < courseLessons.length - 1 ? courseLessons[idx + 1] : null;
 
@@ -61,6 +61,7 @@ export async function getStaticPaths() {
           title: nextLesson.data.title,
           slug: nextLesson.slug.split('/').pop() || nextLesson.slug,
         } : null,
+        courseLessons // Inject courseLessons to build sidebar
       },
     });
   }
@@ -68,8 +69,23 @@ export async function getStaticPaths() {
   return paths;
 }
 
-const { lesson, course, totalLessons, prevLesson, nextLesson } = Astro.props;
+const { lesson, course, totalLessons, prevLesson, nextLesson, courseLessons } = Astro.props;
 const { Content } = await lesson.render();
+
+// Group lessons by module for the sidebar
+const lessonsByModule = new Map();
+course.modules.forEach((module: { id: string, title: string }) => {
+  const moduleLessons = courseLessons.filter((l: any) => l.data.module_id === module.id);
+  if (moduleLessons.length > 0) {
+    lessonsByModule.set(module.id, moduleLessons);
+  }
+});
+
+// Create readable Hebrew label for each module directly from the new Schema
+const moduleLabels: Record<string, string> = {};
+course.modules.forEach((module: { id: string, title: string }, index: number) => {
+  moduleLabels[module.id] = `מודול ${index + 1} — ${module.title}`;
+});
 ---
 
 <LessonLayout
@@ -85,5 +101,33 @@ const { Content } = await lesson.render();
   prevLesson={prevLesson}
   nextLesson={nextLesson}
 >
+  <!-- Sidebar Syllabus -->
+  <div slot="sidebar" class="glass-card p-5 mb-6">
+    <h3 class="text-sm font-bold text-[#00d4ff] mb-4 uppercase tracking-wide">תוכן הקורס</h3>
+    {Array.from(lessonsByModule.entries()).map(([moduleId, mLessons]: [string, any[]]) => (
+      <div class="mb-5 last:mb-0">
+        <h4 class="text-xs font-bold text-white/50 mb-2 uppercase tracking-wide">{moduleLabels[moduleId] || moduleId}</h4>
+        <ul class="space-y-1">
+          {mLessons.map((l) => {
+            const isCurrent = l.slug === lesson.slug;
+            const lSlug = l.slug.split('/').pop() || l.slug;
+            return (
+              <li>
+                <a
+                  href={`/courses/${course.slug}/${lSlug}`}
+                  class={`block py-1.5 pl-3 border-l text-sm transition-all duration-300 ${isCurrent ? 'border-[#00d4ff] text-[#00d4ff] font-semibold bg-[#00d4ff]/5 rounded-r-md' : 'border-white/10 text-white/70 hover:border-[#00d4ff]/50 hover:text-white'}`}
+                >
+                  <span class="inline-block w-5 text-center text-xs opacity-50 ml-1">{l.data.lesson_number}.</span>
+                  {l.data.title}
+                </a>
+              </li>
+            );
+          })}
+        </ul>
+      </div>
+    ))}
+  </div>
+
+  <!-- Main Content -->
   <Content />
 </LessonLayout>

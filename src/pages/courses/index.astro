@@ -1,194 +1,81 @@
 ---
 import { getCollection } from 'astro:content';
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Navbar from '@components/Navbar.astro';
+import Footer from '@components/Footer.astro';
+import CourseGrid from '@components/CourseGrid';
+import { COURSE_EMOJIS, COURSE_ACCENTS, LEVEL_LABELS, LEVEL_COLORS, LEVEL_EMOJIS } from '@lib/ui-constants';
 
 const courses = await getCollection('courses');
-
-// Level labels and colors
-const levelLabels: Record<string, string> = {
-  beginner: 'מתחיל',
-  intermediate: 'בינוני',
-  advanced: 'מתקדם',
-};
-
-const levelColors: Record<string, string> = {
-  beginner: 'bg-green-500/20 text-green-400',
-  intermediate: 'bg-yellow-500/20 text-yellow-400',
-  advanced: 'bg-red-500/20 text-red-400',
-};
-
-const levelEmojis: Record<string, string> = {
-  beginner: '🌱',
-  intermediate: '🎵',
-  advanced: '🚀',
-};
-
-// Course emojis
-const courseEmojis: Record<string, string> = {
-  'world-of-dj': '🌍',
-  'music-structure': '🎼',
-  'manual-beatmatching': '🎯',
-  'flx4-equipment': '🎛️',
-  'rekordbox': '💻',
-};
+courses.sort((a, b) => a.data.order - b.data.order);
 ---
 
-<html lang="he" dir="rtl">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>קורסים | DJMaster Academy</title>
-  <meta name="description" content="קורסים מקצועיים ללימוד DJ בעברית - מתחיל ועד מתקדם" />
-  <meta property="og:title" content="קורסים | DJMaster Academy" />
-  <meta property="og:description" content="5 קורסים מקצועיים ללימוד DJ בעברית — מאפס לבמה" />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://djmaster-academy.vercel.app/courses" />
-  <meta property="og:locale" content="he_IL" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body {
-      font-family: 'Heebo', sans-serif;
-      background: #0A0A0F;
-      color: #fff;
-      min-height: 100vh;
-    }
-    .gradient-text {
-      background: linear-gradient(135deg, #00d4ff, #7b2fff);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-    .course-card {
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 20px;
-      padding: 2rem;
-      transition: all 0.3s ease;
-      text-decoration: none;
-      color: white;
-      display: flex;
-      flex-direction: column;
-      height: 100%;
-    }
-    .course-card:hover {
-      background: rgba(255,255,255,0.08);
-      border-color: rgba(255,255,255,0.2);
-      transform: translateY(-8px);
-    }
-    .course-icon { font-size: 3rem; margin-bottom: 1rem; }
-    .course-title { font-size: 1.4rem; font-weight: 700; margin-bottom: 0.5rem; }
-    .course-description { color: rgba(255,255,255,0.6); line-height: 1.6; margin-bottom: 1.5rem; flex-grow: 1; }
-    .course-meta {
-      display: flex;
-      gap: 0.75rem;
-      flex-wrap: wrap;
-      margin-top: auto;
-    }
-    .meta-tag {
-      padding: 4px 12px;
-      border-radius: 8px;
-      font-size: 0.85rem;
-    }
-    .level-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-    .stat {
-      color: rgba(255,255,255,0.5);
-      font-size: 0.9rem;
-    }
-  </style>
-</head>
-<body>
-  <!-- Navigation -->
-  <header style="border-bottom: 1px solid rgba(255,255,255,0.1); background: rgba(10,10,15,0.95); backdrop-filter: blur(20px); position: sticky; top: 0; z-index: 50;">
-    <div style="max-width: 1200px; margin: 0 auto; padding: 1rem 2rem;">
-      <nav style="display: flex; align-items: center; justify-content: space-between;">
-        <a href="/" style="font-size: 1.5rem; font-weight: 800; text-decoration: none;" class="gradient-text">
-          DJMaster Academy
-        </a>
-        <div style="display: flex; gap: 2rem;">
-          <a href="/courses" style="color: white; text-decoration: none; font-weight: 600;">קורסים</a>
-          <a href="/tools" style="color: rgba(255,255,255,0.7); text-decoration: none;">כלים</a>
-        </div>
-      </nav>
-    </div>
-  </header>
+<BaseLayout title="קורסים" description="קורסים מקצועיים ללימוד DJ בעברית - מתחיל ועד מתקדם">
+  <Navbar activePage="courses" />
 
   <!-- Hero Section -->
-  <section style="padding: 4rem 2rem; text-align: center; background: linear-gradient(135deg, rgba(123,47,255,0.1), rgba(0,212,255,0.05));">
-    <div style="max-width: 1200px; margin: 0 auto;">
-      <h1 style="font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 800; margin-bottom: 1rem;">
-        המסלול שלך ל<span class="gradient-text">DJ מקצועי</span>
-      </h1>
-      <p style="font-size: 1.1rem; color: rgba(255,255,255,0.6); max-width: 700px; margin: 0 auto;">
-        5 קורסים מקיפים שיקחו אותך מאפס לבמה. כל קורס מעוצב על ידי DJ-ים מקצועיים עם שנות ניסיון בתחום.
-      </p>
+  <section class="relative py-16 overflow-hidden mt-16">
+    <div class="absolute inset-0 bg-gradient-to-b from-[#7b2fff]/10 via-[#00d4ff]/5 to-transparent pointer-events-none"></div>
+    <div class="max-w-[1200px] mx-auto px-6 relative z-10">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+        <div class="fade-in-up">
+          <h1 class="text-[clamp(2rem,5vw,3.5rem)] font-[800] mb-4 leading-tight">
+            המסלול שלך ל<span class="text-gradient">DJ מקצועי</span>
+          </h1>
+          <p class="text-white/70 text-lg leading-relaxed max-w-lg">
+            5 קורסים מקיפים שיקחו אותך מאפס לבמה. כל קורס מעוצב על ידי DJ-ים מקצועיים עם שנות ניסיון בתחום.
+          </p>
+        </div>
+        <div class="hidden lg:block fade-in-up" style="animation-delay: 0.2s;">
+          <img src="/images/dj-equipment.png" alt="ציוד DJ מקצועי" class="rounded-2xl border border-white/10 shadow-2xl w-full max-w-md mx-auto" style="aspect-ratio: 1/1; object-fit: cover;" />
+        </div>
+      </div>
     </div>
   </section>
 
   <!-- Courses Grid -->
-  <main style="max-width: 1200px; margin: 0 auto; padding: 4rem 2rem;">
-    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 2rem;">
-      {courses.map((course) => {
-        const slug = course.data.slug;
-        const emoji = courseEmojis[slug] || '📚';
-        const levelLabel = levelLabels[course.data.metadata.level];
-        const levelColor = levelColors[course.data.metadata.level];
-        const levelEmoji = levelEmojis[course.data.metadata.level];
-
-        return (
-          <a href={`/courses/${slug}`} class="course-card">
-            <div class="course-icon">{emoji}</div>
-            <h2 class="course-title">{course.data.title}</h2>
-            <p class="course-description">{course.data.description.short}</p>
-            <div class="course-meta">
-              <span class={`meta-tag level-badge ${levelColor}`}>
-                {levelEmoji} {levelLabel}
-              </span>
-              <span class="stat">⏱️ {course.data.metadata.duration_minutes} דקות</span>
-              <span class="stat">📖 {course.data.metadata.lesson_count} שיעורים</span>
-            </div>
-          </a>
-        );
-      })}
-    </div>
+  <main class="max-w-[1200px] mx-auto px-6 pb-20 fade-in-up" style="animation-delay: 0.3s;">
+    <CourseGrid 
+      client:load 
+      initialCourses={courses.map(c => ({
+        id: c.data.id,
+        slug: c.data.slug,
+        title: c.data.title,
+        description: c.data.description.short,
+        level: c.data.metadata.level,
+        duration: c.data.metadata.duration_minutes,
+        lessonCount: c.data.metadata.lesson_count,
+        order: c.data.order
+      }))} 
+    />
   </main>
 
   <!-- Bottom CTA -->
-  <section style="padding: 4rem 2rem; text-align: center; border-top: 1px solid rgba(255,255,255,0.05);">
-    <div style="max-width: 1200px; margin: 0 auto;">
-      <h2 style="font-size: 2rem; font-weight: 800; margin-bottom: 1rem;">
-        מוכנים ל<span class="gradient-text">להתחיל</span>?
-      </h2>
-      <p style="color: rgba(255,255,255,0.6); margin-bottom: 2rem;">
-        בחרו קורס ותחילו ללמוד עכשיו — הכל חינם עבור הרמה הבסיסית
-      </p>
-      <a href="/courses/world-of-dj" style="
-        display: inline-block;
-        background: linear-gradient(135deg, #7b2fff, #00d4ff);
-        padding: 14px 32px;
-        border-radius: 12px;
-        color: white;
-        text-decoration: none;
-        font-weight: 700;
-        transition: all 0.3s;
-      ">
+  <section class="py-16 px-6 relative overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-b from-transparent via-[#7b2fff]/5 to-transparent pointer-events-none"></div>
+    <div class="max-w-[1200px] mx-auto text-center relative z-10 reveal">
+      <h2 class="text-3xl font-[800] mb-4">מוכנים ל<span class="text-gradient">להתחיל</span>?</h2>
+      <p class="text-white/70 mb-8 text-lg">בחרו קורס ותחילו ללמוד עכשיו — הכל חינם</p>
+      <a href="/courses/world-of-dj" class="inline-flex items-center gap-2 px-8 py-4 rounded-xl font-bold text-lg bg-gradient-to-l from-[#00d4ff] to-[#7b2fff] text-white hover:scale-105 hover:shadow-[0_0_40px_rgba(123,47,255,0.4)] transition-all duration-300">
         🚀 התחל ללמוד בחינם
       </a>
     </div>
   </section>
 
-  <!-- Footer -->
-  <footer style="border-top: 1px solid rgba(255,255,255,0.1); padding: 2rem; text-align: center;">
-    <div style="max-width: 1200px; margin: 0 auto; color: rgba(255,255,255,0.4); font-size: 0.9rem;">
-      <p>© 2026 DJMaster Academy. כל הזכויות שמורות.</p>
-      <p style="margin-top: 0.5rem;">❤️ בעבור כל ה-DJ-ים בעברית</p>
-    </div>
-  </footer>
-</body>
-</html>
+  <Footer />
+
+  <!-- Scroll Reveal -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('revealed');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+      document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    });
+  </script>
+</BaseLayout>

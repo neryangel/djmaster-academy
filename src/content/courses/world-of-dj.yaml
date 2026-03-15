@@ -1,6 +1,7 @@
 id: "01-world-of-dj"
 title: "עולם הדיג'יינג"
 slug: "world-of-dj"
+order: 1
 version: "2.0.0"
 
 description:
@@ -45,8 +46,17 @@ completion:
 tags: ["beginner", "theory", "introduction", "dj-basics"]
 
 modules:
-  - "01-what-is-dj"
-  - "02-history-equipment"
-  - "03-career-first-steps"
+  - id: "01-definition"
+    title: "מהו די ג'יי?"
+  - id: "02-dj-types"
+    title: "סוגי די־ג'ייז"
+  - id: "03-history"
+    title: "היסטוריה קצרה"
+  - id: "04-equipment"
+    title: "סקירת ציוד"
+  - id: "05-career"
+    title: "פיתוח קריירה בענף"
+  - id: "06-getting-started"
+    title: "איך להתחיל: צעדים ראשונים"
 
 pricing_tier: "free"

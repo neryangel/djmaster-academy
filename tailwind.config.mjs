@@ -31,14 +31,23 @@ export default {
           900: '#731230',
         },
         dj: {
-          dark: '#0A0A0F',
-          card: '#1A1A2E',
-          panel: '#16213E',
-          border: '#2A2A3E',
-          cyan: '#00D4FF',
-          purple: '#7B2FFF',
-          green: '#00FF88',
-          orange: '#FF8C00',
+          // Sonic Minimalism Base
+          bgBase: '#09090b',    // Ultra-deep space (Main Background)
+          bgSurface: '#121217', // Secondary surface (Cards, Sidebars)
+          bgElevated: '#1c1c24',// Elevated surface (Dropdowns, Active states)
+          border: '#ffffff1a',  // white/10 (Precision lines)
+          
+          // Semantic Colors
+          cyan: '#00E5FF',      // Primary Interaction 
+          purple: '#7B2FFF',    // Secondary Interaction
+          green: '#00FF88',     // Success / Perfect match
+          orange: '#FF8C00',    // Warning
+          red: '#FF0055',       // Danger / Error
+          
+          // Text Colors
+          textPrimary: '#FFFFFF',
+          textSecondary: '#A1A1AA',
+          textMuted: '#71717A'
         },
       },
       fontFamily: {

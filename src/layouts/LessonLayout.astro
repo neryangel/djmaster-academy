@@ -1,6 +1,7 @@
 ---
-import '../styles/global.css';
-import '../styles/custom.css';
+import BaseLayout from './BaseLayout.astro';
+import Navbar from '@components/Navbar.astro';
+import Footer from '@components/Footer.astro';
 
 interface LessonProps {
   title: string;
@@ -33,44 +34,22 @@ const levelColors: Record<string, string> = {
 const progress = Math.round((lessonNumber / totalLessons) * 100);
 ---
 
-<html lang="he" dir="rtl" class="scroll-smooth">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>{title} | {courseTitle} | DJMaster Academy</title>
-  <meta name="description" content={description || title} />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
-</head>
-<body class="bg-[#0A0A0F] text-white font-hebrew min-h-screen">
-  <!-- Header -->
-  <header class="border-b border-white/10 bg-[#0A0A0F]/95 backdrop-blur-xl sticky top-0 z-50">
-    <div class="max-w-7xl mx-auto px-4 py-4">
-      <nav class="flex items-center justify-between">
-        <a href="/" class="text-xl font-bold bg-gradient-to-l from-[#00d4ff] to-[#7b2fff] bg-clip-text text-transparent">
-          DJMaster Academy
-        </a>
-        <div class="flex items-center gap-4 text-sm">
-          <a href="/courses" class="text-white/60 hover:text-white transition">קורסים</a>
-          <span class="text-white/30">›</span>
-          <a href={`/courses/${courseSlug}`} class="text-white/60 hover:text-white transition">{courseTitle}</a>
-          <span class="text-white/30">›</span>
-          <span class="text-white/90">שיעור {lessonNumber}</span>
-        </div>
-      </nav>
-    </div>
-    <!-- Progress bar -->
-    <div class="h-1 bg-white/5">
-      <div class="h-full bg-gradient-to-l from-[#00d4ff] to-[#7b2fff] transition-all duration-500" style={`width: ${progress}%`}></div>
-    </div>
-  </header>
+<BaseLayout title={`${title} | ${courseTitle}`} description={description || title}>
+  <Navbar
+    variant="breadcrumb"
+    breadcrumbs={[
+      { label: 'קורסים', href: '/courses' },
+      { label: courseTitle, href: `/courses/${courseSlug}` },
+      { label: `שיעור ${lessonNumber}` },
+    ]}
+  />
 
   <!-- Lesson Hero -->
-  <section class="py-8 bg-gradient-to-b from-[#7b2fff]/10 to-transparent border-b border-white/5">
-    <div class="max-w-4xl mx-auto px-4">
-      <div class="flex items-center gap-3 mb-3 flex-wrap">
-        <span class="text-sm font-mono text-[#00d4ff] bg-[#00d4ff]/10 px-3 py-1 rounded-lg">
+  <section class="pt-24 pb-8 relative overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-b from-[#00d4ff]/5 to-transparent pointer-events-none"></div>
+    <div class="max-w-5xl mx-auto px-4 relative z-10">
+      <div class="flex items-center gap-3 mb-4 flex-wrap">
+        <span class="text-sm font-mono text-[#00d4ff] bg-[#00d4ff]/10 px-3 py-1 rounded-full">
           שיעור {lessonNumber} מתוך {totalLessons}
         </span>
         {difficulty && (
@@ -79,43 +58,50 @@ const progress = Math.round((lessonNumber / totalLessons) * 100);
           </span>
         )}
         {duration && (
-          <span class="text-white/40 text-sm">⏱️ {duration} דק'</span>
+          <span class="text-white/60 text-sm">⏱️ {duration} דק'</span>
         )}
       </div>
       <h1 class="text-3xl md:text-4xl font-bold">{title}</h1>
-      {description && <p class="text-white/60 mt-2 text-lg">{description}</p>}
     </div>
   </section>
 
-  <!-- Main Content -->
-  <main class="max-w-7xl mx-auto px-4 py-8">
+  <!-- Progress Bar -->
+  <div class="max-w-5xl mx-auto px-4 mb-8">
+    <div class="h-1.5 bg-white/10 rounded-full overflow-hidden">
+      <div class="h-full bg-gradient-to-l from-[#00d4ff] to-[#7b2fff] rounded-full progress-glow transition-all duration-500" style={`width: ${progress}%`}></div>
+    </div>
+  </div>
+
+  <!-- Content -->
+  <main class="max-w-5xl mx-auto px-4 pb-16">
     <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
       <!-- Sidebar -->
       <aside class="lg:col-span-1 order-2 lg:order-1">
-        <div class="sticky top-24 space-y-6">
-          {/* Key Terms */}
-          {keyTerms && keyTerms.length > 0 && (
-            <div class="bg-white/5 rounded-2xl p-5 border border-white/10">
-              <h3 class="text-sm font-bold text-[#7b2fff] mb-3 uppercase tracking-wide">📚 מונחים חשובים</h3>
-              <div class="space-y-3">
-                {keyTerms.map((term) => (
-                  <div class="text-sm">
-                    <span class="text-white font-semibold">{term.term}</span>
-                    <p class="text-white/50 text-xs mt-0.5 leading-relaxed">{term.definition}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
+        <!-- Syllabus Slot -->
+        <slot name="sidebar" />
 
-          {/* Progress */}
-          <div class="bg-white/5 rounded-2xl p-5 border border-white/10">
-            <h3 class="text-sm font-bold text-[#00d4ff] mb-3 uppercase tracking-wide">📊 התקדמות</h3>
-            <div class="text-3xl font-bold font-mono text-[#00d4ff]">{progress}%</div>
-            <div class="text-white/40 text-xs mt-1">{lessonNumber} מתוך {totalLessons} שיעורים</div>
-            <div class="mt-3 h-2 bg-white/10 rounded-full overflow-hidden">
-              <div class="h-full bg-gradient-to-l from-[#00d4ff] to-[#7b2fff] rounded-full" style={`width: ${progress}%`}></div>
+        <!-- Key Terms -->
+        {keyTerms && keyTerms.length > 0 && (
+          <div class="glass-card p-5 mb-6 sticky top-24">
+            <h3 class="text-sm font-bold text-[#00d4ff] mb-3 uppercase tracking-wide">📚 מונחים חשובים</h3>
+            <div class="space-y-3">
+              {keyTerms.map((term) => (
+                <div>
+                  <div class="font-semibold text-sm text-white">{term.term}</div>
+                  <div class="text-white/70 text-xs leading-relaxed">{term.definition}</div>
+                </div>
+              ))}
             </div>
+          </div>
+        )}
+
+        <!-- Progress Card -->
+        <div class="glass-card p-5">
+          <h3 class="text-sm font-bold text-[#00d4ff] mb-3 uppercase tracking-wide">📊 התקדמות</h3>
+          <div class="text-3xl font-bold font-mono text-gradient">{progress}%</div>
+          <div class="text-white/60 text-xs mt-1">{lessonNumber} מתוך {totalLessons} שיעורים</div>
+          <div class="mt-3 h-2 bg-white/10 rounded-full overflow-hidden">
+            <div class="h-full bg-gradient-to-l from-[#00d4ff] to-[#7b2fff] rounded-full progress-glow" style={`width: ${progress}%`}></div>
           </div>
         </div>
       </aside>
@@ -129,19 +115,19 @@ const progress = Math.round((lessonNumber / totalLessons) * 100);
         <!-- Navigation -->
         <nav class="mt-12 pt-8 border-t border-white/10 grid grid-cols-1 sm:grid-cols-2 gap-4">
           {prevLesson ? (
-            <a href={`/courses/${courseSlug}/${prevLesson.slug}`} class="group bg-white/5 border border-white/10 rounded-xl p-4 hover:border-[#7b2fff]/50 transition-all">
-              <div class="text-xs text-white/40 mb-1">← שיעור קודם</div>
+            <a href={`/courses/${courseSlug}/${prevLesson.slug}`} class="group glass-card p-4 glow-hover hover:border-[#7b2fff]/50 transition-all">
+              <div class="text-xs text-white/60 mb-1">← שיעור קודם</div>
               <div class="text-white font-semibold group-hover:text-[#00d4ff] transition">{prevLesson.title}</div>
             </a>
           ) : <div />}
           {nextLesson ? (
-            <a href={`/courses/${courseSlug}/${nextLesson.slug}`} class="group bg-white/5 border border-white/10 rounded-xl p-4 hover:border-[#00d4ff]/50 transition-all text-left">
-              <div class="text-xs text-white/40 mb-1">שיעור הבא →</div>
+            <a href={`/courses/${courseSlug}/${nextLesson.slug}`} class="group glass-card p-4 glow-hover hover:border-[#00d4ff]/50 transition-all text-left">
+              <div class="text-xs text-white/60 mb-1">שיעור הבא →</div>
               <div class="text-white font-semibold group-hover:text-[#00d4ff] transition">{nextLesson.title}</div>
             </a>
           ) : (
-            <a href={`/courses/${courseSlug}`} class="group bg-gradient-to-l from-[#7b2fff]/20 to-[#00d4ff]/20 border border-[#00d4ff]/30 rounded-xl p-4 hover:border-[#00d4ff]/60 transition-all text-left">
-              <div class="text-xs text-white/40 mb-1">🎉 סיימת!</div>
+            <a href={`/courses/${courseSlug}`} class="group glass-card p-4 bg-gradient-to-l from-[#7b2fff]/10 to-[#00d4ff]/10 border-[#00d4ff]/30 hover:border-[#00d4ff]/60 transition-all text-left">
+              <div class="text-xs text-white/60 mb-1">🎉 סיימת!</div>
               <div class="text-white font-semibold group-hover:text-[#00d4ff] transition">חזרה לדף הקורס</div>
             </a>
           )}
@@ -150,11 +136,5 @@ const progress = Math.round((lessonNumber / totalLessons) * 100);
     </div>
   </main>
 
-  <!-- Footer -->
-  <footer class="border-t border-white/10 py-8 mt-16">
-    <div class="max-w-7xl mx-auto px-4 text-center text-white/40 text-sm">
-      <p>© 2026 DJMaster Academy. כל הזכויות שמורות.</p>
-    </div>
-  </footer>
-</body>
-</html>
+  <Footer />
+</BaseLayout>

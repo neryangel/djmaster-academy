@@ -1,0 +1,39 @@
+---
+interface Props {
+  activePage?: 'home' | 'courses' | 'tools';
+  variant?: 'default' | 'breadcrumb';
+  breadcrumbs?: { label: string; href?: string }[];
+}
+
+const { activePage, variant = 'default', breadcrumbs } = Astro.props;
+---
+
+<nav id="main-nav" class="fixed top-0 w-full z-[100] border-b border-white/10 transition-all duration-300" style="background: rgba(10,10,15,0.85); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);">
+  <div class="max-w-[1200px] mx-auto px-6 py-4 flex items-center justify-between">
+    <a href="/" class="text-2xl font-[900] text-gradient shrink-0">DJMaster Academy</a>
+    <div class="flex items-center gap-6">
+      {variant === 'breadcrumb' && breadcrumbs ? (
+        <div class="flex items-center gap-2 text-sm overflow-x-auto">
+          {breadcrumbs.map((crumb, i) => (
+            <>
+              {i > 0 && <span class="text-white/50 shrink-0">‹</span>}
+              {crumb.href ? (
+                <a href={crumb.href} class="text-white/60 hover:text-white transition whitespace-nowrap">{crumb.label}</a>
+              ) : (
+                <span class="text-white/90 whitespace-nowrap">{crumb.label}</span>
+              )}
+            </>
+          ))}
+        </div>
+      ) : (
+        <>
+          <a href="/courses" class={`nav-link ${activePage === 'courses' ? 'active' : ''}`}>קורסים</a>
+          <a href="/tools" class={`nav-link ${activePage === 'tools' ? 'active' : ''}`}>כלים</a>
+          <a href="/courses/world-of-dj" class="hidden sm:inline-flex items-center gap-2 px-5 py-2 rounded-full text-sm font-bold bg-gradient-to-l from-[#00d4ff] to-[#7b2fff] text-white hover:scale-105 transition-transform">
+            🚀 התחל עכשיו
+          </a>
+        </>
+      )}
+    </div>
+  </div>
+</nav>

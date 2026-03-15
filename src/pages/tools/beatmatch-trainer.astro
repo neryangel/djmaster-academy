@@ -4,9 +4,10 @@ import BeatmatchTrainerTool from '@components/tools/BeatmatchTrainer';
 ---
 
 <ToolLayout
-  title="אימון Beatmatch"
-  description="למד לסנכרן ביטים בלי sync"
-  icon="🎯"
+  title="אימון ביטמאצ'ינג"
+  description="תרגל את השמיעה שלך ולמד לסנכרן שירים כמו מקצוען."
+  icon="🎧"
+  maxWidth="max-w-6xl"
 >
   <div class="space-y-8">
     <!-- Tool Component -->
@@ -20,110 +21,87 @@ import BeatmatchTrainerTool from '@components/tools/BeatmatchTrainer';
 
       <div class="space-y-6">
         <div>
-          <h3 class="text-lg font-semibold text-[#4ade80] mb-2">מדוע Beatmatching חשוב?</h3>
+          <h3 class="text-lg font-semibold text-[#4ade80] mb-2">מדוע Beatmatching (התאמת ביטים) כה חשוב?</h3>
           <p class="text-white/70 mb-3">
-            Beatmatching היא היכולת לסנכרן את קצב (BPM) של שני שירים כך שהם משתנגנים באותה מהירות
-            ובאותה רגע. זה הבסיס של כל תערובת חלקה.
+            ביטמאצ'ינג (Beatmatching) היא היכולת לסנכרן את הקצב (BPM) ואת הביטים של שני שירים כך שהם ינוגנו באותה מהירות ובאותו זמן. זהו הבסיס הטכני לכל מיקס חלק ומקצועי.
           </p>
           <p class="text-white/70">
-            בעוד שמערכות מודרניות מספקות כפתור "Sync", הידע כיצד לבצע beatmatch ידנית היא כישרון קריטי
-            ותעניק לך שליטה מלאה על המיקס שלך.
+            למרות שציוד DJ מודרני מציע כפתור "Sync" מובנה שעושה את הפעולה אוטומטית, היכולת לבצע ביטמאצ'ינג בעזרת האוזניים בלבד (Manual Beatmatching) היא מיומנות קריטית שתפתח את השמיעה המוזיקלית שלכם, תעניק לכם הבנה עמוקה של קצב ותקנה לכם שליטה אמיתית במיקס — גם כשהטכנולוגיה כושלת.
           </p>
         </div>
 
         <div>
-          <h3 class="text-lg font-semibold text-[#4ade80] mb-2">שלבים בסיסיים:</h3>
+          <h3 class="text-lg font-semibold text-[#4ade80] mb-2">שלבי הביצוע למתחילים:</h3>
           <ol class="list-decimal list-inside space-y-3 text-white/70 ml-4">
             <li>
-              <strong class="text-white">בררו את קצב השיר השני</strong> — אם אתם בעלי מחשבון BPM מדויק, תוכלו להשתמש בו
+              <strong class="text-white">זיהוי הבייסליין:</strong> הקשיבו דרך האוזניות לקיק (Kick - ביט התוף) של השיר החי (זה שמתנגן ברחבה).
             </li>
             <li>
-              <strong class="text-white">הגדרו אותו בערך לאותה מהירות</strong> — בדרך כלל ±2-3 BPM
+              <strong class="text-white">התאמת המהירות המקדימה:</strong> שנו את המהירות (Pitch Fader) בנגן החדש כדי להגיע לאותו ה-BPM בערך (ניתן להיעזר במסך בשלב ראשון לתרגול).
             </li>
             <li>
-              <strong class="text-white">הקשיבו לשני קולות</strong> — אתם אמורים לשמוע קצב "וואב" (פיטי) כשהם לא מיושרים
+              <strong class="text-white">שחרור מדויק על הביט:</strong> לחצו Play על השיר החדש בדיוק בתחילת התיבה הבאה או בפראזה (לרוב בדיוק בציון ה-'1' של תיבת 4/4).
             </li>
             <li>
-              <strong class="text-white">התאימו הדרגתית</strong> — הגבירו או הקטינו את Tempo עד שהוואב יעלם
+              <strong class="text-white">תיקון שגיאות בקצב (Nudging):</strong> השתמשו בג'וג העליון (Jog Wheel) כדי להאיץ או להאט רגעית את השיר הנכנס עד שהביטים יישבו בשלמות אחד על השני.
             </li>
             <li>
-              <strong class="text-white">בדקו עם הראש</strong> — כשהם מתיישרים, ניתן יהיה ללכת עם הביט בהדירות
+              <strong class="text-white">נעילת הפיץ':</strong> אם השירים מתחילים שוב "לברוח" מהסנכרון, תקנו שוב עם הפיץ' עד להגעה לנקודה המושלמת בה הם חופפים לאורך זמן.
             </li>
           </ol>
         </div>
 
         <div class="bg-[#4ade80]/5 border border-[#4ade80]/20 rounded-lg p-4">
-          <h3 class="text-lg font-semibold text-[#4ade80] mb-3">שמע לסימנים:</h3>
+          <h3 class="text-lg font-semibold text-[#4ade80] mb-3">איך נשמע חוסר סנכרון? (סימנים אקוסטיים)</h3>
           <ul class="list-disc list-inside space-y-2 text-white/70 ml-4">
             <li>
-              <strong class="text-white">ווב מהיר:</strong> שני השירים רחוקים מאוד — יש הרבה הבדל BPM
+              <strong class="text-white">רעש "גלים" קצר (Phasing):</strong> השירים מנגנים כמעט באותה מהירות, אבל מפוספסים במילי-שניות בודדות. נוצר מעין אפקט מתכתי כפול, "וואששש". זה אומר שהפיץ' קרוב מאוד אבל דורש חצי לחיצת ג'וג עדינה.
             </li>
             <li>
-              <strong class="text-white">ווב איטי:</strong> שני השירים קרובים מאוד — זה בדרך כלל כשהם כמעט מתיישרים
+              <strong class="text-white">צליל כפול / רכבת (Trainwreck):</strong> הקיקים לא יושבים אחד על השני ונשמעים כמו רעש לבן מבולגן או "דהרת סוסים" متמדת. הטמפו או הפאזה רחוקים מהיעד ויש לבצע דחיפה משמעותית של הג'וג.
             </li>
             <li>
-              <strong class="text-white">אין ווב:</strong> הם מרוכזים בצורה מושלמת! המיקס מוכן לחטיבה
+              <strong class="text-white">סנכרון מלא והרמוני:</strong> הקיקים של שני השירים נשמעים כהכאה צלולה, אחידה ושמנה אחת. שני השירים המפוצלים הופכים לכדי "שיר אחד" זורם.
             </li>
           </ul>
         </div>
 
         <div>
-          <h3 class="text-lg font-semibold text-[#4ade80] mb-2">טכניקות התאמה:</h3>
+          <h3 class="text-lg font-semibold text-[#4ade80] mb-2">שיטות התאמה ועבודה במיקס:</h3>
           <ul class="list-disc list-inside space-y-2 text-white/70 ml-4">
             <li>
-              <strong class="text-white">כפתור Pitch:</strong> השתמשו ב-Pitch Wheel למתקנה דקה (±6% בדרך כלל)
+              <strong class="text-white">פיץ' פיידר (Pitch Fader):</strong> שנו מיקומים זעירים כדי להימנע מבריחות קטנות במהלך מעבר ארוך.
             </li>
             <li>
-              <strong class="text-white">כפתור Tempo:</strong> לשינויים גדולים יותר, השתמשו בכפתור Tempo עצמו
+              <strong class="text-white">מגע על דופן הפלטה (Platter Nudge):</strong> האטו את הפלטה ע"י הנחת אצבע קלה על סיביב הג'וג החיצוני.
             </li>
             <li>
-              <strong class="text-white">אוזניות:</strong> דמוֵית האוזניות הן רכוש זהב — הקשיבו בעיון לוואב
-            </li>
-            <li>
-              <strong class="text-white">פאזה בדיקה:</strong> אם הוואב נעלם בקצה אבל לא בעיצומו, חוקרים שליטה בשלוש
+              <strong class="text-white">סנכרון במערכת האוזניות:</strong> העבירו את מיקסר האוזניות כך שתוכלו לשמוע את רצועת הבסיס וגם את ערוץ העבודה הנכנס בו זמנית.
             </li>
           </ul>
         </div>
 
         <div class="bg-[#fbbf24]/5 border border-[#fbbf24]/20 rounded-lg p-4">
-          <p class="text-white/70 mb-2"><strong>🎵 דוגמאות beatmatch:</strong></p>
+          <p class="text-white/70 mb-2"><strong>🎵 דוגמאות מז'אנרים מרכזיים:</strong></p>
           <div class="space-y-2 text-white/70 ml-4 text-sm">
             <p>
-              <strong>House (120 BPM → 122 BPM):</strong> ווב איטי ממש בהתחלה, אז התאימו אפילו 2 BPM יותר
+              <strong>האוס או אלקטרו (122-126 BPM):</strong> לרוב תשתמשו בקיק כיסוד להשוואות. הביטמאצ'ינג עובד חלק על התופים 4/4 הקלאסיים.
             </p>
             <p>
-              <strong>Techno (128 BPM → 130 BPM):</strong> ווב ברור — התאימו בהדרגה עד שהוא נעלם
+              <strong>טראנס טכנו (130-140 BPM):</strong> המהירות לרוב מקשה מאוד על ההתאמה ויש לנטר בקפידה התארכות פייזינג בשכבות הבייסליין הרועשות.
             </p>
             <p>
-              <strong>DNB (170 BPM → 172 BPM):</strong> טמפו מהיר, אבל אותה עיקרון — מקשיבים לווב
+              <strong>דראם נ' בייס (170-175 BPM):</strong> הקיק והסנייר שבורים, חפשו את ה"מרצפים" או צלילי הכליים בסוף תיבות במקום לחכות לתוף הבס.
             </p>
           </div>
         </div>
 
         <div class="bg-[#6C63FF]/5 border border-[#6C63FF]/20 rounded-lg p-4">
-          <p class="text-white/70 mb-2"><strong>💡 טיעון למתחילים:</strong></p>
+          <p class="text-white/70 mb-2"><strong>💡 טיפ פז למתחילים:</strong></p>
           <ul class="list-disc list-inside space-y-1 text-white/70 ml-4 mt-2 text-sm">
-            <li>זה לוקח זמן ותרגול — אל תצפו לשלוט בזה במהרה</li>
-            <li>התחילו עם שירים שקרובים מאוד ב-BPM (±1-2)</li>
-            <li>תרגלו ללא קול קודם כל — פשוט שמעו לווב</li>
-            <li>כאשר אתם מכשירים, תרגלו עם שירים בעלי BPM שונים יותר</li>
-            <li>כמו כל מיומנות, תרגול הוא המפתח — תרגלו כל יום</li>
-          </ul>
-        </div>
-
-        <div>
-          <h3 class="text-lg font-semibold text-[#4ade80] mb-2">טיעון מתקדם:</h3>
-          <ul class="list-disc list-inside space-y-2 text-white/70 ml-4">
-            <li>
-              <strong class="text-white">שליטה בפאזה:</strong> כאשר BPM מתיישרים, עלולים הקולות להיות בפאזה שונה.
-              משמשות אתם יכולים לעדן את התחלת השיר השני קדימה או אחורה בשבריר שניה.
-            </li>
-            <li>
-              <strong class="text-white">קצה ביט:</strong> בחנו עם ביט אחד כל פעם שתהיו בטוחים שהם מיושרים
-            </li>
-            <li>
-              <strong class="text-white">לא רק הביטים:</strong> לפעמים תוכלו בחזקה עם בס או עם כל אלמנט קצבי
-            </li>
+            <li>אל תתייאשו ביומיים הראשונים — לקבל "הארה" של ביטמאצ'ינג לרוב ייקח בין שבוע לפעמיים שרואים או שומעים רמזים!</li>
+            <li>התחילו באימון של טראקים מאותו ה-BPM בדיוק (השאירו פיץ' ב-0%), כך תצטרכו לתרגל רק תיקון פאזות בג'וג.</li>
+            <li>כבו את מסך הלפטופ במכוון כדי לפתח אינסטינקט טהור ללא השפעת עזרים.</li>
           </ul>
         </div>
       </div>

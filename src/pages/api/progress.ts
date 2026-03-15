@@ -1,6 +1,18 @@
 import type { APIRoute } from 'astro';
 import { z } from 'zod';
-import type { UserProgress } from '../../types/gamification';
+
+export interface UserProgress {
+  userId: string;
+  xp: number;
+  level: number;
+  badges: string[];
+  completedLessons: string[];
+  completedCourses: string[];
+  quizResults: Record<string, { score: number; attempts: number }>;
+  streak: { current: number; longest: number; lastActivity: string };
+  toolUsage: Record<string, { firstUsed: string; uses: number }>;
+  joinedAt: string;
+}
 
 // Schema for progress validation
 const ProgressSchema = z.object({
@@ -30,7 +42,6 @@ const ProgressSchema = z.object({
   joinedAt: z.string(),
 });
 
-type ProgressInput = z.infer<typeof ProgressSchema>;
 
 // GET: Retrieve user progress
 export const GET: APIRoute = async ({ request }) => {

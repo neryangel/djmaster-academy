@@ -26,28 +26,18 @@ courseLessons.sort((a, b) => a.data.lesson_number - b.data.lesson_number);
 
 // Group lessons by module
 const lessonsByModule = new Map();
-course.data.modules.forEach((moduleId: string) => {
-  const moduleLessons = courseLessons.filter((l) => l.data.module_id === moduleId);
+course.data.modules.forEach((module: { id: string, title: string }) => {
+  const moduleLessons = courseLessons.filter((l) => l.data.module_id === module.id);
   if (moduleLessons.length > 0) {
-    lessonsByModule.set(moduleId, moduleLessons);
+    lessonsByModule.set(module.id, moduleLessons);
   }
 });
 
-// Create readable Hebrew label for each module from its ID
-// e.g. "01-what-is-dj" → "מהו DJ", "02-history-equipment" → "היסטוריה וציוד"
+// Create readable Hebrew label for each module directly from the new Schema
 const moduleLabels: Record<string, string> = {};
-for (const [moduleId, lessons] of lessonsByModule.entries()) {
-  // Use the first lesson's title prefix or derive from ID
-  const firstLesson = (lessons as any[])[0];
-  if (firstLesson) {
-    // Extract a clean label from module ID parts
-    const parts = moduleId.replace(/^\d+-/, '').split('-');
-    const humanized = parts.join(' ');
-    // Use the course title + module index as fallback
-    const moduleIndex = course.data.modules.indexOf(moduleId) + 1;
-    moduleLabels[moduleId] = `מודול ${moduleIndex} — ${firstLesson.data.title.split(' ').slice(0, 3).join(' ')}`;
-  }
-}
+course.data.modules.forEach((module: { id: string, title: string }, index: number) => {
+  moduleLabels[module.id] = `מודול ${index + 1} — ${module.title}`;
+});
 ---
 
 <CourseLayout
@@ -66,8 +56,8 @@ for (const [moduleId, lessons] of lessonsByModule.entries()) {
           {lessons.map((lesson, idx) => (
             <li>
               <a
-                href={`#lesson-${idx}`}
-                class="text-sm text-white/60 hover:text-[#00d4ff] transition block py-2 pl-3 border-l border-white/10 hover:border-[#00d4ff]"
+                href={`#lesson-${lesson.slug.split('/').pop()}`}
+                class="text-sm text-white/70 hover:text-[#00d4ff] transition block py-2 pl-3 border-l border-white/10 hover:border-[#00d4ff]"
               >
                 {lesson.data.lesson_number}. {lesson.data.title}
               </a>
@@ -86,15 +76,15 @@ for (const [moduleId, lessons] of lessonsByModule.entries()) {
       <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
         <div class="bg-white/5 rounded-lg p-4 border border-white/10">
           <div class="text-3xl font-bold text-[#00d4ff] mb-2">{metadata.lesson_count}</div>
-          <div class="text-white/60 text-sm">שיעורים</div>
+          <div class="text-white/70 text-sm">שיעורים</div>
         </div>
         <div class="bg-white/5 rounded-lg p-4 border border-white/10">
           <div class="text-3xl font-bold text-[#7b2fff] mb-2">{metadata.duration_minutes}</div>
-          <div class="text-white/60 text-sm">דקות לימוד</div>
+          <div class="text-white/70 text-sm">דקות לימוד</div>
         </div>
         <div class="bg-white/5 rounded-lg p-4 border border-white/10">
           <div class="text-3xl font-bold text-[#4ade80] mb-2">{metadata.module_count}</div>
-          <div class="text-white/60 text-sm">מודולים</div>
+          <div class="text-white/70 text-sm">מודולים</div>
         </div>
       </div>
     </section>
@@ -155,7 +145,7 @@ for (const [moduleId, lessons] of lessonsByModule.entries()) {
             <div class="space-y-4">
               {lessons.map((lesson, idx) => (
                 <div
-                  id={`lesson-${idx}`}
+                  id={`lesson-${lesson.slug.split('/').pop()}`}
                   class="bg-white/5 border border-white/10 rounded-lg p-6 hover:border-white/20 transition"
                 >
                   <div class="flex items-start justify-between mb-3">
@@ -166,7 +156,7 @@ for (const [moduleId, lessons] of lessonsByModule.entries()) {
                       {lesson.data.title}
                     </h4>
                     {lesson.data.duration_minutes && (
-                      <span class="text-sm text-white/50">⏱️ {lesson.data.duration_minutes} דקות</span>
+                      <span class="text-sm text-white/70">⏱️ {lesson.data.duration_minutes} דקות</span>
                     )}
                   </div>
 
@@ -261,17 +251,8 @@ for (const [moduleId, lessons] of lessonsByModule.entries()) {
       <h2 class="text-2xl font-bold mb-3">מוכנים להתחיל?</h2>
       <p class="text-white/70 mb-6">הקורס מתחיל עכשיו — אין הרשמה מסובכת, אין עלויות נסתרות</p>
       <a
-        href="#lesson-0"
-        style="
-          display: inline-block;
-          background: linear-gradient(135deg, #7b2fff, #00d4ff);
-          padding: 14px 40px;
-          border-radius: 12px;
-          color: white;
-          text-decoration: none;
-          font-weight: 700;
-          transition: all 0.3s;
-        "
+        href={`/courses/${course.data.slug}/${courseLessons[0]?.slug.split('/').pop()}`}
+        class="inline-block bg-gradient-to-br from-[#7b2fff] to-[#00d4ff] text-white px-10 py-4 rounded-xl font-bold hover:scale-105 hover:shadow-[0_0_30px_rgba(108,99,255,0.4)] transition-all duration-300"
       >
         🚀 התחל את הקורס עכשיו
       </a>

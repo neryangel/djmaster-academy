@@ -7,6 +7,7 @@ const courses = defineCollection({
     id: z.string(),
     title: z.string(),
     slug: z.string(),
+    order: z.number().default(99),
     version: z.string(),
     description: z.object({
       short: z.string(),
@@ -33,7 +34,10 @@ const courses = defineCollection({
       certificate: z.boolean().default(true),
     }),
     tags: z.array(z.string()).default([]),
-    modules: z.array(z.string()),
+    modules: z.array(z.object({
+      id: z.string(),
+      title: z.string(),
+    })),
     pricing_tier: z.enum(['free', 'pro', 'mentorship', 'lifetime']).default('free'),
   }),
 });

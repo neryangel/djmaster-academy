@@ -1,6 +1,7 @@
 id: "03-rekordbox"
 title: "Rekordbox תוכנת"
 slug: "rekordbox"
+order: 3
 version: "2.0.0"
 
 description:
@@ -45,7 +46,17 @@ completion:
 tags: ["beginner", "software", "rekordbox", "music-management"]
 
 modules:
-  - "01-rekordbox-setup"
-  - "01-rekordbox-basics"
+  - id: "01-setup"
+    title: "התקנה והגדרה ראשונית"
+  - id: "02-library"
+    title: "ניהול ספריית המוזיקה"
+  - id: "03-beat-grid"
+    title: "עריכת ה-Beat Grid"
+  - id: "04-hot-cues"
+    title: "עבודה עם Hot Cues & Memory Cues"
+  - id: "05-export-performance"
+    title: "יצוא ל-USB ומצב Performance/Export"
+  - id: "06-recording"
+    title: "הקלטת הסט הדיגיטלי"
 
 pricing_tier: "pro"

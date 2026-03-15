@@ -208,18 +208,23 @@ export default function EqTrainer() {
 
           <p className="text-center text-gray-400 text-sm">באיזה תחום תדרים יש הגברה?</p>
 
-          <div className="grid grid-cols-2 gap-3">
+          <div className={`grid gap-3 ${
+            availableBands.length === 3 ? 'grid-cols-1 sm:grid-cols-3' : 
+            availableBands.length === 4 ? 'grid-cols-1 sm:grid-cols-2' : 
+            'grid-cols-2 sm:grid-cols-3'
+          }`}>
             {availableBands.map((band, i) => (
               <button
                 key={band.name}
                 onClick={() => handleGuess(i)}
                 className="p-4 bg-dj-card border border-dj-border rounded-xl
                            hover:border-dj-primary hover:bg-dj-primary/10
-                           transition-all text-right"
+                           hover:shadow-[0_0_15px_rgba(108,99,255,0.2)]
+                           transition-all text-right group"
               >
-                <div className="font-bold text-white">{band.nameHe}</div>
-                <div className="text-xs text-gray-400 font-mono">{band.range}</div>
-                <div className="text-xs text-gray-500 mt-1">{band.description}</div>
+                <div className="font-bold text-white group-hover:text-dj-primary transition-colors">{band.nameHe}</div>
+                <div className="text-xs text-gray-400 font-mono mt-1">{band.range}</div>
+                <div className="text-xs text-gray-500 mt-2 leading-relaxed">{band.description}</div>
               </button>
             ))}
           </div>

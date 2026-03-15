@@ -1,58 +1,37 @@
 ---
-import '../styles/global.css';
+import BaseLayout from './BaseLayout.astro';
+import Navbar from '@components/Navbar.astro';
+import Footer from '@components/Footer.astro';
+
 interface Props {
   title: string;
   description: string;
-  icon?: string;
+  icon: string;
+  maxWidth?: string;
 }
 
-const { title, description, icon = '🎛️' } = Astro.props;
+const { title, description, icon, maxWidth = 'max-w-4xl' } = Astro.props;
 ---
 
-<html lang="he" dir="rtl" class="scroll-smooth">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>{title} | DJMaster Academy Tools</title>
-  <meta name="description" content={description} />
-  <meta property="og:title" content={`${title} | DJMaster Academy`} />
-  <meta property="og:description" content={description} />
-  <meta property="og:type" content="website" />
-  <meta property="og:locale" content="he_IL" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
-</head>
-<body class="bg-[#0A0A0F] text-white font-hebrew min-h-screen">
-  <header class="border-b border-white/10 bg-[#0A0A0F]/95 backdrop-blur-xl sticky top-0 z-50">
-    <div class="max-w-7xl mx-auto px-4 py-4">
-      <nav class="flex items-center justify-between">
-        <a href="/" class="text-2xl font-bold bg-gradient-to-l from-[#00d4ff] to-[#7b2fff] bg-clip-text text-transparent">
-          DJMaster Academy
-        </a>
-        <div class="flex items-center gap-4">
-          <a href="/courses" class="text-white/70 hover:text-white transition">קורסים</a>
-          <a href="/tools" class="text-white/70 hover:text-white transition">כלים</a>
-        </div>
-      </nav>
-    </div>
-  </header>
+<BaseLayout title={title} description={description}>
+  <Navbar
+    variant="breadcrumb"
+    breadcrumbs={[
+      { label: 'כלים', href: '/tools' },
+      { label: title },
+    ]}
+  />
 
-  <main class="max-w-5xl mx-auto px-4 py-8">
-    <div class="mb-8 text-center">
+  <main class={`${maxWidth} mx-auto px-4 md:px-8 py-12 mt-16 transition-all duration-300`}>
+    <div class="mb-8 text-center fade-in-up">
       <span class="text-5xl mb-4 block">{icon}</span>
       <h1 class="text-3xl md:text-4xl font-bold mb-2">{title}</h1>
-      <p class="text-white/60">{description}</p>
+      <p class="text-white/70">{description}</p>
     </div>
-    <div class="bg-white/5 rounded-2xl border border-white/10 p-6 md:p-8">
+    <div class="glass-card p-6 md:p-8">
       <slot />
     </div>
   </main>
 
-  <footer class="border-t border-white/10 py-8 mt-16">
-    <div class="max-w-7xl mx-auto px-4 text-center text-white/40 text-sm">
-      <p>© 2026 DJMaster Academy. כל הזכויות שמורות.</p>
-    </div>
-  </footer>
-</body>
-</html>
+  <Footer />
+</BaseLayout>

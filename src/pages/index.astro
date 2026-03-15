@@ -1,180 +1,360 @@
 ---
-// DJMaster Academy Landing Page
+// DJMaster Academy Landing Page — Sonic Minimalism Redesign
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Navbar from '@components/Navbar.astro';
+import Footer from '@components/Footer.astro';
+import { 
+  Headphones, 
+  Rocket, 
+  Settings2, 
+  Globe, 
+  Music, 
+  Sliders, 
+  Laptop, 
+  Target, 
+  Activity, 
+  Disc3, 
+  AudioWaveform, 
+  ListMusic 
+} from 'lucide-react';
+import { getCollection } from 'astro:content';
+
+const allCourses = await getCollection('courses');
+const allLessons = await getCollection('lessons');
+
+// Calculate dynamic stats
+const courseCount = allCourses.length;
+const lessonCount = allLessons.length;
 ---
 
-<html lang="he" dir="rtl">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>DJMaster Academy — לימוד DJ מקצועי</title>
-  <meta name="description" content="הפלטפורמה המובילה ללימוד DJ בעברית. 5 קורסים מקצועיים, כלים אינטראקטיביים, ותמיכה של מנטורים אמיתיים — מתחיל מאפס ועד לבמה." />
-  <meta property="og:title" content="DJMaster Academy — לימוד DJ מקצועי" />
-  <meta property="og:description" content="הפלטפורמה המובילה ללימוד DJ בעברית. 5 קורסים, כלים אינטראקטיביים, ומנטורים אמיתיים." />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://djmaster-academy.vercel.app" />
-  <meta property="og:locale" content="he_IL" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: 'Heebo', sans-serif; background: #0A0A0F; color: #fff; }
-    .gradient-text { background: linear-gradient(135deg, #00d4ff, #7b2fff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-    .hero-glow { position: absolute; width: 600px; height: 600px; border-radius: 50%; filter: blur(120px); opacity: 0.15; pointer-events: none; }
-    .card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; padding: 2rem; transition: all 0.3s; }
-    .card:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.2); transform: translateY(-4px); }
-    .btn-primary { background: linear-gradient(135deg, #7b2fff, #00d4ff); padding: 14px 32px; border-radius: 12px; font-weight: 700; font-size: 1.1rem; border: none; color: white; cursor: pointer; transition: all 0.3s; display: inline-block; text-decoration: none; }
-    .btn-primary:hover { transform: scale(1.05); box-shadow: 0 0 30px rgba(123,47,255,0.4); }
-    .btn-secondary { background: rgba(255,255,255,0.1); padding: 14px 32px; border-radius: 12px; font-weight: 600; border: 1px solid rgba(255,255,255,0.2); color: white; cursor: pointer; transition: all 0.3s; display: inline-block; text-decoration: none; }
-    .btn-secondary:hover { background: rgba(255,255,255,0.15); }
-    .tool-icon { font-size: 2.5rem; margin-bottom: 1rem; display: block; }
-    .stat-number { font-family: 'Space Mono', monospace; font-size: 2.5rem; font-weight: 700; }
-    @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
-    .float { animation: float 3s ease-in-out infinite; }
-  </style>
-</head>
-<body>
-  <!-- Navigation -->
-  <nav style="position: fixed; top: 0; width: 100%; z-index: 100; background: rgba(10,10,15,0.9); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(255,255,255,0.1);">
-    <div style="max-width: 1200px; margin: 0 auto; padding: 1rem 2rem; display: flex; align-items: center; justify-content: space-between;">
-      <span style="font-size: 1.5rem; font-weight: 800;" class="gradient-text">DJMaster Academy</span>
-      <div style="display: flex; gap: 2rem; align-items: center;">
-        <a href="/courses" style="color: rgba(255,255,255,0.7); text-decoration: none;">קורסים</a>
-        <a href="/tools" style="color: rgba(255,255,255,0.7); text-decoration: none;">כלים</a>
+<BaseLayout title="DJMaster Academy — לימוד DJ מקצועי" description="הפלטפורמה המובילה ללימוד DJ בעברית. 5 קורסים מקצועיים, כלים אינטראקטיביים, ותמיכה של מנטורים אמיתיים — מתחיל מאפס ועד לבמה.">
+
+  <!-- ═══════════════ NAVIGATION ═══════════════ -->
+  <Navbar activePage="home" />
+
+  <!-- ═══════════════ HERO SECTION ═══════════════ -->
+  <section class="relative min-h-screen flex items-center overflow-hidden pt-20 bg-[#09090b]">
+    <!-- Background Image & Gradients -->
+    <div class="absolute inset-0 z-0">
+      <div class="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none opacity-30"></div>
+      <div class="absolute inset-0 bg-gradient-to-t from-[#09090b] via-transparent to-transparent z-10"></div>
+    </div>
+    <!-- Neon Studio Glows -->
+    <div class="absolute w-[600px] h-[600px] rounded-full blur-[140px] opacity-[0.15] bg-[#00E5FF] -top-32 -right-32 pointer-events-none"></div>
+    <div class="absolute w-[500px] h-[500px] rounded-full blur-[120px] opacity-[0.1] bg-[#7B2FFF] -bottom-32 -left-32 pointer-events-none"></div>
+
+    <!-- Content -->
+    <div class="relative z-10 max-w-[1200px] mx-auto px-6 py-16 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      <div class="fade-in-up">
+        <div class="mb-6 flex items-center gap-3">
+          <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-bold leading-none bg-[#00E5FF]/10 text-[#00E5FF] border border-[#00E5FF]/30 uppercase tracking-[0.15em]">
+            <Headphones size={14} strokeWidth={2.5} /> הפלטפורמה המובילה ללימוד DJ בעברית
+          </span>
+        </div>
+        <h1 class="text-[clamp(2.5rem,6vw,4.5rem)] font-[900] leading-[1.1] mb-6 tracking-tight">
+          ללמוד <span class="text-transparent bg-clip-text bg-gradient-to-l from-[#00E5FF] to-[#7B2FFF]">DJ מקצועי</span><br/>עם כלים של סטודיו
+        </h1>
+        <p class="text-lg text-white/50 max-w-xl leading-relaxed mb-10 font-medium">
+          האקדמיה הדיגיטלית הראשונה בישראל שלוקחת אותך מאפס לדי-ג'יי עם כלים אינטראקטיביים ותוכניות לימוד מעשיות.
+        </p>
+        <div class="flex gap-4 flex-wrap">
+          <a href="/courses" class="inline-flex items-center gap-2 px-8 py-4 rounded-xl font-bold text-sm bg-[#00E5FF] text-[#09090b] hover:bg-white hover:shadow-[0_0_20px_rgba(0,229,255,0.4)] transition-all duration-300 uppercase tracking-widest active:scale-95">
+            <Rocket size={18} strokeWidth={2.5} /> הקורס הראשון בחינם
+          </a>
+          <a href="/tools" class="inline-flex items-center gap-2 px-8 py-4 rounded-xl font-bold text-sm bg-[#121217] text-white border border-white/10 hover:border-[#00E5FF]/50 hover:bg-white/5 transition-all duration-300 uppercase tracking-widest active:scale-95">
+            <Settings2 size={18} /> כלים אינטראקטיביים
+          </a>
+        </div>
+      </div>
+      <!-- Hero Image (visible on large screens) -->
+      <div class="hidden lg:block fade-in-up" style="animation-delay: 0.2s;">
+        <div class="relative group">
+          <div class="absolute -inset-1 rounded-2xl bg-gradient-to-r from-[#00E5FF] to-[#7B2FFF] opacity-20 blur-xl group-hover:opacity-40 transition duration-1000"></div>
+          <img src="/images/dj-equipment.png" alt="ציוד DJ מקצועי" class="relative rounded-2xl border border-white/10 shadow-2xl brightness-90 contrast-125 grayscale-[20%]" />
+        </div>
       </div>
     </div>
-  </nav>
 
-  <!-- Hero Section -->
-  <section style="min-height: 100vh; display: flex; align-items: center; position: relative; overflow: hidden; padding-top: 80px;">
-    <div class="hero-glow" style="background: #7b2fff; top: -200px; right: -200px;"></div>
-    <div class="hero-glow" style="background: #00d4ff; bottom: -200px; left: -200px;"></div>
-    <div style="max-width: 1200px; margin: 0 auto; padding: 0 2rem; position: relative; z-index: 1; text-align: center;">
-      <div style="margin-bottom: 1.5rem;">
-        <span style="background: rgba(123,47,255,0.2); color: #b794ff; padding: 6px 16px; border-radius: 20px; font-size: 0.9rem;">🎧 הפלטפורמה המובילה ללימוד DJ בעברית</span>
-      </div>
-      <h1 style="font-size: clamp(2.5rem, 6vw, 4.5rem); font-weight: 900; line-height: 1.2; margin-bottom: 1.5rem;">
-        תהפוך ל<span class="gradient-text">DJ מקצועי</span><br/>עם הקורס הכי מקיף בישראל
-      </h1>
-      <p style="font-size: 1.25rem; color: rgba(255,255,255,0.6); max-width: 600px; margin: 0 auto 2.5rem; line-height: 1.8;">
-        מתחיל מאפס ועד לבמה. 5 קורסים מקצועיים, כלים אינטראקטיביים, ותמיכה של מנטורים אמיתיים.
-      </p>
-      <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
-        <a href="/courses" class="btn-primary">🚀 התחל ללמוד בחינם</a>
-        <a href="/tools" class="btn-secondary">🎛️ נסה את הכלים</a>
+    <!-- Scroll indicator -->
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 animate-bounce cursor-pointer opacity-50 hover:opacity-100 transition-opacity">
+      <div class="w-6 h-10 rounded-full border-2 border-white/30 flex justify-center pt-2">
+        <div class="w-1 h-2 rounded-full bg-[#00E5FF]"></div>
       </div>
     </div>
   </section>
 
-  <!-- Stats -->
-  <section style="padding: 4rem 2rem; border-top: 1px solid rgba(255,255,255,0.05);">
-    <div style="max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; text-align: center;">
-      <div><div class="stat-number gradient-text">5</div><div style="color: rgba(255,255,255,0.5); margin-top: 0.5rem;">קורסים מקצועיים</div></div>
-      <div><div class="stat-number gradient-text">30</div><div style="color: rgba(255,255,255,0.5); margin-top: 0.5rem;">שיעורים אינטראקטיביים</div></div>
-      <div><div class="stat-number gradient-text">5</div><div style="color: rgba(255,255,255,0.5); margin-top: 0.5rem;">כלי DJ מתקדמים</div></div>
-      <div><div class="stat-number gradient-text">100%</div><div style="color: rgba(255,255,255,0.5); margin-top: 0.5rem;">בעברית</div></div>
-    </div>
-  </section>
-
-  <!-- Courses Preview -->
-  <section style="padding: 5rem 2rem;">
-    <div style="max-width: 1200px; margin: 0 auto;">
-      <h2 style="font-size: 2.5rem; font-weight: 800; text-align: center; margin-bottom: 1rem;">המסלול שלך ל<span class="gradient-text">הצלחה</span></h2>
-      <p style="text-align: center; color: rgba(255,255,255,0.5); margin-bottom: 3rem;">5 קורסים שיקחו אותך מאפס לדי-ג'יי מקצועי</p>
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;">
-        <div class="card">
-          <span style="font-size: 2rem;">🌍</span>
-          <h3 style="font-size: 1.25rem; font-weight: 700; margin: 0.75rem 0 0.5rem;">עולם הדי-ג'יי</h3>
-          <p style="color: rgba(255,255,255,0.5); font-size: 0.95rem; line-height: 1.6;">היכרות מקיפה — מה זה DJ, ציוד, קריירה</p>
-          <div style="margin-top: 1rem; display: flex; gap: 0.5rem;">
-            <span style="background: rgba(34,197,94,0.2); color: #4ade80; padding: 2px 10px; border-radius: 8px; font-size: 0.8rem;">מתחיל</span>
-            <span style="color: rgba(255,255,255,0.3); font-size: 0.8rem;">6 שיעורים</span>
-          </div>
-        </div>
-        <div class="card">
-          <span style="font-size: 2rem;">🎵</span>
-          <h3 style="font-size: 1.25rem; font-weight: 700; margin: 0.75rem 0 0.5rem;">תורת המוזיקה ל-DJ</h3>
-          <p style="color: rgba(255,255,255,0.5); font-size: 0.95rem; line-height: 1.6;">BPM, מפתחות, מבנה שירים, ומיקס הרמוני</p>
-          <div style="margin-top: 1rem; display: flex; gap: 0.5rem;">
-            <span style="background: rgba(34,197,94,0.2); color: #4ade80; padding: 2px 10px; border-radius: 8px; font-size: 0.8rem;">מתחיל</span>
-            <span style="color: rgba(255,255,255,0.3); font-size: 0.8rem;">8 שיעורים</span>
-          </div>
-        </div>
-        <div class="card">
-          <span style="font-size: 2rem;">🎛️</span>
-          <h3 style="font-size: 1.25rem; font-weight: 700; margin: 0.75rem 0 0.5rem;">Rekordbox — מדריך מלא</h3>
-          <p style="color: rgba(255,255,255,0.5); font-size: 0.95rem; line-height: 1.6;">ניהול ספרייה, ניתוח, והכנה לביצוע</p>
-          <div style="margin-top: 1rem; display: flex; gap: 0.5rem;">
-            <span style="background: rgba(234,179,8,0.2); color: #fbbf24; padding: 2px 10px; border-radius: 8px; font-size: 0.8rem;">בינוני</span>
-            <span style="color: rgba(255,255,255,0.3); font-size: 0.8rem;">10 שיעורים</span>
-          </div>
-        </div>
-        <div class="card">
-          <span style="font-size: 2rem;">🎚️</span>
-          <h3 style="font-size: 1.25rem; font-weight: 700; margin: 0.75rem 0 0.5rem;">טכניקות מיקס</h3>
-          <p style="color: rgba(255,255,255,0.5); font-size: 0.95rem; line-height: 1.6;">Beatmatch, EQ mixing, transitions, effects</p>
-          <div style="margin-top: 1rem; display: flex; gap: 0.5rem;">
-            <span style="background: rgba(234,179,8,0.2); color: #fbbf24; padding: 2px 10px; border-radius: 8px; font-size: 0.8rem;">בינוני</span>
-            <span style="color: rgba(255,255,255,0.3); font-size: 0.8rem;">12 שיעורים</span>
-          </div>
-        </div>
-        <div class="card">
-          <span style="font-size: 2rem;">⭐</span>
-          <h3 style="font-size: 1.25rem; font-weight: 700; margin: 0.75rem 0 0.5rem;">בניית סט ובמה</h3>
-          <p style="color: rgba(255,255,255,0.5); font-size: 0.95rem; line-height: 1.6;">תכנון סטים, קריאת קהל, ובניית קריירה</p>
-          <div style="margin-top: 1rem; display: flex; gap: 0.5rem;">
-            <span style="background: rgba(239,68,68,0.2); color: #f87171; padding: 2px 10px; border-radius: 8px; font-size: 0.8rem;">מתקדם</span>
-            <span style="color: rgba(255,255,255,0.3); font-size: 0.8rem;">8 שיעורים</span>
-          </div>
-        </div>
+  <!-- ═══════════════ STATS ═══════════════ -->
+  <section class="py-12 border-t border-b border-white/5 bg-[#0A0A0F] relative">
+    <div class="max-w-[1200px] mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-6 stagger reveal">
+      <div class="bg-[#121217] border border-white/5 rounded-xl p-6 text-center reveal hover:border-white/10 transition-colors">
+        <div class="text-4xl font-bold font-mono text-white" data-count={courseCount}>{courseCount.toString().padStart(2, '0')}</div>
+        <div class="text-[#00E5FF] mt-2 text-xs font-bold uppercase tracking-[0.2em]">קורסים מקצועיים</div>
+      </div>
+      <div class="bg-[#121217] border border-white/5 rounded-xl p-6 text-center reveal hover:border-white/10 transition-colors">
+        <div class="text-4xl font-bold font-mono text-white" data-count={lessonCount}>{lessonCount}</div>
+        <div class="text-[#00E5FF] mt-2 text-xs font-bold uppercase tracking-[0.2em]">שיעורים מעמיקים</div>
+      </div>
+      <div class="bg-[#121217] border border-white/5 rounded-xl p-6 text-center reveal hover:border-white/10 transition-colors">
+        <div class="text-4xl font-bold font-mono text-white" data-count="5">05</div>
+        <div class="text-[#00E5FF] mt-2 text-xs font-bold uppercase tracking-[0.2em]">כלי DJ מתקדמים</div>
+      </div>
+      <div class="bg-[#121217] border border-white/5 rounded-xl p-6 text-center reveal hover:border-white/10 transition-colors">
+        <div class="text-4xl font-bold font-mono text-white" data-count="100">100<span class="text-2xl text-white/50">%</span></div>
+        <div class="text-[#00E5FF] mt-2 text-xs font-bold uppercase tracking-[0.2em]">בעברית מקומית</div>
       </div>
     </div>
   </section>
 
-  <!-- Tools Section -->
-  <section style="padding: 5rem 2rem; background: rgba(123,47,255,0.03);">
-    <div style="max-width: 1200px; margin: 0 auto;">
-      <h2 style="font-size: 2.5rem; font-weight: 800; text-align: center; margin-bottom: 1rem;">כלים <span class="gradient-text">אינטראקטיביים</span></h2>
-      <p style="text-align: center; color: rgba(255,255,255,0.5); margin-bottom: 3rem;">תרגול מעשי ישירות בדפדפן</p>
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem;">
-        <a href="/tools/bpm-calculator" class="card" style="text-decoration: none; text-align: center;">
-          <span class="tool-icon">🥁</span>
-          <h3 style="font-weight: 700;">מחשבון BPM</h3>
-          <p style="color: rgba(255,255,255,0.4); font-size: 0.85rem;">זיהוי קצב בטאפ</p>
+  <!-- ═══════════════ COURSES ═══════════════ -->
+  <section class="py-24 px-6 bg-[#09090b]">
+    <div class="max-w-[1200px] mx-auto">
+      <div class="text-center mb-16 reveal flex flex-col items-center">
+        <span class="text-[#00E5FF] text-xs font-bold tracking-[0.3em] uppercase mb-4 block">המסלול האקדמי</span>
+        <h2 class="text-[clamp(2rem,4vw,3rem)] font-[900] mb-4 tracking-tight">תכנית הלימודים <span class="text-transparent bg-clip-text bg-gradient-to-l from-[#00E5FF] to-[#7B2FFF]">המלאה</span></h2>
+        <p class="text-white/50 text-lg max-w-xl">5 מודולים אינטנסיביים שיקחו אותך מתאוריה בסיסית ועד לשליטה מוחלטת בציוד ובספירה הטכנית.</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 stagger">
+        <!-- Course 1 -->
+        <a href="/courses/world-of-dj" class="bg-[#121217] border border-white/10 rounded-2xl p-6 hover:bg-[#1a1a24] hover:border-[#00E5FF]/30 transition-all group reveal" style="text-decoration:none; color:white;">
+          <div class="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-[#00E5FF] mb-6 group-hover:scale-110 group-hover:bg-[#00E5FF]/10 transition-all">
+            <Globe size={24} />
+          </div>
+          <h3 class="text-xl font-bold mb-3 group-hover:text-white transition-colors">עולם הדי-ג'יי</h3>
+          <p class="text-white/50 text-sm leading-relaxed mb-8">היכרות מקיפה — מה זה DJ, היסטוריה, ציוד, וקריירה בעולם המוזיקה האלקטרונית.</p>
+          <div class="flex gap-2 items-center justify-between border-t border-white/5 pt-4">
+            <span class="px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest bg-[#00E5FF]/10 text-[#00E5FF] border border-[#00E5FF]/20">מתחיל / L1</span>
+            <span class="text-white/40 text-[11px] font-mono tracking-widest">6 MODULES</span>
+          </div>
         </a>
-        <a href="/tools/harmonic-wheel" class="card" style="text-decoration: none; text-align: center;">
-          <span class="tool-icon">🎡</span>
-          <h3 style="font-weight: 700;">גלגל הרמוני</h3>
-          <p style="color: rgba(255,255,255,0.4); font-size: 0.85rem;">התאמת מפתחות</p>
+        <!-- Course 2 -->
+        <a href="/courses/music-structure" class="bg-[#121217] border border-white/10 rounded-2xl p-6 hover:bg-[#1a1a24] hover:border-[#00E5FF]/30 transition-all group reveal" style="text-decoration:none; color:white;">
+          <div class="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-[#00E5FF] mb-6 group-hover:scale-110 group-hover:bg-[#00E5FF]/10 transition-all">
+            <Music size={24} />
+          </div>
+          <h3 class="text-xl font-bold mb-3 group-hover:text-white transition-colors">תורת המוזיקה ל-DJ</h3>
+          <p class="text-white/50 text-sm leading-relaxed mb-8">BPM, מפתחות הרמוניים, מבנה רצועות, ומיקס הרמוני מושלם — כל מה שצריך לדעת.</p>
+          <div class="flex gap-2 items-center justify-between border-t border-white/5 pt-4">
+            <span class="px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest bg-[#00E5FF]/10 text-[#00E5FF] border border-[#00E5FF]/20">מתחיל / L1</span>
+            <span class="text-white/40 text-[11px] font-mono tracking-widest">8 MODULES</span>
+          </div>
         </a>
-        <a href="/tools/eq-trainer" class="card" style="text-decoration: none; text-align: center;">
-          <span class="tool-icon">🎚️</span>
-          <h3 style="font-weight: 700;">אימון EQ</h3>
-          <p style="color: rgba(255,255,255,0.4); font-size: 0.85rem;">פיתוח אוזן</p>
+        <!-- Course 3 -->
+        <a href="/courses/flx4-equipment" class="bg-[#121217] border border-white/10 rounded-2xl p-6 hover:bg-[#1a1a24] hover:border-[#00E5FF]/30 transition-all group reveal" style="text-decoration:none; color:white;">
+          <div class="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-[#00E5FF] mb-6 group-hover:scale-110 group-hover:bg-[#00E5FF]/10 transition-all">
+            <Sliders size={24} />
+          </div>
+          <h3 class="text-xl font-bold mb-3 group-hover:text-white transition-colors">הכרת הציוד DDJ-FLX4</h3>
+          <p class="text-white/50 text-sm leading-relaxed mb-8">מדריך מעמיק לבקר ה-Pioneer — חיבור, הגדרות, ושליטה מלאה בקונסולה.</p>
+          <div class="flex gap-2 items-center justify-between border-t border-white/5 pt-4">
+            <span class="px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest bg-[#00E5FF]/10 text-[#00E5FF] border border-[#00E5FF]/20">מתחיל / L1</span>
+            <span class="text-white/40 text-[11px] font-mono tracking-widest">6 MODULES</span>
+          </div>
         </a>
-        <a href="/tools/beatmatch-trainer" class="card" style="text-decoration: none; text-align: center;">
-          <span class="tool-icon">🎯</span>
-          <h3 style="font-weight: 700;">אימון Beatmatch</h3>
-          <p style="color: rgba(255,255,255,0.4); font-size: 0.85rem;">סינכרון ביטים</p>
+        <!-- Course 4 -->
+        <a href="/courses/rekordbox" class="bg-[#121217] border border-white/10 rounded-2xl p-6 hover:bg-[#1a1a24] hover:border-[#7b2fff]/40 transition-all group reveal" style="text-decoration:none; color:white;">
+          <div class="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-[#7b2fff] mb-6 group-hover:scale-110 group-hover:bg-[#7b2fff]/10 transition-all">
+            <Laptop size={24} />
+          </div>
+          <h3 class="text-xl font-bold mb-3 group-hover:text-white transition-colors">Rekordbox — מאסטר</h3>
+          <p class="text-white/50 text-sm leading-relaxed mb-8">ניהול ספרייה, ניתוח שירים, עריכת תדרים (Beat Grid), והכנה ארגונית לסט.</p>
+          <div class="flex gap-2 items-center justify-between border-t border-white/5 pt-4">
+            <span class="px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest bg-[#7b2fff]/20 text-[#d4b5ff] border border-[#7b2fff]/30">מתקדם / L2</span>
+            <span class="text-white/40 text-[11px] font-mono tracking-widest">10 MODULES</span>
+          </div>
         </a>
-        <a href="/tools/set-planner" class="card" style="text-decoration: none; text-align: center;">
-          <span class="tool-icon">📋</span>
-          <h3 style="font-weight: 700;">מתכנן סטים</h3>
-          <p style="color: rgba(255,255,255,0.4); font-size: 0.85rem;">בניית סט מושלם</p>
+        <!-- Course 5 -->
+        <a href="/courses/manual-beatmatching" class="bg-[#121217] border border-white/10 rounded-2xl p-6 hover:bg-[#1a1a24] hover:border-[#7b2fff]/40 transition-all group reveal" style="text-decoration:none; color:white;">
+          <div class="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-[#7b2fff] mb-6 group-hover:scale-110 group-hover:bg-[#7b2fff]/10 transition-all">
+            <Target size={24} />
+          </div>
+          <h3 class="text-xl font-bold mb-3 group-hover:text-white transition-colors">Beatmatching באוזן</h3>
+          <p class="text-white/50 text-sm leading-relaxed mb-8">Beatmatch טהור, מיקס EQ מתקדם, בניית מתחים אקוסטית — הכל בלי מסכים.</p>
+          <div class="flex gap-2 items-center justify-between border-t border-white/5 pt-4">
+             <span class="px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest bg-[#7b2fff]/20 text-[#d4b5ff] border border-[#7b2fff]/30">מתקדם / L2</span>
+            <span class="text-white/40 text-[11px] font-mono tracking-widest">8 MODULES</span>
+          </div>
         </a>
       </div>
     </div>
   </section>
 
-  <!-- CTA -->
-  <section style="padding: 5rem 2rem; text-align: center;">
-    <h2 style="font-size: 2.5rem; font-weight: 800; margin-bottom: 1rem;">מוכן להתחיל?</h2>
-    <p style="color: rgba(255,255,255,0.5); margin-bottom: 2rem;">הקורס הראשון בחינם. בלי התחייבות.</p>
-    <a href="/courses/world-of-dj" class="btn-primary" style="font-size: 1.2rem; padding: 16px 40px;">🎧 התחל עכשיו — בחינם</a>
+  <!-- ═══════════════ TOOLS ═══════════════ -->
+  <section class="py-24 px-6 relative bg-[#121217] border-y border-white/5 overflow-hidden">
+    <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(0,229,255,0.03),transparent)]"></div>
+    <div class="max-w-[1200px] mx-auto relative z-10">
+      <div class="text-center mb-16 reveal flex flex-col items-center">
+        <span class="text-[#7b2fff] text-xs font-bold tracking-[0.3em] uppercase mb-4 block">אימון מבוסס דפדפן</span>
+        <h2 class="text-[clamp(2rem,4vw,3rem)] font-[900] mb-4 tracking-tight">כלי קונסולה <span class="text-transparent bg-clip-text bg-gradient-to-l from-[#7b2fff] to-[#00E5FF]">אינטראקטיביים</span></h2>
+        <p class="text-white/50 text-lg max-w-xl">הדמיית ציוד אמיתי ישירות בדפדפן - פתח מיומנות פונדמנטלית עוד לפני רכישת בקר.</p>
+      </div>
+      <div class="grid grid-cols-2 lg:grid-cols-5 gap-4 stagger">
+        <a href="/tools/bpm-calculator" class="bg-[#09090b] border border-white/5 rounded-2xl p-6 text-center group hover:bg-[#1a1a24] hover:border-[#00E5FF]/50 transition-all reveal shadow-lg relative overflow-hidden" style="text-decoration:none; color:white;">
+          <div class="absolute inset-x-0 bottom-0 h-1 bg-[#00E5FF] transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></div>
+          <div class="w-12 h-12 mx-auto rounded-full bg-white/5 flex items-center justify-center text-white/40 mb-4 group-hover:text-[#00E5FF] group-hover:bg-[#00E5FF]/10 transition-colors">
+            <Activity size={24} />
+          </div>
+          <h3 class="font-bold text-sm mb-2 text-white/90 group-hover:text-white">מחשבון BPM</h3>
+          <p class="text-white/40 text-[11px] font-medium tracking-wide">DETECT RHYTHM</p>
+        </a>
+        <a href="/tools/harmonic-wheel" class="bg-[#09090b] border border-white/5 rounded-2xl p-6 text-center group hover:bg-[#1a1a24] hover:border-[#7b2fff]/50 transition-all reveal shadow-lg relative overflow-hidden" style="text-decoration:none; color:white;">
+          <div class="absolute inset-x-0 bottom-0 h-1 bg-[#7b2fff] transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></div>
+          <div class="w-12 h-12 mx-auto rounded-full bg-white/5 flex items-center justify-center text-white/40 mb-4 group-hover:text-[#7b2fff] group-hover:bg-[#7b2fff]/10 transition-colors">
+            <Disc3 size={24} />
+          </div>
+          <h3 class="font-bold text-sm mb-2 text-white/90 group-hover:text-white">גלגל הרמוני</h3>
+          <p class="text-white/40 text-[11px] font-medium tracking-wide">CAMELOT MATCH</p>
+        </a>
+        <a href="/tools/eq-trainer" class="bg-[#09090b] border border-white/5 rounded-2xl p-6 text-center group hover:bg-[#1a1a24] hover:border-[#FF0055]/50 transition-all reveal shadow-lg relative overflow-hidden" style="text-decoration:none; color:white;">
+          <div class="absolute inset-x-0 bottom-0 h-1 bg-[#FF0055] transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></div>
+          <div class="w-12 h-12 mx-auto rounded-full bg-white/5 flex items-center justify-center text-white/40 mb-4 group-hover:text-[#FF0055] group-hover:bg-[#FF0055]/10 transition-colors">
+            <Sliders size={24} />
+          </div>
+          <h3 class="font-bold text-sm mb-2 text-white/90 group-hover:text-white">אימון EQ</h3>
+          <p class="text-white/40 text-[11px] font-medium tracking-wide">FREQ ISOLATION</p>
+        </a>
+        <a href="/tools/beatmatch-trainer" class="bg-[#09090b] border border-white/5 rounded-2xl p-6 text-center group hover:bg-[#1a1a24] hover:border-[#00FF88]/50 transition-all reveal shadow-lg relative overflow-hidden" style="text-decoration:none; color:white;">
+          <div class="absolute inset-x-0 bottom-0 h-1 bg-[#00FF88] transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></div>
+          <div class="w-12 h-12 mx-auto rounded-full bg-white/5 flex items-center justify-center text-white/40 mb-4 group-hover:text-[#00FF88] group-hover:bg-[#00FF88]/10 transition-colors">
+            <AudioWaveform size={24} />
+          </div>
+          <h3 class="font-bold text-sm mb-2 text-white/90 group-hover:text-white">אימון Beatmatch</h3>
+          <p class="text-white/40 text-[11px] font-medium tracking-wide">PHASE SYNC</p>
+        </a>
+        <a href="/tools/set-planner" class="bg-[#09090b] border border-white/5 rounded-2xl p-6 text-center group hover:bg-[#1a1a24] hover:border-[#00E5FF]/50 transition-all reveal shadow-lg col-span-2 lg:col-span-1 relative overflow-hidden" style="text-decoration:none; color:white;">
+          <div class="absolute inset-x-0 bottom-0 h-1 bg-[#00E5FF] transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></div>
+          <div class="w-12 h-12 mx-auto rounded-full bg-white/5 flex items-center justify-center text-white/40 mb-4 group-hover:text-[#00E5FF] group-hover:bg-[#00E5FF]/10 transition-colors">
+            <ListMusic size={24} />
+          </div>
+          <h3 class="font-bold text-sm mb-2 text-white/90 group-hover:text-white">מתכנן סטים</h3>
+          <p class="text-white/40 text-[11px] font-medium tracking-wide">PLAYLIST LOGIC</p>
+        </a>
+      </div>
+    </div>
   </section>
 
-  <footer style="border-top: 1px solid rgba(255,255,255,0.05); padding: 2rem; text-align: center; color: rgba(255,255,255,0.3); font-size: 0.85rem;">
-    © 2026 DJMaster Academy. כל הזכויות שמורות.
-  </footer>
-</body>
-</html>
+  <!-- ═══════════════ TESTIMONIALS ═══════════════ -->
+  <section class="py-24 px-6 bg-[#09090b]">
+    <div class="max-w-[1200px] mx-auto">
+      <div class="text-center mb-16 reveal flex flex-col items-center">
+        <h2 class="text-[clamp(2rem,4vw,3rem)] font-[900] mb-4 tracking-tight">נבנה עבור <span class="text-white/50">הדור הבא</span></h2>
+        <p class="text-white/50 text-lg">ביקורות תלמידים שסיימו את ההכשרה באקדמיה</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 stagger">
+        <div class="bg-[#121217] border border-white/5 rounded-2xl p-8 reveal flex flex-col justify-between">
+          <p class="text-white/60 leading-relaxed mb-8 text-sm  font-medium italic">
+            "עברתי קורסים באנגלית ולא הבנתי כלום. פה הכל בעברית, ברור, ומסודר. תוך חודש כבר ניגנתי באירוע ראשון עם ביטחון מוחלט ביכולות שלי."
+          </p>
+          <div class="flex items-center gap-4">
+            <div class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-xs font-bold text-white/40 border border-white/5">ד</div>
+            <div>
+              <div class="font-bold text-sm text-white/90">דניאל כ.</div>
+              <div class="text-[#00E5FF] text-[10px] uppercase font-bold tracking-widest mt-0.5">קורס Beatmatching L2</div>
+            </div>
+          </div>
+        </div>
+        <div class="bg-[#121217] border border-white/5 rounded-2xl p-8 reveal flex flex-col justify-between">
+          <p class="text-white/60 leading-relaxed mb-8 text-sm font-medium italic">
+            "הכלים האינטראקטיביים פשוט מדהימים. אימון הBPM והגלגל ההרמוני בנייד עזרו לי להבין מה זה מיקס הרמוני אמיתי בזמן נסיעות לעבודה."
+          </p>
+          <div class="flex items-center gap-4">
+            <div class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-xs font-bold text-white/40 border border-white/5">ש</div>
+            <div>
+              <div class="font-bold text-sm text-white/90">שירה מ.</div>
+              <div class="text-[#7b2fff] text-[10px] uppercase font-bold tracking-widest mt-0.5">תורת המוזיקה L1</div>
+            </div>
+          </div>
+        </div>
+        <div class="bg-[#121217] border border-white/5 rounded-2xl p-8 reveal flex flex-col justify-between">
+          <p class="text-white/60 leading-relaxed mb-8 text-sm font-medium italic">
+            "הקורס על Rekordbox חסך לי עשרות שעות של סרטוני יוטיוב. הספרייה שלי היום מסודרת כמו מקצוען ומוכנה תמיד לנגינה באופן מיידי."
+          </p>
+          <div class="flex items-center gap-4">
+            <div class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-xs font-bold text-white/40 border border-white/5">א</div>
+            <div>
+              <div class="font-bold text-sm text-white/90">אור ל.</div>
+              <div class="text-[#00E5FF] text-[10px] uppercase font-bold tracking-widest mt-0.5">Rekordbox L2</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ CTA ═══════════════ -->
+  <section class="py-24 px-6 relative overflow-hidden bg-[#0a0a0f] border-t border-white/5">
+    <div class="absolute inset-0 z-0 flex items-end">
+      <div class="w-full h-[500px] bg-gradient-to-t from-[#00E5FF]/[0.02] to-transparent pointer-events-none"></div>
+    </div>
+    <div class="relative z-10 text-center max-w-2xl mx-auto reveal">
+      <h2 class="text-[clamp(2.5rem,4vw,3.5rem)] font-[900] mb-6 tracking-tight">הסט שלך מתחיל כעת.</h2>
+      <p class="text-white/50 text-lg mb-10">הקורס הראשון פתוח בחינם. בלי התחייבות. כנס לסטודיו ותתחיל ללמוד.</p>
+      <a href="/courses/world-of-dj" class="inline-flex items-center justify-center gap-2 px-10 py-5 rounded-xl font-bold text-sm bg-white text-black hover:bg-gray-200 transition-colors uppercase tracking-widest active:scale-95 shadow-[0_0_40px_rgba(255,255,255,0.1)]">
+        <Headphones size={18} strokeWidth={2.5} /> כניסה למערכת
+      </a>
+    </div>
+  </section>
+
+  <!-- ═══════════════ FOOTER ═══════════════ -->
+  <Footer variant="full" />
+
+  <!-- ═══════════════ SCROLL REVEAL & COUNTER SCRIPT ═══════════════ -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // 1. Scroll Reveal Logic
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('revealed');
+            
+            // 2. Trigger Number Counter Animation if it's a stat block
+            const counters = entry.target.querySelectorAll<HTMLElement>('[data-count]');
+            counters.forEach(counter => {
+              if (counter.dataset.animated) return; // Prevent re-triggering
+              counter.dataset.animated = 'true';
+              
+              const target = parseInt(counter.dataset.count || '0');
+              const duration = 2000; 
+              const step = Math.max(1, Math.floor(target / (duration / 16)));
+              let current = 0;
+              
+              const updateCounter = () => {
+                current += step;
+                if (current < target) {
+                  // Keep formatting (e.g. 05) for single digits if original had it
+                  counter.innerText = target < 10 ? current.toString().padStart(2, '0') : current.toString();
+                  requestAnimationFrame(updateCounter);
+                } else {
+                  counter.innerText = target < 10 ? target.toString().padStart(2, '0') : (counter.dataset.count === '100' ? '100%' : target.toString() + (counter.dataset.count === '30' ? '+' : ''));
+                }
+              };
+              updateCounter();
+            });
+
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+      document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+      // Navbar minimal hide/show logic
+      let lastScroll = 0;
+      const nav = document.getElementById('main-nav');
+      if (nav) {
+        window.addEventListener('scroll', () => {
+          const currentScroll = window.scrollY;
+          if (currentScroll > 100) {
+            nav.style.borderBottomColor = 'rgba(255,255,255,0.05)';
+            nav.style.background = 'rgba(9,9,11,0.95)';
+            nav.style.backdropFilter = 'blur(10px)';
+          } else {
+            nav.style.borderBottomColor = 'transparent';
+            nav.style.background = 'transparent';
+            nav.style.backdropFilter = 'none';
+          }
+          lastScroll = currentScroll;
+        });
+      }
+    });
+  </script>
+</BaseLayout>

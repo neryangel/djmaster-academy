@@ -1,6 +1,7 @@
 id: "04-music-structure"
 title: "מבנה מוזיקלי"
 slug: "music-structure"
+order: 4
 version: "2.0.0"
 
 description:
@@ -43,6 +44,17 @@ completion:
 tags: ["intermediate", "theory", "music-structure", "phrasing"]
 
 modules:
-  - "01-music-basics"
+  - id: "01-basics"
+    title: "יסודות הסאונד"
+  - id: "02-song-structure"
+    title: "מבנה שיר אלקטרוני"
+  - id: "03-bpm-genres"
+    title: "קצבים וז'אנרים"
+  - id: "04-energy-management"
+    title: "ניהול אנרגטיקה בסט"
+  - id: "05-phrasing"
+    title: "מיקרו-מבנה: המשפט המוזיקלי (Phrasing)"
+  - id: "06-harmonic-mixing"
+    title: "מיקס הרמוני מלא"
 
 pricing_tier: "pro"

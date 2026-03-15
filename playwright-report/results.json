@@ -1,0 +1,1400 @@
+{
+  "config": {
+    "configFile": "/Users/user/Documents/קורס DJ/djmaster-academy/playwright.config.ts",
+    "rootDir": "/Users/user/Documents/קורס DJ/djmaster-academy/e2e",
+    "forbidOnly": false,
+    "fullyParallel": true,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 5
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/Users/user/Documents/קורס DJ/djmaster-academy/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 5
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "/Users/user/Documents/קורס DJ/djmaster-academy/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "html",
+        {
+          "open": "never"
+        }
+      ],
+      [
+        "json",
+        {
+          "outputFile": "playwright-report/results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "runAgents": "none",
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.58.2",
+    "workers": 5,
+    "webServer": {
+      "command": "npm run preview",
+      "port": 4321,
+      "reuseExistingServer": true
+    }
+  },
+  "suites": [
+    {
+      "title": "homepage.spec.ts",
+      "file": "homepage.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Homepage E2E",
+          "file": "homepage.spec.ts",
+          "line": 3,
+          "column": 6,
+          "specs": [
+            {
+              "title": "Homepage loads successfully",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1231,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-15T05:07:46.576Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "84e7eb052e8cbae1c9f0-561674432d3c7f02c6b7",
+              "file": "homepage.spec.ts",
+              "line": 11,
+              "column": 3
+            },
+            {
+              "title": "Homepage displays Hebrew content",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 1236,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-15T05:07:46.539Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "84e7eb052e8cbae1c9f0-01a55fd636a9fd26eca3",
+              "file": "homepage.spec.ts",
+              "line": 22,
+              "column": 3
+            },
+            {
+              "title": "Homepage navigation links work",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 2,
+                      "status": "passed",
+                      "duration": 1131,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-15T05:07:46.729Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "84e7eb052e8cbae1c9f0-3ad9ff0b9223904c5fa2",
+              "file": "homepage.spec.ts",
+              "line": 35,
+              "column": 3
+            },
+            {
+              "title": "Homepage displays course cards",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 3,
+                      "parallelIndex": 3,
+                      "status": "passed",
+                      "duration": 1153,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-15T05:07:46.533Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "84e7eb052e8cbae1c9f0-f975cf77241e2dc5dec1",
+              "file": "homepage.spec.ts",
+              "line": 57,
+              "column": 3
+            },
+            {
+              "title": "Homepage shows course information",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 4,
+                      "parallelIndex": 4,
+                      "status": "passed",
+                      "duration": 1227,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-15T05:07:46.507Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "84e7eb052e8cbae1c9f0-2c2ef2e78b244b95d18f",
+              "file": "homepage.spec.ts",
+              "line": 72,
+              "column": 3
+            },
+            {
+              "title": "Homepage course cards are clickable",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 3,
+                      "parallelIndex": 3,
+                      "status": "passed",
+                      "duration": 986,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-15T05:07:48.525Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "84e7eb052e8cbae1c9f0-5fcca447ebb6661af9de",
+              "file": "homepage.spec.ts",
+              "line": 92,
+              "column": 3
+            },
+            {
+              "title": "Homepage responsive layout",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 4,
+                      "parallelIndex": 4,
+                      "status": "passed",
+                      "duration": 1071,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-15T05:07:48.588Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "84e7eb052e8cbae1c9f0-201f4f96b4ef8788fef0",
+              "file": "homepage.spec.ts",
+              "line": 117,
+              "column": 3
+            },
+            {
+              "title": "Homepage has proper meta tags",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 927,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-15T05:07:48.598Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "84e7eb052e8cbae1c9f0-610e247b2f135e5b47db",
+              "file": "homepage.spec.ts",
+              "line": 138,
+              "column": 3
+            },
+            {
+              "title": "Homepage loads images properly",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 936,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-15T05:07:48.607Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "84e7eb052e8cbae1c9f0-9a5811fa26ba0009f9bf",
+              "file": "homepage.spec.ts",
+              "line": 154,
+              "column": 3
+            },
+            {
+              "title": "Homepage has accessible heading structure",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 2,
+                      "status": "passed",
+                      "duration": 1063,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-15T05:07:48.836Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "84e7eb052e8cbae1c9f0-6dc42b18a59ee753e044",
+              "file": "homepage.spec.ts",
+              "line": 175,
+              "column": 3
+            },
+            {
+              "title": "Homepage buttons are clickable",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 3,
+                      "parallelIndex": 3,
+                      "status": "passed",
+                      "duration": 883,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-15T05:07:49.549Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "84e7eb052e8cbae1c9f0-fa6afd3d4f3af299731a",
+              "file": "homepage.spec.ts",
+              "line": 187,
+              "column": 3
+            },
+            {
+              "title": "Homepage navigation is consistent",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 881,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-15T05:07:49.570Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "84e7eb052e8cbae1c9f0-0235a435b6a2a8524ab9",
+              "file": "homepage.spec.ts",
+              "line": 205,
+              "column": 3
+            },
+            {
+              "title": "Homepage prevents horizontal overflow",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 1016,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-15T05:07:49.575Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "84e7eb052e8cbae1c9f0-805d7a6ef9e404bab84f",
+              "file": "homepage.spec.ts",
+              "line": 217,
+              "column": 3
+            },
+            {
+              "title": "Homepage color scheme is correct",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 4,
+                      "parallelIndex": 4,
+                      "status": "passed",
+                      "duration": 780,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-15T05:07:49.677Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "84e7eb052e8cbae1c9f0-b98d92a7a24d83e86633",
+              "file": "homepage.spec.ts",
+              "line": 234,
+              "column": 3
+            },
+            {
+              "title": "Homepage content is readable",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 2,
+                      "status": "passed",
+                      "duration": 1273,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-15T05:07:49.930Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "84e7eb052e8cbae1c9f0-b1387c2fe92aaf2c5528",
+              "file": "homepage.spec.ts",
+              "line": 245,
+              "column": 3
+            },
+            {
+              "title": "Homepage performance - loads quickly",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 3,
+                      "parallelIndex": 3,
+                      "status": "passed",
+                      "duration": 732,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-15T05:07:50.454Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "84e7eb052e8cbae1c9f0-fb26b82b5a8cd76a82db",
+              "file": "homepage.spec.ts",
+              "line": 263,
+              "column": 3
+            },
+            {
+              "title": "Homepage keyboard navigation works",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 813,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-15T05:07:50.466Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "84e7eb052e8cbae1c9f0-7989526920f8028cf8ff",
+              "file": "homepage.spec.ts",
+              "line": 278,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "tools.spec.ts",
+      "file": "tools.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Tools Pages E2E",
+          "file": "tools.spec.ts",
+          "line": 3,
+          "column": 6,
+          "specs": [
+            {
+              "title": "BPM Calculator page loads and displays correctly",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 4,
+                      "parallelIndex": 4,
+                      "status": "passed",
+                      "duration": 808,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-15T05:07:50.481Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "28ac77d690f1704d1b07-7acc14af3308429c43ce",
+              "file": "tools.spec.ts",
+              "line": 11,
+              "column": 3
+            },
+            {
+              "title": "BPM Calculator tap functionality works",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 1,
+                      "status": "failed",
+                      "duration": 10970,
+                      "error": {
+                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('div.text-\\\\[80px\\\\]').first()\nExpected: \u001b[32m\"128.5\"\u001b[39m\nReceived: \u001b[31m\"00.0\"\u001b[39m\nTimeout:  10000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" with timeout 10000ms\u001b[22m\n\u001b[2m  - waiting for locator('div.text-\\\\[80px\\\\]').first()\u001b[22m\n\u001b[2m    14 × locator resolved to <div class=\"text-[80px] font-mono leading-none tracking-tighter transition-all duration-150 text-white/10\">00.0</div>\u001b[22m\n\u001b[2m       - unexpected value \"00.0\"\u001b[22m\n",
+                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('div.text-\\\\[80px\\\\]').first()\nExpected: \u001b[32m\"128.5\"\u001b[39m\nReceived: \u001b[31m\"00.0\"\u001b[39m\nTimeout:  10000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" with timeout 10000ms\u001b[22m\n\u001b[2m  - waiting for locator('div.text-\\\\[80px\\\\]').first()\u001b[22m\n\u001b[2m    14 × locator resolved to <div class=\"text-[80px] font-mono leading-none tracking-tighter transition-all duration-150 text-white/10\">00.0</div>\u001b[22m\n\u001b[2m       - unexpected value \"00.0\"\u001b[22m\n\n    at /Users/user/Documents/קורס DJ/djmaster-academy/e2e/tools.spec.ts:38:30",
+                        "location": {
+                          "file": "/Users/user/Documents/קורס DJ/djmaster-academy/e2e/tools.spec.ts",
+                          "column": 30,
+                          "line": 38
+                        },
+                        "snippet": "\u001b[0m \u001b[90m 36 |\u001b[39m     \u001b[90m// Value should change from 00.0 to the manually inputted 128.5\u001b[39m\n \u001b[90m 37 |\u001b[39m     \u001b[36mconst\u001b[39m bpmDisplay \u001b[33m=\u001b[39m page\u001b[33m.\u001b[39mlocator(\u001b[32m'div.text-\\\\[80px\\\\]'\u001b[39m)\u001b[33m.\u001b[39mfirst()\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 38 |\u001b[39m     \u001b[36mawait\u001b[39m expect(bpmDisplay)\u001b[33m.\u001b[39mtoHaveText(\u001b[32m'128.5'\u001b[39m\u001b[33m,\u001b[39m { timeout\u001b[33m:\u001b[39m \u001b[35m10000\u001b[39m })\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                              \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 39 |\u001b[39m   })\u001b[33m;\u001b[39m\n \u001b[90m 40 |\u001b[39m\n \u001b[90m 41 |\u001b[39m   test(\u001b[32m'BPM Calculator reset button works'\u001b[39m\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m ({ page }) \u001b[33m=>\u001b[39m {\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/Users/user/Documents/קורס DJ/djmaster-academy/e2e/tools.spec.ts",
+                            "column": 30,
+                            "line": 38
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('div.text-\\\\[80px\\\\]').first()\nExpected: \u001b[32m\"128.5\"\u001b[39m\nReceived: \u001b[31m\"00.0\"\u001b[39m\nTimeout:  10000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" with timeout 10000ms\u001b[22m\n\u001b[2m  - waiting for locator('div.text-\\\\[80px\\\\]').first()\u001b[22m\n\u001b[2m    14 × locator resolved to <div class=\"text-[80px] font-mono leading-none tracking-tighter transition-all duration-150 text-white/10\">00.0</div>\u001b[22m\n\u001b[2m       - unexpected value \"00.0\"\u001b[22m\n\n\n\u001b[0m \u001b[90m 36 |\u001b[39m     \u001b[90m// Value should change from 00.0 to the manually inputted 128.5\u001b[39m\n \u001b[90m 37 |\u001b[39m     \u001b[36mconst\u001b[39m bpmDisplay \u001b[33m=\u001b[39m page\u001b[33m.\u001b[39mlocator(\u001b[32m'div.text-\\\\[80px\\\\]'\u001b[39m)\u001b[33m.\u001b[39mfirst()\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 38 |\u001b[39m     \u001b[36mawait\u001b[39m expect(bpmDisplay)\u001b[33m.\u001b[39mtoHaveText(\u001b[32m'128.5'\u001b[39m\u001b[33m,\u001b[39m { timeout\u001b[33m:\u001b[39m \u001b[35m10000\u001b[39m })\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                              \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 39 |\u001b[39m   })\u001b[33m;\u001b[39m\n \u001b[90m 40 |\u001b[39m\n \u001b[90m 41 |\u001b[39m   test(\u001b[32m'BPM Calculator reset button works'\u001b[39m\u001b[33m,\u001b[39m \u001b[36masync\u001b[39m ({ page }) \u001b[33m=>\u001b[39m {\u001b[0m\n\u001b[2m    at /Users/user/Documents/קורס DJ/djmaster-academy/e2e/tools.spec.ts:38:30\u001b[22m"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-15T05:07:50.613Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/user/Documents/קורס DJ/djmaster-academy/test-results/tools-Tools-Pages-E2E-BPM-Calculator-tap-functionality-works-chromium/test-failed-1.png"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/Users/user/Documents/קורס DJ/djmaster-academy/test-results/tools-Tools-Pages-E2E-BPM-Calculator-tap-functionality-works-chromium/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/Users/user/Documents/קורס DJ/djmaster-academy/e2e/tools.spec.ts",
+                        "column": 30,
+                        "line": 38
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "28ac77d690f1704d1b07-f848187f98fb5d80b1cd",
+              "file": "tools.spec.ts",
+              "line": 26,
+              "column": 3
+            },
+            {
+              "title": "BPM Calculator reset button works",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 3,
+                      "parallelIndex": 3,
+                      "status": "failed",
+                      "duration": 5696,
+                      "error": {
+                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('div.text-\\\\[80px\\\\]').first()\nExpected: \u001b[32m\"128.5\"\u001b[39m\nReceived: \u001b[31m\"00.0\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('div.text-\\\\[80px\\\\]').first()\u001b[22m\n\u001b[2m    9 × locator resolved to <div class=\"text-[80px] font-mono leading-none tracking-tighter transition-all duration-150 text-white/10\">00.0</div>\u001b[22m\n\u001b[2m      - unexpected value \"00.0\"\u001b[22m\n",
+                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('div.text-\\\\[80px\\\\]').first()\nExpected: \u001b[32m\"128.5\"\u001b[39m\nReceived: \u001b[31m\"00.0\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('div.text-\\\\[80px\\\\]').first()\u001b[22m\n\u001b[2m    9 × locator resolved to <div class=\"text-[80px] font-mono leading-none tracking-tighter transition-all duration-150 text-white/10\">00.0</div>\u001b[22m\n\u001b[2m      - unexpected value \"00.0\"\u001b[22m\n\n    at /Users/user/Documents/קורס DJ/djmaster-academy/e2e/tools.spec.ts:49:30",
+                        "location": {
+                          "file": "/Users/user/Documents/קורס DJ/djmaster-academy/e2e/tools.spec.ts",
+                          "column": 30,
+                          "line": 49
+                        },
+                        "snippet": "\u001b[0m \u001b[90m 47 |\u001b[39m     \u001b[90m// Value should change from 00.0 to the manually inputted 128.5\u001b[39m\n \u001b[90m 48 |\u001b[39m     \u001b[36mconst\u001b[39m bpmDisplay \u001b[33m=\u001b[39m page\u001b[33m.\u001b[39mlocator(\u001b[32m'div.text-\\\\[80px\\\\]'\u001b[39m)\u001b[33m.\u001b[39mfirst()\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 49 |\u001b[39m     \u001b[36mawait\u001b[39m expect(bpmDisplay)\u001b[33m.\u001b[39mtoHaveText(\u001b[32m'128.5'\u001b[39m\u001b[33m,\u001b[39m { timeout\u001b[33m:\u001b[39m \u001b[35m5000\u001b[39m })\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                              \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 50 |\u001b[39m\n \u001b[90m 51 |\u001b[39m     \u001b[90m// Click reset button (CLEAR)\u001b[39m\n \u001b[90m 52 |\u001b[39m     \u001b[36mconst\u001b[39m resetButton \u001b[33m=\u001b[39m page\u001b[33m.\u001b[39mlocator(\u001b[32m'button'\u001b[39m)\u001b[33m.\u001b[39mfilter({ hasText\u001b[33m:\u001b[39m \u001b[35m/CLEAR|אפס/i\u001b[39m })\u001b[33m.\u001b[39mfirst()\u001b[33m;\u001b[39m\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/Users/user/Documents/קורס DJ/djmaster-academy/e2e/tools.spec.ts",
+                            "column": 30,
+                            "line": 49
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('div.text-\\\\[80px\\\\]').first()\nExpected: \u001b[32m\"128.5\"\u001b[39m\nReceived: \u001b[31m\"00.0\"\u001b[39m\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('div.text-\\\\[80px\\\\]').first()\u001b[22m\n\u001b[2m    9 × locator resolved to <div class=\"text-[80px] font-mono leading-none tracking-tighter transition-all duration-150 text-white/10\">00.0</div>\u001b[22m\n\u001b[2m      - unexpected value \"00.0\"\u001b[22m\n\n\n\u001b[0m \u001b[90m 47 |\u001b[39m     \u001b[90m// Value should change from 00.0 to the manually inputted 128.5\u001b[39m\n \u001b[90m 48 |\u001b[39m     \u001b[36mconst\u001b[39m bpmDisplay \u001b[33m=\u001b[39m page\u001b[33m.\u001b[39mlocator(\u001b[32m'div.text-\\\\[80px\\\\]'\u001b[39m)\u001b[33m.\u001b[39mfirst()\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 49 |\u001b[39m     \u001b[36mawait\u001b[39m expect(bpmDisplay)\u001b[33m.\u001b[39mtoHaveText(\u001b[32m'128.5'\u001b[39m\u001b[33m,\u001b[39m { timeout\u001b[33m:\u001b[39m \u001b[35m5000\u001b[39m })\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                              \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 50 |\u001b[39m\n \u001b[90m 51 |\u001b[39m     \u001b[90m// Click reset button (CLEAR)\u001b[39m\n \u001b[90m 52 |\u001b[39m     \u001b[36mconst\u001b[39m resetButton \u001b[33m=\u001b[39m page\u001b[33m.\u001b[39mlocator(\u001b[32m'button'\u001b[39m)\u001b[33m.\u001b[39mfilter({ hasText\u001b[33m:\u001b[39m \u001b[35m/CLEAR|אפס/i\u001b[39m })\u001b[33m.\u001b[39mfirst()\u001b[33m;\u001b[39m\u001b[0m\n\u001b[2m    at /Users/user/Documents/קורס DJ/djmaster-academy/e2e/tools.spec.ts:49:30\u001b[22m"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-15T05:07:51.256Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/user/Documents/קורס DJ/djmaster-academy/test-results/tools-Tools-Pages-E2E-BPM-Calculator-reset-button-works-chromium/test-failed-1.png"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/Users/user/Documents/קורס DJ/djmaster-academy/test-results/tools-Tools-Pages-E2E-BPM-Calculator-reset-button-works-chromium/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/Users/user/Documents/קורס DJ/djmaster-academy/e2e/tools.spec.ts",
+                        "column": 30,
+                        "line": 49
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "28ac77d690f1704d1b07-f4e9128c9716c476ea66",
+              "file": "tools.spec.ts",
+              "line": 41,
+              "column": 3
+            },
+            {
+              "title": "BPM Calculator manual input works",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 2,
+                      "status": "passed",
+                      "duration": 818,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-15T05:07:51.244Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "28ac77d690f1704d1b07-0284f2bf33a38f21056d",
+              "file": "tools.spec.ts",
+              "line": 59,
+              "column": 3
+            },
+            {
+              "title": "BPM Calculator shows genre",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 668,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-15T05:07:51.318Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "28ac77d690f1704d1b07-74d656ea142593a0c99b",
+              "file": "tools.spec.ts",
+              "line": 72,
+              "column": 3
+            },
+            {
+              "title": "Harmonic Wheel page loads correctly",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 4,
+                      "parallelIndex": 4,
+                      "status": "passed",
+                      "duration": 616,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-15T05:07:51.306Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "28ac77d690f1704d1b07-7404997f75c1f80900b9",
+              "file": "tools.spec.ts",
+              "line": 85,
+              "column": 3
+            },
+            {
+              "title": "Harmonic Wheel key selection works",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 4,
+                      "parallelIndex": 4,
+                      "status": "passed",
+                      "duration": 5757,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-15T05:07:51.936Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "28ac77d690f1704d1b07-7441ec3a2251e1196082",
+              "file": "tools.spec.ts",
+              "line": 96,
+              "column": 3
+            },
+            {
+              "title": "Tools listing page shows all tools",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 591,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-15T05:07:52.000Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "28ac77d690f1704d1b07-896bf35df488cf9bde98",
+              "file": "tools.spec.ts",
+              "line": 114,
+              "column": 3
+            },
+            {
+              "title": "Navigation between tools works",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 2,
+                      "status": "passed",
+                      "duration": 1467,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-15T05:07:52.153Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "28ac77d690f1704d1b07-cbf435dce45680187b2a",
+              "file": "tools.spec.ts",
+              "line": 136,
+              "column": 3
+            },
+            {
+              "title": "Tool pages are responsive",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 461,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-15T05:07:52.607Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "28ac77d690f1704d1b07-ab1cc53dca4be9b78599",
+              "file": "tools.spec.ts",
+              "line": 150,
+              "column": 3
+            },
+            {
+              "title": "Tools pages have Hebrew language",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 457,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-15T05:07:53.081Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "28ac77d690f1704d1b07-b729611fe2315efe7020",
+              "file": "tools.spec.ts",
+              "line": 163,
+              "column": 3
+            },
+            {
+              "title": "Tool pages load without errors",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 1221,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-15T05:07:53.560Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "28ac77d690f1704d1b07-7925c3141da22fa09f57",
+              "file": "tools.spec.ts",
+              "line": 174,
+              "column": 3
+            },
+            {
+              "title": "Tool pages have proper meta tags",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 2,
+                      "status": "passed",
+                      "duration": 457,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-15T05:07:53.639Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "28ac77d690f1704d1b07-a99e8dd7722aa7b3c7a0",
+              "file": "tools.spec.ts",
+              "line": 192,
+              "column": 3
+            },
+            {
+              "title": "Tool pages prevent horizontal scrolling",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 2,
+                      "status": "passed",
+                      "duration": 539,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-15T05:07:54.120Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "28ac77d690f1704d1b07-5fa0b95f96a9e53c612b",
+              "file": "tools.spec.ts",
+              "line": 204,
+              "column": 3
+            },
+            {
+              "title": "Tool pages use correct colors theme",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 2,
+                      "status": "timedOut",
+                      "duration": 30047,
+                      "error": {
+                        "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m",
+                        "stack": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                      },
+                      "errors": [
+                        {
+                          "message": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+                        },
+                        {
+                          "location": {
+                            "file": "/Users/user/Documents/קורס DJ/djmaster-academy/e2e/tools.spec.ts",
+                            "column": 34,
+                            "line": 219
+                          },
+                          "message": "Error: locator.evaluate: Test timeout of 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('h2').filter({ hasText: /מחשבון/ })\u001b[22m\n\n\n\u001b[0m \u001b[90m 217 |\u001b[39m     \u001b[90m// Check for dark theme colors\u001b[39m\n \u001b[90m 218 |\u001b[39m     \u001b[36mconst\u001b[39m heading \u001b[33m=\u001b[39m page\u001b[33m.\u001b[39mlocator(\u001b[32m'h2'\u001b[39m)\u001b[33m.\u001b[39mfilter({ hasText\u001b[33m:\u001b[39m \u001b[35m/מחשבון/\u001b[39m })\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 219 |\u001b[39m     \u001b[36mconst\u001b[39m styles \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m heading\u001b[33m.\u001b[39mevaluate((el) \u001b[33m=>\u001b[39m window\u001b[33m.\u001b[39mgetComputedStyle(el))\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                                  \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 220 |\u001b[39m\n \u001b[90m 221 |\u001b[39m     \u001b[90m// Check that text is visible (light text on dark background)\u001b[39m\n \u001b[90m 222 |\u001b[39m     \u001b[36mconst\u001b[39m color \u001b[33m=\u001b[39m styles\u001b[33m.\u001b[39mcolor\u001b[33m;\u001b[39m\u001b[0m\n\u001b[2m    at /Users/user/Documents/קורס DJ/djmaster-academy/e2e/tools.spec.ts:219:34\u001b[22m"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-15T05:07:54.674Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/user/Documents/קורס DJ/djmaster-academy/test-results/tools-Tools-Pages-E2E-Tool-pages-use-correct-colors-theme-chromium/test-failed-1.png"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/Users/user/Documents/קורס DJ/djmaster-academy/test-results/tools-Tools-Pages-E2E-Tool-pages-use-correct-colors-theme-chromium/error-context.md"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "28ac77d690f1704d1b07-8d899a2ef9c5f5849d33",
+              "file": "tools.spec.ts",
+              "line": 214,
+              "column": 3
+            },
+            {
+              "title": "BPM Calculator supports keyboard shortcuts",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 10570,
+                      "error": {
+                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('div.text-\\\\[80px\\\\]').first()\nExpected: \u001b[32m\"\u001b[7m124\u001b[27m.0\"\u001b[39m\nReceived: \u001b[31m\"\u001b[7m00\u001b[27m.0\"\u001b[39m\nTimeout:  10000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" with timeout 10000ms\u001b[22m\n\u001b[2m  - waiting for locator('div.text-\\\\[80px\\\\]').first()\u001b[22m\n\u001b[2m    14 × locator resolved to <div class=\"text-[80px] font-mono leading-none tracking-tighter transition-all duration-150 text-white/10\">00.0</div>\u001b[22m\n\u001b[2m       - unexpected value \"00.0\"\u001b[22m\n",
+                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('div.text-\\\\[80px\\\\]').first()\nExpected: \u001b[32m\"\u001b[7m124\u001b[27m.0\"\u001b[39m\nReceived: \u001b[31m\"\u001b[7m00\u001b[27m.0\"\u001b[39m\nTimeout:  10000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" with timeout 10000ms\u001b[22m\n\u001b[2m  - waiting for locator('div.text-\\\\[80px\\\\]').first()\u001b[22m\n\u001b[2m    14 × locator resolved to <div class=\"text-[80px] font-mono leading-none tracking-tighter transition-all duration-150 text-white/10\">00.0</div>\u001b[22m\n\u001b[2m       - unexpected value \"00.0\"\u001b[22m\n\n    at /Users/user/Documents/קורס DJ/djmaster-academy/e2e/tools.spec.ts:243:30",
+                        "location": {
+                          "file": "/Users/user/Documents/קורס DJ/djmaster-academy/e2e/tools.spec.ts",
+                          "column": 30,
+                          "line": 243
+                        },
+                        "snippet": "\u001b[0m \u001b[90m 241 |\u001b[39m\n \u001b[90m 242 |\u001b[39m     \u001b[90m// Check tap count changed to our injected value\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 243 |\u001b[39m     \u001b[36mawait\u001b[39m expect(bpmDisplay)\u001b[33m.\u001b[39mtoHaveText(\u001b[32m'124.0'\u001b[39m\u001b[33m,\u001b[39m { timeout\u001b[33m:\u001b[39m \u001b[35m10000\u001b[39m })\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                              \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 244 |\u001b[39m\n \u001b[90m 245 |\u001b[39m     \u001b[90m// Press Escape to reset\u001b[39m\n \u001b[90m 246 |\u001b[39m     \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mkeyboard\u001b[33m.\u001b[39mpress(\u001b[32m'Escape'\u001b[39m)\u001b[33m;\u001b[39m\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/Users/user/Documents/קורס DJ/djmaster-academy/e2e/tools.spec.ts",
+                            "column": 30,
+                            "line": 243
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  locator('div.text-\\\\[80px\\\\]').first()\nExpected: \u001b[32m\"\u001b[7m124\u001b[27m.0\"\u001b[39m\nReceived: \u001b[31m\"\u001b[7m00\u001b[27m.0\"\u001b[39m\nTimeout:  10000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" with timeout 10000ms\u001b[22m\n\u001b[2m  - waiting for locator('div.text-\\\\[80px\\\\]').first()\u001b[22m\n\u001b[2m    14 × locator resolved to <div class=\"text-[80px] font-mono leading-none tracking-tighter transition-all duration-150 text-white/10\">00.0</div>\u001b[22m\n\u001b[2m       - unexpected value \"00.0\"\u001b[22m\n\n\n\u001b[0m \u001b[90m 241 |\u001b[39m\n \u001b[90m 242 |\u001b[39m     \u001b[90m// Check tap count changed to our injected value\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 243 |\u001b[39m     \u001b[36mawait\u001b[39m expect(bpmDisplay)\u001b[33m.\u001b[39mtoHaveText(\u001b[32m'124.0'\u001b[39m\u001b[33m,\u001b[39m { timeout\u001b[33m:\u001b[39m \u001b[35m10000\u001b[39m })\u001b[33m;\u001b[39m\n \u001b[90m     |\u001b[39m                              \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 244 |\u001b[39m\n \u001b[90m 245 |\u001b[39m     \u001b[90m// Press Escape to reset\u001b[39m\n \u001b[90m 246 |\u001b[39m     \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mkeyboard\u001b[33m.\u001b[39mpress(\u001b[32m'Escape'\u001b[39m)\u001b[33m;\u001b[39m\u001b[0m\n\u001b[2m    at /Users/user/Documents/קורס DJ/djmaster-academy/e2e/tools.spec.ts:243:30\u001b[22m"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-15T05:07:54.800Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/user/Documents/קורס DJ/djmaster-academy/test-results/tools-Tools-Pages-E2E-BPM--dc181-supports-keyboard-shortcuts-chromium/test-failed-1.png"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/Users/user/Documents/קורס DJ/djmaster-academy/test-results/tools-Tools-Pages-E2E-BPM--dc181-supports-keyboard-shortcuts-chromium/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/Users/user/Documents/קורס DJ/djmaster-academy/e2e/tools.spec.ts",
+                        "column": 30,
+                        "line": 243
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "28ac77d690f1704d1b07-20ee0865cb2660b44492",
+              "file": "tools.spec.ts",
+              "line": 226,
+              "column": 3
+            },
+            {
+              "title": "Tool pages accessibility - keyboard navigation",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 4,
+                      "parallelIndex": 4,
+                      "status": "passed",
+                      "duration": 467,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-03-15T05:07:57.708Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "28ac77d690f1704d1b07-746e4b901e2d21a9d1c1",
+              "file": "tools.spec.ts",
+              "line": 252,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-03-15T05:07:44.906Z",
+    "duration": 39860.807,
+    "expected": 30,
+    "skipped": 0,
+    "unexpected": 4,
+    "flaky": 0
+  }
+}

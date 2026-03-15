@@ -1,70 +1,64 @@
 ---
-// Tools index page
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Navbar from '@components/Navbar.astro';
+import Footer from '@components/Footer.astro';
+
 const tools = [
-  { name: 'מחשבון BPM', slug: 'bpm-calculator', icon: '🥁', description: 'זהה קצב שירים בטאפ או ניתוח אוטומטי', color: '#00d4ff' },
-  { name: 'גלגל הרמוני', slug: 'harmonic-wheel', icon: '🎡', description: 'מצא מפתחות תואמים למיקס מושלם', color: '#7b2fff' },
-  { name: 'אימון EQ', slug: 'eq-trainer', icon: '🎚️', description: 'פתח את האוזן לזהות תדרים', color: '#FF6584' },
-  { name: 'אימון Beatmatch', slug: 'beatmatch-trainer', icon: '🎯', description: 'למד לסנכרן ביטים בלי sync', color: '#4ade80' },
-  { name: 'מתכנן סטים', slug: 'set-planner', icon: '📋', description: 'תכנן סט מושלם עם ניתוח מעברים', color: '#fbbf24' },
+  { name: 'מחשבון BPM', slug: 'bpm-calculator', icon: '🥁', description: 'זהה קצב שירים בטאפ או ניתוח אוטומטי. כלי חיוני לכל DJ.', color: '#67e8f9', glow: 'glow-cyan' },
+  { name: 'גלגל הרמוני', slug: 'harmonic-wheel', icon: '🎡', description: 'מצא מפתחות תואמים למיקס מושלם עם Camelot Wheel אינטראקטיבי.', color: '#a78bfa', glow: 'glow-purple' },
+  { name: 'אימון EQ', slug: 'eq-trainer', icon: '🎚️', description: 'פתח את האוזן לזהות תדרים — High, Mid, Low. אימון שמיעתי מקצועי.', color: '#fda4af', glow: 'glow-pink' },
+  { name: 'אימון Beatmatch', slug: 'beatmatch-trainer', icon: '🎯', description: 'למד לסנכרן ביטים בלי sync. אימון מעשי על אוזן בלבד.', color: '#86efac', glow: 'glow-green' },
+  { name: 'מתכנן סטים', slug: 'set-planner', icon: '📋', description: 'תכנן סט מושלם עם ניתוח מעברים, BPM, ומפתחות.', color: '#fcd34d', glow: 'glow-orange' },
 ];
 ---
 
-<html lang="he" dir="rtl">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>כלי DJ | DJMaster Academy</title>
-  <meta name="description" content="כלי DJ אינטראקטיביים — מחשבון BPM, גלגל הרמוני, אימון EQ, אימון Beatmatch ומתכנן סטים. תרגול מעשי ישירות בדפדפן." />
-  <meta property="og:title" content="כלי DJ אינטראקטיביים | DJMaster Academy" />
-  <meta property="og:description" content="5 כלי DJ מקצועיים לתרגול ישירות בדפדפן — בחינם" />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://djmaster-academy.vercel.app/tools" />
-  <meta property="og:locale" content="he_IL" />
-  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: 'Heebo', sans-serif; background: #0A0A0F; color: #fff; min-height: 100vh; }
-    .gradient-text { background: linear-gradient(135deg, #00d4ff, #7b2fff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-    .tool-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 20px; padding: 2.5rem; transition: all 0.3s; text-decoration: none; color: white; display: block; }
-    .tool-card:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.2); transform: translateY(-6px); }
-  </style>
-</head>
-<body>
-  <nav style="border-bottom: 1px solid rgba(255,255,255,0.1); padding: 1rem 2rem;">
-    <div style="max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between;">
-      <a href="/" style="font-size: 1.5rem; font-weight: 800; text-decoration: none;" class="gradient-text">DJMaster Academy</a>
-      <div style="display: flex; gap: 2rem;">
-        <a href="/courses" style="color: rgba(255,255,255,0.7); text-decoration: none;">קורסים</a>
-        <a href="/tools" style="color: white; text-decoration: none; font-weight: 600;">כלים</a>
-      </div>
-    </div>
-  </nav>
+<BaseLayout title="כלי DJ" description="כלי DJ אינטראקטיביים — מחשבון BPM, גלגל הרמוני, אימון EQ, אימון Beatmatch ומתכנן סטים. תרגול מעשי ישירות בדפדפן.">
+  <Navbar activePage="tools" />
 
-  <main style="max-width: 1200px; margin: 0 auto; padding: 3rem 2rem;">
-    <div style="text-align: center; margin-bottom: 3rem;">
-      <h1 style="font-size: 2.5rem; font-weight: 800; margin-bottom: 0.75rem;">כלי <span class="gradient-text">DJ</span> אינטראקטיביים</h1>
-      <p style="color: rgba(255,255,255,0.5); font-size: 1.1rem;">תרגול מעשי ישירות בדפדפן — בלי להתקין כלום</p>
+  <!-- Hero -->
+  <section class="relative py-16 overflow-hidden mt-16">
+    <div class="absolute inset-0 bg-gradient-to-b from-[#00d4ff]/5 via-[#7b2fff]/5 to-transparent pointer-events-none"></div>
+    <div class="max-w-[1200px] mx-auto px-6 text-center relative z-10 fade-in-up">
+      <h1 class="text-[clamp(2rem,5vw,3rem)] font-[800] mb-3">כלי <span class="text-gradient">DJ</span> אינטראקטיביים</h1>
+      <p class="text-white/70 text-lg max-w-lg mx-auto">תרגול מעשי ישירות בדפדפן — בלי להתקין כלום</p>
     </div>
+  </section>
 
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem;">
+  <!-- Tools Grid -->
+  <main class="max-w-[1200px] mx-auto px-6 pb-20">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 stagger">
       {tools.map(tool => (
-        <a href={`/tools/${tool.slug}`} class="tool-card">
-          <span style="font-size: 3rem; display: block; margin-bottom: 1rem;">{tool.icon}</span>
-          <h2 style="font-size: 1.4rem; font-weight: 700; margin-bottom: 0.5rem;">{tool.name}</h2>
-          <p style="color: rgba(255,255,255,0.5); line-height: 1.6;">{tool.description}</p>
-          <div style={`margin-top: 1.5rem; color: ${tool.color}; font-weight: 600; font-size: 0.95rem;`}>
-            פתח כלי ←
+        <a href={`/tools/${tool.slug}`} class={`glass-card glow-hover ${tool.glow} group reveal`} style={`text-decoration:none; color:white; border-top: 3px solid ${tool.color};`}>
+          <div class="flex items-start gap-4">
+            <span class="text-4xl group-hover:scale-125 transition-transform inline-block flex-shrink-0">{tool.icon}</span>
+            <div>
+              <h2 class="text-xl font-bold mb-2 group-hover:text-white transition-colors" style={`color:${tool.color}`}>{tool.name}</h2>
+              <p class="text-white/70 text-sm leading-relaxed mb-4">{tool.description}</p>
+              <div class="flex items-center gap-2 text-sm font-semibold transition-colors" style={`color:${tool.color}`}>
+                <span>פתח כלי</span>
+                <span class="group-hover:-translate-x-1 transition-transform">←</span>
+              </div>
+            </div>
           </div>
         </a>
       ))}
     </div>
   </main>
 
-  <footer style="border-top: 1px solid rgba(255,255,255,0.1); padding: 2rem; text-align: center; margin-top: 4rem;">
-    <div style="max-width: 1200px; margin: 0 auto; color: rgba(255,255,255,0.4); font-size: 0.9rem;">
-      <p>© 2026 DJMaster Academy. כל הזכויות שמורות.</p>
-      <p style="margin-top: 0.5rem;">❤️ בעבור כל ה-DJ-ים בעברית</p>
-    </div>
-  </footer>
-</body>
-</html>
+  <Footer />
+
+  <!-- Scroll Reveal -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('revealed');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+      document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    });
+  </script>
+</BaseLayout>
